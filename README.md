@@ -1,5 +1,14 @@
 # La Life RP
 
+<iframe src="https://discordapp.com/widget?id=305731436533514241&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0"></iframe>
+
+## Information
+
+- Il est recommandé de savoir un minimum coder pour utiliser nos fichiers.
+- LES **SOURCES C#** SORTIONT SOUS PEU!
+- Nous allons sortir les gros patchs aux 2 semaines environ.
+- Les hotfix sortiront le plus rapidement possible
+
 ## Requirements
 
 - Consulter la liste dans Credits.md
@@ -12,7 +21,9 @@
 
 - Télécharger les fichiers
 - Configurer le tout selon vos désirs
+- LES POINTS ILLÉGAUX dans tradeIlegal     -- VOS POINTS ICI
 - Launch
+
 Plus de détails bientôt
 
 ## License
