@@ -54,7 +54,7 @@ Including :
 	[17] Le script est basé sur le truckerjob déjà disponible, le code a été repensé et retravaillé pour le rendre plus flexible et custom.
 -	vdk_call
 	[8] Super script fonctionnel à 100%!
-	
+
 Autres de base
 
 Bibliographie :
