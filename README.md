@@ -5,6 +5,8 @@ Pour le support sur le scripting de FiveM en général.
 
 [Twitter](https://twitter.com/Lalife_rp)
 
+**N'HÉSITEZ PAS À CONTRIBUER AVEC LES PULL REQUESTS!**
+
 ## Information
 
 - Il est recommandé de savoir un minimum coder pour utiliser nos fichiers.
