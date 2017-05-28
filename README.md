@@ -15,6 +15,10 @@
 - Launch
 Plus de détails bientôt
 
+## License
+
+- Consulter la license.md. Bref n'enlevez pas le crédits aux divers créateurs de ce projet.
+
 ## Thanks
 
 - Tous les ressources publiques publiées chaque jour sur le forum FiveM
