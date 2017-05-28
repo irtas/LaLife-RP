@@ -23,7 +23,7 @@ AddEventHandler('playerConnecting', function(name, setReason)
 
     if isVIP then
 
-    elseif playerCount >= 0 then
+    elseif playerCount >= 24 then
       setReason('Le serveur est complet!')
       CancelEvent()
     end
@@ -50,5 +50,5 @@ function fisVIP(id)
   return false
 end
 
-								-- Nabil
-VIP = {"steam:1100001067e5e10", "steam:1100001050bea3e", "steam:110000104114ff1", "steam:110000119ab11cf","steam:1100001068125dd", "steam:110000106ec999e", "steam:110000102dfc8af", "steam:110000101f39291", "steam:110000104cb2ae5", "steam:11000010a766e38"}
+
+VIP = {}
