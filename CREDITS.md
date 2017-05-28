@@ -1,10 +1,11 @@
 # La_LifeRP
 
 Including :
+
 - Car pack [15] FBI, LSPD, Sheriff
-- Citizen-V, The Map.
+- LaLife, The Map.
 - Wrapper [C#]
-- CitizenV
+**LaLife**
 - CCreation
 	Exclusive : Menu de création complète du personnage avec des tenues prédéfinies. Version 0.3
 	client_base
@@ -23,6 +24,7 @@ Including :
 -	lscustoms
  	[6] Script super intéressant dont nous n’avons pas eu le temps de travailler dessus, pour l’instant. À voir!
 
+**Database**
 - Banking
 	[7] Script de banque le plus complet que vous pouvez trouver en ressource publique. Nous l’avons adapté à nos besoins. Système de transfert complètement revu.
 -	es_garages
@@ -34,7 +36,7 @@ Including :
 - vehshop
 	[12] Encore une fois, super script que nous avons adapté à notre système de véhicule.
 
-Jobs
+**Jobs**
 - Organe
  	Exclusive :
 -	jobs-police
