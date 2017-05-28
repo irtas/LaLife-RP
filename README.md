@@ -1,5 +1,6 @@
 # La Life RP
 
+<a href="https://discord.gg/aiekillu"><img alt="Discord Status" src="https://discordapp.com/api/guilds/305731436533514241/widget.png"></a>
 
 ## Information
 
