@@ -1,0 +1,66 @@
+ListenPort: 30120
+
+PreParseResources:
+    - mapmanager
+
+AutoStartResources:
+    - Citizen-V # MAP -> Définit le ou les points de Spawn de base.
+    - client_base # NeverWanted, HandsUP, VoiceChat, etc...
+    - chat
+    - spawnmanager
+    - baseevents
+    - rconlog
+    - hardcap # prevents too many players from joining
+    - fivemenu
+    - es_admin
+    - truckerjob
+    - pooljob
+    - es_garages
+    - es_weashop
+    - jobs-police
+    - vdk_call
+    - salaire
+    - banking
+    - foodhud
+    #- lscustoms
+    - loadingscreen
+    - tradeIlegal
+    - interiors
+    - FBI
+    - Sheriff
+    - LSPD
+    - mine
+    - Wrapper
+    - ccreation
+    - car
+    - Organe
+    - es_afterStart
+    #GARDER ES_AFTERSTART DERNIER MERCI LEL
+
+
+# do change
+RconPassword: 112233
+
+# configure this, please
+Hostname: La Life Open Source
+
+# don't change this, it'll cause your server to be unlisted
+Game: GTA5
+
+PlatformServer: updater.fivereborn.com
+
+ScriptDebug: true
+
+DebugLog: true
+
+# set to false to hide from the online server list
+Announce: true
+
+# set to false to require players to be signed in to Steam
+DisableAuth: false
+
+# set to true to disable local script hook plugins
+DisableScriptHook: true
+
+# set to the path of an icon to use in the server browser. it should be square.
+ServerIcon: hello.png

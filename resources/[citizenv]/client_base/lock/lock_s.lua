@@ -1,0 +1,6 @@
+RegisterServerEvent('lock:getCar')
+AddEventHandler('lock:getCar', function()
+  TriggerEvent('es:getPlayerFromId', source, function(user)
+    TriggerClientEvent("lock:f_getCar", source, {user:getVehicle()})
+  end)
+end)

@@ -1,0 +1,125 @@
+ <!-- Loading screen By https://www.youtube.com/channel/UCcvQNELYLPdoaWSvF9k7Kkg -->
+ <!-- Current version of the loading screen : 1.1.0 -->
+ <!-- Projet 100% free, any problem contact rabtorlobby@gmail.com or release fivem or youtube -->
+<html>
+    <head>
+     <!-- Title not show in your server -->
+    	<title>Loading screen by RaBToRFR</title>
+     <!-- Add the css -->
+        <link href="rabtor.css" rel="stylesheet" type="text/css" />
+      <!-- Add script for the text -->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    </head>
+<style>#selector {width:100%; height:100%;}</style>
+ <!-- If you want change the background please, change the background.gif to your link -->
+ <!-- Note speedplay.fr is my domaine expire in 2018 so if the gif dosen't work in 2018 that is normal -->
+<img src='http://i.imgur.com/23PiMob.jpg' id='selector'/>
+    <body>
+      <audio autoplay="" id="Loading" loop=""><source src="music/Loading.ogg" type="audio/ogg" />
+       <!-- If you want change the sound please, convert your sound in .ogg and put this in music folder  and change Loading.ogg to your sound .ogg-->
+         <source src="music/Loading.ogg" type="audio/ogg">
+    </audio>
+    <script>
+     var vid = document.getElementById("Loading");
+     vid.volume = 0.1
+    </script>
+
+
+          <!-- Text & Rules you cant change that like you want !-->
+            <div class="fix">
+               <center> <h3></h3></center>
+
+                <div class="loadbar"><div class="scroll"></div></div>
+                <center>
+    				 <p class="text"></p>
+	          		 <p class="text"></p>
+	           		 <p class="text"></p>
+	           		 <p class="text"></p>
+	          		 <p class="text"></p>
+	         		 <p class="text"></p>
+	         		 <p class="text"></p>
+					</center>
+        </div>
+
+ <!-- Script of fivem keks loading screen. !-->
+<script type="text/javascript">
+var count = 0;
+var thisCount = 0;
+const handlers = {
+    startInitFunctionOrder(data)
+    {
+        count = data.count;
+
+        document.querySelector('.letni h3').innerHTML += emoji[data.type][data.order - 1] || '';
+    },
+
+    initFunctionInvoking(data)
+    {
+        document.querySelector('.thingy').style.left = '0%';
+        document.querySelector('.thingy').style.width = ((data.idx / count) * 100) + '%';
+    },
+
+    startDataFileEntries(data)
+    {
+        count = data.count;
+
+        document.querySelector('.letni h3').innerHTML += "\u{1f358}";
+    },
+
+    performMapLoadFunction(data)
+    {
+        ++thisCount;
+
+        document.querySelector('.thingy').style.left = '0%';
+        document.querySelector('.thingy').style.width = ((thisCount / count) * 100) + '%';
+    },
+
+    onLogLine(data)
+    {
+        document.querySelector('.letni p').innerHTML = data.message + "..!";
+    }
+};
+
+window.addEventListener('message', function(e)
+{
+    (handlers[e.data.eventName] || function() {})(e.data);
+});
+</script>
+
+ <!-- Script for the text changer !-->
+<script>
+(function() {
+	//used for text
+    var text = $(".text");
+    var quoteIndex = -1;
+
+    function showNextQuote() {
+        ++quoteIndex;
+        text.eq(quoteIndex % text.length)
+            .fadeIn(2000)//fade in time
+            .delay(2000)//delay time
+            .fadeOut(2000, showNextQuote);//fase out next quote
+    }
+
+    showNextQuote();
+
+})();
+(function() {
+	//Ignore tis function, it is used for the twoquote style
+    var text = $(".text2");
+    var quoteIndex = -1;
+
+    function showNextQuote() {
+        ++quoteIndex;
+        text.eq(quoteIndex % text.length)
+            .fadeIn(2000)
+            .delay(2000)
+            .fadeOut(2000, showNextQuote);
+    }
+
+    showNextQuote();
+
+})
+</script>
+    </body>
+</html>

@@ -1,0 +1,24 @@
+CitizenMP.Server (FiveM/project Lambda) - released 2017-01-30, build 1.
+
+Contains cfx-server 45c2dc72261272a913127d0cb88e67f93dd71055.
+
+Changes from previous release (8d735e18526f1a18922fd66057f781ba1318820a - http://updater.fivereborn.com/client/cfx-server-8d735e1.7z):
+
+$ git shortlog 8d735e18526f1a18922fd66057f781ba1318820a..HEAD
+fivereborn-dev (7):
+      atomically update TempID counter
+      add TempEP to Client
+      check client IP for resource downloads
+      support server-sent events for /log endpoint
+      support for indicating enhanced host support
+      fix possible cause of duplicate netid clients
+      autostart sessionmanager
+
+Contains cfx-server-data def0581d6d99fd2d5310dc12e017568ce25cfcab.
+
+Changes from previous release (8ca2e679d5e603665177649be5c9c7d478041c00):
+
+$ git shortlog 8ca2e679d5e603665177649be5c9c7d478041c00..HEAD
+fivereborn-dev (2):
+      'new' sessionmanager resource
+      update keks loading screen example

@@ -1,0 +1,155 @@
+<html>
+    <head>
+        <script src="nui://game/ui/jquery.js" type="text/javascript"></script>
+        <link href="style.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <img id="cursor" src="cursor.png">
+
+        <div class="dialog">
+            <p align="center" class="tititre">
+            Bienvenue sur LA Life!
+            </p>
+            <form id="login-form">
+                <input id="username" pattern="[A-Za-z]{3,20}" maxlenght=20 title="Must contain at least" type="text" placeholder="Nom"><br>
+                <input id="password" pattern="[A-Za-z]{3,20}" maxlenght=20 title="Must contain at least" type="text" placeholder="Prenom"><br>
+                <hr>
+                <fieldset>
+                    <div class="dialog-selectorg">
+                        <input align="center" id="gender" type="radio" name="gender" value="0"> Homme<br />
+                        <input align="center" id="gender" type="radio" name="gender" value="1"> Femme
+                    </div>
+                </fieldset>
+                <hr>
+                <fieldset>
+                    <div class="dialog-selector">
+                        <input id="outfit1" class="outfit" type="radio" name="outfit" value="1">
+                        <label class="out-cc outfit1" for="outfit1"></label>
+                        <input id="outfit2" class="outfit" type="radio" name="outfit" value="2">
+                        <label class="out-cc outfit2" for="outfit2"></label>
+                        <input id="outfit3" class="outfit" type="radio" name="outfit" value="3">
+                        <label class="out-cc outfit3" for="outfit3"></label>
+                        <input id="outfit4" class="outfit" type="radio" name="outfit" value="4">
+                        <label class="out-cc outfit4" for="outfit4"></label>
+                        <input id="outfit5" class="outfit" type="radio" name="outfit" value="5">
+                        <label class="out-cc outfit5" for="outfit5"></label>
+
+                        <input id="outfit6" class="outfit" type="radio" name="outfit" value="6">
+                        <label class="out-cc outfit6" for="outfit6"></label>
+                        <input id="outfit7" class="outfit" type="radio" name="outfit" value="7">
+                        <label class="out-cc outfit7" for="outfit7"></label>
+                        <input id="outfit8" class="outfit" type="radio" name="outfit" value="8">
+                        <label class="out-cc outfit8" for="outfit8"></label>
+                        <input id="outfit9" class="outfit" type="radio" name="outfit" value="9">
+                        <label class="out-cc outfit9" for="outfit9"></label>
+                        <input id="outfit10" class="outfit" type="radio" name="outfit" value="10">
+                        <label class="out-cc outfit10" for="outfit10"></label>
+
+                        <input id="outfit11" class="outfit" type="radio" name="outfit" value="11">
+                        <label class="out-cc outfit11" for="outfit11"></label>
+                        <input id="outfit12" class="outfit" type="radio" name="outfit" value="12">
+                        <label class="out-cc outfit12" for="outfit12"></label>
+                        <input id="outfit13" class="outfit" type="radio" name="outfit" value="13">
+                        <label class="out-cc outfit13" for="outfit13"></label>
+                        <input id="outfit14" class="outfit" type="radio" name="outfit" value="14">
+                        <label class="out-cc outfit14" for="outfit14"></label>
+                        <input id="outfit15" class="outfit" type="radio" name="outfit" value="15">
+                        <label class="out-cc outfit15" for="outfit15"></label>
+
+                        <input id="outfit16" class="outfit" type="radio" name="outfit" value="16">
+                        <label class="out-cc outfit16" for="outfit16"></label>
+                        <input id="outfit17" class="outfit" type="radio" name="outfit" value="17">
+                        <label class="out-cc outfit17" for="outfit17"></label>
+                        <input id="outfit18" class="outfit" type="radio" name="outfit" value="18">
+                        <label class="out-cc outfit18" for="outfit18"></label>
+                    </div>
+                    <div class="dialog-selectorf">
+                        SOON
+                        <!-- <input id="outfit1" class="outfit" type="radio" name="outfit" value="1">
+                        <label class="out-cc outfit1" for="outfit1"></label>
+                        <input id="outfit2" class="outfit" type="radio" name="outfit" value="2">
+                        <label class="out-cc outfit2" for="outfit2"></label>
+                        <input id="outfit3" class="outfit" type="radio" name="outfit" value="3">
+                        <label class="out-cc outfit3" for="outfit3"></label>
+                        <input id="outfit4" class="outfit" type="radio" name="outfit" value="4">
+                        <label class="out-cc outfit4" for="outfit4"></label>
+                        <input id="outfit5" class="outfit" type="radio" name="outfit" value="5">
+                        <label class="out-cc outfit5" for="outfit5"></label>
+
+                        <input id="outfit6" class="outfit" type="radio" name="outfit" value="6">
+                        <label class="out-cc outfit6" for="outfit6"></label>
+                        <input id="outfit7" class="outfit" type="radio" name="outfit" value="7">
+                        <label class="out-cc outfit7" for="outfit7"></label>
+                        <input id="outfit8" class="outfit" type="radio" name="outfit" value="8">
+                        <label class="out-cc outfit8" for="outfit8"></label>
+                        <input id="outfit9" class="outfit" type="radio" name="outfit" value="9">
+                        <label class="out-cc outfit9" for="outfit9"></label>
+                        <input id="outfit10" class="outfit" type="radio" name="outfit" value="10">
+                        <label class="out-cc outfit10" for="outfit10"></label>
+
+                        <input id="outfit11" class="outfit" type="radio" name="outfit" value="11">
+                        <label class="out-cc outfit11" for="outfit11"></label>
+                        <input id="outfit12" class="outfit" type="radio" name="outfit" value="12">
+                        <label class="out-cc outfit12" for="outfit12"></label>
+                        <input id="outfit13" class="outfit" type="radio" name="outfit" value="13">
+                        <label class="out-cc outfit13" for="outfit13"></label>
+                        <input id="outfit14" class="outfit" type="radio" name="outfit" value="14">
+                        <label class="out-cc outfit14" for="outfit14"></label>
+                        <input id="outfit15" class="outfit" type="radio" name="outfit" value="15">
+                        <label class="out-cc outfit15" for="outfit15"></label>
+
+                        <input id="outfit16" class="outfit" type="radio" name="outfit" value="16">
+                        <label class="out-cc outfit16" for="outfit16"></label>
+                        <input id="outfit17" class="outfit" type="radio" name="outfit" value="17">
+                        <label class="out-cc outfit17" for="outfit17"></label>
+                        <input id="outfit18" class="outfit" type="radio" name="outfit" value="18">
+                        <label class="out-cc outfit18" for="outfit18"></label> -->
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div class="dialog-selector1">
+                        <input class="hair" type="number" name="hair" min="0" max="22"> Cheveux
+                        <!-- <input id="hair1" class="hair" type="radio" name="hair" value="0">
+                        <label class="out-cc hair1" for="hair1"></label>
+                        <input id="hair2" class="hair" type="radio" name="hair" value="2">
+                        <label class="out-cc hair2" for="hair2"></label>
+                        <input id="hair3" class="hair" type="radio" name="hair" value="3">
+                        <label class="out-cc hair3" for="hair3"></label>
+                        <input id="hair4" class="hair" type="radio" name="hair" value="9">
+                        <label class="out-cc hair4" for="hair4"></label>
+                        <input id="hair5" class="hair" type="radio" name="hair" value="13">
+                        <label class="out-cc hair5" for="hair5"></label>
+                        <input id="hair6" class="hair" type="radio" name="hair" value="21">
+                        <label class="out-cc hair6" for="hair6"></label> -->
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div class="dialog-selector1">
+                        <input class="color" type="number" name="color" min="0" max="4"> Couleur de cheveux
+                        <!-- <input id="color1" class="color" type="radio" name="color" value="0">
+                        <label class="out-cc color1" for="color1"></label>
+                        <input id="color2" class="color" type="radio" name="color" value="1">
+                        <label class="out-cc color2" for="color2"></label>
+                        <input id="color3" class="color" type="radio" name="color" value="2">
+                        <label class="out-cc color3" for="color3"></label>
+                        <input id="color4" class="color" type="radio" name="color" value="3">
+                        <label class="out-cc color4" for="color4"></label>
+                        <input id="color5" class="color" type="radio" name="color" value="4">
+                        <label class="out-cc color5" for="color5"></label>
+                        <input id="color6" class="color" type="radio" name="color" value="0">
+                        <label class="out-cc color6" for="color6"></label> -->
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div class="dialog-selector1">
+                        <input class="face" type="number" name="face" min="0" max="45"> Face
+                    </div>
+                </fieldset>
+                <hr>
+                <button id="submit" type="submit">Log In</button>
+            <form>
+        </div>
+
+        <script src="script.js" type="text/javascript"></script>
+    </body>
+</html>
