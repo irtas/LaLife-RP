@@ -455,8 +455,8 @@ function VMenu.valid()
 				VMenu.curItem = 2
 				curItem = 2
 			else
-				-- VMenu.curItem = 1
-				-- curItem = 1
+				VMenu.curItem = 1
+				curItem = 1
 			end
 		end
 		scrollAdjust()
@@ -1258,271 +1258,271 @@ Citizen.CreateThread(function()
 				end
 				if VOpts.toUpdate == "OutfitsNo1" then
 					getOutfitsMenu(108, getOpt("OutfitsNo1"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo1"), 108}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo1"), 108}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo2" then
 					getOutfitsMenu(109, getOpt("OutfitsNo2"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo2"), 109}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo2"), 109}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo3" then
 					getOutfitsMenu(110, getOpt("OutfitsNo3"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo3"), 110}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo3"), 110}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo4" then
 					getOutfitsMenu(111, getOpt("OutfitsNo4"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo4"), 111}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo4"), 111}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo5" then
 					getOutfitsMenu(112, getOpt("OutfitsNo5"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo5"), 112}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo5"), 112}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo6" then
 					getOutfitsMenu(113, getOpt("OutfitsNo6"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo6"), 113}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo6"), 113}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo7" then
 					getOutfitsMenu(114, getOpt("OutfitsNo7"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo7"), 114}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo7"), 114}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo8" then
 					getOutfitsMenu(115, getOpt("OutfitsNo8"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo8"), 115}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo8"), 115}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo9" then
 					getOutfitsMenu(116, getOpt("OutfitsNo9"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo9"), 116}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo9"), 116}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo10" then
 					getOutfitsMenu(117, getOpt("OutfitsNo10"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo10"), 117}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo10"), 117}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo11" then
 					getOutfitsMenu(118, getOpt("OutfitsNo11"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo11"), 118}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo11"), 118}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo12" then
 					getOutfitsMenu(119, getOpt("OutfitsNo12"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo12"), 119}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo12"), 119}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo13" then
 					getOutfitsMenu(120, getOpt("OutfitsNo13"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo13"), 120}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo13"), 120}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo14" then
 					getOutfitsMenu(121, getOpt("OutfitsNo14"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo14"), 121}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo14"), 121}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo15" then
 					getOutfitsMenu(122, getOpt("OutfitsNo15"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo15"), 122}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo15"), 122}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo16" then
 					getOutfitsMenu(123, getOpt("OutfitsNo16"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo16"), 123}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo16"), 123}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo17" then
 					getOutfitsMenu(124, getOpt("OutfitsNo17"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo17"), 124}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo17"), 124}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo18" then
 					getOutfitsMenu(125, getOpt("OutfitsNo18"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo18"), 125}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo18"), 125}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo19" then
 					getOutfitsMenu(126, getOpt("OutfitsNo19"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo19"), 126}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo19"), 126}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo20" then
 					getOutfitsMenu(127, getOpt("OutfitsNo20"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo20"), 127}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo20"), 127}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo21" then
 					getOutfitsMenu(128, getOpt("OutfitsNo21"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo21"), 128}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo21"), 128}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo22" then
 					getOutfitsMenu(129, getOpt("OutfitsNo22"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo22"), 129}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo22"), 129}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo23" then
 					getOutfitsMenu(130, getOpt("OutfitsNo23"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo23"), 130}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo23"), 130}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo24" then
 					getOutfitsMenu(131, getOpt("OutfitsNo24"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo24"), 131}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo24"), 131}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo25" then
 					getOutfitsMenu(132, getOpt("OutfitsNo25"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo25"), 132}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo25"), 132}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo26" then
 					getOutfitsMenu(133, getOpt("OutfitsNo26"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo26"), 133}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo26"), 133}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo27" then
 					getOutfitsMenu(134, getOpt("OutfitsNo27"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo27"), 134}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo27"), 134}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo28" then
 					getOutfitsMenu(135, getOpt("OutfitsNo28"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo28"), 135}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo28"), 135}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo29" then
 					getOutfitsMenu(136, getOpt("OutfitsNo29"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo29"), 136}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo29"), 136}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo30" then
 					getOutfitsMenu(137, getOpt("OutfitsNo30"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo30"), 137}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo30"), 137}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo31" then
 					getOutfitsMenu(138, getOpt("OutfitsNo31"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo31"), 138}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo31"), 138}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo32" then
 					getOutfitsMenu(139, getOpt("OutfitsNo32"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo32"), 139}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo32"), 139}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo33" then
 					getOutfitsMenu(140, getOpt("OutfitsNo33"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo33"), 140}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo33"), 140}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo34" then
 					getOutfitsMenu(141, getOpt("OutfitsNo34"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo34"), 141}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo34"), 141}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo35" then
 					getOutfitsMenu(142, getOpt("OutfitsNo35"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo35"), 142}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo35"), 142}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo36" then
 					getOutfitsMenu(143, getOpt("OutfitsNo36"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo36"), 143}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo36"), 143}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo37" then
 					getOutfitsMenu(144, getOpt("OutfitsNo37"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo37"), 144}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo37"), 144}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo38" then
 					getOutfitsMenu(145, getOpt("OutfitsNo38"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo38"), 145}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo38"), 145}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo39" then
 					getOutfitsMenu(146, getOpt("OutfitsNo39"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo39"), 146}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo39"), 146}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo40" then
 					getOutfitsMenu(147, getOpt("OutfitsNo40"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo40"), 147}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo40"), 147}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo41" then
 					getOutfitsMenu(148, getOpt("OutfitsNo41"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo41"), 148}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo41"), 148}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo42" then
 					getOutfitsMenu(149, getOpt("OutfitsNo42"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo42"), 149}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo42"), 149}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo43" then
 					getOutfitsMenu(150, getOpt("OutfitsNo43"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo43"), 150}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo43"), 150}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo44" then
 					getOutfitsMenu(151, getOpt("OutfitsNo44"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo44"), 151}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo44"), 151}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo45" then
 					getOutfitsMenu(152, getOpt("OutfitsNo45"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo45"), 152}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo45"), 152}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo46" then
 					getOutfitsMenu(153, getOpt("OutfitsNo46"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo46"), 153}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo46"), 153}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo47" then
 					getOutfitsMenu(154, getOpt("OutfitsNo47"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo47"), 154}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo47"), 154}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo48" then
 					getOutfitsMenu(155, getOpt("OutfitsNo48"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo48"), 155}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo48"), 155}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo49" then
 					getOutfitsMenu(156, getOpt("OutfitsNo49"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo49"), 156}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo49"), 156}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo50" then
 					getOutfitsMenu(157, getOpt("OutfitsNo50"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo50"), 157}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo50"), 157}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo51" then
 					getOutfitsMenu(158, getOpt("OutfitsNo51"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo51"), 158}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo51"), 158}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo52" then
 					getOutfitsMenu(159, getOpt("OutfitsNo52"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo52"), 159}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo52"), 159}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo53" then
 					getOutfitsMenu(160, getOpt("OutfitsNo53"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo53"), 160}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo53"), 160}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo54" then
 					getOutfitsMenu(161, getOpt("OutfitsNo54"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo54"), 161}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo54"), 161}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo55" then
 					getOutfitsMenu(162, getOpt("OutfitsNo55"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo55"), 162}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo55"), 162}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo56" then
 					getOutfitsMenu(163, getOpt("OutfitsNo56"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo56"), 163}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo56"), 163}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo57" then
 					getOutfitsMenu(164, getOpt("OutfitsNo57"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo57"), 164}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo57"), 164}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo58" then
 					getOutfitsMenu(165, getOpt("OutfitsNo58"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo58"), 165}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo58"), 165}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo59" then
 					getOutfitsMenu(166, getOpt("OutfitsNo59"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo59"), 166}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo59"), 166}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo60" then
 					getOutfitsMenu(167, getOpt("OutfitsNo60"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo60"), 167}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo60"), 167}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo61" then
 					getOutfitsMenu(168, getOpt("OutfitsNo61"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo61"), 168}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo61"), 168}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo62" then
 					getOutfitsMenu(169, getOpt("OutfitsNo62"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo62"), 169}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo62"), 169}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo63" then
 					getOutfitsMenu(170, getOpt("OutfitsNo63"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo63"), 170}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo63"), 170}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo64" then
 					getOutfitsMenu(171, getOpt("OutfitsNo64"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo64"), 171}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo64"), 171}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo65" then
 					getOutfitsMenu(172, getOpt("OutfitsNo65"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo65"), 172}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo65"), 172}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo66" then
 					getOutfitsMenu(173, getOpt("OutfitsNo66"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo66"), 173}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo66"), 173}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo67" then
 					getOutfitsMenu(174, getOpt("OutfitsNo67"))
-					VMenu.EditFunc(8, "Valider votre tenues", "vmenu:OutfitsVal", {getOpt("OutfitsNo67"), 174}, "Valider")
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo67"), 174}, "Valider")
 				end
 			end
 
@@ -1555,13 +1555,12 @@ Citizen.CreateThread(function()
 						TriggerServerEvent("vmenu:lastCharInShop", model)
 					end
 					VMenu.EditFunc(10, "Valider", "vmenu:getclientFace", {getOpt("Sexe"),getOpt("Face"),0}, "Obtenir ce changement")
-				elseif VOpts.toUpdate == "Face"or VOpts.toUpdate == "Face_text" then
+				elseif VOpts.toUpdate == "Face" or VOpts.toUpdate == "Face_text" then
+					-- local id = getOpt("Face")
+					-- SetPedHeadBlendData(ped, id, id, id, id, id, id, 1.0, 1.0, 1.0, false)
+ 				-- 	SetPedComponentVariation(GetPlayerPed(-1), 0, id, 0, 2)
 					SetPedComponentVariation(GetPlayerPed(-1), 0, getOpt("Face"), 0, 2)
 					VMenu.EditFunc(10, "Valider", "vmenu:getclientFace", {getOpt("Sexe"),getOpt("Face"),0}, "Obtenir ce changement")
-					-- elseif VOpts.toUpdate == "Test"or VOpts.toUpdate == "Test_text" or VOpts.toUpdate == "Test1" or VOpts.toUpdate == "Test1_text" then
-					--   SetPedComponentVariation(GetPlayerPed(-1), getOpt("Test1_text"), getOpt("Test"), getOpt("Test1"), getOpt("Test_text"))
-					-- elseif VOpts.toUpdate == "Test1"or VOpts.toUpdate == "Test1_text" then
-					--   SetPedComponentVariation(GetPlayerPed(-1), 7, getOpt("Test1"), getOpt("Test1_text"), 2)
 				end
 			end
 

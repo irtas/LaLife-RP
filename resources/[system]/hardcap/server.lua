@@ -50,5 +50,5 @@ function fisVIP(id)
   return false
 end
 
-
+-- LA WHITELIST EST ICI
 VIP = {}

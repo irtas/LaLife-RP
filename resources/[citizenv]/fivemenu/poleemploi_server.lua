@@ -1,5 +1,5 @@
 require "resources/[essential]/essentialmode/lib/MySQL"
-MySQL:open("localhost", "gta5_gamemode_essential", "root", "Police911")
+MySQL:open(database.host, database.name, database.username, database.password)
 
 
 function nameJob(id)
