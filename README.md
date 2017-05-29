@@ -50,4 +50,4 @@ Plus de détails bientôt
   
 - **Inactifs:**
 
-  Geekness_Fr
+  GeeknessFr
