@@ -9,19 +9,27 @@ Including :
 **LaLife**
 - CCreation
 	Exclusive : Menu de création complète du personnage avec des tenues prédéfinies. Version 0.3
-	client_base
+	client_base	
+	
 	LockSystem, Exclusive, ce script est basé sur [1], totalement repensé pour associer une plaque de véhicule unique au joueur. Permet de verrouiller et déverrouiller que son propre véhicule.
+	
 	SirenControls, Déjà super fonctionnel [2], ce script permet de rendre muet les sirènes d’une voiture avec la touche G ainsi que de changer de mode avec la touche Shift
-	Pointing, Exclusive par Geekness_Fr, contributeur externe.
+	
+	Pointing, **Exclusive par Geekness_Fr, contributeur externe.**
+	
 	Vocalchat, NeverWanted, Handsup, Stamina, Ressources déjà disponibles dans FiveM de base, peu modifié.
--	fivemenu
- 	Exclusive : Le menu le plus complet que vous trouverez distribuer de façon publique. Son utilisation n’est pas la plus simple tellement il est complexe et flexible. Il permet de regrouper toutes les interactions en un seul module. Cette ressource est massive et elle est loin d’être teminée. Comprend : [11][14]
+-	fivemenu **Exclusive par Geekness_Fr, contributeur externe.**
+ 	Le menu le plus complet que vous trouverez distribuer de façon publique. Son utilisation n’est pas la plus simple tellement il est complexe et flexible. Il permet de regrouper toutes les interactions en un seul module. Cette ressource est massive et elle est loin d’être teminée. Comprend : [11][14]
 - foodhud [C#]
+
 	Exclusive : Foodhud est un script développé par nous, inspiré du fameux script frfuel. Foodhud permet d’avoir un HUD proposant deux barres, la faim et la soif. Ainsi que la possibilité de remplir les jauges avec en utilisant des Events.
+	
 -	frfuel [C#]
  	Ce script est déjà connu de tous! [3] Sa réputation est indéniable!
+	
 -	interiors
  	Cette petit ressource vraiment utile, basée sur [4], a été modifié et est déjà disponible publiquement. Elle permet d’entrer dans les intérieurs inaccessibles à l’aide de point de téléportation.
+	
 -	loadingscreen (Simple et efficace [5])
 -	lscustoms
  	[6] Script super intéressant dont nous n’avons pas eu le temps de travailler dessus, pour l’instant. À voir!
