@@ -12,7 +12,8 @@ Including :
 	client_base
 	LockSystem, Exclusive, ce script est basé sur [1], totalement repensé pour associer une plaque de véhicule unique au joueur. Permet de verrouiller et déverrouiller que son propre véhicule.
 	SirenControls, Déjà super fonctionnel [2], ce script permet de rendre muet les sirènes d’une voiture avec la touche G ainsi que de changer de mode avec la touche Shift
-	Vocalchat, NeverWanted, Handsup, Pointing, Stamina, Ressources déjà disponibles dans FiveM de base, peu modifié.
+	Pointing, Exclusive par Geekness_Fr, contributeur externe.
+	Vocalchat, NeverWanted, Handsup, Stamina, Ressources déjà disponibles dans FiveM de base, peu modifié.
 -	fivemenu
  	Exclusive : Le menu le plus complet que vous trouverez distribuer de façon publique. Son utilisation n’est pas la plus simple tellement il est complexe et flexible. Il permet de regrouper toutes les interactions en un seul module. Cette ressource est massive et elle est loin d’être teminée. Comprend : [11][14]
 - foodhud [C#]
