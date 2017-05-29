@@ -44,8 +44,10 @@ Plus de détails bientôt
 
 ## Contributeurs officiels
 
-- Actifs
+- **Actifs:**
+
   Draziak, Shakir Darwish, Montecristo
   
-- Inactifs
+- **Inactifs:**
+
   Geekness_Fr
