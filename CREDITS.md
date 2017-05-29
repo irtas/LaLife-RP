@@ -15,9 +15,9 @@ Including :
 	
 	SirenControls, Déjà super fonctionnel [2], ce script permet de rendre muet les sirènes d’une voiture avec la touche G ainsi que de changer de mode avec la touche Shift
 	
-	Pointing, **Exclusive par Geekness_Fr, contributeur externe.**
+	Pointing, **Exclusive par GeeknessFr, contributeur externe.**
 	
-	OnVoiceAction Icon, **Exclusive par Geekness_Fr, contributeur externe.**
+	OnVoiceAction Icon, **Exclusive par GeeknessFr, contributeur externe.**
 	
 	Vocalchat, NeverWanted, Handsup, Stamina, Ressources déjà disponibles dans FiveM de base, peu modifié.
 -	fivemenu **Exclusive par Geekness_Fr, contributeur externe.**
@@ -82,7 +82,7 @@ Bibliographie :
 [11] https://forum.fivem.net/t/release-inventory-system-v1-5/14477
 [12] https://forum.fivem.net/t/release-vehicle-shop-by-arturs/1783
 [13] https://forum.fivem.net/t/release-es-weapon-store-v1-1/12195/2
-[14] Le menu a été développé par Geekness_Fr qui était avec nous au début du projet. Un grand merci à lui.
+[14] Le menu a été développé par GeeknessFr qui était avec nous au début du projet. Un grand merci à lui.
 [15] https://forum.fivem.net/t/release-captain14s-els-style-car-packs/18425/25
 [16] https://github.com/PandaBasketteur/Jobs-System-and-Paycheck
 [17] https://forum.fivem.net/t/release-truckerjob-v0-3-update-29th-january/5237
