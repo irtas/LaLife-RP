@@ -6,9 +6,6 @@ détruit par Draziak :)
 --]]
 
 --> Voir ReadMe.txt pour la doc.
-
---OutfitsCat = { one = "Haute Gamme", two = "Associates", three = "Beach", four = "Biker", five = "Biker suit",  six = "VIP", seven = "Vehicle Vendetta", eight = "Valentines Underwear", nine = "Valentines Formal", ten = "Team", eleven = "Team Masked", twelve = "Team Heavy" }
-
 local livery = 0
 
 VMenu = {
@@ -983,7 +980,7 @@ function Construct()
 	VMenu.AddMenu(menu, "Tenues", "cloth") -- default = Header "Texte" sur fond bleu
 	VMenu.AddNum(menu, "Catégorie", "Tenues", 0, 65, "Changer de catégorie")
 	VMenu.AddSep(menu, OutfitsCat[1])
-	VMenu.AddFunc(menu, "Valider catégories tenues", "vmenu:OutfitsValidate", {getOpt("Tenues")}, "Valider")
+	VMenu.AddFunc(menu, "Validez catégories tenues", "vmenu:OutfitsValidate", {getOpt("Tenues")}, "Valider")
 
 	local menu = 9
 	VMenu.AddMenu(menu, "", "default") -- default = Header "Texte" sur fond bleu
@@ -1024,6 +1021,11 @@ function Construct()
 	for _, item in pairs(jobs) do
 		VMenu.AddFunc(menu, item.name, "vmenu:poleemploi", {item.id}, "Valider")
 	end
+
+	local menu = 16
+	VMenu.AddMenu(menu, "", "default")
+	VMenu.AddFunc(menu, "Laver votre argent sale (30% de retour)", "vmenu:cleanCash", {}, "Valider")
+
 
 	------- MAIN MENU F7
 	local menu = 98
@@ -1254,7 +1256,7 @@ Citizen.CreateThread(function()
 				if VOpts.toUpdate == "Tenues" then
 					local u = getOpt("Tenues")+1
 					VMenu.EditSep(8, OutfitsCat[u])
-					VMenu.EditFunc(8, "Valider catégories tenues", "vmenu:OutfitsValidate", {getOpt("Tenues")}, "Valider")
+					VMenu.EditFunc(8, "Validez catégories tenues", "vmenu:OutfitsValidate", {getOpt("Tenues")}, "Valider")
 				end
 				if VOpts.toUpdate == "OutfitsNo1" then
 					getOutfitsMenu(108, getOpt("OutfitsNo1"))
@@ -1557,8 +1559,10 @@ Citizen.CreateThread(function()
 					VMenu.EditFunc(10, "Valider", "vmenu:getclientFace", {getOpt("Sexe"),getOpt("Face"),0}, "Obtenir ce changement")
 				elseif VOpts.toUpdate == "Face" or VOpts.toUpdate == "Face_text" then
 					-- local id = getOpt("Face")
-					-- SetPedHeadBlendData(ped, id, id, id, id, id, id, 1.0, 1.0, 1.0, false)
- 				-- 	SetPedComponentVariation(GetPlayerPed(-1), 0, id, 0, 2)
+					SetPedHeadBlendData(GetPlayerPed(-1), getOpt("Face"), getOpt("Face"), getOpt("Face"), getOpt("Face"), getOpt("Face"), getOpt("Face"), 1.0, 1.0, 1.0, true)
+					-- La barbe bientôt
+					--SetPedHeadOverlay(playerPed,  1,  Character['beard_1'],  (Character['beard_2'] / 10) + 0.0)    -- Beard
+					--SetPedHeadOverlayColor(playerPed,  1,  1,  Character['beard_3'],  Character['beard_4'])        -- Beard Color
 					SetPedComponentVariation(GetPlayerPed(-1), 0, getOpt("Face"), 0, 2)
 					VMenu.EditFunc(10, "Valider", "vmenu:getclientFace", {getOpt("Sexe"),getOpt("Face"),0}, "Obtenir ce changement")
 				end
@@ -1613,6 +1617,8 @@ Citizen.CreateThread(function()
 		elseif (IsNearPoints(Armory, 2) == true) then
 
 		elseif (IsNearPoints(informateur, 3) == true) then
+
+		elseif (IsNearPoints(lavage_argent, 3) == true) then
 
 		elseif (IsNearPoints(changeYourJob, 3) == true) then
 
@@ -1770,6 +1776,8 @@ Citizen.CreateThread(function()
 				TriggerEvent("vmenu:openMenu", 14)
 			elseif (IsNearPoints(changeYourJob, 3) == true) then
 				TriggerEvent("vmenu:openMenu", 15)
+			elseif (IsNearPoints(lavage_argent, 3) == true) then
+				TriggerEvent("vmenu:openMenu", 16)
 			else
 
 			end
@@ -1813,6 +1821,8 @@ Citizen.CreateThread(function()
 		elseif (IsNearPoints(Store, 4) == true) then
 			VMenu.store = false
 			VMenu.Info('Appuyer sur ~g~F6~s~ pour accéder au magasin', false)
+		elseif (IsNearPoints(lavage_argent, 3) == true) then
+			VMenu.Info('Appuyer sur ~g~F6~s~ pour accéder au menu', false)
 		else
 			if (VMenu.updatedChar == false) then
 				Wait(1200)

@@ -14,6 +14,7 @@ AddEventHandler("vmenu:updateChar", function(args)
   SetPlayerModel(PlayerId(), model)
   SetModelAsNoLongerNeeded(model)
 
+	SetPedHeadBlendData(GetPlayerPed(-1), args[1], args[1], args[1], args[1], args[1], args[1], 1.0, 1.0, 1.0, true)
   ChangeComponent({0,0,args[1],args[2]})-- 1:componentID; 2: page; 3: drawbleID; 4: textureID
   ChangeComponent({2,0,args[3],args[4]})
   ChangeComponent({3,0,args[13],args[14]})
@@ -55,6 +56,7 @@ AddEventHandler("vmenu:supdateChar", function(o, t, th, f, fi, s, se, e, n, te, 
   SetPlayerModel(PlayerId(), model)
   SetModelAsNoLongerNeeded(model)
 
+  SetPedHeadBlendData(GetPlayerPed(-1), o, o, o, o, o, o, 1.0, 1.0, 1.0, true)
   ChangeComponent({0,0,o,t})-- 1:componentID; 2: page; 3: drawbleID; 4: textureID
   ChangeComponent({2,0,th,f})
   ChangeComponent({3,0,thi,fo})

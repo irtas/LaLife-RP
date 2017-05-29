@@ -43,6 +43,9 @@ AddEventHandler('playerDropped', function()
 		MySQL:executeQuery("UPDATE users SET `money`='@value' WHERE identifier = '@identifier'",
 		{['@value'] = user.money, ['@identifier'] = user.identifier})
 
+		MySQL:executeQuery("UPDATE users SET `dirtymoney`='@value' WHERE identifier = '@identifier'",
+			{['@value'] = user.dirtymoney, ['@identifier'] = user.identifier})
+
 		MySQL:executeQuery("UPDATE coordinates SET `x`='@valx',`y`='@valy',`z`='@valz' WHERE identifier = '@identifier'",
 		{['@valx'] = user.coords.x, ['@valy'] = user.coords.y, ['@valz'] = user.coords.z, ['@identifier'] = user.identifier})
 

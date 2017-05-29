@@ -123,3 +123,7 @@ informateur = {
     {name="informateur", id=52, x=0.0, y=0.0, z=0.0},
     {name="informateur", id=52, x=0.0, y=0.0, z=0.0},
 }
+
+lavage_argent = {
+  {name="Lave le cash", x = 450.17324829102, y = -974.35028076172, z = 30.689588546753},
+}

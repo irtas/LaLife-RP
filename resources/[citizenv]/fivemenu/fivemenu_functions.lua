@@ -18,6 +18,10 @@ function DrawNotif(text)
 	DrawNotification(false, false)
 end
 
+AddEventHandler("vmenu:cleanCash", function(target)
+	TriggerServerEvent("vmenu:cleanCash_s")
+end)
+
 AddEventHandler("vmenu:anim", function(dict, anim)
 	Citizen.CreateThread(function()
 		Wait(1000)

@@ -65,6 +65,7 @@ RegisterNUICallback('updateHair', function(data, cb)
 end)
 
 RegisterNUICallback('updateFace', function(data, cb)
+		SetPedHeadBlendData(GetPlayerPed(-1), tonumber(data.face), tonumber(data.face), tonumber(data.face), tonumber(data.face), tonumber(data.face), tonumber(data.face), 1.0, 1.0, 1.0, true)
     SetPedComponentVariation(GetPlayerPed(-1), 0, tonumber(data.face), 0, 2)
     Citizen.Wait(10)
     cb('ok')
