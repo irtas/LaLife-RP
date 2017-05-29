@@ -119,7 +119,7 @@ Log_company = {
 
 informateur = {
     {name="informateur", id=52, x=0.0, y=-0.0, z=0.0},
-    {name="informateur", id=52, x=, y=, z=},
-    {name="informateur", id=52, x=, y=, z=},
-    {name="informateur", id=52, x=, y=, z=},
+    {name="informateur", id=52, x=0.0, y=0.0, z=0.0},
+    {name="informateur", id=52, x=0.0, y=0.0, z=0.0},
+    {name="informateur", id=52, x=0.0, y=0.0, z=0.0},
 }
