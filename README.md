@@ -48,6 +48,6 @@ Plus de détails bientôt
 
   Draziak, Shakir Darwish, Montecristo
   
-- **Inactifs:**
+- **Externes:**
 
   [GeeknessFr](https://github.com/geeknessfr) [Twitter](https://twitter.com/GeeknessFr)
