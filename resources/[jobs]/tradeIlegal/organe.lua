@@ -14,11 +14,11 @@ local Price = 1500
 
 local Position = {
     -- VOS POINTS ICI
-    Recolet={x=,y=,z=, distance=2},
-    traitement={x=,y=,z=, distance=2},
-    traitement2={x=,y=,z=, distance=5},
-    traitement3={x=,y=,z=, distance=2},
-    vente={x=,y=,z=, distance=2}
+    Recolet={x=0.0,y=0.0,z=0.0, distance=2},
+    traitement={x=0.0,y=0.0,z=0.0, distance=2},
+    traitement2={x=0.0,y=0.0,z=0.0, distance=5},
+    traitement3={x=0.0,y=0.0,z=0.0, distance=2},
+    vente={x=0.0,y=0.0,z=0.0, distance=2}
 }
 
 function drawTxt(text,font,centre,x,y,scale,r,g,b,a)
