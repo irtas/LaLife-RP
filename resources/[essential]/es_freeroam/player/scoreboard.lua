@@ -142,8 +142,8 @@ Citizen.CreateThread( function()
 		else
 			showList = false
 			timerList = 0
-			TriggerEvent("es:setMoneyDisplay", "hidden")
-			TriggerEvent("banking:setBankDisplay", "hidden")
+			TriggerEvent("es:setMoneyDisplay", "visible")
+			TriggerEvent("banking:setBankDisplay", "visible")
 		end
 
 	end
