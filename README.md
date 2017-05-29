@@ -41,3 +41,11 @@ Plus de détails bientôt
 
 - Tous les ressources publiques publiées chaque jour sur le forum FiveM
 - Consulter la liste dans [Credits](https://github.com/ldlac/La_LifeRP/blob/master/CREDITS.md)
+
+## Contributeurs officiels
+
+- Actifs
+  Draziak, Shakir Darwish, Montecristo
+  
+- Inactifs
+  Geekness_Fr
