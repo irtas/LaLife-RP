@@ -7,6 +7,8 @@ Pour le support sur le scripting de FiveM en général.
 
 **N'HÉSITEZ PAS À CONTRIBUER AVEC LES PULL REQUESTS!**
 
+**SI JAMAIS VOUS VOYEZ QU'IL MANQUE UNE SOURCE/CRÉDITS CONTACTEZ MOI!**
+
 ## Information
 
 - **Recommandé de faire rouler le serveur sous windows, sous linux certaines ressources ne sont pas compatibles**
