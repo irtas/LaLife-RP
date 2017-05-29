@@ -50,4 +50,4 @@ Plus de détails bientôt
   
 - **Inactifs:**
 
-  GeeknessFr
+  [GeeknessFr](https://github.com/geeknessfr) [Twitter](https://twitter.com/GeeknessFr)
