@@ -43,7 +43,7 @@ Including :
 -	jobs-police
  	Exclusive : Script complètement créé par nos soins et pour nos besoins. Il permet de faire tout ce qu’un policier a besoin de faire afin d’avoir une expérience de jeu intéressante.
 - pole-emploi
- 	Exclusive : Pole-emploi fait sur mesure avec notre menu. Tous les jobs sont inclus
+ 	Exclusive : Pole-emploi fait sur mesure avec notre menu. Tous les jobs sont inclus. Il est fortement inspiré de [16]
 -	mine
  	Exclusive : Job de mineur dynamique, qui sortira complètement bientôt.
 -	pooljob (basé sur es_taxi)
@@ -72,4 +72,5 @@ Bibliographie :
 [12] https://forum.fivem.net/t/release-vehicle-shop-by-arturs/1783
 [13] https://forum.fivem.net/t/release-es-weapon-store-v1-1/12195/2
 [15] https://forum.fivem.net/t/release-captain14s-els-style-car-packs/18425/25
+[16] https://github.com/PandaBasketteur/Jobs-System-and-Paycheck
 [17] https://forum.fivem.net/t/release-truckerjob-v0-3-update-29th-january/5237
