@@ -17,6 +17,8 @@ Including :
 	
 	Pointing, **Exclusive par Geekness_Fr, contributeur externe.**
 	
+	OnVoiceAction Icon, **Exclusive par Geekness_Fr, contributeur externe.**
+	
 	Vocalchat, NeverWanted, Handsup, Stamina, Ressources déjà disponibles dans FiveM de base, peu modifié.
 -	fivemenu **Exclusive par Geekness_Fr, contributeur externe.**
  	Le menu le plus complet que vous trouverez distribuer de façon publique. Son utilisation n’est pas la plus simple tellement il est complexe et flexible. Il permet de regrouper toutes les interactions en un seul module. Cette ressource est massive et elle est loin d’être teminée. Comprend : [11][14]
