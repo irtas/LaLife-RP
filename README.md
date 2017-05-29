@@ -29,6 +29,7 @@ Pour le support sur le scripting de FiveM en général.
 - Configurer le tout selon vos désirs
 - LES POINTS ILLÉGAUX dans tradeIlegal
 - LES INFORMATEURS ILLÉGAUX dans fivemenu > drogue_serveur et fivemenu > client_data
+- [Pour rien n'oublier](https://github.com/ldlac/La_LifeRP/blob/master/INSTALLATION.MD)
 - Launch
 
 Plus de détails bientôt
