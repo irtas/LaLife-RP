@@ -14,7 +14,7 @@ Including :
 	SirenControls, Déjà super fonctionnel [2], ce script permet de rendre muet les sirènes d’une voiture avec la touche G ainsi que de changer de mode avec la touche Shift
 	Vocalchat, NeverWanted, Handsup, Pointing, Stamina, Ressources déjà disponibles dans FiveM de base, peu modifié.
 -	fivemenu
- 	Exclusive : Le menu le plus complet que vous trouverez distribuer de façon publique. Son utilisation n’est pas la plus simple tellement il est complexe et flexible. Il permet de regrouper toutes les interactions en un seul module. Cette ressource est massive et elle est loin d’être teminée. Comprend : [11]
+ 	Exclusive : Le menu le plus complet que vous trouverez distribuer de façon publique. Son utilisation n’est pas la plus simple tellement il est complexe et flexible. Il permet de regrouper toutes les interactions en un seul module. Cette ressource est massive et elle est loin d’être teminée. Comprend : [11][14]
 - foodhud [C#]
 	Exclusive : Foodhud est un script développé par nous, inspiré du fameux script frfuel. Foodhud permet d’avoir un HUD proposant deux barres, la faim et la soif. Ainsi que la possibilité de remplir les jauges avec en utilisant des Events.
 -	frfuel [C#]
@@ -71,6 +71,7 @@ Bibliographie :
 [11] https://forum.fivem.net/t/release-inventory-system-v1-5/14477
 [12] https://forum.fivem.net/t/release-vehicle-shop-by-arturs/1783
 [13] https://forum.fivem.net/t/release-es-weapon-store-v1-1/12195/2
+[14] Le menu a été développé par Geekness_Fr qui était avec nous au début du projet. Un grand merci à lui.
 [15] https://forum.fivem.net/t/release-captain14s-els-style-car-packs/18425/25
 [16] https://github.com/PandaBasketteur/Jobs-System-and-Paycheck
 [17] https://forum.fivem.net/t/release-truckerjob-v0-3-update-29th-january/5237
