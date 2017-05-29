@@ -9,6 +9,7 @@ Pour le support sur le scripting de FiveM en général.
 
 ## Information
 
+- **Recommandé de faire rouler le serveur sous windows, sous linux certaines ressources ne sont pas compatibles**
 - Il est recommandé de savoir un minimum coder pour utiliser nos fichiers.
 - LES **SOURCES C#** SORTIONT SOUS PEU!
 - Nous allons sortir les gros patchs aux 2 semaines environ.
