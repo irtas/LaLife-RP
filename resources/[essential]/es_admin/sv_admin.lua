@@ -19,7 +19,7 @@ TriggerEvent('es:addCommand', 'admin', function(source, args, user)
 	TriggerClientEvent('chatMessage', source, "SYSTEM", {255, 0, 0}, "Group: ^2" .. user.group.group)
 end)
 
-TriggerEvent('es:addCommand', 'car', function(source, args, user)
+TriggerEvent('es:addGroupCommand', 'car', "admin", function(source, args, user)
 	TriggerClientEvent('es_admin:spawnVehicle', source, args[2])
 end)
 
