@@ -135,6 +135,11 @@ AddEventHandler("player:sellItem", function(item, price)
 	end
 end)
 
+AddEventHandler("item:reset", function()
+	ITEMS = {}
+	TriggerServerEvent("inventory:reset_s")
+end)
+
 --------- EVENT FROM SERVER NO TARGET
 
 AddEventHandler("playerSpawned", function()

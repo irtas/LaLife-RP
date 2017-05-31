@@ -194,9 +194,9 @@ end
 function ResPlayer()
 	isRes = true
 	TriggerServerEvent('es_em:sv_removeMoney')
-	TriggerServerEvent("item:reset")
+	TriggerEvent("item:reset")
 
-	TriggerServerEvent("skin_customization:SpawnPlayer")
+	-- TriggerServerEvent("skin_customization:SpawnPlayer") À CHANGER POUR LA TENUE AU RESPAWN.
 
 	RemoveAllPedWeapons(GetPlayerPed(-1),true)
 	NetworkResurrectLocalPlayer(357.757, -597.202, 28.6314, true, true, false)

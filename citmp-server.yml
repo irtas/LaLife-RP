@@ -1,4 +1,4 @@
-ListenPort: 30120
+﻿ListenPort: 30120
 
 PreParseResources:
     - mapmanager
@@ -32,7 +32,6 @@ AutoStartResources:
     - mine
     - Wrapper
     - ccreation
-    - car
     - Organe
     - carwash
     - emergency
