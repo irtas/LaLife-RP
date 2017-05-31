@@ -23,11 +23,14 @@ end
 )
 
 RegisterServerEvent('es_em:getTheCall')
-AddEventHandler('es_em:getTheCall',
-function(playerName, playerID, x, y, z, sourcePlayerInComa)
+AddEventHandler('es_em:getTheCall', function(playerName, playerID, x, y, z, sourcePlayerInComa)
+  local fullname = playerName
+  TriggerEvent('es:getPlayerFromId', source, function(user)
+    fullname = user:getPrenom() .. " " .. user:getNom()
+  end)
   TriggerEvent("es:getPlayers", function(players)
     for i,v in pairs(players) do
-      TriggerClientEvent('es_em:callTaken', i, playerName, playerID, x, y, z, sourcePlayerInComa)
+      TriggerClientEvent('es_em:callTaken', i, fullname, playerID, x, y, z, sourcePlayerInComa)
     end
   end)
 end

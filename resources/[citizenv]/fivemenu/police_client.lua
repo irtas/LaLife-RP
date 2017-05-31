@@ -36,7 +36,7 @@ AddEventHandler("menupolice:PoliceOG", function(target, rangPolice) -- 0 rien, 1
 				VMenu.AddSep(98, "Cadet")
 		end
 	 	VMenu.AddFunc(98, "Verifier papier", "menupolice:verifp", {}, "Accéder")
-	 	VMenu.AddNum1000(98, "Montant contravention", "Amcon", 0, 100000, "Montant de la contravention")
+	 	VMenu.AddNum1000(98, "Montant contravention", "Amcon", 0, 60000, "Montant de la contravention")
 		VMenu.AddFunc(98, "Donner contravention", "menupolice:givecon", {getOpt("Amcon")}, "Accéder")
 		VMenu.AddFunc(98, "Fouiller véhicule le plus près", "menupolice:searchveh", {}, "Accéder")
 		VMenu.AddFunc(98, "Fouiller civil le plus près", "menupolice:searchciv", {}, "Accéder")
