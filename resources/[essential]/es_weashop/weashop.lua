@@ -1,3 +1,4 @@
+--NOTE: Dans l attente de la suppression des armes à la mort du joueur pour activer les armes du DLC. Si vous voulez ajouter une arme, vous n'avez qu'à enlever les "--" et pour les prix "costs = 'PRIX'"
 local weashop = {
 	opened = false,
 	title = "Weapon store",
@@ -20,135 +21,114 @@ local weashop = {
 			title = "CATEGORIES",
 			name = "main",
 			buttons = {
-				{title = "Melee weapons", name = "Melee", description = ""},
+				{title = "Armes blanches", name = "Melee", description = ""},
 				{title = "Pistolets", name = "Pistolets", description = ""},
-				-- {title = "Machine guns", name = "MachineGuns", description = ""},
-				-- {title = "Shotgun", name = "Shotguns", description = ""},
-				-- {title = "Assault rifle", name = "AssaultRifles", description = ""},
-				-- {title = "Sniper rifle", name = "SniperRifles", description = ""},
-				-- {title = "Heavy Weapons", name = "HeavyWeapons", description = ""},
-				-- {title = "Thrown weapons", name = "ThrownWeapons", description = ""},
+				{title = "Pistolets Mitrailleurs", name = "MachineGuns", description = ""},
+				{title = "Fusils à pompe", name = "Shotguns", description = ""},
+				{title = "Fusils d'assaut", name = "AssaultRifles", description = ""},
+				-- {title = "Sniper", name = "SniperRifles", description = ""},							DLC ARMES ET VEHICULES A GOGO
+				-- {title = "Heavy Weapons", name = "HeavyWeapons", description = ""},					DLC ARMES ET VEHICULES A GOGO
+				{title = "Armes de jet", name = "ThrownWeapons", description = ""},
 			}
 		},
 		["Melee"] = {
-			title = "Melee weapons",
+			title = "Armes blanches",
 			name = "Melee",
 			buttons = {
-				{title = "Knife", name = "Knife", costs = 15000, description = {}, model = "WEAPON_Knife"},
+				{title = "Couteau", name = "Knife", costs = 400, description = {}, model = "WEAPON_Knife"},
+				{title = "Marteau", name = "Hammer", costs = 500, description = {}, model = "WEAPON_HAMMER"},
+				{title = "Batte", name = "Bat", costs = 750, description = {}, model = "WEAPON_Bat"},
+				{title = "Bouteille", name = "Bottle", costs = 300, description = {}, model = "WEAPON_Bottle"},
+				{title = "Poignard", name = "Dagger", costs = 2000, description = {}, model = "WEAPON_Dagger"},
+				{title = "Hachette", name = "Hatchet", costs = 750, description = {}, model = "WEAPON_Hatchet"},
+				{title = "Poing américain", name = "KnuckleDuster", costs = 7500, description = {}, model = "WEAPON_KNUCKLE"},
+				--{title = "Machette", name = "Machete", costs = 8900, description = {}, model = "WEAPON_Machete"},							DLC ARMES ET VEHICULES A GOGO
+				{title = "Lampe de poche", name = "Flashlight", costs = 5750, description = {}, model = "WEAPON_Flashlight"},
+				-- {title = "Poolcue", name = "Poolcue", costs = 120000, description = {}, model = "WEAPON_Poolcue"},
+				-- {title = "Wrench", name = "Wrench", costs = 120000, description = {}, model = "WEAPON_Wrench"},
+				-- {title = "Battleaxe", name = "Battleaxe", costs = 120000, description = {}, model = "WEAPON_Battleaxe"},
+				-- {title = "Pied de Biche", name = "Crowbar", costs = 30000, description = {}, model = "WEAPON_Crowbar"},
+				-- {title = "Club de Golf", name = "Golfclub", costs = 120000, description = {}, model = "WEAPON_Golfclub"},
 				-- {title = "Nightstick", name = "Nightstick", costs = 25000, description = {}, model = "WEAPON_Nightstick"},
-				-- {title = "Hammer", name = "Hammer", costs = 10000, description = {}, model = "WEAPON_HAMMER"},
-				{title = "Bat", name = "Bat", costs = 15000, description = {}, model = "WEAPON_Bat"},
-				{title = "Crowbar", name = "Crowbar", costs = 15000, description = {}, model = "WEAPON_Crowbar"},
-				{title = "Golfclub", name = "Golfclub", costs = 15000, description = {}, model = "WEAPON_Golfclub"},
-				{title = "Bottle", name = "Bottle", costs = 15000, description = {}, model = "WEAPON_Bottle"},
-				{title = "Dagger", name = "Dagger", costs = 15000, description = {}, model = "WEAPON_Dagger"},
-				{title = "Hatchet", name = "Hatchet", costs = 15000, description = {}, model = "WEAPON_Hatchet"},
-				{title = "KnuckleDuster", name = "KnuckleDuster", costs = 15000, description = {}, model = "WEAPON_KnuckleDuster"},
-				{title = "Machete", name = "Machete", costs = 15000, description = {}, model = "WEAPON_Machete"},
-				{title = "Flashlight", name = "Flashlight", costs = 15000, description = {}, model = "WEAPON_Flashlight"},
-				-- {title = "SwitchBlade", name = "SwitchBlade", costs = 120000, description = {}, model = "WEAPON_SwitchBlade"},
-				--{title = "Poolcue", name = "Poolcue", costs = 120000, description = {}, model = "WEAPON_Poolcue"},
-				--{title = "Wrench", name = "Wrench", costs = 120000, description = {}, model = "WEAPON_Wrench"},
-				--{title = "Battleaxe", name = "Battleaxe", costs = 120000, description = {}, model = "WEAPON_Battleaxe"},
 			}
 		},
 		["Pistolets"] = {
 			title = "Pistolets",
 			name = "Pistolets",
 			buttons = {
-				{title = "Pistol", name = "Pistol", costs = 30000, description = {}, model = "WEAPON_Pistol"},
-				{title = "Combat Pistol", name = "CombatPistol", costs = 30000, description = {}, model = "WEAPON_CombatPistol"},
+				{title = "Pistolet", name = "Pistol", costs = 250000, description = {}, model = "WEAPON_Pistol"},
 				{title = "Pistol Cal 50", name = "Pistol50", costs = 40000, description = {}, model = "WEAPON_PISTOL50"},
-				-- {title = "SNS Pistol", name = "SNSPistol", costs = 5000, description = {}, model = "WEAPON_SNSPistol"},
-				-- {title = "Heavy Pistol", name = "HeavyPistol", costs = 8000, description = {}, model = "WEAPON_HeavyPistol"},
-				-- {title = "Vintage Pistol", name = "VintagePistol", costs = 15000, description = {}, model = "WEAPON_VintagePistol"},
-				-- {title = "Marksman Pistol", name = "MarksmanPistol", costs = 2000, description = {}, model = "WEAPON_MarksmanPistol"},
-				-- {title = "Revolver", name = "Revolver", costs = 1900, description = {}, model = "WEAPON_Revolver"},
-				-- {title = "AP Pistol", name = "APPistol", costs = 2700, description = {}, model = "WEAPON_APPistol"},
-				-- {title = "Stun Gun", name = "StunGun", costs = 2800, description = {}, model = "WEAPON_StunGun"},
-				-- {title = "Flare Gun", name = "FlareGun", costs = 2900, description = {}, model = "WEAPON_FlareGun"},
+				-- {title = "SNS Pistol", name = "SNSPistol", costs = 50000, description = {}, model = "WEAPON_SNSPistol"},
+				{title = "Pistolet Lourd", name = "HeavyPistol", costs = 375000, description = {}, model = "WEAPON_HeavyPistol"},
+				{title = "Pistolet Vintage", name = "VintagePistol", costs = 345000, description = {}, model = "WEAPON_VintagePistol"},
+				{title = "Revolver", name = "Revolver", costs = 19000, description = {}, model = "WEAPON_Revolver"},
+				--{title = "Pistolet perforant", name = "APPistol", costs = 500000, description = {}, model = "WEAPON_APPistol"},			DLC ARMES ET VEHICULES A GOGO
+				{title = "Pistolet de détresse", name = "FlareGun", costs = 5750, description = {}, model = "WEAPON_FlareGun"},
 			}
 		},
 		["MachineGuns"] = {
-			title = "Machine guns",
+			title = "Fusils",
 			name = "MachineGuns",
 			buttons = {
-				{title = "MicroSMG", name = "MicroSMG", costs = 15000, description = {}, model = "WEAPON_MicroSMG"},
-				{title = "Machine Pistol", name = "MachinePistol", costs = 155000, description = {}, model = "WEAPON_MachinePistol"},
-				{title = "SMG", name = "SMG", costs = 25000, description = {}, model = "WEAPON_SMG"},
-				{title = "Assault SMG", name = "AssaultSMG", costs = 18000, description = {}, model = "WEAPON_AssaultSMG"},
-				{title = "Combat PDW", name = "CombatPDW", costs = 85000, description = {}, model = "WEAPON_CombatPDW"},
-				{title = "MG", name = "MG", costs = 30000, description = {}, model = "WEAPON_MG"},
-				{title = "Combat MG", name = "CombatMG", costs = 120000, description = {}, model = "WEAPON_CombatMG"},
-				{title = "Gusenberg", name = "Gusenberg", costs = 120000, description = {}, model = "WEAPON_Gusenberg"},
-				{title = "Mini SMG", name = "MiniSMG", costs = 120000, description = {}, model = "WEAPON_MiniSMG"},
+				{title = "Uzi", name = "MicroSMG", costs = 375000, description = {}, model = "WEAPON_MicroSMG"},
+				{title = "TEC-9", name = "MachinePistol", costs = 625000, description = {}, model = "WEAPON_MachinePistol"},
+				--{title = "MP5A3", name = "SMG", costs = 750000, description = {}, model = "WEAPON_SMG"},								DLC ARMES ET VEHICULES A GOGO
+				{title = "Magpul PDR", name = "AssaultSMG", costs = 1250000, description = {}, model = "WEAPON_AssaultSMG"},
+				{title = "MPX", name = "CombatPDW", costs = 1175000, description = {}, model = "WEAPON_CombatPDW"},
+				-- {title = "MG", name = "MG", costs = 30000, description = {}, model = "WEAPON_MG"},
+				-- {title = "Combat MG", name = "CombatMG", costs = 120000, description = {}, model = "WEAPON_CombatMG"},
+				-- {title = "Gusenberg", name = "Gusenberg", costs = 1460000, description = {}, model = "WEAPON_Gusenberg"},			DLC ARMES ET VEHICULES A GOGO
+				-- {title = "Mini SMG", name = "MiniSMG", costs = 120000, description = {}, model = "WEAPON_MiniSMG"},
 			}
 		},
 		["Shotguns"] = {
-			title = "Shotgun",
+			title = "Fusils à pompe",
 			name = "Shotguns",
 			buttons = {
-				{title = "Pump Shotgun", name = "PumpShotgun", costs = 150000, description = {}, model = "WEAPON_PumpShotgun"},
-				{title = "Sawn-off Shotgun", name = "SawnoffShotgun", costs = 220000, description = {}, model = "WEAPON_SawnoffShotgun"},
-				{title = "Bullpup Shotgun", name = "BullpupShotgun", costs = 250000, description = {}, model = "WEAPON_BullpupShotgun"},
-				{title = "Assault Shotgun", name = "AssaultShotgun", costs = 280000, description = {}, model = "WEAPON_AssaultShotgun"},
-				{title = "Musket", name = "Musket", costs = 850000, description = {}, model = "WEAPON_Musket"},
-				{title = "Heavy Shotgun", name = "HeavyShotgun", costs = 35000, description = {}, model = "WEAPON_HeavyShotgun"},
-				{title = "Double-Barrel Shotgun", name = "DoubleBarrelShotgun", costs = 400000, description = {}, model = "WEAPON_DoubleBarrelShotgun"},
-				{title = "Auto Shotgun", name = "Autoshotgun", costs = 450000, description = {}, model = "WEAPON_Autoshotgun"},
+				{title = "Fusil à Pompe", name = "PumpShotgun", costs = 350000, description = {}, model = "WEAPON_PumpShotgun"},
+				{title = "Fusil à canon scié", name = "SawnoffShotgun", costs = 300000, description = {}, model = "WEAPON_SawnoffShotgun"},
+				-- {title = "Musket", name = "Musket", costs = 850000, description = {}, model = "WEAPON_Musket"},
 			}
 		},
 		["AssaultRifles"] = {
-			title = "Assault Rifles",
+			title = "Fusils d'assaut",
 			name = "AssaultRifles",
 			buttons = {
-				{title = "Assault Rifle", name = "AssaultRifle", costs = 250000, description = {}, model = "WEAPON_AssaultRifle"},
-				{title = "Carbine Rifle", name = "CarbineRifle", costs = 250000, description = {}, model = "WEAPON_CarbineRifle"},
-				{title = "Advanced Rifle", name = "AdvancedRifle", costs = 300000, description = {}, model = "WEAPON_AdvancedRifle"},
-				{title = "Special Carbine", name = "SpecialCarbine", costs = 310000, description = {}, model = "WEAPON_SpecialCarbine"},
-				{title = "Bullpup Rifle", name = "BullpupRifle", costs = 350000, description = {}, model = "WEAPON_BullpupRifle"},
-				{title = "FCompact Rifle", name = "CompactRifle", costs = 400000, description = {}, model = "WEAPON_CompactRifle"},
+				{title = "AK-47", name = "AssaultRifle", costs = 855000 , description = {}, model = "WEAPON_AssaultRifle"},
+				--{title = "M4A4", name = "CarbineRifle", costs = 1250000, description = {}, model = "WEAPON_CarbineRifle"},		DLC ARMES ET VEHICULES A GOGO
+				{title = "TAR-21", name = "AdvancedRifle", costs = 1425000 , description = {}, model = "WEAPON_AdvancedRifle"},
+				--{title = "G36C", name = "SpecialCarbine", costs = 1475000, description = {}, model = "WEAPON_SpecialCarbine"},	DLC ARMES ET VEHICULES A GOGO
+				{title = "QBZ-95", name = "BullpupRifle", costs = 1450000, description = {}, model = "WEAPON_BullpupRifle"},
+				-- {title = "FCompact Rifle", name = "CompactRifle", costs = 400000, description = {}, model = "WEAPON_CompactRifle"},
 			}
 		},
-		["SniperRifles"] = {
-			title = "Sniper Rifles",
-			name = "SniperRifles",
-			buttons = {
-				{title = "Sniper Rifle", name = "SniperRifle", costs = 500000, description = {}, model = "WEAPON_SniperRifle"},
-				{title = "Heavy Sniper", name = "HeavySniper", costs = 800000, description = {}, model = "WEAPON_HeavySniper"},
-				{title = "Marksman Rifle", name = "MarksmanRifle", costs = 1000000, description = {}, model = "WEAPON_MarksmanRifle"},
-			}
-		},
-		["HeavyWeapons"] = {
-			title = "Heavy Weapons",
-			name = "HeavyWeapons",
-			buttons = {
-				{title = "Grenade Launcher", name = "GrenadeLauncher", costs = 500000, description = {}, model = "WEAPON_GrenadeLauncher"},
-				{title = "RPG", name = "RPG", costs = 800000, description = {}, model = "WEAPON_RPG"},
-				{title = "Minigun", name = "Minigun", costs = 1000000, description = {}, model = "WEAPON_Minigun"},
-				{title = "Firework", name = "Firework", costs = 1000000, description = {}, model = "WEAPON_Firework"},
-				{title = "Railgun", name = "Railgun", costs = 999999999, description = {}, model = "WEAPON_Railgun"},
-				{title = "Homing Launcher", name = "HomingLauncher", costs = 1000000, description = {}, model = "WEAPON_HomingLauncher"},
-				{title = "Smoke-grenade Launcher", name = "GrenadeLauncherSmoke", costs = 1000000, description = {}, model = "WEAPON_GrenadeLauncherSmoke"},
-				{title = "Compact Launcher", name = "CompactLauncher", costs = 1000000, description = {}, model = "WEAPON_CompactLauncher"},
-			}
-		},
+		-- ["SniperRifles"] = {
+			-- title = "Sniper Rifles",
+			-- name = "SniperRifles",
+			-- buttons = {
+				-- {title = "Sniper Rifle", name = "SniperRifle", costs = 500000, description = {}, model = "WEAPON_SniperRifle"},				DLC ARMES ET VEHICULES A GOGO
+			-- }
+		-- },
+		-- ["HeavyWeapons"] = {
+			-- title = "Heavy Weapons",
+			-- name = "HeavyWeapons",
+			-- buttons = {
+				-- {title = "RPG", name = "RPG", costs = 800000, description = {}, model = "WEAPON_RPG"},												DLC ARMES ET VEHICULES A GOGO
+				-- {title = "Smoke-grenade Launcher", name = "GrenadeLauncherSmoke", costs = 1000000, description = {}, model = "WEAPON_GrenadeLauncherSmoke"},	DLC ARMES ET VEHICULES A GOGO
+				-- {title = "Compact Launcher", name = "CompactLauncher", costs = 1000000, description = {}, model = "WEAPON_CompactLauncher"},
+			-- }
+		-- },
 		["ThrownWeapons"] = {
-			title = "Thrown Weapons",
+			title = "Armes de jet",
 			name = "ThrownWeapons",
 			buttons = {
-				{title = "Grenade", name = "Grenade", costs = 1500, description = {}, model = "WEAPON_Grenade"},
-				{title = "Sticky Bomb", name = "StickyBomb", costs = 15500, description = {}, model = "WEAPON_StickyBomb"},
-				{title = "Proximity Mine", name = "ProximityMine", costs = 250000, description = {}, model = "WEAPON_ProximityMine"},
-				{title = "BZ Gas", name = "BZGas", costs = 1800, description = {}, model = "WEAPON_BZGas"},
-				{title = "Molotov", name = "Molotov", costs = 85000, description = {}, model = "WEAPON_Molotov"},
-				{title = "Fire Extinguisher", name = "FireExtinguisher", costs = 3000, description = {}, model = "WEAPON_FireExtinguisher"},
-				{title = "Petrol Can", name = "PetrolCan", costs = 120000, description = {}, model = "WEAPON_PetrolCan"},
+				-- {title = "Grenade", name = "Grenade", costs = 15000, description = {}, model = "WEAPON_Grenade"}, 								DLC ARMES ET VEHICULES A GOGO
+				{title = "Gas BZ", name = "BZGas", costs = 8500, description = {}, model = "WEAPON_BZGas"},
+				{title = "Molotov", name = "Molotov", costs = 12000, description = {}, model = "WEAPON_Molotov"},
+				{title = "Extincteur", name = "FireExtinguisher", costs = 3000, description = {}, model = "WEAPON_FireExtinguisher"},
+				{title = "Jerrican", name = "PetrolCan", costs = 8500, description = {}, model = "WEAPON_PetrolCan"},
 				{title = "Flare", name = "Flare", costs = 12000, description = {}, model = "WEAPON_Flare"},
-				{title = "Ball", name = "Ball", costs = 120, description = {}, model = "WEAPON_Ball"},
-				{title = "Snowball", name = "Snowball", costs = 120, description = {}, model = "WEAPON_Snowball"},
-				{title = "Smoke Grenade", name = "SmokeGrenade", costs = 12000, description = {}, model = "WEAPON_SmokeGrenade"},
-				{title = "Bombe artisanale", name = "Pipebomb", costs = 3000, description = {}, model = "WEAPON_Pipebomb"},
+				-- {title = "Smoke Grenade", name = "SmokeGrenade", costs = 12000, description = {}, model = "WEAPON_SmokeGrenade"},				DLC ARMES ET VEHICULES A GOGO
 			}
 		},
 	}
@@ -156,7 +136,17 @@ local weashop = {
 
 local fakeWeapon = ''
 local weashop_locations = {
-{entering = {253.00769042969,-48.460647583008,69.941078186035}, inside = {253.00769042969,-48.460647583008,69.941078186035}, outside = {253.00769042969,-48.460647583008,69.941078186035}},
+{entering = {1692.379,3758.194,33.71}, inside = {1692.379,3758.194,33.71}, outside = {1692.379,3758.194,33.71}},
+{entering = {252.915,-48.186,68.941}, inside = {252.915,-48.186,69.941}, outside = {252.915,-48.186,69.941}},
+{entering = {844.352,-1033.517,27.094}, inside = {844.352,-1033.517,28.194}, outside = {844.352,-1033.517,28.194}},
+{entering = {-331.487,6082.348,30.354}, inside = {-331.487,6082.348,31.454}, outside = {-331.487,6082.348,31.454}},
+{entering = {-664.268,-935.479,20.729}, inside = {-664.268,-935.479,21.829}, outside = {-664.268,-935.479,21.829}},
+{entering = {-1305.427,-392.428,35.595}, inside = {-1305.427,-392.428,36.695}, outside = {-1305.427,-392.428,36.695}},
+{entering = {-1119.146,2697.061,17.454}, inside = {-1119.146,2697.061,18.554}, outside = {-1119.146,2697.061,18.554}},
+{entering = {2569.978,294.472,107.634}, inside = {2569.978,294.472,108.734}, outside = {2569.978,294.472,108.734}},
+{entering = {-3172.584,1085.858,19.738}, inside = {-3172.584,1085.858,20.838}, outside = {-3172.584,1085.858,20.838}},
+{entering = {20.0430,-1106.469,28.697}, inside = {20.0430,-1106.469,29.797}, outside = {20.0430,-1106.469,29.797}},
+{entering = {810.319,-2157.670,29.619}, inside = {810.319,-2157.670,29.619}, outside = {810.319,-2157.670,29.619}},
 }
 
 local weashop_blips ={}
@@ -456,18 +446,18 @@ function ButtonSelected(button)
 			OpenMenu('Melee')
 		elseif btn == "Pistolets" then
 			OpenMenu('Pistolets')
-		-- elseif btn == "MachineGuns" then
-		-- 	OpenMenu('MachineGuns')
-		-- elseif btn == "Shotguns" then
-		-- 	OpenMenu('Shotguns')
-		-- elseif btn == "AssaultRifles" then
-		-- 	OpenMenu('AssaultRifles')
-		-- elseif btn == "SniperRifles" then
-		-- 	OpenMenu('SniperRifles')
-		-- elseif btn == "HeavyWeapons" then
-		-- 	OpenMenu('HeavyWeapons')
-		-- elseif btn == "ThrownWeapons" then
-		-- 	OpenMenu('ThrownWeapons')
+		elseif btn == "MachineGuns" then
+			OpenMenu('MachineGuns')
+		elseif btn == "Shotguns" then
+			OpenMenu('Shotguns')
+		elseif btn == "AssaultRifles" then
+			OpenMenu('AssaultRifles')
+		elseif btn == "SniperRifles" then
+			OpenMenu('SniperRifles')
+		elseif btn == "HeavyWeapons" then
+			OpenMenu('HeavyWeapons')
+		elseif btn == "ThrownWeapons" then
+			OpenMenu('ThrownWeapons')
 		end
 	else
 		fakeWeapon = button.model
@@ -519,7 +509,7 @@ if firstspawn == 0 then
 	ShowWeashopBlips(true)
 	firstspawn = 1
 end
-TriggerServerEvent("weaponshop:playerSpawned", spawn)
+	TriggerServerEvent("weaponshop:playerSpawned", spawn)
 end)
 
 RegisterNetEvent('giveWeapon')

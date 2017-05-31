@@ -4,7 +4,7 @@ MySQL:open("localhost", "gta5_gamemode_essential", "root", "Police911")
 
 RegisterServerEvent('paycheck:salary')
 AddEventHandler('paycheck:salary', function()
-	 local salary = 500
+	 local salary = 150 --AIDE DE L ETAT (RP: Le président peut decider de les changer)
    TriggerEvent('es:getPlayerFromId', source, function(user)
   	-- Ajout de l'argent à l'utilisateur
   	local user_id = user.identifier
@@ -14,7 +14,7 @@ AddEventHandler('paycheck:salary', function()
     local salary_job = tonumber(result[1].salary)
     if salary_job > 0 then
           user:addMoney((salary + salary_job))
-   	  TriggerClientEvent("es_freeroam:notify", source, "CHAR_BANK_MAZE", 1, "Maze Bank", false, "Salaire reçu :  + "..salary.."~g~$~s~~n~Salaire metier reçu : + "..salary_job.." ~g~$")
+   	  TriggerClientEvent("es_freeroam:notify", source, "CHAR_BANK_MAZE", 1, "Maze Bank", false, "Aide de L'État :  + "..salary.."~g~$~s~~n~Salaire reçu : + "..salary_job.." ~g~$")
     end
  	end)
 end)

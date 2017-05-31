@@ -125,30 +125,30 @@ local blips = {
     --{name="Gang", id=437, x=960.24, y=-140.31, z=74.50},
     --{name="Gang", id=437, x=-1042.29, y=4910.17, z=94.92},
     -- Gas stations
-   {name="Gas Station", colour=76, scale=0.7, id=361, x=49.4187,   y=2778.793,  z=58.043},
-   {name="Gas Station", colour=76, scale=0.7, id=361, x=263.894,   y=2606.463,  z=44.983},
-   {name="Gas Station", colour=76, scale=0.7, id=361, x=1039.958,  y=2671.134,  z=39.550},
-   {name="Gas Station", colour=76, scale=0.7, id=361, x=1207.260,  y=2660.175,  z=37.899},
-   {name="Gas Station", colour=76, scale=0.7, id=361, x=2539.685,  y=2594.192,  z=37.944},
-   {name="Gas Station", colour=76, scale=0.7, id=361, x=2679.858,  y=3263.946,  z=55.240},
-   {name="Gas Station", colour=76, scale=0.7, id=361, x=2005.055,  y=3773.887,  z=32.403},
-   {name="Gas Station", colour=76, scale=0.7, id=361, x=1687.156,  y=4929.392,  z=42.078},
-   {name="Gas Station", colour=76, scale=0.7, id=361, x=1701.314,  y=6416.028,  z=32.763},
-   {name="Gas Station", colour=76, scale=0.7, id=361, x=179.857,   y=6602.839,  z=31.868},
-   {name="Gas Station", colour=76, scale=0.7, id=361, x=-94.4619,  y=6419.594,  z=31.489},
-   {name="Gas Station", colour=76, scale=0.7, id=361, x=-2554.996, y=2334.40,  z=33.078},
-   {name="Gas Station", colour=76, scale=0.7, id=361, x=-1800.375, y=803.661,  z=138.651},
-   {name="Gas Station", colour=76, scale=0.7, id=361, x=-1437.622, y=-276.747,  z=46.207},
-   {name="Gas Station", colour=76, scale=0.7, id=361, x=-2096.243, y=-320.286,  z=13.168},
-   {name="Gas Station", colour=76, scale=0.7, id=361, x=-724.619, y=-935.1631,  z=19.213},
-   {name="Gas Station", colour=76, scale=0.7, id=361, x=-526.019, y=-1211.003,  z=18.184},
-   {name="Gas Station", colour=76, scale=0.7, id=361, x=-70.2148, y=-1761.792,  z=29.534},
-   {name="Gas Station", colour=76, scale=0.7, id=361, x=265.648,  y=-1261.309,  z=29.292},
-   {name="Gas Station", colour=76, scale=0.7, id=361, x=819.653,  y=-1028.846,  z=26.403},
-   {name="Gas Station", colour=76, scale=0.7, id=361, x=1208.951, y= -1402.567, z=35.224},
-   {name="Gas Station", colour=76, scale=0.7, id=361, x=1181.381, y= -330.847,  z=69.316},
-   {name="Gas Station", colour=76, scale=0.7, id=361, x=620.843,  y= 269.100,  z=103.089},
-   {name="Gas Station", colour=76, scale=0.7, id=361, x=2581.321, y=362.039, 108.468},
+   {name="Station Service", colour=76, scale=0.7, id=361, x=49.4187,   y=2778.793,  z=58.043},
+   {name="Station Service", colour=76, scale=0.7, id=361, x=263.894,   y=2606.463,  z=44.983},
+   {name="Station Service", colour=76, scale=0.7, id=361, x=1039.958,  y=2671.134,  z=39.550},
+   {name="Station Service", colour=76, scale=0.7, id=361, x=1207.260,  y=2660.175,  z=37.899},
+   {name="Station Service", colour=76, scale=0.7, id=361, x=2539.685,  y=2594.192,  z=37.944},
+   {name="Station Service", colour=76, scale=0.7, id=361, x=2679.858,  y=3263.946,  z=55.240},
+   {name="Station Service", colour=76, scale=0.7, id=361, x=2005.055,  y=3773.887,  z=32.403},
+   {name="Station Service", colour=76, scale=0.7, id=361, x=1687.156,  y=4929.392,  z=42.078},
+   {name="Station Service", colour=76, scale=0.7, id=361, x=1701.314,  y=6416.028,  z=32.763},
+   {name="Station Service", colour=76, scale=0.7, id=361, x=179.857,   y=6602.839,  z=31.868},
+   {name="Station Service", colour=76, scale=0.7, id=361, x=-94.4619,  y=6419.594,  z=31.489},
+   {name="Station Service", colour=76, scale=0.7, id=361, x=-2554.996, y=2334.40,  z=33.078},
+   {name="Station Service", colour=76, scale=0.7, id=361, x=-1800.375, y=803.661,  z=138.651},
+   {name="Station Service", colour=76, scale=0.7, id=361, x=-1437.622, y=-276.747,  z=46.207},
+   {name="Station Service", colour=76, scale=0.7, id=361, x=-2096.243, y=-320.286,  z=13.168},
+   {name="Station Service", colour=76, scale=0.7, id=361, x=-724.619, y=-935.1631,  z=19.213},
+   {name="Station Service", colour=76, scale=0.7, id=361, x=-526.019, y=-1211.003,  z=18.184},
+   {name="Station Service", colour=76, scale=0.7, id=361, x=-70.2148, y=-1761.792,  z=29.534},
+   {name="Station Service", colour=76, scale=0.7, id=361, x=265.648,  y=-1261.309,  z=29.292},
+   {name="Station Service", colour=76, scale=0.7, id=361, x=819.653,  y=-1028.846,  z=26.403},
+   {name="Station Service", colour=76, scale=0.7, id=361, x=1208.951, y= -1402.567, z=35.224},
+   {name="Station Service", colour=76, scale=0.7, id=361, x=1181.381, y= -330.847,  z=69.316},
+   {name="Station Service", colour=76, scale=0.7, id=361, x=620.843,  y= 269.100,  z=103.089},
+   {name="Station Service", colour=76, scale=0.7, id=361, x=2581.321, y=362.039, 108.468},
     -- Police Stations
    {name="Commisariat", colour=3, scale=1.0, id=60, x=425.130, y=-979.558, z=30.711},
    --{name="Police Station", id=60, x=1859.234, y= 3678.742, z=33.690},
@@ -190,7 +190,12 @@ local blips = {
     --{name="Safehouse", id=357, x=-771.79888916016, y= 351.59423828125, z=87.998191833496},
     --{name="Safehouse", id=357, x=-3086.428, y=339.252, z=6.371},
     --{name="Safehouse", id=357, x=-917.289, y=-450.206, z=39.600},
-
+	
+    --{name="Planque", id=267, x=141.325, y=-2200.85, z=4.68803},
+    --{name="Planque", id=267, x=488.65, y=-1315.62, z=29.2479},
+    --{name="Planque", id=267, x=716.57, y=-966.28, z=30.3953},
+    --{name="Planque", id=267, x=-110.5451, y=-9.06105, z=70.5196},
+    --{name="Planque", id=267, x=-555.266, y=288.186, z=82.1763},
 
    --{name="Race", id=316, x=-1277.629, y=-2030.913, z=1.2823},
    --{name="Race", id=316, x=2384.969, y=4277.583, z=30.379},
@@ -294,6 +299,14 @@ Citizen.CreateThread(function()
   RequestIpl("ex_sm_13_office_01b")
   RequestIpl("ex_sm_13_office_02a")
   RequestIpl("ex_sm_13_office_02b")
+  RequestIpl("v_hospital")
+  RemoveIpl("RC12B_Default")
+  RemoveIpl("RC12B_Fixed")
+  RequestIpl("RC12B_Destroyed")
+  RequestIpl("RC12B_HospitalInterior")	
+  RequestIpl("canyonriver01_traincrash")
+  RequestIpl("railing_end")
+  RequestIpl("des_farmhouse")
 end)
 
 Citizen.CreateThread(function()

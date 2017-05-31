@@ -3,7 +3,7 @@ require "resources/[essential]/essentialmode/lib/MySQL"
 MySQL:open("127.0.0.1", "gta5_gamemode_essential", "root", "Police911")
 
 local max_number_weapons = 6 --maximum number of weapons that the player can buy. Weapons given at spawn doesn't count.
-local cost_ratio = 100 --Ratio for withdrawing the weapons. This is price/cost_ratio = cost.
+local cost_ratio = 0 --Ratio for withdrawing the weapons. This is price/cost_ratio = cost.
 
 RegisterServerEvent('CheckMoneyForWea')
 AddEventHandler('CheckMoneyForWea', function(weapon,price)
@@ -19,6 +19,7 @@ AddEventHandler('CheckMoneyForWea', function(weapon,price)
 					nb_weapon = nb_weapon + 1
 				end
 			end
+			print(nb_weapon)
 			if (tonumber(max_number_weapons) > tonumber(nb_weapon)) then
 				-- Pay the shop (price)
 				user:removeMoney((price))
@@ -26,14 +27,14 @@ AddEventHandler('CheckMoneyForWea', function(weapon,price)
 				{['@username'] = player, ['@weapon'] = weapon, ['@cost'] = (price)/cost_ratio})
 				-- Trigger some client stuff
 				TriggerClientEvent('FinishMoneyCheckForWea',source)
-				TriggerClientEvent("es_freeroam:notify", source, "CHAR_MP_ROBERTO", 1, "Roberto", false, "MURDER TIME. FUN TIME!\n")
+				TriggerClientEvent("es_freeroam:notify", source, "CHAR_AMMUNATION", 1, "AMMUNATION", false, "Amuse toi bien avec ces joujous!\n")
 			else
 				TriggerClientEvent('ToManyWeapons',source)
-				TriggerClientEvent("es_freeroam:notify", source, "CHAR_MP_ROBERTO", 1, "Roberto", false, "You have reached the weapon limit ! (max: "..max_number_weapons..")\n")
+				TriggerClientEvent("es_freeroam:notify", source, "CHAR_AMMUNATION", 1, "AMMUNATION", false, "Tu as atteint la limite d armes ! (max: "..max_number_weapons..")\n")
 			end
 		else
 			-- Inform the player that he needs more money
-			TriggerClientEvent("es_freeroam:notify", source, "CHAR_MP_ROBERTO", 1, "Roberto", false, "You don't have enough cash !\n")
+			TriggerClientEvent("es_freeroam:notify", source, "CHAR_AMMUNATION", 1, "AMMUNATION", false, "Reviens quand tu auras plus d'argent !\n")
 		end
 	end)
 end)
@@ -44,6 +45,8 @@ AddEventHandler("weaponshop:playerSpawned", function(spawn)
 		TriggerEvent('weaponshop:GiveWeaponsToPlayer', source)
 	end)
 end)
+
+-- NOTE: Ajouter une fonction pour remove l arme à la mort du joueur in game et in db
 
 RegisterServerEvent("weaponshop:GiveWeaponsToPlayer")
 AddEventHandler("weaponshop:GiveWeaponsToPlayer", function(player)
@@ -61,11 +64,11 @@ AddEventHandler("weaponshop:GiveWeaponsToPlayer", function(player)
 					TriggerClientEvent("giveWeapon", player, v.weapon_model, delay)
 					--user:removeMoney((v.withdraw_cost))
 				--else
-					--TriggerClientEvent("es_freeroam:notify", source, "CHAR_MP_ROBERTO", 1, "Roberto", false, "You don't have enough cash !\n")
+					--TriggerClientEvent("es_freeroam:notify", source, "CHAR_AMMUNATION", 1, "AMMUNATION", false, "You don't have enough cash !\n")
 					--return
 				--end
 			end
-			--TriggerClientEvent("es_freeroam:notify", source, "CHAR_MP_ROBERTO", 1, "Roberto", false, "Here are your weapons !\n")
+			--TriggerClientEvent("es_freeroam:notify", source, "CHAR_AMMUNATION", 1, "AMMUNATION", false, "Here are your weapons !\n")
 		end
 
 	end)

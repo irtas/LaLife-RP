@@ -44,18 +44,18 @@ AddEventHandler('jobspolice:jobs', function(id, civil)
 		local namePolice = namePolice(player, user) --SELECT
 		local id_police = idPolice(user) --Donne le ID de la police du joueur pour lui donne les armes et le skin aproprier
 		if namePolice == "Rien" then
-			TriggerClientEvent("es_freeroam:notify", source, "CHAR_MP_STRIPCLUB_PR", 1, "Commissariat", false, "Vous devez être policier")
+			TriggerClientEvent("es_freeroam:notify", source, "CHAR_ANDREAS", 1, "Commissariat", false, "Vous devez être policier")
 		else
 			--updatejob(player, id) --UPDATE
 			user:setenService(id)
 			local isService = isService(user)
 			if isService == 1 then
-				TriggerClientEvent("es_freeroam:notify", source, "CHAR_MP_STRIPCLUB_PR", 1, "Commissariat", false, "Vous êtes en service en tant que : ".. namePolice)
+				TriggerClientEvent("es_freeroam:notify", source, "CHAR_ANDREAS", 1, "Commissariat", false, "Vous êtes en service en tant que : ".. namePolice)
 				if not civil then
 					ArmeSelonGrade(id_police)
 				end
 			else
-				TriggerClientEvent("es_freeroam:notify", source, "CHAR_MP_STRIPCLUB_PR", 1, "Commissariat", false, "Vous êtes maintenant hors service")
+				TriggerClientEvent("es_freeroam:notify", source, "CHAR_ANDREAS", 1, "Commissariat", false, "Vous êtes maintenant hors service")
         TriggerEvent("vmenu:fromSlastChar", source)
 			end
 			TriggerEvent('vmenu:updateUser', 5)
@@ -96,7 +96,7 @@ AddEventHandler('jobspolice:wepArmory', function(id)
     local player = user.identifier
 		local namePolice = namePolice(player, user) --SELECT
 		if namePolice == "Rien" then
-			TriggerClientEvent("es_freeroam:notify", source, "CHAR_MP_STRIPCLUB_PR", 1, "Commissariat", false, "Vous devez être policier")
+			TriggerClientEvent("es_freeroam:notify", source, "CHAR_ANDREAS", 1, "Commissariat", false, "Vous devez être policier")
 		else
 			local isService = isService(user)
 			if isService == 1 then
@@ -147,7 +147,7 @@ AddEventHandler('jobspolice:vehGarage', function(vehicule)
 					 TriggerClientEvent("jobspolice:notif", source, "~r~Vous n'êtes pas en service")
 				 end
 		else
-				TriggerClientEvent("es_freeroam:notify", source, "CHAR_MP_STRIPCLUB_PR", 1, "Commissariat", false, "Vous devez être policier")
+				TriggerClientEvent("es_freeroam:notify", source, "CHAR_ANDREAS", 1, "Commissariat", false, "Vous devez être policier")
   	end
 		TriggerEvent('vmenu:updateUser', 98)
 	end)

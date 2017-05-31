@@ -18,7 +18,7 @@ AddEventHandler('mission:completed', function(total)
 TriggerEvent('es:getPlayerFromId', source, function(user)
   -- update player money amount
   user:addMoney((total))
- TriggerClientEvent("es_freeroam:notify", source, "CHAR_BANK_MAZE", 1, "Maze Bank", false, "You received ~g~$".. tonumber(total))
+ TriggerClientEvent("es_freeroam:notify", source, "CHAR_BANK_MAZE", 1, "Maze Bank", false, "Vous avez reçu ~g~$".. tonumber(total))
  end)
 end)
 
@@ -27,10 +27,10 @@ AddEventHandler('es_freeroam:pay', function(amount)
 	-- Get the players money amount
 	TriggerEvent("es:getPlayerFromId", source, function(user)
 		if(user.money > amount) then
-			TriggerClientEvent("es_freeroam:notify", source, "CHAR_BANK_MAZE", 1, "Maze Bank", false, "Your transaction is ~g~completed.")
+			TriggerClientEvent("es_freeroam:notify", source, "CHAR_BANK_MAZE", 1, "Maze Bank", false, "Transaction ~g~effectuée.")
 			user:removeMoney((amount))
 		else
-			TriggerClientEvent("es_freeroam:notify", source, "CHAR_BANK_MAZE", 1, "Maze Bank", false, "Your transaction is ~r~rejected.")
+			TriggerClientEvent("es_freeroam:notify", source, "CHAR_BANK_MAZE", 1, "Maze Bank", false, "Transaction ~r~rejetée.")
 		end
 	end)
 end)

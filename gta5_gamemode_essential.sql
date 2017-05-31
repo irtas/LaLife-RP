@@ -119,6 +119,7 @@ INSERT INTO `jobs` VALUES ('9', 'Livreur de médicaments', '0');
 INSERT INTO `jobs` VALUES ('10', 'Policier', '0');
 INSERT INTO `jobs` VALUES ('11', 'Fossoyeur', '0');
 INSERT INTO `jobs` VALUES ('12', 'Préposé à la morgue', '0');
+INSERT INTO `jobs` VALUES ('13', 'Ambulancier', '500');
 
 -- ----------------------------
 -- Table structure for `outfits`
@@ -197,11 +198,11 @@ CREATE TABLE `users` (
   `group` varchar(50) NOT NULL DEFAULT '0',
   `permission_level` int(11) NOT NULL DEFAULT '0',
   `money` double NOT NULL DEFAULT '0',
+  `dirtymoney` double(11,0) NOT NULL DEFAULT '0',
   `bankbalance` int(32) DEFAULT '0',
   `job` int(11) DEFAULT '1',
   `police` int(11) DEFAULT '0',
   `enService` int(11) DEFAULT '0',
-  `dirtymoney` double(11,0) NOT NULL DEFAULT '0',
   `isFirstConnection` int(11) DEFAULT '1',
   `nom` varchar(30) CHARACTER SET utf8mb4 NOT NULL DEFAULT '',
   `prenom` varchar(30) CHARACTER SET utf8mb4 NOT NULL DEFAULT '',
