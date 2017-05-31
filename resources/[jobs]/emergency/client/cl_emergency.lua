@@ -258,13 +258,15 @@ function GetService()
 	local playerPed = GetPlayerPed(-1)
 
 	if jobId ~= 13 then
-		SendNotification(txt[lang]['notDoc'])
+	SendNotification(txt[lang]['notDoc'])
 		return
 	end
 
 	if isInService then
-		SendNotification(txt[lang]['stopService'])
+		SendNotification(txt[lang]['stopService'])  
+		TriggerServerEvent("vmenu:updateChar") --EN TEST REDONNE LES VETEMENT
 		TriggerServerEvent('es_em:sv_setService', 0)
+		--TriggerServerEvent("jobssystem:jobs", 1) --REPASSER EN CHOMEUR A TEST
 	else
 		SendNotification(txt[lang]['startService'])
 		TriggerServerEvent('es_em:sv_setService', 1)
@@ -284,6 +286,7 @@ function GetService()
 	SetPedComponentVariation(playerPed, 4, 61, 5, 0)
 	SetPedComponentVariation(playerPed, 3, 109, 0, 0)
 	SetPedComponentVariation(playerPed, 6, 25, 0, 0)
+	end
 end
 
 --[[

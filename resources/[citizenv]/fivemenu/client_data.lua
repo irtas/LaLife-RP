@@ -10,7 +10,7 @@ changeYourJob = {
   {name="Pole Emploi", colour=15, id=351, x=-601.59295654297, y=-116.45598602295, z=41.734840393066},
 }
 
-jobsname = {"Sans Emploi", "Nettoyeur de piscine", "Éboueur", "Mineur", "Chauffeur de taxi", "Livreur de bois", "Livreur de citerne", "Livreur de conteneur", "Livreur de médicaments", "Policier", "Fossoyeur", "Préposé à la morgue" }
+jobsname = {"Sans Emploi", "Nettoyeur de piscine", "Éboueur", "Mineur", "Chauffeur de taxi", "Livreur de bois", "Livreur de citerne", "Livreur de conteneur", "Livreur de médicaments", "Policier", "Fossoyeur", "Préposé à la morgue", "Ambulancier" }
 
 jobs = {
   {name="Sans Emploi", id=1},
@@ -25,6 +25,7 @@ jobs = {
   --{name="Policier", id=10},
   {name="Fossoyeur", id=11},
   {name="Préposé à la morgue", id=12},
+  {name="Ambulancier", id=13},
 }
 
 hair = {

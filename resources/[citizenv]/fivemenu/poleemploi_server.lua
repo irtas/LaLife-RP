@@ -8,7 +8,7 @@ function nameJob(id)
   return result[1].job_name
 end
 
-jobsname = {"Sans Emploi", "Nettoyeur de piscine", "Éboueur", "Mineur", "Chauffeur de taxi", "Livreur de bois", "Livreur de citerne", "Livreur de conteneur", "Livreur de médicaments", "Policier", "Fossoyeur", "Préposé à la morgue" }
+jobsname = {"Sans Emploi", "Nettoyeur de piscine", "Éboueur", "Mineur", "Chauffeur de taxi", "Livreur de bois", "Livreur de citerne", "Livreur de conteneur", "Livreur de médicaments", "Policier", "Fossoyeur", "Préposé à la morgue", "Ambulancier" }
 
 
 function updatejob(player, id)
