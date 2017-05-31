@@ -2,6 +2,18 @@
 
 ## Changelog
 
+2. 31 05 2017
+
+Release des sources pour le Wrapper.
+
+**Bugfix**
+
+- Some
+	
+**Ajout de la communauté**
+- **EMS!**
+- Il est possible qu'il y est des bugs, les tests n'ont pas été fait en profondeur, mais aucun bug jusqu'à maintenant. 
+
 2. 29 05 2017
 
 **Bugfix**
