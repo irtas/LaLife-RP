@@ -59,7 +59,7 @@ function()
     for i,v in pairs(players) do
       identifier = GetPlayerIdentifiers(i)
       if (identifier ~= nil) then
-        local executed_query = MySQL:executeQuery("SELECT identifier, job_id, job_name FROM users LEFT JOIN jobs ON jobs.job_id = users.job WHERE users.identifier = '@identifier' AND job_id = 11 AND enService = 1", {['@identifier'] = identifier[1]})
+        local executed_query = MySQL:executeQuery("SELECT identifier, job_id, job_name FROM users LEFT JOIN jobs ON jobs.job_id = users.job WHERE users.identifier = '@identifier' AND job_id = 13", {['@identifier'] = identifier[1]})
         local result = MySQL:getResults(executed_query, {'job_id'}, "identifier")
 
         if (result[1] ~= nil) then

@@ -199,7 +199,7 @@ function ResPlayer()
 	-- TriggerServerEvent("skin_customization:SpawnPlayer") À CHANGER POUR LA TENUE AU RESPAWN.
 
 	RemoveAllPedWeapons(GetPlayerPed(-1),true)
-	NetworkResurrectLocalPlayer(357.757, -597.202, 28.6314, true, true, false)
+	NetworkResurrectLocalPlayer(307.5803527832, -1433.3092041016, 29.966968536377, true, true, false)
 end
 
 function OnPlayerDied(playerId, reasonID, reason)
