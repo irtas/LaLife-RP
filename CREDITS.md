@@ -65,6 +65,8 @@ Including :
 	[17] Le script est basé sur le truckerjob déjà disponible, le code a été repensé et retravaillé pour le rendre plus flexible et custom.
 -	vdk_call
 	[8] Super script fonctionnel à 100%!
+-	ems
+	[18] Merci à Dayfield et Stivicx pour la proposition et la pull request, le script est super intéressant et très bien fait. 	Merci à ses créateurs
 
 Autres de base
 
@@ -86,3 +88,4 @@ Bibliographie :
 [15] https://forum.fivem.net/t/release-captain14s-els-style-car-packs/18425/25
 [16] https://github.com/PandaBasketteur/Jobs-System-and-Paycheck
 [17] https://forum.fivem.net/t/release-truckerjob-v0-3-update-29th-january/5237
+[18] https://forum.fivem.net/t/release-job-save-people-be-a-hero-paramedic-emergency-coma-ko/19773/184
