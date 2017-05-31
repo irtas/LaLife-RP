@@ -59,6 +59,11 @@ AddEventHandler('es:getVehPlate_s', function()
 	end)
 end)
 
+function round(num, numDecimalPlaces)
+	local mult = 5^(numDecimalPlaces or 0)
+	return math.floor(num * mult + 0.5) / mult
+end
+
 RegisterServerEvent("vmenu:cleanCash_s")
 AddEventHandler("vmenu:cleanCash_s", function()
 	TriggerEvent('es:getPlayerFromId', source, function(user)
@@ -66,7 +71,7 @@ AddEventHandler("vmenu:cleanCash_s", function()
 		local cash = tonumber(user:getMoney())
 		local washedcash = dcash * 0.3
 		user:setDMoney(0)
-		local total = cash + washedcash
+		local total = cash + round(washedcash)
 		user:setMoney(total)
 	end)
 end)
