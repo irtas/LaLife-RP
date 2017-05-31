@@ -9,6 +9,8 @@ Pour le support sur le scripting de FiveM en général.
 
 **SI JAMAIS VOUS VOYEZ QU'IL MANQUE UNE SOURCE/CRÉDITS CONTACTEZ MOI!**
 
+**[BRANCHE STABLE](https://github.com/ldlac/La_LifeRP/tree/Stable)**
+
 ## Information
 
 - **Linux roule bien finalement. Tout est sensé fonctionner. Assurez vous de bien installer tout comme il le faut. (Mono, etc)**
