@@ -264,7 +264,7 @@ function GetService()
 
 	if isInService then
 		SendNotification(txt[lang]['stopService'])
-		TriggerServerEvent("vmenu:updateChar") --EN TEST REDONNE LES VETEMENT
+		TriggerServerEvent("vmenu:lastChar") --EN TEST REDONNE LES VETEMENT
 		TriggerServerEvent('es_em:sv_setService', 0)
 		--TriggerServerEvent("jobssystem:jobs", 1) --REPASSER EN CHOMEUR A TEST
 	else
