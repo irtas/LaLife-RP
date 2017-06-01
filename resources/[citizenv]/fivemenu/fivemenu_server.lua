@@ -30,17 +30,38 @@ AddEventHandler('vmenu:updateUser', function(openMenu)
 
 	local userInfos = {}
 
+	-- Spawned = false,
+	-- Loaded = false,
+	-- group = "0",
+	-- permission_level = 0,
+	-- money = 0,
+	-- dirtymoney = 0,
+	-- job = 0,
+	-- police = 0,
+	-- enService = 0,
+	-- nom = "",
+	-- prenom = "",
+	-- vehicle = "",
+	-- identifier = nil,
+	-- telephone = ""
+
 	TriggerEvent('es:getPlayerFromId', source, function(user)
 		if user ~= nil then
 			TriggerEvent('es:getPlayerFromIdentifier', user.identifier, function(user)
 				userInfos = user
 			end)
+			userInfos["identifier"] = user.identifier
+			userInfos["group"] = user.group.group
+			userInfos["permission_level"] = user.permission_level
 			userInfos["vehicle"] = user:getVehicle()
 			userInfos["telephone"] = user:getTel()
 			userInfos["enService"] = user:getenService()
 			userInfos["nom"] = user:getNom()
 			userInfos["prenom"] = user:getPrenom()
 			userInfos["job"] = user:getJob()
+			userInfos["police"] = user:getPolice()
+			userInfos["money"] = user:getMoney()
+			userInfos["dirtymoney"] = user:getDMoney()
 		end
 	end)
 	--print(userInfos.identifier)
