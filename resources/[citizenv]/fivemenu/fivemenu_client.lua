@@ -246,7 +246,6 @@ function VMenu.DrawItems(td)
 		end
 
 		local itemTitle = VMenu.items[curMenu][i].name
-		Citizen.Trace(itemTitle)
 		local itemDesc = VMenu.items[curMenu][i].desc
 
 		if VMenu.items[curMenu][i].type == "separator" then

@@ -22,21 +22,21 @@ local lsc = {
 		from = 1,
 		to = 10,
 		["bumpers"] = { 
-			title = "pare-chocs", 
+			title = "bumpers", 
 			name = "bumpers",
 			buttons = { 
 
 			}
 		},
 		["frontbumper"] = { 
-			title = "pare-chocs avant", 
+			title = "frontbumper", 
 			name = "frontbumper",
 			buttons = { 
 
 			}
 		},
 		["rearbumper"] = { 
-			title = "pare-chocs arriere", 
+			title = "rearbumper", 
 			name = "rearbumper",
 			buttons = { 
 
@@ -49,7 +49,7 @@ local lsc = {
 				
 			}
 		},["exhaust"] = { 
-			title = "Echappement", 
+			title = "exhaust", 
 			name = "exhaust",
 			buttons = { 
 				
@@ -63,34 +63,34 @@ local lsc = {
 			}
 		},
 		["grille"] = { 
-			title = "Calandre", 
+			title = "grille", 
 			name = "grille",
 			buttons = { 
 				
 			}
 		},
 		["hood"] = { 
-			title = "Capot", 
+			title = "hood", 
 			name = "hood",
 			buttons = { 
 				
 			}
 		},["rollcage"] = { 
-			title = "Arceaux", 
+			title = "rollcage", 
 			name = "rollcage",
 			buttons = { 
 				
 			}
 		},
 		["roof"] = { 
-			title = "Toit", 
+			title = "roof", 
 			name = "roof",
 			buttons = { 
 				
 			}
 		},
 		["skirts"] = { 
-			title = "Jupes", 
+			title = "skirts", 
 			name = "skirts",
 			buttons = { 
 				
@@ -98,7 +98,7 @@ local lsc = {
 		}
 		,
 		["spoiler"] = { 
-			title = "Ailerons", 
+			title = "spoiler", 
 			name = "spoiler",
 			buttons = { 
 				
@@ -111,14 +111,14 @@ local lsc = {
 			}
 		},
 		["chassis"] = { 
-			title = "Chassis", 
+			title = "chassis", 
 			name = "chassis",
 			buttons = { 
 				
 			}
 		}
 	,["primarymetallic"] = { 
-			title = "Couleurs primaires", 
+			title = "primary colors", 
 			name = "primarymetallic",
 			buttons = { 
 				{name = "Black",costs = 0, colorindex = 0, description = "", centre = 0, font = 0, scale = 0.4},
@@ -199,7 +199,7 @@ local lsc = {
 			}
 		},
 		["secondarymetallic"] = { 
-			title = "Couleurs secondaires", 
+			title = "secondary colors", 
 			name = "secondarymetallic",
 			buttons = { 
 				{name = "Black",costs = 0, colorindex = 0, description = "", centre = 0, font = 0, scale = 0.4},
@@ -281,7 +281,7 @@ local lsc = {
 		},
 
 		["primarymatte"] = { 
-				title = "Couleurs primaires", 
+				title = "primary colors", 
 				name = "primarymatte",
 				buttons = { 
 					{name = "Black", colorindex = 12,costs = 0, description = "", centre = 0, font = 0, scale = 0.4},
@@ -307,7 +307,7 @@ local lsc = {
 				}
 			},
 			["secondarymatte"] = { 
-				title = "Couleurs secondaires", 
+				title = "secondary colors", 
 				name = "secondarymatte",
 				buttons = { 
 					{name = "Black", colorindex = 12,costs = 0, description = "", centre = 0, font = 0, scale = 0.4},
@@ -333,7 +333,7 @@ local lsc = {
 				}
 			},
 			["primarymetal"] = { 
-				title = "Couleurs primaires", 
+				title = "primary colors", 
 				name = "primarymetal",
 				buttons = { 
 					{name = "Brushed Steel",colorindex = 117,costs = 0, description = "", centre = 0, font = 0, scale = 0.4},
@@ -345,7 +345,7 @@ local lsc = {
 			}
 			,
 			["secondarymetal"] = { 
-				title = "Couleurs secondaires", 
+				title = "secondary colors", 
 				name = "secondarymetal",
 				buttons = { 
 					{name = "Brushed Steel",colorindex = 117,costs = 0, description = "", centre = 0, font = 0, scale = 0.4},
@@ -355,7 +355,7 @@ local lsc = {
 					{name = "Brushed Gold",colorindex = 159,costs = 0, description = "", centre = 0, font = 0, scale = 0.4}
 				}
 			},["wheelcolor"] = { 
-			title = "Couleurs des jantes", 
+			title = "wheel colors", 
 			name = "wheelcolor",
 			buttons = { 
 				{name = "Black",costs = 0, colorindex = 0, description = "", centre = 0, font = 0, scale = 0.4},
@@ -513,7 +513,7 @@ local lsc = {
 		},
 
 		["primaryclassic"] = { 
-			title = "Couleurs primaires", 
+			title = "primary colors", 
 			name = "primaryclassic",
 			buttons = { 
 				{name = "Black",costs = 0, colorindex = 0, description = "", centre = 0, font = 0, scale = 0.4},
@@ -594,7 +594,7 @@ local lsc = {
 			}
 		},
 		["secondaryclassic"] = { 
-			title = "Couleurs secondaires", 
+			title = "secondary colors", 
 			name = "secondaryclassic",
 			buttons = { 
 				{name = "Black",costs = 0, colorindex = 0, description = "", centre = 0, font = 0, scale = 0.4},
@@ -674,7 +674,7 @@ local lsc = {
 				{name = "Frost White",costs = 0, colorindex = 112, description = "", centre = 0, font = 0, scale = 0.4}
 			}
 		},["suspension"] = { 
-			title = "Amortisseurs", 
+			title = "suspensions", 
 			name = "suspensions",
 			buttons = { 
 				{name = "Stock Suspension",mod = -1,modtype =15, costs = 0, description = "", centre = 0, font = 0, scale = 0.4},
@@ -685,7 +685,7 @@ local lsc = {
 			}
 		},
 		["transmission"] = { 
-			title = "Boite de vitesse", 
+			title = "transmissions", 
 			name = "transmission",
 			buttons = { 
 				{name = "Stock Transmission",mod = -1,modtype =13, costs = 0, description = "", centre = 0, font = 0, scale = 0.4},
@@ -696,7 +696,7 @@ local lsc = {
 		}
 		,
 		["turbo"] = { 
-			title = "Turbo", 
+			title = "turbo", 
 			name = "turbo",
 			buttons = { 
 				{name = "None",mod = false,modtype =18, costs = 0, description = "", centre = 0, font = 0, scale = 0.4},
@@ -704,7 +704,7 @@ local lsc = {
 			}
 		},
 		["wheels"] = { 
-			title = "Jantes", 
+			title = "wheels", 
 			name = "wheels",
 			buttons = { 
 				{name = "Wheel Type", description = "", centre = 0, font = 0, scale = 0.4},
@@ -713,7 +713,7 @@ local lsc = {
 			}
 		},
 		["wheeltype"] = { 
-			title = "Types de jantes", 
+			title = "wheel types", 
 			name = "wheeltype",
 			buttons = { 
 				
@@ -1606,7 +1606,7 @@ Citizen.CreateThread(function()
 						outside = pos.outside						
 						if GetDistanceBetweenCoords(outside.x,outside.y,outside.z,GetEntityCoords(ped)) <= f(5) then
 							if pos.locked == false then
-								drawTxt("Appuies sur ~b~ENTER~w~ pour entrer a ~b~Los Santos Customs ",4,1,0.5,0.8,1.0,255,255,255,255)
+								drawTxt("Press ~b~ENTER~w~ to enter ~b~Los Santos Customs ",4,1,0.5,0.8,1.0,255,255,255,255)
 								if IsControlJustPressed(1,201) then
 									
 										lsc.currentpos = pos

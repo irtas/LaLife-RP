@@ -83,6 +83,8 @@ function LoadUser(identifier, source, new)
 			-- LOADING THE PHONEBOOK OF THE PLAYER
 			LoadPhonebook(identifier, source)
 
+			-- LOADING STUFF AFTER LOADING PLAYER
+
 			TriggerEvent('es:playerLoaded', source, Users[source])
 			TriggerClientEvent("es:finishedLoading", source)
 

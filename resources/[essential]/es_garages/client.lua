@@ -40,6 +40,7 @@ function ListeVehicule()
     ped = GetPlayerPed(-1);
     MenuTitle = "Mes vehicules :"
     ClearMenu()
+    Citizen.Trace(#VEHICLES)
     for ind, value in pairs(VEHICLES) do
         Menu.addButton(tostring(value.vehicle_name) .. " : " .. tostring(value.vehicle_state), "OptionVehicle", value.id)
     end
@@ -200,7 +201,7 @@ AddEventHandler("garages:getVehicles", function(THEVEHICLES)
 end)
 
 AddEventHandler("playerSpawned", function()
-    TriggerServerEvent("garages:CheckGarageForVeh")
+
 end)
 
 AddEventHandler('garages:SpawnVehicle', function(vehicle, plate, state, primarycolor, secondarycolor, pearlescentcolor, wheelcolor)
@@ -253,11 +254,12 @@ AddEventHandler('garages:StoreVehicle', function(vehicle, plate)
     local car = GetHashKey(vehicle)
     local plate = plate
     Citizen.CreateThread(function()
-        Citizen.Wait(3000)
+        Citizen.Wait(1000)
         local caissei = GetClosestVehicle(currentPos[1], currentPos[2], currentPos[3], 3.000, 0, 70)
         SetEntityAsMissionEntity(caissei, true, true)
         local platecaissei = GetVehicleNumberPlateText(caissei)
         if DoesEntityExist(caissei) then
+            Citizen.Trace(platecaissei)
             if plate ~= platecaissei then
                 drawNotification("Ce n'est pas ton véhicule")
             else
@@ -286,7 +288,7 @@ AddEventHandler('garages:SelVehicle', function(vehicle, plate)
                 drawNotification("Ce n'est pas ton véhicule")
             else
                 Citizen.InvokeNative(0xEA386986E786A54F, Citizen.PointerValueIntInitialized(caissei))
-                TriggerServerEvent('garages:SelVeh', plate)
+                TriggerServerEvent('garages:SelVeh', plate, vehicle)
                 TriggerServerEvent("garages:CheckGarageForVeh")
             end
         else
