@@ -17,6 +17,3 @@ spawnCoords = { x= 454.371, y= -993.277, z= 30.689 }
 skins = {
 	"mp_m_freemode_01"
 }
-
-
-require "resources/[essential]/essentialmode/lib/MySQL"

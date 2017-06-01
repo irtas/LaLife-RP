@@ -1,32 +1,18 @@
-require "resources/[essential]/essentialmode/lib/MySQL"
-MySQL:open("localhost", "gta5_gamemode_essential", "root", "Police911")
-
+require "resources/mysql-async/lib/MySQL"
 
 function idPolice(user)
 	return user:getPolice()
-  -- local executed_query = MySQL:executeQuery("SELECT * FROM users WHERE identifier = '@identifier'", {['@identifier'] = player})
-  -- local result = MySQL:getResults(executed_query, {'police'}, "police")
-  -- return result[1].police
 end
 
 function namePolice(player, user)
   local idPolice = idPolice(user)
-  local executed_query = MySQL:executeQuery("SELECT * FROM police WHERE police_id = '@respolice'", {['@respolice'] = idPolice})
-  local result = MySQL:getResults(executed_query, {'police_name'}, "police_name")
-  return result[1].police_name
+
+  return MySQL.Sync.fetchScalar("SELECT police_name FROM police WHERE police_id = @respolice", {['@respolice'] = idPolice})
 end
 
 function isService(user)
   return user:getenService()
-	-- local executed_query = MySQL:executeQuery("SELECT * FROM users WHERE identifier = '@identifier'", {['@identifier'] = player})
-	-- local result = MySQL:getResults(executed_query, {'enService'}, "enService")
-	-- return result[1].enService
 end
-
--- function updatejob(player, id)
---   local police = id
---   MySQL:executeQuery("UPDATE users SET `enService`='@value' WHERE identifier = '@identifier'", {['@value'] = police, ['@identifier'] = player})
--- end
 
 RegisterServerEvent('jobspolice:updateService')
 AddEventHandler('jobspolice:updateService', function(id)
@@ -140,8 +126,6 @@ AddEventHandler('jobspolice:vehGarage', function(vehicule)
 		if name_police ~= "Rien" then
 			   local isService = isService(user)
 			   if isService == 1 then
-  		    --  local executed_query = MySQL:executeQuery("INSERT INTO user_vehicle (`identifier`, `vehicle_model`, `vehicle_plate`, `vehicle_state`) VALUES ('@username', '@vehicle', '@plate', '@state')",
-  		    --  {['@username'] = player, ['@vehicle'] = vehicule, ['@plate'] = plate, ['@state'] = state})
   				 TriggerClientEvent("jobspolice:SpawnVehicle", source, vehicule, plateveh)
 			   else
 					 TriggerClientEvent("jobspolice:notif", source, "~r~Vous n'êtes pas en service")

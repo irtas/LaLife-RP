@@ -55,7 +55,7 @@ ScriptDebug: true
 DebugLog: true
 
 # set to false to hide from the online server list
-Announce: true
+Announce: false
 
 # set to false to require players to be signed in to Steam
 DisableAuth: false

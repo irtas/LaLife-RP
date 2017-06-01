@@ -21,8 +21,6 @@ settings.defaultSettings = {
 }
 settings.sessionSettings = {}
 
-require "resources/[essential]/essentialmode/lib/MySQL"
-
 AddEventHandler('playerConnecting', function(name, setCallback)
 	local identifiers = GetPlayerIdentifiers(source)
 

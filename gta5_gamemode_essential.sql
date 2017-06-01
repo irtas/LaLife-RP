@@ -219,7 +219,7 @@ CREATE TABLE `users` (
 -- ----------------------------
 DROP TABLE IF EXISTS `user_inventory`;
 CREATE TABLE `user_inventory` (
-  `user_id` varchar(255) CHARACTER SET utf8mb4 NOT NULL DEFAULT '',
+  `user_id` varchar(128) CHARACTER SET utf8mb4 NOT NULL DEFAULT '',
   `item_id` int(11) unsigned NOT NULL,
   `quantity` int(11) DEFAULT NULL,
   PRIMARY KEY (`user_id`,`item_id`),

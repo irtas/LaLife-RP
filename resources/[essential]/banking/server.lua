@@ -1,29 +1,24 @@
-require "resources/[essential]/essentialmode/lib/MySQL"
-MySQL:open("127.0.0.1", "gta5_gamemode_essential", "root", "Police911")
+require "resources/mysql-async/lib/MySQL"
 
 -- HELPER FUNCTIONS
 function bankBalance(player)
-  local executed_query = MySQL:executeQuery("SELECT * FROM users WHERE identifier = '@name'", {['@name'] = player})
-  local result = MySQL:getResults(executed_query, {'bankbalance'}, "identifier")
-  return tonumber(result[1].bankbalance)
+  return tonumber(MySQL.Sync.fetchScalar("SELECT bankbalance FROM users WHERE identifier = @name", {['@name'] = player}))
 end
 
 function bankdBalance(player)
-  local executed_query = MySQL:executeQuery("SELECT * FROM users WHERE identifier = '@name'", {['@name'] = player})
-  local result = MySQL:getResults(executed_query, {'dirtymoney'}, "identifier")
-  return tonumber(result[1].dirtymoney)
+  return tonumber(MySQL.Sync.fetchScalar("SELECT dirtymoney FROM users WHERE identifier = @name", {['@name'] = player}))
 end
 
 function deposit(player, amount)
   local bankbalance = bankBalance(player)
   local new_balance = bankbalance + amount
-  MySQL:executeQuery("UPDATE users SET `bankbalance`='@value' WHERE identifier = '@identifier'", {['@value'] = new_balance, ['@identifier'] = player})
+  MySQL.Async.execute("UPDATE users SET `bankbalance`=@value WHERE identifier = @identifier", {['@value'] = new_balance, ['@identifier'] = player})
 end
 
 function withdraw(player, amount)
   local bankbalance = bankBalance(player)
   local new_balance = bankbalance - amount
-  MySQL:executeQuery("UPDATE users SET `bankbalance`='@value' WHERE identifier = '@identifier'", {['@value'] = new_balance, ['@identifier'] = player})
+  MySQL.Async.execute("UPDATE users SET `bankbalance`=@value WHERE identifier = @identifier", {['@value'] = new_balance, ['@identifier'] = player})
 end
 
 function round(num, numDecimalPlaces)

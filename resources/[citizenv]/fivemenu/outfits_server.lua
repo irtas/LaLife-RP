@@ -1,11 +1,10 @@
-require "resources/[essential]/essentialmode/lib/MySQL"
-MySQL:open(database.host, database.name, database.username, database.password)
+require "resources/mysql-async/lib/MySQL"
 
 function updateHair(player, e, v)
   local hair = e
   local haircolor = v
-  MySQL:executeQuery("UPDATE outfits SET `hair`='@hair' WHERE identifier='@user'",{['@hair'] = hair, ['@user'] = player})
-  MySQL:executeQuery("UPDATE outfits SET `hair_text`='@hairc' WHERE identifier='@user'",{['@hairc'] = haircolor, ['@user'] = player})
+  MySQL.Async.execute("UPDATE outfits SET `hair`=@hair WHERE identifier=@user",{['@hair'] = hair, ['@user'] = player})
+  MySQL.Async.execute("UPDATE outfits SET `hair_text`=@hairc WHERE identifier=@user",{['@hairc'] = haircolor, ['@user'] = player})
 end
 
 RegisterServerEvent('vmenu:getHair')
@@ -25,9 +24,9 @@ function updateFace(player, e, v, t)
   end
   local face = v
   local face_text = t
-  MySQL:executeQuery("UPDATE outfits SET `skin`='@skin' WHERE identifier='@user'",{['@skin'] = sexe, ['@user'] = player})
-  MySQL:executeQuery("UPDATE outfits SET `face`='@face' WHERE identifier='@user'",{['@face'] = face, ['@user'] = player})
-  MySQL:executeQuery("UPDATE outfits SET `face_text`='@face_text' WHERE identifier='@user'",{['@face_text'] = face_text, ['@user'] = player})
+  MySQL.Async.execute("UPDATE outfits SET `skin`=@skin WHERE identifier=@user",{['@skin'] = sexe, ['@user'] = player})
+  MySQL.Async.execute("UPDATE outfits SET `face`=@face WHERE identifier=@user",{['@face'] = face, ['@user'] = player})
+  MySQL.Async.execute("UPDATE outfits SET `face_text`=@face_text WHERE identifier=@user",{['@face_text'] = face_text, ['@user'] = player})
 end
 
 RegisterServerEvent('vmenu:getFace')
@@ -54,7 +53,7 @@ function updateOutfit(player, e)
   local torso = e[11]
   local totext = e[12]
 
-	MySQL:executeQuery("UPDATE outfits SET `three`='@three',`three_text`='@ttext',`pants`='@pants',`pants_text`='@ptext',`shoes`='@shoes',`shoes_text`='@shtext',`seven`='@seven',`seven_text`='@stext',`shirt`='@shirt',`shirt_text`='@shitext',`torso`='@torso',`torso_text`='@totext' WHERE identifier='@user'",{['@ttext'] = ttext, ['@three'] = three, ['@pants'] = pants, ['@ptext'] = ptext,['@shoes'] = shoes, ['@shtext'] = shtext,['@seven'] = seven, ['@stext'] = stext,['@shirt'] = shirt, ['@shitext'] = shitext, ['@torso'] = torso, ['@totext'] = totext, ['@user'] = player})
+    MySQL.Async.execute("UPDATE outfits SET `three`=@three,`three_text`=@ttext,`pants`=@pants,`pants_text`=@ptext,`shoes`=@shoes,`shoes_text`=@shtext,`seven`=@seven,`seven_text`=@stext,`shirt`=@shirt,`shirt_text`=@shitext,`torso`=@torso,`torso_text`=@totext WHERE identifier=@user",{['@ttext'] = ttext, ['@three'] = three, ['@pants'] = pants, ['@ptext'] = ptext,['@shoes'] = shoes, ['@shtext'] = shtext,['@seven'] = seven, ['@stext'] = stext,['@shirt'] = shirt, ['@shitext'] = shitext, ['@torso'] = torso, ['@totext'] = totext, ['@user'] = player})
 
 end
 
@@ -73,9 +72,12 @@ RegisterServerEvent('vmenu:lastChar')
 AddEventHandler('vmenu:lastChar', function()
     TriggerEvent('es:getPlayerFromId', source, function(user)
 	    local player = user.identifier
-        local executed_query = MySQL:executeQuery("SELECT skin,face,face_text,hair,hair_text,pants,pants_text,shoes,shoes_text,torso,torso_text,shirt,shirt_text,three,three_text,seven,seven_text FROM outfits WHERE identifier='@user'",{['@user']=player})
-        local result = MySQL:getResults(executed_query, {'skin','face','face_text','hair','hair_text','pants','pants_text','shoes','shoes_text','torso','torso_text','shirt','shirt_text','three','three_text','seven','seven_text'}, "identifier")
-        TriggerClientEvent("vmenu:updateChar",source,{result[1].face,result[1].face_text,result[1].hair,result[1].hair_text,result[1].pants,result[1].pants_text,result[1].shoes,result[1].shoes_text,result[1].torso,result[1].torso_text,result[1].shirt,result[1].shirt_text,result[1].three,result[1].three_text,result[1].seven,result[1].seven_text,result[1].skin})
+
+        MySQL.Async.fetchAll("SELECT skin,face,face_text,hair,hair_text,pants,pants_text,shoes,shoes_text,torso,torso_text,shirt,shirt_text,three,three_text,seven,seven_text FROM outfits WHERE identifier=@user",{
+            ['@user']=player
+        }, function (result)
+            TriggerClientEvent("vmenu:updateChar",source,{result[1].face,result[1].face_text,result[1].hair,result[1].hair_text,result[1].pants,result[1].pants_text,result[1].shoes,result[1].shoes_text,result[1].torso,result[1].torso_text,result[1].shirt,result[1].shirt_text,result[1].three,result[1].three_text,result[1].seven,result[1].seven_text,result[1].skin})
+        end)
     end)
 end)
 
@@ -83,9 +85,10 @@ RegisterServerEvent('vmenu:lastCharInShop')
 AddEventHandler('vmenu:lastCharInShop', function(model)
     TriggerEvent('es:getPlayerFromId', source, function(user)
 	    local player = user.identifier
-        local executed_query = MySQL:executeQuery("SELECT skin,face,face_text,hair,hair_text,pants,pants_text,shoes,shoes_text,torso,torso_text,shirt,shirt_text,three,three_text,seven,seven_text FROM outfits WHERE identifier='@user'",{['@user']=player})
-        local result = MySQL:getResults(executed_query, {'skin','face','face_text','hair','hair_text','pants','pants_text','shoes','shoes_text','torso','torso_text','shirt','shirt_text','three','three_text','seven','seven_text'}, "identifier")
-        TriggerClientEvent("vmenu:updateCharInShop",source,{result[1].face,result[1].face_text,result[1].hair,result[1].hair_text,result[1].pants,result[1].pants_text,result[1].shoes,result[1].shoes_text,result[1].torso,result[1].torso_text,result[1].shirt,result[1].shirt_text,result[1].three,result[1].three_text,result[1].seven,result[1].seven_text,model})
+
+        MySQL.Async.fetchAll("SELECT skin,face,face_text,hair,hair_text,pants,pants_text,shoes,shoes_text,torso,torso_text,shirt,shirt_text,three,three_text,seven,seven_text FROM outfits WHERE identifier=@user",{['@user']=player}, function (result)
+            TriggerClientEvent("vmenu:updateCharInShop",source,{result[1].face,result[1].face_text,result[1].hair,result[1].hair_text,result[1].pants,result[1].pants_text,result[1].shoes,result[1].shoes_text,result[1].torso,result[1].torso_text,result[1].shirt,result[1].shirt_text,result[1].three,result[1].three_text,result[1].seven,result[1].seven_text,model})
+        end)
     end)
 end)
 
@@ -94,8 +97,9 @@ RegisterServerEvent('vmenu:fromSlastChar')
 AddEventHandler('vmenu:fromSlastChar', function(source)
     TriggerEvent('es:getPlayerFromId', source, function(user)
 	    local player = user.identifier
-        local executed_query = MySQL:executeQuery("SELECT skin,face,face_text,hair,hair_text,pants,pants_text,shoes,shoes_text,torso,torso_text,shirt,shirt_text,three,three_text,seven,seven_text FROM outfits WHERE identifier='@user'",{['@user']=player})
-        local result = MySQL:getResults(executed_query, {'skin','face','face_text','hair','hair_text','pants','pants_text','shoes','shoes_text','torso','torso_text','shirt','shirt_text','three','three_text','seven','seven_text'}, "identifier")
-        TriggerClientEvent("vmenu:updateChar",source,{result[1].face,result[1].face_text,result[1].hair,result[1].hair_text,result[1].pants,result[1].pants_text,result[1].shoes,result[1].shoes_text,result[1].torso,result[1].torso_text,result[1].shirt,result[1].shirt_text,result[1].three,result[1].three_text,result[1].seven,result[1].seven_text,result[1].skin})
+
+        MySQL.Async.fetchAll("SELECT skin,face,face_text,hair,hair_text,pants,pants_text,shoes,shoes_text,torso,torso_text,shirt,shirt_text,three,three_text,seven,seven_text FROM outfits WHERE identifier=@user",{['@user']=player}, function(result)
+            TriggerClientEvent("vmenu:updateChar",source,{result[1].face,result[1].face_text,result[1].hair,result[1].hair_text,result[1].pants,result[1].pants_text,result[1].shoes,result[1].shoes_text,result[1].torso,result[1].torso_text,result[1].shirt,result[1].shirt_text,result[1].three,result[1].three_text,result[1].seven,result[1].seven_text,result[1].skin})
+        end)
     end)
 end)

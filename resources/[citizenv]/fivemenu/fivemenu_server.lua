@@ -1,7 +1,3 @@
-require "resources/[essential]/essentialmode/lib/MySQL"
-MySQL:open(database.host, database.name, database.username, database.password)
-
-
 RegisterServerEvent('vmenu:getUpdates')
 AddEventHandler('vmenu:getUpdates', function(openMenu)
 	--print("-[FiveMenu]- Updating Menu...")

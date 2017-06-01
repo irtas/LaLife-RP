@@ -1,5 +1,4 @@
-require "resources/[essential]/essentialmode/lib/MySQL"
-MySQL:open(database.host, database.name, database.username, database.password)
+require "resources/mysql-async/lib/MySQL"
 
 RegisterServerEvent('CheckMoneyForVeh')
 RegisterServerEvent('BuyForVeh')
@@ -11,16 +10,24 @@ AddEventHandler('CheckMoneyForVeh', function(name, vehicle, price)
     local vehicle = vehicle
     local name = name
     local price = tonumber(price)
-    local executed_query = MySQL:executeQuery("SELECT * FROM user_vehicle WHERE identifier = '@username'",{['@username'] = player})
-    local result = MySQL:getResults(executed_query, {'vehicle_model'})
 
-    if (result) then
-      count = 0
-      for _ in pairs(result) do
-        count = count + 1
-      end
-      if count == 5 then
-        TriggerClientEvent("es_freeroam:notify", source, "CHAR_SIMEON", 1, "Simeon", false, "Garage plein!\n")
+    MySQL.Async.fetchAll("SELECT * FROM user_vehicle WHERE identifier = @username",{['@username'] = player}, function (result)
+      if (result) then
+        count = 0
+        for _ in pairs(result) do
+          count = count + 1
+        end
+        if count == 5 then
+          TriggerClientEvent("es_freeroam:notify", source, "CHAR_SIMEON", 1, "Simeon", false, "Garage plein!\n")
+        else
+          if (tonumber(user.money) >= tonumber(price)) then
+            user:removeMoney((price))
+            TriggerClientEvent('FinishMoneyCheckForVeh', source, name, vehicle, price)
+            TriggerClientEvent("es_freeroam:notify", source, "CHAR_SIMEON", 1, "Simeon", false, "Bonne route!\n")
+          else
+            TriggerClientEvent("es_freeroam:notify", source, "CHAR_SIMEON", 1, "Simeon", false, "Fonds insuffisants!\n")
+          end
+        end
       else
         if (tonumber(user.money) >= tonumber(price)) then
           user:removeMoney((price))
@@ -28,17 +35,9 @@ AddEventHandler('CheckMoneyForVeh', function(name, vehicle, price)
           TriggerClientEvent("es_freeroam:notify", source, "CHAR_SIMEON", 1, "Simeon", false, "Bonne route!\n")
         else
           TriggerClientEvent("es_freeroam:notify", source, "CHAR_SIMEON", 1, "Simeon", false, "Fonds insuffisants!\n")
-       end
+        end
       end
-   else
-      if (tonumber(user.money) >= tonumber(price)) then
-        user:removeMoney((price))
-        TriggerClientEvent('FinishMoneyCheckForVeh', source, name, vehicle, price)
-        TriggerClientEvent("es_freeroam:notify", source, "CHAR_SIMEON", 1, "Simeon", false, "Bonne route!\n")
-      else
-          TriggerClientEvent("es_freeroam:notify", source, "CHAR_SIMEON", 1, "Simeon", false, "Fonds insuffisants!\n")
-      end
-    end
+    end)
   end)
 end)
 
@@ -55,7 +54,7 @@ AddEventHandler('BuyForVeh', function(name, vehicle, price, plate, primarycolor,
     local secondarycolor = secondarycolor
     local pearlescentcolor = pearlescentcolor
     local wheelcolor = wheelcolor
-    local executed_query = MySQL:executeQuery("INSERT INTO user_vehicle (`identifier`, `vehicle_name`, `vehicle_model`, `vehicle_price`, `vehicle_plate`, `vehicle_state`, `vehicle_colorprimary`, `vehicle_colorsecondary`, `vehicle_pearlescentcolor`, `vehicle_wheelcolor`) VALUES ('@username', '@name', '@vehicle', '@price', '@plate', '@state', '@primarycolor', '@secondarycolor', '@pearlescentcolor', '@wheelcolor')",
+    MySQL.Async.execute("INSERT INTO user_vehicle (`identifier`, `vehicle_name`, `vehicle_model`, `vehicle_price`, `vehicle_plate`, `vehicle_state`, `vehicle_colorprimary`, `vehicle_colorsecondary`, `vehicle_pearlescentcolor`, `vehicle_wheelcolor`) VALUES (@username, @name, @vehicle, @price, @plate, @state, @primarycolor, @secondarycolor, @pearlescentcolor, @wheelcolor)",
     {['@username'] = player, ['@name'] = name, ['@vehicle'] = vehicle, ['@price'] = price, ['@plate'] = plate, ['@state'] = state, ['@primarycolor'] = primarycolor, ['@secondarycolor'] = secondarycolor, ['@pearlescentcolor'] = pearlescentcolor, ['@wheelcolor'] = wheelcolor})
 
   end)
