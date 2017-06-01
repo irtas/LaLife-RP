@@ -1,4 +1,4 @@
-/*
+﻿/*
 Navicat MySQL Data Transfer
 
 Source Server         : Localhost
@@ -59,7 +59,7 @@ CREATE TABLE `items` (
   `value` int(11) NOT NULL DEFAULT '0',
   `type` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of items
@@ -101,7 +101,7 @@ CREATE TABLE `jobs` (
   `job_name` varchar(40) CHARACTER SET utf8mb4 NOT NULL,
   `salary` int(11) NOT NULL DEFAULT '500',
   PRIMARY KEY (`job_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of jobs
@@ -158,7 +158,7 @@ CREATE TABLE `phonebook` (
   `pidentifier` varchar(30) CHARACTER SET utf8mb4 DEFAULT '',
   `phonenumber` varchar(30) CHARACTER SET utf8mb4 DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of phonebook
@@ -173,7 +173,7 @@ CREATE TABLE `police` (
   `police_name` varchar(40) CHARACTER SET utf8mb4 NOT NULL,
   `salary` int(11) NOT NULL DEFAULT '500',
   PRIMARY KEY (`police_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of police
@@ -207,7 +207,7 @@ CREATE TABLE `users` (
   `prenom` varchar(30) CHARACTER SET utf8mb4 NOT NULL DEFAULT '',
   `telephone` varchar(30) CHARACTER SET utf8mb4 NOT NULL DEFAULT '',
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of users
@@ -247,7 +247,7 @@ CREATE TABLE `user_vehicle` (
   `vehicle_pearlescentcolor` varchar(60) CHARACTER SET utf8mb4 NOT NULL,
   `vehicle_wheelcolor` varchar(60) CHARACTER SET utf8mb4 NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=123 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user_vehicle
