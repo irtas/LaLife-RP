@@ -188,6 +188,12 @@ AddEventHandler("es:sendingSpawnData", function(lecoords)
   Citizen.Trace(coords.x .. " | " .. coords.y)
 end)
 
+local finishedLoading = false
+RegisterNetEvent("es:finishedLoading")
+AddEventHandler("es:finishedLoading", function()
+  finishedLoading = true
+end)
+
 local ShowMsgtime = {msg="",time=0}
 
 function drawTxt(text,font,centre,x,y,scale,r,g,b,a)
@@ -233,8 +239,14 @@ function spawnPlayer(spawnIdx, cb)
       Citizen.Wait(0)
     end
 
+    while not finishedLoading do
+      Citizen.Wait(0)
+    end
+
+    Citizen.Trace("Finished")
+
     TriggerServerEvent("es:requestingSpawnData")
-    Wait(1000)
+    Wait(2000)
     -- if the spawn isn't set, select a random one
     if not spawnIdx then
       spawnIdx = GetRandomIntInRange(1, #spawnPoints + 1)
@@ -290,14 +302,14 @@ function spawnPlayer(spawnIdx, cb)
     --SetEntityHealth(ped, 300) -- TODO: allow configuration of this?
     RemoveAllPedWeapons(ped) -- TODO: make configurable (V behavior?)
     ClearPlayerWantedLevel(PlayerId())
-    Wait(10000)
+    Wait(15000)
     freezePlayer(PlayerId(), false)
 
     TriggerEvent('playerSpawned', spawn)
     if cb then
       cb(spawn)
     end
-
+    Citizen.Trace("There")
     ShutdownLoadingScreen()
     DoScreenFadeIn(500)
 
@@ -418,7 +430,7 @@ Citizen.CreateThread(function()
       if autoSpawnEnabled then
         if NetworkIsPlayerActive(PlayerId()) then
           if (diedAt and (GetTimeDifference(GetGameTimer(), diedAt) > 2000)) or respawnForced then
-            Citizen.Trace("forcin' respawn\n")
+            Citizen.Trace("forcin' respawn!\n")
 
             if respawnDead then
               if autoSpawnCallback then

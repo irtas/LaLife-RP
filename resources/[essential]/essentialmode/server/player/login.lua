@@ -84,6 +84,7 @@ function LoadUser(identifier, source, new)
 			LoadPhonebook(identifier, source)
 
 			TriggerEvent('es:playerLoaded', source, Users[source])
+			TriggerClientEvent("es:finishedLoading", source)
 
 			if(true)then
 				TriggerClientEvent('es:setPlayerDecorator', source, 'rank', Users[source]:getPermissions())

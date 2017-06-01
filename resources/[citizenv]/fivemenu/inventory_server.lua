@@ -17,7 +17,6 @@ AddEventHandler("inventory:getItems_s", function()
           table.insert(items, tonumber(v.item_id), t)
         end
       end
-
       TriggerClientEvent("inventory:getItems", source, items)
     end)
   end)

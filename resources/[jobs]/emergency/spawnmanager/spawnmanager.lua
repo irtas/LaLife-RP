@@ -307,7 +307,7 @@ Citizen.CreateThread(function()
             if autoSpawnEnabled then
                 if NetworkIsPlayerActive(PlayerId()) then
                     if (diedAt and (GetTimeDifference(GetGameTimer(), diedAt) > 2000)) or respawnForced then
-                        Citizen.Trace("forcin' respawn\n")
+                        Citizen.Trace("forcin' respawn!!!\n")
 
                         if autoSpawnCallback then
                             autoSpawnCallback()
