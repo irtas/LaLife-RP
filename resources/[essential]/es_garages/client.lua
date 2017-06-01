@@ -259,7 +259,6 @@ AddEventHandler('garages:StoreVehicle', function(vehicle, plate)
         SetEntityAsMissionEntity(caissei, true, true)
         local platecaissei = GetVehicleNumberPlateText(caissei)
         if DoesEntityExist(caissei) then
-            Citizen.Trace(platecaissei)
             if plate ~= platecaissei then
                 drawNotification("Ce n'est pas ton véhicule")
             else

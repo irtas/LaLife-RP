@@ -798,7 +798,6 @@ end)
 RegisterNetEvent("vmenu:setUser")
 AddEventHandler("vmenu:setUser", function(infos)
 	for k,v in pairs(infos) do
-		Citizen.Trace(tostring(k) .. " | " .. tostring(v))
 		User[k] = v
 	end
 end)

@@ -127,10 +127,10 @@ AddEventHandler('garages:CheckGarageForVehFirst', function(user)
         local i = 0
         for _, v in ipairs(result) do
           i = i + 1
-          print(v.vehicle_model)
-          print(v.vehicle_plate)
-          print(v.vehicle_state)
-          print(v.ID)
+          -- print(v.vehicle_model)
+          -- print(v.vehicle_plate)
+          -- print(v.vehicle_state)
+          -- print(v.ID)
           t = { ["id"] = v.ID, ["vehicle_model"] = v.vehicle_model, ["vehicle_name"] = v.vehicle_name, ["vehicle_state"] = v.vehicle_state}
           table.insert(vehicles, tonumber(i), t)
         end

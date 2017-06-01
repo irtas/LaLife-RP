@@ -5,3 +5,4 @@ NLog.config
 /bin/
 /mono/
 /system/
+.ftpconfig
