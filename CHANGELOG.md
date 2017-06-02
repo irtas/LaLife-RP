@@ -2,6 +2,12 @@
 
 ## Changelog
 
+4. 01 06 2017
+
+Progression pour le merged complet et la stabilité de mysql-async, merci à tous les gens impliqués.
+
+**Bugfix**
+
 3. 31 05 2017
 
 Release des sources pour le Wrapper.
