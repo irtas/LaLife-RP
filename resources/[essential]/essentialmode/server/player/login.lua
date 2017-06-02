@@ -130,13 +130,13 @@ AddEventHandler('es:getPlayers', function(cb)
 end)
 
 -- GET ONE
-function hasAccount(identifier)
-	local result = MySQL.Sync.fetchAll("SELECT * FROM users WHERE identifier = @name", {['@name'] = identifier})
-
-	if(result[1] ~= nil) then
-		return true
-	end
-	return false
+function hasAccount(identifier, callback)
+	local result = MySQL.Async.fetchAll("SELECT * FROM users WHERE identifier = @name", {['@name'] = identifier}, function (result)
+		if(result[1] ~= nil) then
+			callback(true)
+		end
+		callback(false)
+	end)
 end
 
 -- YOU MUST
@@ -154,45 +154,47 @@ end
 
 -- REGISTER FOR LE DB
 function registerUser(identifier, source)
-	if not hasAccount(identifier) then
-		--Telephone number
-		local telephone = tostring(generateTel(identifier))
+	hasAccount(identifier, function (result)
+		if not result then
+			--Telephone number
+			local telephone = tostring(generateTel(identifier))
 
-		-- Inserting Default User Account Stats
-		MySQL.Async.execute("INSERT INTO users (`identifier`, `permission_level`, `money`, `group`, `nom`, `prenom`, `telephone`) VALUES (@username, '0', @money, 'user', 'Citizen', 'Citizen', @telephone)",
-		{['@username'] = identifier, ['@telephone'] = telephone, ['@money'] = settings.defaultSettings.startingCash})
+			-- Inserting Default User Account Stats
+			MySQL.Async.execute("INSERT INTO users (`identifier`, `permission_level`, `money`, `group`, `nom`, `prenom`, `telephone`) VALUES (@username, '0', @money, 'user', 'Citizen', 'Citizen', @telephone)",
+			{['@username'] = identifier, ['@telephone'] = telephone, ['@money'] = settings.defaultSettings.startingCash})
 
-		MySQL.Async.execute("INSERT INTO coordinates (`identifier`,`x`,`y`,`z`) VALUES (@identifier, @valx, @valy, @valz)",
-		{['@valx'] = settings.defaultSettings.spawnx, ['@valy'] = settings.defaultSettings.spawny, ['@valz'] = settings.defaultSettings.spawnz, ['@identifier'] = identifier})
+			MySQL.Async.execute("INSERT INTO coordinates (`identifier`,`x`,`y`,`z`) VALUES (@identifier, @valx, @valy, @valz)",
+			{['@valx'] = settings.defaultSettings.spawnx, ['@valy'] = settings.defaultSettings.spawny, ['@valz'] = settings.defaultSettings.spawnz, ['@identifier'] = identifier})
 
-		-- SKIN PAR DÉFAUT
-		-- USELESS BUT NEEDED
-		MySQL.Async.execute("INSERT INTO outfits (`identifier`, `skin`, `face`, `face_text`, `hair`, `hair_text`, `pants`, `pants_text`, `shoes`, `shoes_text`, `torso`, `torso_text`, `shirt`, `shirt_text`, `three`, `three_text`, `seven`, `seven_text`) VALUES (@username, 'mp_m_freemode_01', '0', '0', '-1', '-1', '24', '5', '18', '0', '29', '5', '31', '0', '12', '0', '29', '2')",
-		{['@username'] = identifier, ['@money'] = settings.defaultSettings.startingCash})
+			-- SKIN PAR DÉFAUT
+			-- USELESS BUT NEEDED
+			MySQL.Async.execute("INSERT INTO outfits (`identifier`, `skin`, `face`, `face_text`, `hair`, `hair_text`, `pants`, `pants_text`, `shoes`, `shoes_text`, `torso`, `torso_text`, `shirt`, `shirt_text`, `three`, `three_text`, `seven`, `seven_text`) VALUES (@username, 'mp_m_freemode_01', '0', '0', '-1', '-1', '24', '5', '18', '0', '29', '5', '31', '0', '12', '0', '29', '2')",
+			{['@username'] = identifier, ['@money'] = settings.defaultSettings.startingCash})
 
-		-- INVENTAIRE VIDE
-		-- BUILDING AN EMPTY INVENTORY, NEED REWORK UGLY, IM DYING
-		for i=1,27 do
-			MySQL.Async.execute("INSERT INTO user_inventory (`user_id`, `item_id`, `quantity`) VALUES (@username, @item_id, '0')",
-			{['@username'] = identifier, ['@item_id'] = i})
+			-- INVENTAIRE VIDE
+			-- BUILDING AN EMPTY INVENTORY, NEED REWORK UGLY, IM DYING
+			for i=1,27 do
+				MySQL.Async.execute("INSERT INTO user_inventory (`user_id`, `item_id`, `quantity`) VALUES (@username, @item_id, '0')",
+				{['@username'] = identifier, ['@item_id'] = i})
+			end
+
+			-- VOITURE PAR DÉFAUT
+			-- PLATE SYSTEM WITH SOCIAL CLUB ID TASTY AF
+			local L = #identifier - 4
+			local L1 = #identifier - 3
+			local L2 = #identifier - 2
+			local L3 = #identifier - 1
+			local plateveh = "CTZN" .. identifier[L] .. identifier[L1] .. identifier[L2] .. identifier[L3]
+			MySQL.Async.execute("INSERT INTO user_vehicle (`identifier`, `vehicle_name`, `vehicle_model`, `vehicle_price`, `vehicle_plate`, `vehicle_state`, `vehicle_colorprimary`, `vehicle_colorsecondary`, `vehicle_pearlescentcolor`, `vehicle_wheelcolor`) VALUES (@username, 'Faggio', 'faggio2', '4000',@plate, 'Rentré', '4', '0', '111', '156')",
+			{['@username'] = identifier, ['@plate'] = string.upper(plateveh)})
+
+			TriggerClientEvent("ccreation:menu", source)
+
+			LoadUser(identifier, source, true)
+		else
+			LoadUser(identifier, source)
 		end
-
-		-- VOITURE PAR DÉFAUT
-		-- PLATE SYSTEM WITH SOCIAL CLUB ID TASTY AF
-		local L = #identifier - 4
-		local L1 = #identifier - 3
-		local L2 = #identifier - 2
-		local L3 = #identifier - 1
-		local plateveh = "CTZN" .. identifier[L] .. identifier[L1] .. identifier[L2] .. identifier[L3]
-		MySQL.Async.execute("INSERT INTO user_vehicle (`identifier`, `vehicle_name`, `vehicle_model`, `vehicle_price`, `vehicle_plate`, `vehicle_state`, `vehicle_colorprimary`, `vehicle_colorsecondary`, `vehicle_pearlescentcolor`, `vehicle_wheelcolor`) VALUES (@username, 'Faggio', 'faggio2', '4000',@plate, 'Rentré', '4', '0', '111', '156')",
-		{['@username'] = identifier, ['@plate'] = string.upper(plateveh)})
-
-		TriggerClientEvent("ccreation:menu", source)
-
-		LoadUser(identifier, source, true)
-	else
-		LoadUser(identifier, source)
-	end
+	end)
 end
 
 AddEventHandler("es:setPlayerData", function(user, k, v, cb)
