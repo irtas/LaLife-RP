@@ -1,18 +1,3 @@
-﻿/*
-Navicat MySQL Data Transfer
-
-Source Server         : Localhost
-Source Server Version : 50714
-Source Host           : localhost:3306
-Source Database       : gta5_gamemode_essential
-
-Target Server Type    : MYSQL
-Target Server Version : 50714
-File Encoding         : 65001
-
-Date: 2017-06-01 00:33:20
-*/
-
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
