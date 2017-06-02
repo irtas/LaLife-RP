@@ -265,7 +265,7 @@ end)
 function generateTel(identifier)
 	local tel = ""
 	for i = #identifier, 1, -1 do
-	    local c = identifier:sub(i,i)
+	    local c = string.sub(identifier, i, i)
 	    -- do something with c
 	    if (#tel) < 8 then
 	        c = tonumber(c)
