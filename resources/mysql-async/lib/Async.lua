@@ -152,17 +152,25 @@ function MySQL.Async.wrapQuery(next, Connection, Message)
 
             if Connection then
                 Connection.Close()
+                Connection.Dispose()
             end
 
             return nil
         end
 
+        local ConnectionId = -1;
+
+        if Connection then
+            ConnectionId = Connection.ServerThread
+        end
+
         Stopwatch.Stop()
-        Logger:Info(string.format('[%dms] %s', Stopwatch.ElapsedMilliseconds, Message))
+        Logger:Info(string.format('[%s][%d][%dms] %s', GetInvokingResource(), ConnectionId, Stopwatch.ElapsedMilliseconds, Message))
         Result = next(Result)
 
         if Connection then
             Connection.Close()
+            Connection.Dispose()
         end
 
         return Result
