@@ -262,7 +262,11 @@ AddEventHandler('garages:StoreVehicle', function(vehicle, plate)
             if plate ~= platecaissei then
                 drawNotification("Ce n'est pas ton véhicule")
             else
-                Citizen.InvokeNative(0xB736A491E64A32CF,Citizen.PointerValueIntInitialized(car))
+                Citizen.InvokeNative(0xB736A491E64A32CF, Citizen.PointerValueIntInitialized(car))
+                Citizen.InvokeNative(0xB736A491E64A32CF, Citizen.PointerValueIntInitialized(car))
+                Citizen.InvokeNative(0xB736A491E64A32CF, Citizen.PointerValueIntInitialized(car))
+                Citizen.InvokeNative(0xEA386986E786A54F, Citizen.PointerValueIntInitialized(caissei))
+                Citizen.InvokeNative(0xEA386986E786A54F, Citizen.PointerValueIntInitialized(caissei))
                 Citizen.InvokeNative(0xEA386986E786A54F, Citizen.PointerValueIntInitialized(caissei))
                 drawNotification("Véhicule rentré")
                 TriggerServerEvent('garages:SetVehIn', plate)

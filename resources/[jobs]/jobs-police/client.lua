@@ -274,7 +274,7 @@ end)
  end)
 
  RegisterNetEvent("jobspolice:brigadier")
- AddEventHandler('jobspolice:Brigadier', function()
+ AddEventHandler('jobspolice:brigadier', function()
    SetPedComponentVariation(GetPlayerPed(-1), 3, 30, 0, 0)--Gants
  			SetPedComponentVariation(GetPlayerPed(-1), 4, 35, 0, 0)--Jean
  			SetPedComponentVariation(GetPlayerPed(-1), 6, 24, 0, 0)--Chaussure

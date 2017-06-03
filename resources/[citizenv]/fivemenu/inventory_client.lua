@@ -79,16 +79,27 @@ end)
 
 AddEventHandler("inventory:useItem", function(target, id) -- target = Dernier joueur à avoir parlé, pas besoin ici. Mais obligatoire !
 	local useItem = {}
+	local value = 0
 	for _, val in ipairs(inv_array_legal) do
 		if id == val.id then
+			value = val.value
 			useItem = val
 		end
 	end
 	delete({ id, 1})
 	if id == 1 then
-		TriggerEvent("food:drink", useItem)
+		if IsInVehicle() then
+			TriggerEvent("food:vdrink", value)
+		else
+			TriggerEvent("food:drink", useItem)
+		end
+
 	else
-		TriggerEvent("food:eat", useItem)
+		if IsInVehicle() then
+			TriggerEvent("food:veat", value)
+		else
+			TriggerEvent("food:eat", useItem)
+		end
 	end
 end)
 
@@ -166,3 +177,12 @@ AddEventHandler("inventory:getItems", function(p_items) -- target = Dernier joue
 	ITEMS = {}
 	ITEMS = p_items
 end)
+
+function IsInVehicle()
+  local ply = GetPlayerPed(-1)
+  if IsPedSittingInAnyVehicle(ply) then
+    return true
+  else
+    return false
+  end
+end

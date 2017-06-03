@@ -8,16 +8,21 @@ AddEventHandler("tel:getPhonebook", function(p_phonebook)
 end)
 
 AddEventHandler("menutel:PhoneOG", function(target, mytel)
-	teldest = ""
-	VMenu.telephone = true
-	VMenu.ResetMenu(98, "", "default")
-	Wait(100)
-	VMenu.AddSep(98, tostring(mytel))
-	VMenu.AddFunc(98, "Retour", "vmenu:MainMenuOG", {}, "Retour")
-	VMenu.AddFunc(98, "Ajouter un contact", "tel:add", {}, "Valider")
-	VMenu.AddFunc(98, "Conctacter la police", "tel:call", {"911"}, "Appeller")
-	for ind, value in pairs(PHONEBOOK) do
-		VMenu.AddFunc(98, value.nom .. " " .. value.prenom .. " " .. tostring(ind), "tel:call", {ind}, "Appeller: " .. tostring(ind))
+	if not IsInVehicle() then
+		TriggerEvent("vmenu:animChain", "cellphone@", "text_in", "cellphone@", "f_cellphone_text_read_base", "cellphone@", "cellphone_text_out")
+		teldest = ""
+		VMenu.telephone = true
+		VMenu.ResetMenu(98, "", "default")
+		Wait(100)
+		VMenu.AddSep(98, tostring(mytel))
+		VMenu.AddFunc(98, "Retour", "vmenu:MainMenuOG", {}, "Retour")
+		VMenu.AddFunc(98, "Ajouter un contact", "tel:add", {}, "Valider")
+		VMenu.AddFunc(98, "Conctacter la police", "tel:call", {"911"}, "Appeller")
+		for ind, value in pairs(PHONEBOOK) do
+			VMenu.AddFunc(98, value.nom .. " " .. value.prenom .. " " .. tostring(ind), "tel:call", {ind}, "Appeller: " .. tostring(ind))
+		end
+	else
+		TriggerEvent("es_freeroam:notif", "~r~Utilisation impossible en conduisant")
 	end
 end)
 
@@ -152,6 +157,15 @@ Citizen.CreateThread(function()
 		end
 	end
 end)
+
+function IsInVehicle()
+  local ply = GetPlayerPed(-1)
+  if IsPedSittingInAnyVehicle(ply) then
+    return true
+  else
+    return false
+  end
+end
 
 -- LA FONCTION DU BEAU TIT CARRÉ
 function DrawAdvancedText(x,y ,w,h,sc, text, r,g,b,a,font,jus)

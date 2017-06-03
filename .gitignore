@@ -1,8 +1,3 @@
-CitizenMP.Server.exe
-CitizenMP.Server.exe.config
-NLog.config
 /cache/
-/bin/
-/mono/
-/system/
 .ftpconfig
+.remote-sync.json

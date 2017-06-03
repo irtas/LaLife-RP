@@ -1696,7 +1696,6 @@ Citizen.CreateThread(function()
 			timerTarget = 0
 			VMenu.curItem = 1
 			--TriggerEvent("vmenu:anim", "cellphone@", "text_in")
-			TriggerEvent("vmenu:animChain", "cellphone@", "text_in", "cellphone@", "f_cellphone_text_read_base", "cellphone@", "cellphone_text_out")
 			TriggerEvent("vmenu:openMenu", 98)
 
 			VMenu.mainMenu = true

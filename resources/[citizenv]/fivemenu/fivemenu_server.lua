@@ -10,9 +10,9 @@ AddEventHandler('vmenu:getUpdates', function(openMenu)
 	else
 		TriggerEvent('es:getPlayerFromId', source, function(user)
 			if user ~= nil then
-				TriggerEvent('es:getPlayerFromIdentifier', user.identifier, function(user)
-					MenuOpts.user = user
-				end)
+				-- TriggerEvent('es:getPlayerFromIdentifier', user.identifier, function(user)
+				-- 	MenuOpts.user = user
+				-- end)
 			end
 		end)
 	end
@@ -44,24 +44,19 @@ AddEventHandler('vmenu:updateUser', function(openMenu)
 	-- vehicle = "",
 	-- identifier = nil,
 	-- telephone = ""
-
 	TriggerEvent('es:getPlayerFromId', source, function(user)
 		if user ~= nil then
-			TriggerEvent('es:getPlayerFromIdentifier', user.identifier, function(user)
-				userInfos = user
-			end)
-			userInfos["identifier"] = user.identifier
 			userInfos["group"] = user.group.group
 			userInfos["permission_level"] = user.permission_level
-			userInfos["vehicle"] = user:getVehicle()
-			userInfos["telephone"] = user:getTel()
-			userInfos["enService"] = user:getenService()
-			userInfos["nom"] = user:getNom()
-			userInfos["prenom"] = user:getPrenom()
-			userInfos["job"] = user:getJob()
-			userInfos["police"] = user:getPolice()
 			userInfos["money"] = user:getMoney()
 			userInfos["dirtymoney"] = user:getDMoney()
+			userInfos["job"] = user:getJob()
+			userInfos["police"] = user:getPolice()
+			userInfos["nom"] = user:getNom()
+			userInfos["prenom"] = user:getPrenom()
+			userInfos["vehicle"] = user:getVehicle()
+			userInfos["telephone"] = user:getTel()
+			userInfos["identifier"] = user.identifier
 		end
 	end)
 	--print(userInfos.identifier)

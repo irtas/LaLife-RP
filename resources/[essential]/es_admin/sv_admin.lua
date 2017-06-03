@@ -130,7 +130,7 @@ TriggerEvent('es:addGroupCommand', 'ban', "admin", function(source, args, user)
 				table.remove(reason, 1)
 				table.remove(reason, 1)
 
-				reason = "Banned: " .. table.concat(reason, " ")				
+				reason = "Banned: " .. table.concat(reason, " ")
 
 				if(reason == "Banned: ")then
 					reason = reason .. "You have been banned for: ^1^*" .. message .. "^r^0."

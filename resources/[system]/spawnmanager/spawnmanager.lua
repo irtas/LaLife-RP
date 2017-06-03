@@ -182,10 +182,11 @@ end
 local spawnLock = false
 
 local coords = {}
+local spawnReceived = false
 RegisterNetEvent("es:sendingSpawnData")
 AddEventHandler("es:sendingSpawnData", function(lecoords)
   coords = lecoords
-  Citizen.Trace(coords.x .. " | " .. coords.y)
+  spawnReceived = true
 end)
 
 local finishedLoading = false
@@ -246,7 +247,10 @@ function spawnPlayer(spawnIdx, cb)
     Citizen.Trace("Finished")
 
     TriggerServerEvent("es:requestingSpawnData")
-    Wait(2000)
+    while not spawnReceived do
+      Citizen.Wait(0)
+    end
+    Wait(5000)
     -- if the spawn isn't set, select a random one
     if not spawnIdx then
       spawnIdx = GetRandomIntInRange(1, #spawnPoints + 1)

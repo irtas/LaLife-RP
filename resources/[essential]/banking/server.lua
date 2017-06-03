@@ -116,25 +116,26 @@ AddEventHandler('bank:transfer', function(fromPlayer, toPlayer, amount)
   end
 end)
 
-RegisterServerEvent('bank:givecash')
-AddEventHandler('bank:givecash', function(toPlayer, amount)
-	TriggerEvent('es:getPlayerFromId', source, function(user)
-		if (tonumber(user.money) >= tonumber(amount)) then
-			local player = user.identifier
-			user:removeMoney(amount)
-			TriggerEvent('es:getPlayerFromId', toPlayer, function(recipient)
-				recipient:addMoney(amount)
-				TriggerClientEvent("es_freeroam:notify", source, "CHAR_BANK_MAZE", 1, "Maze Bank", false, "Argent donné: ~r~-$".. amount .." ~n~~s~Porte-monnaie: ~g~$" .. user.money)
-				TriggerClientEvent("es_freeroam:notify", toPlayer, "CHAR_BANK_MAZE", 1, "Maze Bank", false, "Argent reçu: ~g~$".. amount .." ~n~~s~Porte-monnaie: ~g~$" .. recipient.money)
-			end)
-		else
-			if (tonumber(user.money) < tonumber(amount)) then
-        TriggerClientEvent('chatMessage', source, "", {0, 0, 200}, "^1Pas assez d'argent dans votre porte-monnaie^0")
-        CancelEvent()
-			end
-		end
-	end)
-end)
+-- DOUBLE CALLBACK
+-- RegisterServerEvent('bank:givecash')
+-- AddEventHandler('bank:givecash', function(toPlayer, amount)
+-- 	TriggerEvent('es:getPlayerFromId', source, function(user)
+-- 		if (tonumber(user.money) >= tonumber(amount)) then
+-- 			local player = user.identifier
+-- 			user:removeMoney(amount)
+-- 			TriggerEvent('es:getPlayerFromId', toPlayer, function(recipient)
+-- 				recipient:addMoney(amount)
+-- 				TriggerClientEvent("es_freeroam:notify", source, "CHAR_BANK_MAZE", 1, "Maze Bank", false, "Argent donné: ~r~-$".. amount .." ~n~~s~Porte-monnaie: ~g~$" .. user.money)
+-- 				TriggerClientEvent("es_freeroam:notify", toPlayer, "CHAR_BANK_MAZE", 1, "Maze Bank", false, "Argent reçu: ~g~$".. amount .." ~n~~s~Porte-monnaie: ~g~$" .. recipient.money)
+-- 			end)
+-- 		else
+-- 			if (tonumber(user.money) < tonumber(amount)) then
+--         TriggerClientEvent('chatMessage', source, "", {0, 0, 200}, "^1Pas assez d'argent dans votre porte-monnaie^0")
+--         CancelEvent()
+-- 			end
+-- 		end
+-- 	end)
+-- end)
 
 AddEventHandler('es:playerLoaded', function(source)
   TriggerEvent('es:getPlayerFromId', source, function(user)
