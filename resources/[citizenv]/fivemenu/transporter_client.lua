@@ -28,11 +28,11 @@ AddEventHandler("transporter:optionMission", function(target, index)
   VMenu.AddFunc(13, "Destination #3", "transporter:mission", {2}, "Choisir")
   VMenu.AddFunc(13, "Destination #4", "transporter:mission", {3}, "Choisir")
   if index == 2 then
-    VMenu.AddFunc(13, "Destination #1", "transporter:mission", {4}, "Choisir")
-    VMenu.AddFunc(13, "Destination #2", "transporter:mission", {5}, "Choisir")
-    VMenu.AddFunc(13, "Destination #3", "transporter:mission", {6}, "Choisir")
-    VMenu.AddFunc(13, "Destination #4", "transporter:mission", {7}, "Choisir")
-    VMenu.AddFunc(13, "Destination #5", "transporter:mission", {8}, "Choisir")
+    VMenu.AddFunc(13, "Destination #5", "transporter:mission", {4}, "Choisir")
+    VMenu.AddFunc(13, "Destination #6", "transporter:mission", {5}, "Choisir")
+    VMenu.AddFunc(13, "Destination #7", "transporter:mission", {6}, "Choisir")
+    VMenu.AddFunc(13, "Destination #8", "transporter:mission", {7}, "Choisir")
+    VMenu.AddFunc(13, "Destination #9", "transporter:mission", {8}, "Choisir")
   end
 end)
 

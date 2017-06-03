@@ -62,6 +62,7 @@ end
 ----------- EVENT FROM MENU TARGET TARGET!!!
 
 AddEventHandler("inventory:buy", function(target, qty, id, price, name) -- target = Dernier joueur à avoir parlé, pas besoin ici. Mais obligatoire !
+	local price = price * qty
 	item = tonumber(id)
 	if (ITEMS[item] == nil) then
 		new(qty, item, price, name)

@@ -12,6 +12,8 @@ client_script 'sirencontrols.net.dll'
 client_script 'lock/client/main.lua'
 client_script 'lock/lock.lua'
 
+client_script 'carhud.lua'
+
 server_script 'lock/server/main.lua'
 server_script 'lock/lock_s.lua'
 
@@ -24,6 +26,3 @@ files({
     'lock/client/html/sounds/unlock.ogg',
     'lock/client/html/sounds/demo.ogg'
 })
-
-
-
