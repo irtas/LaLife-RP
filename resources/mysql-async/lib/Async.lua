@@ -51,11 +51,10 @@ function MySQL.Async.fetchAll(query, params, func, transaction)
     end
 
     clr.Brouznouf.FiveM.Async.ExecuteReaderCallback(executeReaderTask, MySQL.Async.wrapQuery(
-        function (Result)
-            callback(MySQL.Utils.ConvertResultToTable(Result))
-        end,
+        callback,
         connection,
-        Command.CommandText
+        Command.CommandText,
+        MySQL.Utils.ConvertResultToTable
     ))
 end
 
@@ -142,7 +141,8 @@ function MySQL.Async.rollbackTransaction(transaction, func)
     ))
 end
 
-function MySQL.Async.wrapQuery(next, Connection, Message)
+function MySQL.Async.wrapQuery(next, Connection, Message, Transformer)
+    Transformer = Transformer or function (Result) return Result end
     local Stopwatch = clr.System.Diagnostics.Stopwatch()
     Stopwatch.Start()
 
@@ -160,18 +160,18 @@ function MySQL.Async.wrapQuery(next, Connection, Message)
 
         local ConnectionId = -1;
 
+        Result = Transformer(Result)
+
         if Connection then
             ConnectionId = Connection.ServerThread
+            Connection.Close()
+            Connection.Dispose()
         end
 
         Stopwatch.Stop()
         Logger:Info(string.format('[%s][%d][%dms] %s', GetInvokingResource(), ConnectionId, Stopwatch.ElapsedMilliseconds, Message))
-        Result = next(Result)
 
-        if Connection then
-            Connection.Close()
-            Connection.Dispose()
-        end
+        next(Result)
 
         return Result
     end
