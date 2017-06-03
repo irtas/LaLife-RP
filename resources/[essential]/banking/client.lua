@@ -88,7 +88,7 @@ local banks = {
   {name="Banque", id=108, x=150.266, y=-1040.203, z=29.374},
   {name="Banque", id=108, x=-1212.980, y=-330.841, z=37.787},
   {name="Banque", id=108, x=-2962.582, y=482.627, z=15.703},
-  --{name="Bank", id=108, x=-112.202, y=6469.295, z=31.626},
+  {name="Banque", id=108, x=-112.202, y=6469.295, z=31.626},
   {name="Banque", id=108, x=314.187, y=-278.621, z=54.170},
   {name="Banque", id=108, x=-351.534, y=-49.529, z=49.042},
   {name="Banque", id=108, x=241.727, y=220.706, z=106.286},
@@ -147,12 +147,12 @@ if enableBankingGui then
       Citizen.Wait(0)
       if(IsNearBank() or IsNearATM()) then
         if (atBank == false) then
-          TriggerEvent('chatMessage', "", {0, 255, 0}, "^0Press 'Context Action Key' (Default: E) to activate");
+          TriggerEvent('chatMessage', "", {0, 255, 0}, "^0Appuie sur E pour accéder à la banque");
         end
         atBank = true
         if IsControlJustPressed(1, 38)  then -- IF INPUT_PICKUP Is pressed
           if (IsInVehicle()) then
-            TriggerEvent('chatMessage', "", {255, 0, 0}, "^1You cannot use the bank in a vehicle!");
+            TriggerEvent('chatMessage', "", {255, 0, 0}, "^1Tu ne peux pas accéder à la banque depuis ton véhicule!");
           else
             if bankOpen then
               closeGui()
@@ -248,7 +248,7 @@ function IsNearATM()
   local plyCoords = GetEntityCoords(ply, 0)
   for _, item in pairs(atms) do
     local distance = GetDistanceBetweenCoords(item.x, item.y, item.z,  plyCoords["x"], plyCoords["y"], plyCoords["z"], true)
-    if(distance <= 4) then
+    if(distance <= 1) then
       return true
     end
   end
@@ -270,7 +270,7 @@ function IsNearBank()
   local plyCoords = GetEntityCoords(ply, 0)
   for _, item in pairs(banks) do
     local distance = GetDistanceBetweenCoords(item.x, item.y, item.z,  plyCoords["x"], plyCoords["y"], plyCoords["z"], true)
-    if(distance <= 7) then
+    if(distance <= 4) then
       return true
     end
   end
@@ -283,7 +283,7 @@ function IsNearPlayer(player)
   local ply2 = GetPlayerPed(GetPlayerFromServerId(player))
   local ply2Coords = GetEntityCoords(ply2, 0)
   local distance = GetDistanceBetweenCoords(ply2Coords["x"], ply2Coords["y"], ply2Coords["z"],  plyCoords["x"], plyCoords["y"], plyCoords["z"], true)
-  if(distance <= 5) then
+  if(distance <= 3) then
     return true
   end
 end
@@ -298,7 +298,7 @@ AddEventHandler('bank:deposit', function(amount)
       TriggerServerEvent("bank:deposit", tonumber(amount))
     end
   else
-    TriggerEvent("es_freeroam:notif", "~r~ Vous pouvez déposer que dans une banque")
+    TriggerEvent("es_freeroam:notif", "~r~ Vous ne pouvez déposer que dans une banque")
   end
 end)
 

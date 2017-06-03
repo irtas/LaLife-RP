@@ -1,7 +1,7 @@
 require "resources/mysql-async/lib/MySQL"
 
 local max_number_weapons = 6 --maximum number of weapons that the player can buy. Weapons given at spawn doesn't count.
-local cost_ratio = 0 --Ratio for withdrawing the weapons. This is price/cost_ratio = cost.
+local cost_ratio = 100 --Ratio for withdrawing the weapons. This is price/cost_ratio = cost.
 
 RegisterServerEvent('CheckMoneyForWea')
 AddEventHandler('CheckMoneyForWea', function(weapon,price)

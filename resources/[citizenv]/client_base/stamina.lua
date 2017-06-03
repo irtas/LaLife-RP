@@ -1,7 +1,7 @@
-Citizen.CreateThread( function()
- while true do
-    Citizen.Wait(0)
-    RestorePlayerStamina(playerPed, 1.0)
-	-- it's that simple
+--ENLEVER LA STAMINA
+Citizen.CreateThread(function()
+	while true do
+		RestorePlayerStamina(PlayerId(), 1.0)
+		Citizen.Wait(0)
 	end
 end)

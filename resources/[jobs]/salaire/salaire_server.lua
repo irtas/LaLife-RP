@@ -3,7 +3,7 @@ require "resources/mysql-async/lib/MySQL"
 
 RegisterServerEvent('paycheck:salary')
 AddEventHandler('paycheck:salary', function()
-	local salary = 150 --AIDE DE L ETAT (RP: Le président peut decider de les changer)
+	local salary = math.random(100,250) --Aide de l'État random (ici entre 100 et 250) RP: A changer au bon vouloir du président
     TriggerEvent('es:getPlayerFromId', source, function(user)
     -- Ajout de l'argent à l'utilisateur
         local user_id = user.identifier

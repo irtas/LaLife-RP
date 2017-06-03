@@ -1,3 +1,15 @@
+fuelCost = 5
+
+RegisterServerEvent('frfuel:fuelAdded')-- fuel events
+AddEventHandler('frfuel:fuelAdded', function(amount) --fuelAmount
+	TriggerEvent('es:getPlayerFromId', source, function(user)
+		local cost = amount * fuelCost
+		user:removeMoney(cost)
+	end)
+end)
+
+-- ANCIENS
+
 fuel = 5 -- Fuel Cost, this could be made to randomise between 1.05 and 1.30 or something like that
 
 function round(num, numDecimalPlaces)
