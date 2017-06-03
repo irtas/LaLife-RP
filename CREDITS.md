@@ -47,7 +47,9 @@ Including :
 -	Essential avec une db SQL. Complètement retravaillé. Merci à son créateur. Nous passerons sous une db NoSQL lorsque le temps le permettra.
 - vehshop
 	[12] Encore une fois, super script que nous avons adapté à notre système de véhicule.
-
+- mysql-async
+	[19] Un énorme merci **@Brouznouf** pour son implication dans le projet pour l'aspect mysql-async
+	
 **Jobs**
 - Organe
  	Exclusive :
@@ -89,3 +91,4 @@ Bibliographie :
 [16] https://github.com/PandaBasketteur/Jobs-System-and-Paycheck
 [17] https://forum.fivem.net/t/release-truckerjob-v0-3-update-29th-january/5237
 [18] https://forum.fivem.net/t/release-job-save-people-be-a-hero-paramedic-emergency-coma-ko/19773/184
+[19] https://github.com/brouznouf/fivem-mysql-async
