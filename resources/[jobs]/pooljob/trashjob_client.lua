@@ -310,7 +310,7 @@ Citizen.CreateThread(function()
 							bin.blip[1] = nil
 						end
 						if IsPedInAnyVehicle(LocalPed(), true) == false then
-							ShowInfoJobBin("Appuyez sur ~INPUT_CONTEXT~ pour ~b~ramasser~w~ la poubelle.", 0)
+							ShowInfoJobBin("Appuyez sur ~INPUT_CONTEXT~ pour ~b~ramassé~w~ la poubelle.", 0)
 							if IsControlJustPressed(1,38) then
 								local dict = "pickup_object"
 								local anim = "pickup_low"

@@ -123,10 +123,6 @@ AddEventHandler("vmenu:getGarage", function(target, vehicule) -- target = Dernie
 	TriggerServerEvent('jobspolice:vehGarage', vehicule)
 end)
 
-AddEventHandler("vmenu:getHelicoGarage", function(target, vehicule) -- target = Dernier joueur à avoir parlé, pas besoin ici. Mais obligatoire !
-	TriggerServerEvent('jobspolice:vehHelicoGarage', vehicule)
-end)
-
 AddEventHandler("vmenu:toGarage", function(target) -- target = Dernier joueur à avoir parlé, pas besoin ici. Mais obligatoire !
 	if IsPedSittingInAnyVehicle(GetPlayerPed(-1)) then
 		DrawNotif("Sortez du véhicule")
@@ -208,8 +204,7 @@ AddEventHandler("vmenu:spawnVeh", function(target, model, bool) -- target = Dern
 	end)
 end)
 
-RegisterNetEvent("vmenu:teleport_marker")
-AddEventHandler("vmenu:teleport_marker", function(target, pos)
+AddEventHandler("vmenu:teleport_marker", function(target)
 	CreateThread(function()
 		local carid = GetHashKey(model)
 		local e = GetPlayerPed(-1)
@@ -223,12 +218,7 @@ AddEventHandler("vmenu:teleport_marker", function(target, pos)
 		if IsWaypointActive() then
 			--local coords = GetBlipCoords(blip)
 			--local a = {}
-			local coords = {}
-			if pos == nil then
-				coords = Citizen.InvokeNative(0x586AFE3FF72D996E, blip, Citizen.ResultAsVector())
-			else
-				coords = pos
-			end
+			local coords = Citizen.InvokeNative(0x586AFE3FF72D996E, blip, Citizen.ResultAsVector())
 
 			if IsPedInAnyVehicle(e, 0) then
 

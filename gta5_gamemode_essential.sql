@@ -128,7 +128,7 @@ CREATE TABLE `outfits` (
   `three_text` int(11) NOT NULL DEFAULT '0',
   `seven` int(11) NOT NULL DEFAULT '0',
   `seven_text` int(11) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of outfits
@@ -143,7 +143,7 @@ CREATE TABLE `phonebook` (
   `pidentifier` varchar(30) CHARACTER SET utf8mb4 DEFAULT '',
   `phonenumber` varchar(30) CHARACTER SET utf8mb4 DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of phonebook

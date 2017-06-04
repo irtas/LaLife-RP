@@ -16,9 +16,9 @@ AddEventHandler('job:GetIdentifier', function()
     local L1 = #player - 3
     local L2 = #player - 2
     local L3 = #player - 1
-    local plate = "JOBS" .. player[L] .. player[L1] .. player[L2] .. player[L3]
+    local plate = "CTZN" .. player[L] .. player[L1] .. player[L2] .. player[L3]
     plate = string.upper(plate)
-    user:setJobVehicle(plate)
+    user:setVehicle(plate)
     TriggerClientEvent("job:f_GetIdentifier", source, plate)
   end)
 end)

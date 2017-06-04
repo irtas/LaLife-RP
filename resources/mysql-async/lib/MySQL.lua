@@ -41,7 +41,7 @@ function MySQL.init(self)
     self.settings.AllowUserVariables = true
     self.settings.Pooling = false
 
-    return self.mysql, isInit
+    return isInit
 end
 
 ---
@@ -63,3 +63,4 @@ function MySQL.createConnection(self)
 end
 
 MySQL:init()
+

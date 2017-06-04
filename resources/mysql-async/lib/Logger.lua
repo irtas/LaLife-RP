@@ -1,7 +1,6 @@
 Logger = setmetatable({}, Logger)
 Logger.__index = Logger
-Logger.name = GetInvokingResource()
-Logger.instance = clr.NLog.LogManager.GetLogger(Logger.name)
+Logger.instance = clr.NLog.LogManager.GetLogger("MySQL")
 
 function Logger.Trace(self, message)
     self:Get().Trace(message)

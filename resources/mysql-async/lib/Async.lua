@@ -24,8 +24,7 @@ function MySQL.Async.execute(query, params, func, transaction)
     clr.Brouznouf.FiveM.Async.ExecuteCallback(executeTask, MySQL.Async.wrapQuery(
         callback,
         connection,
-        Command.CommandText,
-        MySQL.Utils.ConvertObject
+        Command.CommandText
     ))
 end
 
@@ -85,8 +84,7 @@ function MySQL.Async.fetchScalar(query, params, func, transaction)
     clr.Brouznouf.FiveM.Async.ExecuteScalarCallback(executeScalarTask, MySQL.Async.wrapQuery(
         callback,
         connection,
-        Command.CommandText,
-        MySQL.Utils.ConvertObject
+        Command.CommandText
     ))
 end
 
@@ -178,4 +176,3 @@ function MySQL.Async.wrapQuery(next, Connection, Message, Transformer)
         return Result
     end
 end
-

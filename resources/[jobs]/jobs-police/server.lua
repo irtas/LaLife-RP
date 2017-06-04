@@ -126,33 +126,7 @@ AddEventHandler('jobspolice:vehGarage', function(vehicule)
 		if name_police ~= "Rien" then
 			   local isService = isService(user)
 			   if isService == 1 then
-  				 TriggerClientEvent("jobspolice:SpawnVehicle", source, vehicule, plateveh, true)
-			   else
-					 TriggerClientEvent("jobspolice:notif", source, "~r~Vous n'êtes pas en service")
-				 end
-		else
-				TriggerClientEvent("es_freeroam:notify", source, "CHAR_ANDREAS", 1, "Commissariat", false, "Vous devez être policier")
-  	end
-		TriggerEvent('vmenu:updateUser', 98)
-	end)
-end)
-
-RegisterServerEvent('jobspolice:vehHelicoGarage')
-AddEventHandler('jobspolice:vehHelicoGarage', function(vehicule)
-  TriggerEvent('es:getPlayerFromId', source, function(user)
-    local player = user.identifier
-		local L = #player - 4
-		local L1 = #player - 3
-		local L2 = #player - 2
-		local L3 = #player - 1
-		local plateveh = "LSPD" .. player[L] .. player[L1] .. player[L2] .. player[L3]
-		plateveh = string.upper(plateveh)
-    user:setVehicle(plateveh)
-		local name_police = namePolice(player, user)
-		if name_police ~= "Rien" then
-			   local isService = isService(user)
-			   if isService == 1 then
-  				 TriggerClientEvent("jobspolice:SpawnVehicle", source, vehicule, plateveh, false)
+  				 TriggerClientEvent("jobspolice:SpawnVehicle", source, vehicule, plateveh)
 			   else
 					 TriggerClientEvent("jobspolice:notif", source, "~r~Vous n'êtes pas en service")
 				 end

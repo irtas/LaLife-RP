@@ -62,25 +62,6 @@ end, function(source, args, user)
 	TriggerClientEvent('chatMessage', source, "SYSTEM", {255, 0, 0}, "Insufficienct permissions!")
 end)
 
--- Marker
-TriggerEvent('es:addGroupCommand', 'marker', "admin", function(source, args, user)
-	TriggerClientEvent("vmenu:teleport_marker", source)
-end, function(source, args, user)
-	TriggerClientEvent('chatMessage', source, "SYSTEM", {255, 0, 0}, "Insufficienct permissions!")
-end)
-
--- TPMarker
-TriggerEvent('es:addGroupCommand', 'tpme', "admin", function(source, args, user)
-	local pos = {}
-	TriggerEvent("es:getPlayerFromId", source, function(user)
-		pos = user:getCoords()
-	end)
-	TriggerEvent("es_freeroam:notif", GetPlayerName(tonumber(args[2])))
-	TriggerClientEvent("vmenu:teleport_marker_player", tonumber(args[2]), pos)
-end, function(source, args, user)
-	TriggerClientEvent('chatMessage', source, "SYSTEM", {255, 0, 0}, "Insufficienct permissions!")
-end)
-
 -- Kicking
 TriggerEvent('es:addGroupCommand', 'kick', "mod", function(source, args, user)
 		if(GetPlayerName(tonumber(args[2])))then

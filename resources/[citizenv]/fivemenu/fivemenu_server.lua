@@ -52,7 +52,6 @@ AddEventHandler('vmenu:updateUser', function(openMenu)
 			userInfos["dirtymoney"] = user:getDMoney()
 			userInfos["job"] = user:getJob()
 			userInfos["police"] = user:getPolice()
-			userInfos["enService"] = user:getenService()
 			userInfos["nom"] = user:getNom()
 			userInfos["prenom"] = user:getPrenom()
 			userInfos["vehicle"] = user:getVehicle()
@@ -60,6 +59,9 @@ AddEventHandler('vmenu:updateUser', function(openMenu)
 			userInfos["identifier"] = user.identifier
 		end
 	end)
+	--print(userInfos.identifier)
+	--print(userInfos.group)
+	--print(userInfos.police)
 	userInfos.Loaded = true
 	-- Envoie des données et Ouverture du Menu...
 	TriggerClientEvent("vmenu:setUser", source, userInfos)

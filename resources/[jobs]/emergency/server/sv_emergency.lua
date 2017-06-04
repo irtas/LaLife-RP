@@ -7,7 +7,9 @@
 ################################################################
 --]]
 
-require "resources/mysql-async/lib/MySQL"
+require "resources/[essential]/essentialmode/lib/MySQL"
+
+MySQL:open("127.0.0.1", "gta5_gamemode_essential", "root", "Police911")
 
 RegisterServerEvent('es_em:sendEmergency')
 AddEventHandler('es_em:sendEmergency',
@@ -60,11 +62,12 @@ function()
     for i,v in pairs(players) do
       identifier = GetPlayerIdentifiers(i)
       if (identifier ~= nil) then
-        MySQL.Async.fetchAll("SELECT * FROM users LEFT JOIN jobs ON jobs.job_id = users.job WHERE users.identifier = '@identifier' AND jobs.job_id = 13", {['@name'] = tostring(identifier)}, function (result)
-          if (result[1] ~= nil) then
-            isConnected = true
-          end
-        end)
+        local executed_query = MySQL:executeQuery("SELECT identifier, job_id, job_name FROM users LEFT JOIN jobs ON jobs.job_id = users.job WHERE users.identifier = '@identifier' AND job_id = 13", {['@identifier'] = identifier[1]})
+        local result = MySQL:getResults(executed_query, {'job_id'}, "identifier")
+
+        if (result[1] ~= nil) then
+          isConnected = true
+        end
       end
     end
     TriggerClientEvent('es_em:cl_getDocConnected', source, isConnected)
@@ -109,9 +112,30 @@ end
 )
 
 AddEventHandler('playerDropped', function()
-
+  TriggerEvent('es:getPlayerFromId', source,
+  function(user)
+    local executed_query = MySQL:executeQuery("UPDATE users SET enService = 0 WHERE users.identifier = '@identifier'", {['@identifier'] = user.identifier})
+  end
+)
 end)
 
 TriggerEvent('es:addCommand', 'respawn', function(source, args, user)
   TriggerClientEvent('es_em:cl_respawn', source)
 end)
+
+function GetJobId(source)
+  local jobId = -1
+
+  TriggerEvent('es:getPlayerFromId', source,
+  function(user)
+    local executed_query = MySQL:executeQuery("SELECT identifier, job_id, job_name FROM users LEFT JOIN jobs ON jobs.job_id = users.job WHERE users.identifier = '@identifier' AND job_id IS NOT NULL", {['@identifier'] = user.identifier})
+    local result = MySQL:getResults(executed_query, {'job_id'}, "identifier")
+
+    if (result[1] ~= nil) then
+      jobId = result[1].job_id
+    end
+  end
+)
+
+return jobId
+end
