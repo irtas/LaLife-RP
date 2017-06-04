@@ -361,21 +361,21 @@ Citizen.CreateThread(function()
                 ShowMsgtime.msg = '~g~ Vendre ~b~minerai'
                 ShowMsgtime.time = 250
                 Wait(2500)
-                ShowMsgtime.msg = '~g~ +'..Price..'$'
+                ShowMsgtime.msg = '~g~ +'..PrixRoche..'$'
                 ShowMsgtime.time = 150
                 TriggerEvent("inventory:sell",0, 1, 24, PrixRoche, "")
               elseif cuivre ~= 0 then
                 ShowMsgtime.msg = '~g~ Vendre ~b~minerai'
                 ShowMsgtime.time = 250
                 Wait(2500)
-                ShowMsgtime.msg = '~g~ +'..Price..'$'
+                ShowMsgtime.msg = '~g~ +'..PrixCuivre..'$'
                 ShowMsgtime.time = 150
                 TriggerEvent("inventory:sell", 0, 1, 20, PrixCuivre, "")
               elseif fer ~= 0 then
                 ShowMsgtime.msg = '~g~ Vendre ~b~minerai'
                 ShowMsgtime.time = 250
                 Wait(2500)
-                ShowMsgtime.msg = '~g~ +'..Price..'$'
+                ShowMsgtime.msg = '~g~ +'..PrixFer..'$'
                 ShowMsgtime.time = 150
                 TriggerEvent("inventory:sell", 0, 1, 21, PrixFer, "")
               else
@@ -414,7 +414,7 @@ Citizen.CreateThread(function()
                 ShowMsgtime.msg = '~g~ Vendre ~b~ du diamant'
                 ShowMsgtime.time = 250
                 Wait(2500)
-                ShowMsgtime.msg = '~g~ +'..Price..'$'
+                ShowMsgtime.msg = '~g~ +'..PrixDiams..'$'
                 ShowMsgtime.time = 150
                 TriggerEvent("inventory:sell",0, 1, 22, PrixDiams, "")
               else
