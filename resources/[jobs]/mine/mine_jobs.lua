@@ -360,7 +360,6 @@ Citizen.CreateThread(function()
               if roche ~= 0 then
                 ShowMsgtime.msg = '~g~ Vendre ~b~minerai'
                 ShowMsgtime.time = 250
-                TriggerEvent("vmenu:anim" ,"pickup_object", "pickup_low")
                 Wait(2500)
                 ShowMsgtime.msg = '~g~ +'..Price..'$'
                 ShowMsgtime.time = 150
@@ -368,7 +367,6 @@ Citizen.CreateThread(function()
               elseif cuivre ~= 0 then
                 ShowMsgtime.msg = '~g~ Vendre ~b~minerai'
                 ShowMsgtime.time = 250
-                TriggerEvent("vmenu:anim" ,"pickup_object", "pickup_low")
                 Wait(2500)
                 ShowMsgtime.msg = '~g~ +'..Price..'$'
                 ShowMsgtime.time = 150
@@ -376,7 +374,6 @@ Citizen.CreateThread(function()
               elseif fer ~= 0 then
                 ShowMsgtime.msg = '~g~ Vendre ~b~minerai'
                 ShowMsgtime.time = 250
-                TriggerEvent("vmenu:anim" ,"pickup_object", "pickup_low")
                 Wait(2500)
                 ShowMsgtime.msg = '~g~ +'..Price..'$'
                 ShowMsgtime.time = 150
@@ -416,7 +413,6 @@ Citizen.CreateThread(function()
               if diams ~= 0 then
                 ShowMsgtime.msg = '~g~ Vendre ~b~ du diamant'
                 ShowMsgtime.time = 250
-                TriggerEvent("vmenu:anim" ,"pickup_object", "pickup_low")
                 Wait(2500)
                 ShowMsgtime.msg = '~g~ +'..Price..'$'
                 ShowMsgtime.time = 150
