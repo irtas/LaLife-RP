@@ -27,6 +27,7 @@ setmetatable(Player, {
 		pl.prenom = prenom
 		pl.telephone = telephone
 		pl.vehicle = 0
+		pl.jobVehicle = 0
 
 		return setmetatable(pl, Player)
 	end
@@ -190,6 +191,14 @@ end
 
 function Player:getVehicle()
 	return self.vehicle
+end
+
+function Player:setJobVehicle(param)
+	self.jobVehicle = param
+end
+
+function Player:getJobVehicle()
+	return self.jobVehicle
 end
 
 function Player:getTel()

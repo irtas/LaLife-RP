@@ -97,24 +97,6 @@ AddEventHandler("playerSpawned", function()
 	TriggerServerEvent("job:GetIdentifier")
 end)
 
-local ShowMsgtime = { msg = "", time = 0 }
-local myjob = 0
-
-RegisterNetEvent("mine:getJobs")
-AddEventHandler("mine:getJobs", function(job)
-	myjob = job
-end)
-
-Citizen.CreateThread(function()
-  while true do
-    Citizen.Wait(0)
-    if ShowMsgtime.time ~= 0 then
-      drawTxtpool(ShowMsgtime.msg, 0, 1, 0.5, 0.8, 0.6, 255, 255, 255, 255)
-      ShowMsgtime.time = ShowMsgtime.time - 1
-    end
-  end
-end)
-
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(0)
@@ -345,33 +327,36 @@ Citizen.CreateThread(function()
 					if GetDistanceBetweenCoords(GetEntityCoords(GetPlayerPed(-1)), daily.coords.cx[daily.flag[2]],daily.coords.cy[daily.flag[2]],daily.coords.cz[daily.flag[2]], true) > 5.0001 then
 						--DrawMarker(1, daily.coords.cx[daily.flag[2]],daily.coords.cy[daily.flag[2]],daily.coords.cz[daily.flag[2]]-1.0001, 0, 0, 0, 0, 0, 0, 2.0, 2.0, 2.0, 178, 236, 93, 155, 0, 0, 2, 0, 0, 0, 0)
 					else
-						if daily.blip[1] ~= nil and DoesBlipExist(daily.blip[1]) then
-							Citizen.InvokeNative(0x86A652570E5F25DD,Citizen.PointerValueIntInitialized(daily.blip[1]))
-							daily.blip[1] = nil
-						end
-						if IsPedInAnyVehicle(LocalPed(), true) == false then
-							ShowInfoJobPool("Appuyez sur ~INPUT_CONTEXT~ pour ~b~nettoyer~w~ la piscine.", 0)
-							if IsControlJustPressed(1,38) then
-								local dict = "pickup_object"
-								local anim = "pickup_low"
-								RequestAnimDict(dict)
+						local plyCoords = GetEntityCoords(GetPlayerPed(-1))
+						if math.abs(plyCoords['z'] - daily.coords.cz[daily.flag[2]]) < 1 then
+							if daily.blip[1] ~= nil and DoesBlipExist(daily.blip[1]) then
+								Citizen.InvokeNative(0x86A652570E5F25DD,Citizen.PointerValueIntInitialized(daily.blip[1]))
+								daily.blip[1] = nil
+							end
+							if IsPedInAnyVehicle(LocalPed(), true) == false then
+								ShowInfoJobPool("Appuyez sur ~INPUT_CONTEXT~ pour ~b~nettoyer~w~ la piscine.", 0)
+								if IsControlJustPressed(1,38) then
+									local dict = "pickup_object"
+									local anim = "pickup_low"
+									RequestAnimDict(dict)
 
-								while not HasAnimDictLoaded(dict) do
-									Citizen.Wait(0)
+									while not HasAnimDictLoaded(dict) do
+										Citizen.Wait(0)
+									end
+
+									local myPed = PlayerPedId()
+									local animation = anim
+									local flags = 16 -- only play the animation on the upper body
+
+									TaskPlayAnim(myPed, dict, animation, 8.0, -8, -1, flags, 0, 0, 0, 0)
+									Wait(2000)
+									DrawMissionTextpool("~h~Vous avez ~g~nettoyé~w~ une piscine !", 5000)
+									TriggerServerEvent('job:success', distance)
+									--TriggerServerEvent('CheckPool')
+									Wait(1000)
+									daily.flag[1] = 1
+									daily.flag[2] = GetRandomIntInRange(1, 88)
 								end
-
-								local myPed = PlayerPedId()
-								local animation = anim
-								local flags = 16 -- only play the animation on the upper body
-
-								TaskPlayAnim(myPed, dict, animation, 8.0, -8, -1, flags, 0, 0, 0, 0)
-								Wait(2000)
-								DrawMissionTextpool("~h~Vous avez ~g~nettoyé~w~ une piscine !", 5000)
-								TriggerServerEvent('job:success', distance)
-								--TriggerServerEvent('CheckPool')
-								Wait(1000)
-								daily.flag[1] = 1
-								daily.flag[2] = GetRandomIntInRange(1, 88)
 							end
 						end
 					end

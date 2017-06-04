@@ -15,7 +15,7 @@ Pour le support sur le scripting de FiveM en général.
 
 - **Linux roule bien finalement. Tout est sensé fonctionner. Assurez vous de bien installer tout comme il le faut. (Mono, etc)**
 - Il est recommandé de savoir un minimum coder pour utiliser nos fichiers.
-- LES **SOURCES C#** SORTIONT SOUS PEU!
+- LES **SOURCES C#** SORTIRONT SOUS PEU!
 - Nous allons sortir les gros patchs aux 2 semaines environ.
 - Les hotfix sortiront le plus rapidement possible
 - Certaines ressources sont inclus dans le package mais ne sont pas encore activées, car elles ne sont pas finalisées

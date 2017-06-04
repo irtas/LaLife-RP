@@ -1,4 +1,5 @@
 --- Activate this file if you want to clear sleeping connection every 10secs
+require "resources/mysql-async/lib/MySQL"
 
 local function ClearConnection()
     SetTimeout(10000, function ()
@@ -21,3 +22,4 @@ local function ClearConnection()
 end
 
 ClearConnection()
+
