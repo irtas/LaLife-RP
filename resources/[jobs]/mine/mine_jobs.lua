@@ -203,7 +203,7 @@ Citizen.CreateThread(function()
               local chance_mat = math.random(chance,1000)
               Wait(100)
               Citizen.Wait(1)
-              if (roche+cuivre+fer+diams) < 30 and chance_mat <=50  then
+              if (roche+cuivre+fer+diams) < 30 and chance_mat <=500  then
                 ShowMsgtime.msg = 'Miner'
                 ShowMsgtime.time = 250
                 TriggerEvent("vmenu:anim" ,"pickup_object", "pickup_low")
@@ -213,7 +213,7 @@ Citizen.CreateThread(function()
                 TriggerEvent("player:receiveItem", 23, 1)
                 chance = chance + 1
 
-              elseif (roche+cuivre+fer+diams) < 30 and chance_mat <=80  then
+              elseif (roche+cuivre+fer+diams) < 30 and chance_mat <=800  then
                 ShowMsgtime.msg = 'Miner'
                 ShowMsgtime.time = 250
                 TriggerEvent("vmenu:anim" ,"pickup_object", "pickup_low")
@@ -223,7 +223,7 @@ Citizen.CreateThread(function()
                 TriggerEvent("player:receiveItem", 17, 1)
                 chance = chance + 1
 
-              elseif (roche+cuivre+fer+diams) < 30 and chance_mat <= 98 then
+              elseif (roche+cuivre+fer+diams) < 30 and chance_mat <= 980 then
                 ShowMsgtime.msg = 'Miner'
                 ShowMsgtime.time = 250
                 TriggerEvent("vmenu:anim" ,"pickup_object", "pickup_low")
@@ -233,7 +233,7 @@ Citizen.CreateThread(function()
                 TriggerEvent("player:receiveItem", 18, 1)
                 chance = chance + 1
 
-              elseif (roche+cuivre+fer+diams) < 30 and chance_mat <= 100  then
+              elseif (roche+cuivre+fer+diams) < 30 and chance_mat <= 1000  then
                 ShowMsgtime.msg = 'Miner'
                 ShowMsgtime.time = 250
                 TriggerEvent("vmenu:anim" ,"pickup_object", "pickup_low")
