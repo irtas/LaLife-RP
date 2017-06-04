@@ -242,6 +242,16 @@ Citizen.CreateThread(function()
               TriggerServerEvent("org:addcorp")
               TriggerServerEvent("org:getcorp")
               TriggerEvent("inventory:sell",0, 1, 26, Price, "")
+
+              random = math.random(1, 8)
+              Blip = AddBlipForCoord(hopital[random].x, hopital[random].y, hopital[random].z)
+
+              SetBlipSprite(Blip, 273)
+              SetBlipColour(Blip, 2)
+
+              BeginTextCommandSetBlipName("STRING")
+              AddTextComponentString("Allez chercher le corps")
+              EndTextCommandSetBlipName(Blip)
               --SetEntityAsNoLongerNeeded(Blip.company)
             else
               ShowMsgtime.msg = "~r~ Vous n'avez pas de corps !"
