@@ -13,8 +13,9 @@ AutoStartResources:
     - hardcap # prevents too many players from joining
     - fivemenu
     - es_admin
+    - jobs-legal
     - truckerjob
-    - pooljob
+    #- pooljob
     - es_garages
     - es_weashop
     - jobs-police

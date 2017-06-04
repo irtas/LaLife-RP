@@ -32,6 +32,7 @@ end
 
 local Lock =
 { car = nil,
+	jobcar = nil,
   posCar = 0
 }
 
@@ -44,6 +45,7 @@ end
 RegisterNetEvent("lock:f_getCar")
 AddEventHandler('lock:f_getCar', function(vehicle)
     Lock.car = vehicle[1]
+		Lock.jobcar = vehicle[2]
 end)
 
 Citizen.CreateThread(function()
@@ -69,8 +71,9 @@ Citizen.CreateThread(function()
               end
             end
             local platec = Lock.car
+            local platej = Lock.jobcar
             Wait(100)
-            if platec == platev then
+            if platec == platev or platej == platev then
                 posCar = GetEntityCoords(v, false)
                 carX, carY, carZ = posCar.x, posCar.y, posCar.z
 
@@ -78,13 +81,13 @@ Citizen.CreateThread(function()
                 playerX, playerY, playerZ = posPlayer.x, posPlayer.y, posPlayer.z
             end
             Wait(100)
-            if platec == nil then
+            if platec == nil or platej == nil then
 
                 if chatMessage then
                     DrawNotif("Tu n'as pas de véhicule.")
                 end
 
-            elseif platec == platev then
+            elseif platec == platev or platej == platev then
 
                 distanceBetweenVehPlayer = GetDistanceBetweenCoords(carX, carY, carZ, playerX, playerY, playerZ, false)
                 --IsPedGettingIntoAVehicle(player)

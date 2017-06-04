@@ -128,20 +128,17 @@ Citizen.CreateThread(function()
       local spawncar = true
       TriggerServerEvent("jobspolice:CheckParking")
       Wait(100)
-      Citizen.Trace(tostring(ParkingPolice[1]))
       if ServerParking[2] == false then
         if ParkingPolice[1] == false then
           veh = CreateVehicle(car, 452.443, -998.466, 25.742, 0.0, true, false)
           TriggerServerEvent("jobspolice:SetParking", 1, true)
           TriggerServerEvent("jobspolice:CheckParking")
           ServerParking = {1, true}
-          Citizen.Trace("Spot 1 "..tostring(ServerParking[2]))
         elseif ParkingPolice[2] == false then
           veh = CreateVehicle(car, 447.09, -996.98, 25.76, 0.0, true, false)
           TriggerServerEvent("jobspolice:SetParking", 2, true)
           TriggerServerEvent("jobspolice:CheckParking")
           ServerParking = {2, true}
-          Citizen.Trace("Spot 1 "..tostring(ServerParking[2]))
         elseif ParkingPolice[3] == false then
           veh = CreateVehicle(car, 436.455, -996.787, 25.767, 0.0, true, false)
           TriggerServerEvent("jobspolice:SetParking", 3, true)
@@ -185,11 +182,31 @@ AddEventHandler('jobspolice:f_CheckParking', function(param)
 end)
 
 RegisterNetEvent("jobspolice:SpawnVehicle")
-AddEventHandler('jobspolice:SpawnVehicle', function(vehicle, cplate)
-	car = GetHashKey(vehicle)
-  -- VOITURE PAR DÉFAUT
-	plate = cplate
-	spawningcar = true
+AddEventHandler('jobspolice:SpawnVehicle', function(vehicle, cplate, param)
+  if param then
+    car = GetHashKey(vehicle)
+    -- VOITURE PAR DÉFAUT
+  	plate = cplate
+  	spawningcar = true
+  else
+    local car = GetHashKey(vehicle)
+    local veh = vehicle
+    local plate = cplate
+    veh = CreateVehicle(car, 449.87265014648, -981.50982666016, 43.69164276123, 0.0, true, false)
+    SetVehicleNumberPlateText(veh, plate)
+    SetVehicleOnGroundProperly(veh)
+    SetVehicleHasBeenOwnedByPlayer(veh,true)
+    local id = NetworkGetNetworkIdFromEntity(veh)
+    SetNetworkIdCanMigrate(id, true)
+    SetVehRadioStation(veh, "OFF")
+    SetEntityInvincible(veh, false)
+		SetVehicleLivery(veh, 2)
+    SetVehicleEngineTorqueMultiplier( veh, 1.25 )
+    SetVehicleEnginePowerMultiplier( veh, 1.25 )
+    SetPedIntoVehicle(GetPlayerPed(-1),  veh,  -1)
+    SetEntityAsMissionEntity(veh, true, true)
+    drawNotification("Véhicule sorti, bonne route")
+  end
 end)
 
 function GetVehicleInDirection( coordFrom, coordTo )
