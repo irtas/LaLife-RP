@@ -172,7 +172,7 @@ Citizen.CreateThread(function()
 			        ShowMsgtime.msg = "Allez à la mine et n'oubliez pas de ramener le camion pour être rembourser"
               ShowMsgtime.time = 300
             else
-              ShowMsgtime.msg = "Vous n'avez pas assez d'argent"
+              ShowMsgtime.msg = "Vous n'avez pas assez d'argent, il vous faut 3000$ pour récupérer le camion"
               ShowMsgtime.time = 300
 			  end
             else
@@ -299,12 +299,12 @@ Citizen.CreateThread(function()
               fer = qte
               TriggerEvent("player:getQuantity", 19)
               diams = qte
-			  
+
 			  local roche_trait = 0
 			  local cuivre_trait =0
 			  local fer_trait =0
 			  local diams_trait =0
-			  
+
 			  TriggerEvent("player:getQuantity", 24)
               roche_trait = qte
               TriggerEvent("player:getQuantity", 20)
