@@ -4,6 +4,9 @@ Citizen.CreateThread(function()
         if GetPlayerWantedLevel(PlayerId()) ~= 0 then
             SetPlayerWantedLevel(PlayerId(), 0, false)
             SetPlayerWantedLevelNow(PlayerId(), false)
+            SetPoliceIgnorePlayer(PlayerId(), true)
+            SetDispatchCopsForPlayer(PlayerId(), false)
+            SetDitchPoliceModels()
         end
     end
 end)

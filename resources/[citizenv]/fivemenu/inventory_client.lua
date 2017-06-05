@@ -1,5 +1,7 @@
 ITEMS = {}
 
+local MoneyOk = false
+
 function DrawNotif(text)
 	SetNotificationTextEntry("STRING")
 	AddTextComponentString(text)
@@ -63,11 +65,16 @@ end
 
 AddEventHandler("inventory:buy", function(target, qty, id, price, name) -- target = Dernier joueur à avoir parlé, pas besoin ici. Mais obligatoire !
 	local price = price * qty
-	item = tonumber(id)
-	if (ITEMS[item] == nil) then
-		new(qty, item, price, name)
-	else
-		add({ item, qty, price, name })
+	TriggerServerEvent("inventory:checkMoney", price)
+	Wait(200)
+	if MoneyOk then
+		item = tonumber(id)
+		if (ITEMS[item] == nil) then
+			new(qty, item, price, name)
+		else
+			add({ item, qty, price, name })
+		end
+		MoneyOk = false
 	end
 end)
 
@@ -177,6 +184,11 @@ RegisterNetEvent("inventory:getItems")
 AddEventHandler("inventory:getItems", function(p_items) -- target = Dernier joueur à avoir parlé, pas besoin ici. Mais obligatoire !
 	ITEMS = {}
 	ITEMS = p_items
+end)
+
+RegisterNetEvent("inventory:MoneyOk")
+AddEventHandler("inventory:MoneyOk", function(param) -- target = Dernier joueur à avoir parlé, pas besoin ici. Mais obligatoire !
+	MoneyOk = param
 end)
 
 function IsInVehicle()

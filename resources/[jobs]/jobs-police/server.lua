@@ -5,28 +5,28 @@ function idPolice(user)
 end
 
 function namePolice(player, user)
-  local idPolice = idPolice(user)
+	local idPolice = idPolice(user)
 
-  return MySQL.Sync.fetchScalar("SELECT police_name FROM police WHERE police_id = @respolice", {['@respolice'] = idPolice})
+	return MySQL.Sync.fetchScalar("SELECT police_name FROM police WHERE police_id = @respolice", {['@respolice'] = idPolice})
 end
 
 function isService(user)
-  return user:getenService()
+	return user:getenService()
 end
 
 RegisterServerEvent('jobspolice:updateService')
 AddEventHandler('jobspolice:updateService', function(id)
-  TriggerEvent('es:getPlayerFromId', source, function(user)
-    local player = user.identifier
-    user:setenService(id)
+	TriggerEvent('es:getPlayerFromId', source, function(user)
+		local player = user.identifier
+		user:setenService(id)
 		TriggerServerEvent('vmenu:updateUser', 5)
-  end)
+	end)
 end)
 
 RegisterServerEvent('jobspolice:jobs')
 AddEventHandler('jobspolice:jobs', function(id, civil)
-  TriggerEvent('es:getPlayerFromId', source, function(user)
-    local player = user.identifier
+	TriggerEvent('es:getPlayerFromId', source, function(user)
+		local player = user.identifier
 		local namePolice = namePolice(player, user) --SELECT
 		local id_police = idPolice(user) --Donne le ID de la police du joueur pour lui donne les armes et le skin aproprier
 		if namePolice == "Rien" then
@@ -42,11 +42,11 @@ AddEventHandler('jobspolice:jobs', function(id, civil)
 				end
 			else
 				TriggerClientEvent("es_freeroam:notify", source, "CHAR_ANDREAS", 1, "Commissariat", false, "Vous êtes maintenant hors service")
-        TriggerEvent("vmenu:fromSlastChar", source)
+				TriggerEvent("vmenu:fromSlastChar", source)
 			end
 			TriggerEvent('vmenu:updateUser', 5)
 		end
-  end)
+	end)
 end)
 
 function ArmeSelonGrade(id_police) --Donne certaine Arme en fonction du grade de la police PAS ENCORE TERMINER
@@ -62,14 +62,14 @@ function ArmeSelonGrade(id_police) --Donne certaine Arme en fonction du grade de
 	elseif id_police == 4 then
 		TriggerClientEvent("jobspolice:giveWeapon", source, "WEAPON_STUNGUN", nil)
 		--TriggerClientEvent("jobspolice:changeSkin", source, "S_M_Y_Cop_01", nil)
-    		TriggerClientEvent("jobspolice:lieutenant", source , nil)
+		TriggerClientEvent("jobspolice:lieutenant", source , nil)
 	elseif id_police == 5 then
 		TriggerClientEvent("jobspolice:giveWeapon", source, "WEAPON_STUNGUN", nil)
 		TriggerClientEvent("jobspolice:capitaine", source , nil)
 	elseif id_police >= 6 then
 		TriggerClientEvent("jobspolice:giveWeapon", source, "WEAPON_STUNGUN", nil)
 		--TriggerClientEvent("jobspolice:changeSkin", source, "mp_m_freemode_01", nil)
-    		TriggerClientEvent("jobspolice:commandant", source , nil)
+		TriggerClientEvent("jobspolice:commandant", source , nil)
 	end
 end
 
@@ -78,8 +78,8 @@ end
 
 RegisterServerEvent('jobspolice:wepArmory')
 AddEventHandler('jobspolice:wepArmory', function(id)
-  TriggerEvent('es:getPlayerFromId', source, function(user)
-    local player = user.identifier
+	TriggerEvent('es:getPlayerFromId', source, function(user)
+		local player = user.identifier
 		local namePolice = namePolice(player, user) --SELECT
 		if namePolice == "Rien" then
 			TriggerClientEvent("es_freeroam:notify", source, "CHAR_ANDREAS", 1, "Commissariat", false, "Vous devez être policier")
@@ -92,73 +92,68 @@ AddEventHandler('jobspolice:wepArmory', function(id)
 				TriggerClientEvent("jobspolice:notif", source, "~r~Vous n'êtes pas en service")
 			end
 		end
-  end)
+	end)
 end)
 
 RegisterServerEvent('jobspolice:vehtoGarage')
 AddEventHandler('jobspolice:vehtoGarage', function()
-  TriggerEvent('es:getPlayerFromId', source, function(user)
-    local player = user.identifier
+	TriggerEvent('es:getPlayerFromId', source, function(user)
+		local player = user.identifier
 		local L = #player - 4
 		local L1 = #player - 3
 		local L2 = #player - 2
 		local L3 = #player - 1
 		local plateveh = "LSPD" .. player[L] .. player[L1] .. player[L2] .. player[L3]
 		plateveh = string.upper(plateveh)
-    user:setVehicle(0)
-	  TriggerClientEvent("jobspolice:DespawnVehicle", source, plateveh)
+		user:setVehicle(0)
+		TriggerClientEvent("jobspolice:DespawnVehicle", source, plateveh)
 		TriggerEvent('vmenu:updateUser', 98)
 	end)
 end)
 
 RegisterServerEvent('jobspolice:vehGarage')
 AddEventHandler('jobspolice:vehGarage', function(vehicule)
-  TriggerEvent('es:getPlayerFromId', source, function(user)
-    local player = user.identifier
+	TriggerEvent('es:getPlayerFromId', source, function(user)
+		local player = user.identifier
 		local L = #player - 4
 		local L1 = #player - 3
 		local L2 = #player - 2
 		local L3 = #player - 1
 		local plateveh = "LSPD" .. player[L] .. player[L1] .. player[L2] .. player[L3]
 		plateveh = string.upper(plateveh)
-    user:setVehicle(plateveh)
+		user:setVehicle(plateveh)
 		local name_police = namePolice(player, user)
 		if name_police ~= "Rien" then
-			   local isService = isService(user)
-			   if isService == 1 then
-  				 TriggerClientEvent("jobspolice:SpawnVehicle", source, vehicule, plateveh, true)
-			   else
-					 TriggerClientEvent("jobspolice:notif", source, "~r~Vous n'êtes pas en service")
-				 end
+			local isService = isService(user)
+			if isService == 1 then
+				TriggerClientEvent("jobspolice:SpawnVehicle", source, vehicule, plateveh, true)
+			else
+				TriggerClientEvent("jobspolice:notif", source, "~r~Vous n'êtes pas en service")
+			end
 		else
-				TriggerClientEvent("es_freeroam:notify", source, "CHAR_ANDREAS", 1, "Commissariat", false, "Vous devez être policier")
-  	end
+			TriggerClientEvent("es_freeroam:notify", source, "CHAR_ANDREAS", 1, "Commissariat", false, "Vous devez être policier")
+		end
 		TriggerEvent('vmenu:updateUser', 98)
 	end)
 end)
 
 RegisterServerEvent('jobspolice:vehHelicoGarage')
 AddEventHandler('jobspolice:vehHelicoGarage', function(vehicule)
-  TriggerEvent('es:getPlayerFromId', source, function(user)
-    local player = user.identifier
+	TriggerEvent('es:getPlayerFromId', source, function(user)
+		local player = user.identifier
 		local L = #player - 4
 		local L1 = #player - 3
 		local L2 = #player - 2
 		local L3 = #player - 1
 		local plateveh = "LSPD" .. player[L] .. player[L1] .. player[L2] .. player[L3]
 		plateveh = string.upper(plateveh)
-    user:setVehicle(plateveh)
-		local name_police = namePolice(player, user)
-		if name_police ~= "Rien" then
-			   local isService = isService(user)
-			   if isService == 1 then
-  				 TriggerClientEvent("jobspolice:SpawnVehicle", source, vehicule, plateveh, false)
-			   else
-					 TriggerClientEvent("jobspolice:notif", source, "~r~Vous n'êtes pas en service")
-				 end
+		user:setVehicle(plateveh)
+		local isService = isService(user)
+		if isService == 1 then
+			TriggerClientEvent("jobspolice:SpawnVehicle", source, vehicule, plateveh, false)
 		else
-				TriggerClientEvent("es_freeroam:notify", source, "CHAR_ANDREAS", 1, "Commissariat", false, "Vous devez être policier")
-  	end
+			TriggerClientEvent("jobspolice:notif", source, "~r~Vous n'êtes pas en service")
+		end
 		TriggerEvent('vmenu:updateUser', 98)
 	end)
 end)
@@ -168,7 +163,7 @@ local ParkingPolice = {
 	[2] = false,
 	[3] = false,
 	[4] = false
- }
+}
 
 RegisterServerEvent('jobspolice:CheckParking')
 AddEventHandler('jobspolice:CheckParking', function()

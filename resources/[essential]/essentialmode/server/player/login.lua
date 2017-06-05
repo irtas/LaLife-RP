@@ -11,18 +11,20 @@ telist = {}
 
 -- tel = { name, surname, identifier, IDsource }
 
--- THIS IS CALLED AFTER THE CHARACTER CREATION.
--- WE NEED TO UPDATE HIS NAME BECAUSE CITIZEN CITIZEN IS NOT A DECENT NAME FOR SOMEONE!
--- I AM WRITING SINGLE COMMENT LINE
-RegisterServerEvent("es:loadAfterCreation")
-AddEventHandler("es:loadAfterCreation", function()
-	TriggerEvent('es:getPlayerFromId', source, function(user)
-		local player = user.identifier
-		MySQL.Async.fetchScalar("SELECT telephone FROM users WHERE identifier = @name", {['@name'] = player}, function (telephone)
-			telist[telephone] = { IDsource = source }
-		end)
-  end)
-end)
+-- -- THIS IS CALLED AFTER THE CHARACTER CREATION.
+-- -- WE NEED TO UPDATE HIS NAME BECAUSE CITIZEN CITIZEN IS NOT A DECENT NAME FOR SOMEONE!
+-- -- I AM WRITING SINGLE COMMENT LINE
+-- RegisterServerEvent("es:loadAfterCreation")
+-- AddEventHandler("es:loadAfterCreation", function()
+-- 	TriggerEvent('es:getPlayerFromId', source, function(user)
+-- 		local player = user.identifier
+-- 		MySQL.Async.fetchScalar("SELECT telephone FROM users WHERE identifier = @name", {['@name'] = player}, function (telephone)
+-- 			telist[telephone] = { IDsource = source }
+-- 		end)
+--   end)
+-- end)
+
+local countItems = MySQL.Sync.fetchScalar("SELECT COUNT(1) FROM items")
 
 RegisterServerEvent("es:deleteTelist")
 AddEventHandler("es:deleteTelist", function(source)
@@ -76,6 +78,14 @@ function LoadUser(identifier, source, new)
 		MySQL.Async.fetchAll("SELECT * FROM coordinates WHERE identifier = @name", {['@name'] = identifier}, function (result1)
 			local group = groups[result[1].group]
 			Users[source] = Player(source, result[1].permission_level, result[1].money, result[1].identifier, group, result[1].dirtymoney, result[1].job, result[1].police, result[1].nom, result[1].prenom, result[1].telephone, { x = result1[1].x, y = result1[1].y, z = result1[1].z})
+
+			local playerCountItems = MySQL.Sync.fetchScalar("SELECT COUNT(1) FROM user_inventory WHERE user_id = @username", { ['@username'] = identifier })
+			if playerCountItems ~= countItems then
+				for i=playerCountItems+1,countItems do
+					MySQL.Async.execute("INSERT INTO user_inventory (`user_id`, `item_id`, `quantity`) VALUES (@username, @item_id, '0')",
+					{['@username'] = identifier, ['@item_id'] = i})
+				end
+			end
 
 			-- THE ARRAY THAT WE WILL USE TO COMMUNICATE WITH CELLPHONE, OMAGGAD TECHNOLOGY
 			telist[result[1].telephone] = { IDsource = source }
@@ -174,10 +184,11 @@ function registerUser(identifier, source)
 
 			-- INVENTAIRE VIDE
 			-- BUILDING AN EMPTY INVENTORY, NEED REWORK UGLY, IM DYING
-			for i=1,27 do
+			for i=1,countItems do
 				MySQL.Async.execute("INSERT INTO user_inventory (`user_id`, `item_id`, `quantity`) VALUES (@username, @item_id, '0')",
 				{['@username'] = identifier, ['@item_id'] = i})
 			end
+
 
 			-- VOITURE PAR DÉFAUT
 			-- PLATE SYSTEM WITH SOCIAL CLUB ID TASTY AF

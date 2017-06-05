@@ -1,24 +1,42 @@
-CitizenMP.Server (FiveM/project Lambda) - released 2017-01-30, build 1.
+CitizenMP.Server (FiveM) - released 2017-04-30, build 3.
 
-Contains cfx-server 45c2dc72261272a913127d0cb88e67f93dd71055.
+Contains cfx-server 7503609dafd327a246291b09ae15bb1ec82a90df.
 
-Changes from previous release (8d735e18526f1a18922fd66057f781ba1318820a - http://updater.fivereborn.com/client/cfx-server-8d735e1.7z):
+Earlier builds were respun due to two critical flaws in master server code due to early local testing.
 
-$ git shortlog 8d735e18526f1a18922fd66057f781ba1318820a..HEAD
-fivereborn-dev (7):
-      atomically update TempID counter
-      add TempEP to Client
-      check client IP for resource downloads
-      support server-sent events for /log endpoint
-      support for indicating enhanced host support
-      fix possible cause of duplicate netid clients
-      autostart sessionmanager
+Changes from previous release (45c2dc72261272a913127d0cb88e67f93dd71055 - https://runtime.fivem.net/client/cfx-server-45c2dc7.7z):
 
-Contains cfx-server-data def0581d6d99fd2d5310dc12e017568ce25cfcab.
+$ git shortlog 45c2dc72261272a913127d0cb88e67f93dd71055..HEAD
+nihonium (4):
+      Add history of commands
+      Fix code style, rework start of the history handling
+      More neat command input boxxy
+      Cleanup
 
-Changes from previous release (8ca2e679d5e603665177649be5c9c7d478041c00):
+flerovium (13):
+      PerformHttpRequest fixes for Lua thread contexts
+      heartbeat time fixes
+      factor out GameServer into GameServerImplV1, stage 1
+      cleanup and more gameserverimpl refactoring
+      WindowedLogger: not reborn? :/
+      changes before breaking it
+      fix SendReliableCommand call breakage
+      gitlab ci config
+      cleanup, remove nuget
+      get rid of uhttpsharp
+      restore first
+      return server version in initConnect result
+      fix challenge corruption in getinfo
 
-$ git shortlog 8ca2e679d5e603665177649be5c9c7d478041c00..HEAD
-fivereborn-dev (2):
-      'new' sessionmanager resource
-      update keks loading screen example
+iridium (1):
+      darnit, that's a wrong host
+
+Contains cfx-server-data aeab2edc5cb98ba1991f99b911462f40cf7b7e9e.
+
+Changes from previous release (def0581d6d99fd2d5310dc12e017568ce25cfcab):
+
+$ git shortlog def0581d6d99fd2d5310dc12e017568ce25cfcab..HEAD
+ytterbium (3):
+      ignore local resources
+      change defaults
+      spawnmanager: wait for collision

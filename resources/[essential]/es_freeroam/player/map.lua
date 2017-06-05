@@ -190,7 +190,7 @@ local blips = {
     --{name="Safehouse", id=357, x=-771.79888916016, y= 351.59423828125, z=87.998191833496},
     --{name="Safehouse", id=357, x=-3086.428, y=339.252, z=6.371},
     --{name="Safehouse", id=357, x=-917.289, y=-450.206, z=39.600},
-	
+
     --{name="Planque", id=267, x=141.325, y=-2200.85, z=4.68803},
     --{name="Planque", id=267, x=488.65, y=-1315.62, z=29.2479},
     --{name="Planque", id=267, x=716.57, y=-966.28, z=30.3953},
@@ -305,7 +305,7 @@ Citizen.CreateThread(function()
   RequestIpl("rc12b_default")
   RequestIpl("rc12b_hospitalinterior")
   RequestIpl("rc12b_hospitalinterior_lod")
-  RequestIpl("canyonriver01_traincrash")
+  --RequestIpl("canyonriver01_traincrash")
   RequestIpl("railing_end")
   RequestIpl("des_farmhouse")
   RequestIpl("redCarpet")

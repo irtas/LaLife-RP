@@ -92,14 +92,14 @@ CREATE TABLE `jobs` (
 -- Records of jobs
 -- ----------------------------
 INSERT INTO `jobs` VALUES ('1', 'Sans Emploi', '0');
-INSERT INTO `jobs` VALUES ('2', 'Nettoyeur de piscines', '0');
+INSERT INTO `jobs` VALUES ('2', 'Nettoyeur de piscine', '0');
 INSERT INTO `jobs` VALUES ('3', 'Éboueur', '0');
 INSERT INTO `jobs` VALUES ('4', 'Mineur', '0');
 INSERT INTO `jobs` VALUES ('5', 'Chauffeur de taxi', '500');
 INSERT INTO `jobs` VALUES ('6', 'Livreur de bois', '0');
 INSERT INTO `jobs` VALUES ('7', 'Livreur de citerne', '0');
 INSERT INTO `jobs` VALUES ('8', 'Livreur de conteneur', '0');
-INSERT INTO `jobs` VALUES ('9', 'Livreur de médicaments', '0');
+INSERT INTO `jobs` VALUES ('9', 'Livreur de médicament', '0');
 INSERT INTO `jobs` VALUES ('10', 'Policier', '0');
 INSERT INTO `jobs` VALUES ('11', 'Fossoyeur', '0');
 INSERT INTO `jobs` VALUES ('12', 'Préposé à la morgue', '0');

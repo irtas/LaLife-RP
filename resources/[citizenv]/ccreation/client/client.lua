@@ -119,9 +119,10 @@ RegisterNUICallback('login', function(data, cb)
 	    DisplayNotification(data.outfit .. " - " .. data.gender)
 	    EnableGui(false)
 	    Citizen.Wait(2000)
+			SetEntityCoordsNoOffset(GetPlayerPed(-1), -1037.927, -2738.061, 20.169, 0,  0,  1)
 	    FreezeEntityPosition(GetPlayerPed(-1),  false)
 	    TriggerServerEvent("vmenu:lastChar")
-			TriggerServerEvent("es:loadAfterCreation")
+			--TriggerServerEvent("es:loadAfterCreation")
 		else
 			TriggerEvent("es_freeroam:notif", "~r~Remplisser tous les champs")
 		end

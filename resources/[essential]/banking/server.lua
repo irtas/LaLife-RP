@@ -29,51 +29,65 @@ end
 RegisterServerEvent('bank:deposit')
 AddEventHandler('bank:deposit', function(amount)
   TriggerEvent('es:getPlayerFromId', source, function(user)
-      local rounded = round(tonumber(amount), 0)
-      if(string.len(rounded) >= 9) then
-        TriggerClientEvent('chatMessage', source, "", {0, 0, 200}, "^1Montant trop élevé^0")
+    local rounded = round(tonumber(amount), 0)
+    if(string.len(rounded) >= 9) then
+      TriggerClientEvent('chatMessage', source, "", {0, 0, 200}, "^1Montant trop élevé^0")
+      CancelEvent()
+    else
+      if(tonumber(rounded) <= tonumber(user:money)) then
+        user:removeMoney((rounded))
+        local player = user.identifier
+        deposit(player, rounded)
+        local new_balance = bankBalance(player)
+        TriggerClientEvent("es_freeroam:notify", source, "CHAR_BANK_MAZE", 1, "Maze Bank", false, "Dépôt: ~g~$".. rounded .." ~n~~s~Nouvelle Balance: ~g~$" .. new_balance)
+        TriggerClientEvent("banking:updateBalance", source, new_balance)
+        TriggerClientEvent("banking:addBalance", source, rounded)
         CancelEvent()
       else
-      	if(tonumber(rounded) <= tonumber(user:money)) then
-          user:removeMoney((rounded))
-          local player = user.identifier
-          deposit(player, rounded)
-          local new_balance = bankBalance(player)
-          TriggerClientEvent("es_freeroam:notify", source, "CHAR_BANK_MAZE", 1, "Maze Bank", false, "Dépôt: ~g~$".. rounded .." ~n~~s~Nouvelle Balance: ~g~$" .. new_balance)
-          TriggerClientEvent("banking:updateBalance", source, new_balance)
-          TriggerClientEvent("banking:addBalance", source, rounded)
-          CancelEvent()
-        else
-          TriggerClientEvent('chatMessage', source, "", {0, 0, 200}, "^1Pas assez d'argent!^0")
-          CancelEvent()
-        end
+        TriggerClientEvent('chatMessage', source, "", {0, 0, 200}, "^1Pas assez d'argent!^0")
+        CancelEvent()
       end
+    end
   end)
 end)
 
 RegisterServerEvent('bank:withdraw')
 AddEventHandler('bank:withdraw', function(amount)
   TriggerEvent('es:getPlayerFromId', source, function(user)
-      local rounded = round(tonumber(amount), 0)
-      if(string.len(rounded) >= 9) then
-        TriggerClientEvent('chatMessage', source, "", {0, 0, 200}, "^1Montant trop élevé^0")
+    local rounded = round(tonumber(amount), 0)
+    if(string.len(rounded) >= 9) then
+      TriggerClientEvent('chatMessage', source, "", {0, 0, 200}, "^1Montant trop élevé^0")
+      CancelEvent()
+    else
+      local player = user.identifier
+      local bankbalance = bankBalance(player)
+      if(tonumber(rounded) <= tonumber(bankbalance)) then
+        withdraw(player, rounded)
+        user:addMoney((rounded))
+        local new_balance = bankBalance(player)
+        TriggerClientEvent("es_freeroam:notify", source, "CHAR_BANK_MAZE", 1, "Maze Bank", false, "Retrait: ~g~$".. rounded .." ~n~~s~Nouvelle Balance: ~g~$" .. new_balance)
+        TriggerClientEvent("banking:updateBalance", source, new_balance)
+        TriggerClientEvent("banking:removeBalance", source, rounded)
         CancelEvent()
       else
-        local player = user.identifier
-        local bankbalance = bankBalance(player)
-        if(tonumber(rounded) <= tonumber(bankbalance)) then
-          withdraw(player, rounded)
-          user:addMoney((rounded))
-          local new_balance = bankBalance(player)
-          TriggerClientEvent("es_freeroam:notify", source, "CHAR_BANK_MAZE", 1, "Maze Bank", false, "Retrait: ~g~$".. rounded .." ~n~~s~Nouvelle Balance: ~g~$" .. new_balance)
-          TriggerClientEvent("banking:updateBalance", source, new_balance)
-          TriggerClientEvent("banking:removeBalance", source, rounded)
-          CancelEvent()
-        else
-          TriggerClientEvent('chatMessage', source, "", {0, 0, 200}, "^1Pas assez d'argent dans le compte!^0")
-          CancelEvent()
-        end
+        TriggerClientEvent('chatMessage', source, "", {0, 0, 200}, "^1Pas assez d'argent dans le compte!^0")
+        CancelEvent()
       end
+    end
+  end)
+end)
+
+RegisterServerEvent('bank:remove')
+AddEventHandler('bank:remove', function(amount, source)
+  TriggerEvent('es:getPlayerFromId', source, function(user)
+    local rounded = round(tonumber(amount), 0)
+    local player = user.identifier
+    local bankbalance = bankBalance(player)
+    withdraw(player, rounded)
+    local new_balance = bankBalance(player)
+    TriggerClientEvent("banking:updateBalance", source, new_balance)
+    TriggerClientEvent("banking:removeBalance", source, rounded)
+    CancelEvent()
   end)
 end)
 
@@ -84,34 +98,34 @@ AddEventHandler('bank:transfer', function(fromPlayer, toPlayer, amount)
     CancelEvent()
   else
     TriggerEvent('es:getPlayerFromId', fromPlayer, function(user)
-        local rounded = round(tonumber(amount), 0)
-        if(string.len(rounded) >= 9) then
-          TriggerClientEvent('chatMessage', source, "", {0, 0, 200}, "^1Montant trop élevé^0")
+      local rounded = round(tonumber(amount), 0)
+      if(string.len(rounded) >= 9) then
+        TriggerClientEvent('chatMessage', source, "", {0, 0, 200}, "^1Montant trop élevé^0")
+        CancelEvent()
+      else
+        local player = user.identifier
+        local bankbalance = bankBalance(player)
+        if(tonumber(rounded) <= tonumber(bankbalance)) then
+          withdraw(player, rounded)
+          local new_balance = bankBalance(player)
+          TriggerClientEvent("es_freeroam:notify", source, "CHAR_BANK_MAZE", 1, "Maze Bank", false, "Transféré: ~r~-$".. rounded .." ~n~~s~Nouvelle Balance: ~g~$" .. new_balance)
+          TriggerClientEvent("banking:updateBalance", source, new_balance)
+          TriggerClientEvent("banking:removeBalance", source, rounded)
+          TriggerEvent('es:getPlayerFromId', toPlayer, function(user2)
+            local recipient = user2.identifier
+            deposit(recipient, rounded)
+            new_balance2 = bankBalance(recipient)
+            TriggerClientEvent("es_freeroam:notify", toPlayer, "CHAR_BANK_MAZE", 1, "Maze Bank", false, "Reçu: ~g~$".. rounded .." ~n~~s~Nouvelle Balance: ~g~$" .. new_balance2)
+            TriggerClientEvent("banking:updateBalance", toPlayer, new_balance2)
+            TriggerClientEvent("banking:addBalance", toPlayer, rounded)
+            CancelEvent()
+          end)
           CancelEvent()
         else
-          local player = user.identifier
-          local bankbalance = bankBalance(player)
-          if(tonumber(rounded) <= tonumber(bankbalance)) then
-            withdraw(player, rounded)
-            local new_balance = bankBalance(player)
-            TriggerClientEvent("es_freeroam:notify", source, "CHAR_BANK_MAZE", 1, "Maze Bank", false, "Transféré: ~r~-$".. rounded .." ~n~~s~Nouvelle Balance: ~g~$" .. new_balance)
-            TriggerClientEvent("banking:updateBalance", source, new_balance)
-            TriggerClientEvent("banking:removeBalance", source, rounded)
-            TriggerEvent('es:getPlayerFromId', toPlayer, function(user2)
-                local recipient = user2.identifier
-                deposit(recipient, rounded)
-                new_balance2 = bankBalance(recipient)
-                TriggerClientEvent("es_freeroam:notify", toPlayer, "CHAR_BANK_MAZE", 1, "Maze Bank", false, "Reçu: ~g~$".. rounded .." ~n~~s~Nouvelle Balance: ~g~$" .. new_balance2)
-                TriggerClientEvent("banking:updateBalance", toPlayer, new_balance2)
-                TriggerClientEvent("banking:addBalance", toPlayer, rounded)
-                CancelEvent()
-            end)
-            CancelEvent()
-          else
-            TriggerClientEvent('chatMessage', source, "", {0, 0, 200}, "^1Pas assez d'argent dans le compte^0")
-            CancelEvent()
-          end
+          TriggerClientEvent('chatMessage', source, "", {0, 0, 200}, "^1Pas assez d'argent dans le compte^0")
+          CancelEvent()
         end
+      end
     end)
   end
 end)
@@ -139,10 +153,10 @@ end)
 
 AddEventHandler('es:playerLoaded', function(source)
   TriggerEvent('es:getPlayerFromId', source, function(user)
-      local player = user.identifier
-      local bankbalance = bankBalance(player)
-      local bankdbalance = bankdBalance(player)
-      TriggerClientEvent("banking:updateBalance", source, bankbalance)
-      TriggerClientEvent("banking:updatedBalance", source, bankdbalance)
-    end)
+    local player = user.identifier
+    local bankbalance = bankBalance(player)
+    local bankdbalance = bankdBalance(player)
+    TriggerClientEvent("banking:updateBalance", source, bankbalance)
+    TriggerClientEvent("banking:updatedBalance", source, bankdbalance)
+  end)
 end)

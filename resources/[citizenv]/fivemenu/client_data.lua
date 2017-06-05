@@ -90,8 +90,16 @@ Store = {
   {name="Magasin", colour=0, scale=0.9, id=52, ['x'] = 2555.2375488281, ['y'] = 382.17391967773, ['z'] = 108.62296295166},
 }
 
+distributeur = {
+  {name="Distributeur", colour=15, id=351, ['x'] = 435.92715454102, ['y'] = -985.86511230469, ['z'] = 30.689582824707},
+}
+
 LockerPolice = {
   {name="Pole Emploi", colour=15, id=351, x=454.371, y=-993.277, z=30.689},
+}
+
+JailPolice = {
+  {name="Pole Emploi", colour=15, id=351, ['x'] = 459.70581054688, ['y'] = -989.13195800781, ['z'] = 24.914867401123}
 }
 
 Armory = {

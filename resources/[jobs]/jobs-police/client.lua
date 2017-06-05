@@ -35,60 +35,60 @@ local garage = {
 
 RegisterNetEvent("jobspolice:giveArmory")
 AddEventHandler("jobspolice:giveArmory", function(name, delayTime)
-    if delayTime == nil then
-        delayTime = 0
-    end
+  if delayTime == nil then
+    delayTime = 0
+  end
 
-    Citizen.CreateThread(function()
-        Wait(delayTime)
-        local hash = GetHashKey(name)
-        GiveWeaponToPed(GetPlayerPed(-1), hash, 1000, 0, false)
-    end)
+  Citizen.CreateThread(function()
+    Wait(delayTime)
+    local hash = GetHashKey(name)
+    GiveWeaponToPed(GetPlayerPed(-1), hash, 1000, 0, false)
+  end)
 end)
 
 RegisterNetEvent("jobspolice:giveWeapon")
 AddEventHandler("jobspolice:giveWeapon", function(name, delayTime)
-    if delayTime == nil then
-        delayTime = 0
-    end
+  if delayTime == nil then
+    delayTime = 0
+  end
 
-    Citizen.CreateThread(function()
-        Wait(delayTime)
-        local hash = GetHashKey(name)
-        GiveWeaponToPed(GetPlayerPed(-1), hash, 1000, 0, false)
-	      SetPlayerMaxArmour(PlayerId(),100)
-    end)
+  Citizen.CreateThread(function()
+    Wait(delayTime)
+    local hash = GetHashKey(name)
+    GiveWeaponToPed(GetPlayerPed(-1), hash, 1000, 0, false)
+    SetPlayerMaxArmour(PlayerId(),100)
+  end)
 end)
 
 RegisterNetEvent("jobspolice:changeSkin")
 AddEventHandler("jobspolice:changeSkin", function(skinName, id)--skinName)
   Citizen.CreateThread(function()
-       	  SetPedPropIndex(GetPlayerPed(-1),  0,  12,  0,  0)
-          SetPedPropIndex(GetPlayerPed(-1),  1,  18,  2,  0)
-          SetPedComponentVariation(GetPlayerPed(-1), 3, 0, 0, 2)
-          SetPedComponentVariation(GetPlayerPed(-1), 4, 35, 0, 2)
-          SetPedComponentVariation(GetPlayerPed(-1), 5, 0, 0, 2)
-          SetPedComponentVariation(GetPlayerPed(-1), 6, 25, 0, 2)
-          SetPedComponentVariation(GetPlayerPed(-1), 7, 15, 0, 2)
-          SetPedComponentVariation(GetPlayerPed(-1), 8, 58, 0, 2)
-          SetPedComponentVariation(GetPlayerPed(-1), 9, 0, 0, 2) --Dessus Armure / etc
-          SetPedComponentVariation(GetPlayerPed(-1), 10, 7, 0, 2)
-          SetPedComponentVariation(GetPlayerPed(-1), 11, 55, 0, 2)
+    SetPedPropIndex(GetPlayerPed(-1),  0,  12,  0,  0)
+    SetPedPropIndex(GetPlayerPed(-1),  1,  18,  2,  0)
+    SetPedComponentVariation(GetPlayerPed(-1), 3, 0, 0, 2)
+    SetPedComponentVariation(GetPlayerPed(-1), 4, 35, 0, 2)
+    SetPedComponentVariation(GetPlayerPed(-1), 5, 0, 0, 2)
+    SetPedComponentVariation(GetPlayerPed(-1), 6, 25, 0, 2)
+    SetPedComponentVariation(GetPlayerPed(-1), 7, 15, 0, 2)
+    SetPedComponentVariation(GetPlayerPed(-1), 8, 58, 0, 2)
+    SetPedComponentVariation(GetPlayerPed(-1), 9, 0, 0, 2) --Dessus Armure / etc
+    SetPedComponentVariation(GetPlayerPed(-1), 10, 7, 0, 2)
+    SetPedComponentVariation(GetPlayerPed(-1), 11, 55, 0, 2)
 
-	        --SetPedComponentVariation(GetPlayerPed(-1), 2, id, 0, 2)
-          --SetPedComponentVariation(GetPlayerPed(-1), id, 50, 0, 2)
-          --SetPedComponentVariation(GetPlayerPed(-1), 2, 2, 0, 2)
- end)
+    --SetPedComponentVariation(GetPlayerPed(-1), 2, id, 0, 2)
+    --SetPedComponentVariation(GetPlayerPed(-1), id, 50, 0, 2)
+    --SetPedComponentVariation(GetPlayerPed(-1), 2, 2, 0, 2)
+  end)
 end)
 
 ---------------------------------- CITIZEN ----------------------------------
 local ServerParking = {0, false}
 local ParkingPolice = {
-	[1] = false,
-	[2] = false,
-	[3] = false,
-	[4] = false
- }
+  [1] = false,
+  [2] = false,
+  [3] = false,
+  [4] = false
+}
 
 Citizen.CreateThread(function()
   while true do
@@ -173,6 +173,25 @@ Citizen.CreateThread(function()
       end
       spawningcar = false
     end
+    if spawningheli then
+      RequestModel(car)
+      while not HasModelLoaded(car) do
+        Citizen.Wait(0)
+      end
+      veh = CreateVehicle(car, 449.87265014648, -981.50982666016, 43.69164276123, 0.0, true, false)
+      SetVehicleNumberPlateText(veh, plate)
+      SetVehicleOnGroundProperly(veh)
+      SetVehicleHasBeenOwnedByPlayer(veh,true)
+      local id = NetworkGetNetworkIdFromEntity(veh)
+      SetNetworkIdCanMigrate(id, true)
+      SetVehRadioStation(veh, "OFF")
+      SetEntityInvincible(veh, false)
+      SetVehicleLivery(veh, 2)
+      SetPedIntoVehicle(GetPlayerPed(-1),  veh,  -1)
+      SetEntityAsMissionEntity(veh, true, true)
+      drawNotification("Véhicule sorti, bonne route")
+      spawningheli = false
+    end
   end
 end)
 
@@ -186,90 +205,77 @@ AddEventHandler('jobspolice:SpawnVehicle', function(vehicle, cplate, param)
   if param then
     car = GetHashKey(vehicle)
     -- VOITURE PAR DÉFAUT
-  	plate = cplate
-  	spawningcar = true
+    plate = cplate
+    spawningcar = true
   else
-    local car = GetHashKey(vehicle)
-    local veh = vehicle
-    local plate = cplate
-    veh = CreateVehicle(car, 449.87265014648, -981.50982666016, 43.69164276123, 0.0, true, false)
-    SetVehicleNumberPlateText(veh, plate)
-    SetVehicleOnGroundProperly(veh)
-    SetVehicleHasBeenOwnedByPlayer(veh,true)
-    local id = NetworkGetNetworkIdFromEntity(veh)
-    SetNetworkIdCanMigrate(id, true)
-    SetVehRadioStation(veh, "OFF")
-    SetEntityInvincible(veh, false)
-		SetVehicleLivery(veh, 2)
-    SetVehicleEngineTorqueMultiplier( veh, 1.25 )
-    SetVehicleEnginePowerMultiplier( veh, 1.25 )
-    SetPedIntoVehicle(GetPlayerPed(-1),  veh,  -1)
-    SetEntityAsMissionEntity(veh, true, true)
-    drawNotification("Véhicule sorti, bonne route")
+    car = GetHashKey(vehicle)
+    -- VOITURE PAR DÉFAUT
+    plate = cplate
+    spawningheli = true
   end
 end)
 
 function GetVehicleInDirection( coordFrom, coordTo )
-    local rayHandle = CastRayPointToPoint( coordFrom.x, coordFrom.y, coordFrom.z, coordTo.x, coordTo.y, coordTo.z, 10, GetPlayerPed( -1 ), 0 )
-    local _, _, _, _, vehicle = GetRaycastResult( rayHandle )
-    return vehicle
+  local rayHandle = CastRayPointToPoint( coordFrom.x, coordFrom.y, coordFrom.z, coordTo.x, coordTo.y, coordTo.z, 10, GetPlayerPed( -1 ), 0 )
+  local _, _, _, _, vehicle = GetRaycastResult( rayHandle )
+  return vehicle
 end
 
 function getUnloadCoord(param)
-	if param >= 305 then
-		return {-1.3,1.3}
-	elseif param >= 260 then
-		return {0,1.3}
-	elseif param >= 225 then
-		return {1.3,1.3}
-	elseif param >= 180 then
-		return {1.3,0}
-	elseif param >= 135 then
-		return {1.3,-1.3}
-	elseif param >= 90 then
-		return {0,-1.3}
-	elseif param >= 45 then
-		return {-1.3,-1.3}
-	else
-		return {-1.3,0}
-	end
+  if param >= 305 then
+    return {-1.3,1.3}
+  elseif param >= 260 then
+    return {0,1.3}
+  elseif param >= 225 then
+    return {1.3,1.3}
+  elseif param >= 180 then
+    return {1.3,0}
+  elseif param >= 135 then
+    return {1.3,-1.3}
+  elseif param >= 90 then
+    return {0,-1.3}
+  elseif param >= 45 then
+    return {-1.3,-1.3}
+  else
+    return {-1.3,0}
+  end
 end
 
 RegisterNetEvent("jobspolice:DespawnVehicle")
 AddEventHandler('jobspolice:DespawnVehicle', function(plateveh)
-    local plateveh = plateveh
-    local plate = GetVehicleNumberPlateText(v)
-      Citizen.CreateThread(function()
-      Citizen.Wait(1500)
-          local playerPos = GetEntityCoords( GetPlayerPed(-1), 1 )
-          local inFrontOfPlayer = GetOffsetFromEntityInWorldCoords( GetPlayerPed(-1), 0.0, 10.000, 0.0 )
-          local vehicle = GetVehicleInDirection( playerPos, inFrontOfPlayer )
-          if ( DoesEntityExist( vehicle ) ) then
-            local plate = GetVehicleNumberPlateText(vehicle)
-            if plate ~= plateveh then
-              drawNotification("Ce véhicule ne vous appartient pas")
-            else
-              -- local heading = GetEntityHeading(GetPlayerPed(-1))
-              -- local unloadCoord = getUnloadCoord(heading)
-              -- local ply = GetPlayerPed(-1)
-              -- local plyCoords = GetEntityCoords(ply, 0)
-              -- SetEntityCoords(GetPlayerPed(-1), plyCoords["x"] + unloadCoord[1], plyCoords["y"] + unloadCoord[2], plyCoords["z"] + 0.3)
-              Wait(100)
-              SetEntityAsMissionEntity( vehicle, true, true )
-              Citizen.InvokeNative( 0xEA386986E786A54F, Citizen.PointerValueIntInitialized( vehicle ) )
-              Citizen.InvokeNative( 0xB736A491E64A32CF, Citizen.PointerValueIntInitialized( vehicle ))
-              drawNotification("Véhicule rentré")
-            end
-          else
-            drawNotification("Aucun véhicule devant vous")
-          end
-    end)
+  local plateveh = plateveh
+  local plate = GetVehicleNumberPlateText(v)
+  Citizen.CreateThread(function()
+    Citizen.Wait(1500)
+    local playerPos = GetEntityCoords( GetPlayerPed(-1), 1 )
+    local inFrontOfPlayer = GetOffsetFromEntityInWorldCoords( GetPlayerPed(-1), 0.0, 10.000, 0.0 )
+    local vehicle = GetVehicleInDirection( playerPos, inFrontOfPlayer )
+    if ( DoesEntityExist( vehicle ) ) then
+      local plate = GetVehicleNumberPlateText(vehicle)
+      if plate ~= plateveh then
+        drawNotification("Ce véhicule ne vous appartient pas")
+      else
+        -- local heading = GetEntityHeading(GetPlayerPed(-1))
+        -- local unloadCoord = getUnloadCoord(heading)
+        -- local ply = GetPlayerPed(-1)
+        -- local plyCoords = GetEntityCoords(ply, 0)
+        -- SetEntityCoords(GetPlayerPed(-1), plyCoords["x"] + unloadCoord[1], plyCoords["y"] + unloadCoord[2], plyCoords["z"] + 0.3)
+        Wait(100)
+        SetEntityAsMissionEntity( vehicle, true, true )
+        Citizen.InvokeNative( 0xEA386986E786A54F, Citizen.PointerValueIntInitialized( vehicle ) )
+        Citizen.InvokeNative( 0xB736A491E64A32CF, Citizen.PointerValueIntInitialized( vehicle ))
+        drawNotification("Véhicule rentré")
+      end
+    else
+      drawNotification("Aucun véhicule devant vous")
+    end
+  end)
 end)
 
 function drawNotification(text)
-	SetNotificationTextEntry("STRING")
-	AddTextComponentString(text)
-	DrawNotification(false, false)
+  SetNotificationTextEntry("STRING")
+  AddTextComponentString(text)
+  DrawNotification(false, false)
 end
 
 RegisterNetEvent("jobspolice:notif")
@@ -277,76 +283,76 @@ AddEventHandler('jobspolice:notif', function(lestring)
   drawNotification("" .. lestring .. "")
 end)
 
- RegisterNetEvent("jobspolice:cadet")
- AddEventHandler('jobspolice:cadet', function()
-   SetPedComponentVariation(GetPlayerPed(-1), 3, 30, 0, 0)--Gants
- 			SetPedComponentVariation(GetPlayerPed(-1), 4, 35, 0, 0)--Jean
- 			SetPedComponentVariation(GetPlayerPed(-1), 6, 24, 0, 0)--Chaussure
- 			SetPedComponentVariation(GetPlayerPed(-1), 8, 58, 0, 0)--mattraque
- 			SetPedComponentVariation(GetPlayerPed(-1), 11, 55, 0, 0)--Veste
- 			SetPedPropIndex(GetPlayerPed(-1), 2, 2, 0, 1)--Oreillete
- 			SetPedPropIndex(GetPlayerPed(-1), 6, 3, 0, 1)--Montre
- 			SetPedPropIndex(GetPlayerPed(-1), 1, 7, 0, 1)--Lunette
-			SetPedComponentVariation(GetPlayerPed(-1), 8, 59, 0, 0)--GiletJaune
- end)
+RegisterNetEvent("jobspolice:cadet")
+AddEventHandler('jobspolice:cadet', function()
+  SetPedComponentVariation(GetPlayerPed(-1), 3, 30, 0, 0)--Gants
+  SetPedComponentVariation(GetPlayerPed(-1), 4, 35, 0, 0)--Jean
+  SetPedComponentVariation(GetPlayerPed(-1), 6, 24, 0, 0)--Chaussure
+  SetPedComponentVariation(GetPlayerPed(-1), 8, 58, 0, 0)--mattraque
+  SetPedComponentVariation(GetPlayerPed(-1), 11, 55, 0, 0)--Veste
+  SetPedPropIndex(GetPlayerPed(-1), 2, 2, 0, 1)--Oreillete
+  SetPedPropIndex(GetPlayerPed(-1), 6, 3, 0, 1)--Montre
+  SetPedPropIndex(GetPlayerPed(-1), 1, 7, 0, 1)--Lunette
+  SetPedComponentVariation(GetPlayerPed(-1), 8, 59, 0, 0)--GiletJaune
+end)
 
- RegisterNetEvent("jobspolice:brigadier")
- AddEventHandler('jobspolice:brigadier', function()
-   SetPedComponentVariation(GetPlayerPed(-1), 3, 30, 0, 0)--Gants
- 			SetPedComponentVariation(GetPlayerPed(-1), 4, 35, 0, 0)--Jean
- 			SetPedComponentVariation(GetPlayerPed(-1), 6, 24, 0, 0)--Chaussure
- 			SetPedComponentVariation(GetPlayerPed(-1), 8, 58, 0, 0)--mattraque
- 			SetPedComponentVariation(GetPlayerPed(-1), 11, 55, 0, 0)--Veste
- 			SetPedPropIndex(GetPlayerPed(-1), 2, 2, 0, 1)--Oreillete
- 			SetPedPropIndex(GetPlayerPed(-1), 6, 3, 0, 1)--Montre
- 			SetPedPropIndex(GetPlayerPed(-1), 1, 7, 0, 1)--Lunette
- end)
- RegisterNetEvent("jobspolice:sergent")
- AddEventHandler('jobspolice:sergent', function()
-   SetPedComponentVariation(GetPlayerPed(-1), 3, 30, 0, 0)--Gants
- 			SetPedComponentVariation(GetPlayerPed(-1), 4, 35, 0, 0)--Jean
- 			SetPedComponentVariation(GetPlayerPed(-1), 6, 24, 0, 0)--Chaussure
- 			SetPedComponentVariation(GetPlayerPed(-1), 8, 58, 0, 0)--mattraque
- 			SetPedComponentVariation(GetPlayerPed(-1), 11, 55, 0, 0)--Veste
- 			SetPedPropIndex(GetPlayerPed(-1), 2, 2, 0, 1)--Oreillete
- 			SetPedPropIndex(GetPlayerPed(-1), 6, 3, 0, 1)--Montre
- 			SetPedPropIndex(GetPlayerPed(-1), 1, 7, 0, 1)--Lunette
-       SetPedComponentVariation(GetPlayerPed(-1), 10, 8, 2, 0)--Grade
- end)
- RegisterNetEvent("jobspolice:lieutenant")
- AddEventHandler('jobspolice:lieutenant', function()
-   SetPedComponentVariation(GetPlayerPed(-1), 3, 30, 0, 0)--Gants
- 			SetPedComponentVariation(GetPlayerPed(-1), 4, 35, 0, 0)--Jean
- 			SetPedComponentVariation(GetPlayerPed(-1), 6, 24, 0, 0)--Chaussure
- 			SetPedComponentVariation(GetPlayerPed(-1), 8, 58, 0, 0)--mattraque
- 			SetPedComponentVariation(GetPlayerPed(-1), 11, 55, 0, 0)--Veste
- 			SetPedPropIndex(GetPlayerPed(-1), 2, 2, 0, 1)--Oreillete
- 			SetPedPropIndex(GetPlayerPed(-1), 6, 3, 0, 1)--Montre
- 			SetPedPropIndex(GetPlayerPed(-1), 1, 7, 0, 1)--Lunette
-       SetPedComponentVariation(GetPlayerPed(-1), 10, 8, 2, 0)--Grade
- end)
- RegisterNetEvent("jobspolice:capitaine")
- AddEventHandler('jobspolice:capitaine', function()
-   SetPedComponentVariation(GetPlayerPed(-1), 3, 30, 0, 0)--Gants
- 			SetPedComponentVariation(GetPlayerPed(-1), 4, 35, 0, 0)--Jean
- 			SetPedComponentVariation(GetPlayerPed(-1), 6, 24, 0, 0)--Chaussure
- 			SetPedComponentVariation(GetPlayerPed(-1), 8, 58, 0, 0)--mattraque
- 			SetPedComponentVariation(GetPlayerPed(-1), 11, 55, 0, 0)--Veste
- 			SetPedPropIndex(GetPlayerPed(-1), 2, 2, 0, 1)--Oreillete
- 			SetPedPropIndex(GetPlayerPed(-1), 6, 3, 0, 1)--Montre
- 			SetPedPropIndex(GetPlayerPed(-1), 1, 7, 0, 1)--Lunette
-       SetPedComponentVariation(GetPlayerPed(-1), 10, 8, 2, 0)--Grade
- end)
- RegisterNetEvent("jobspolice:commandant")
- AddEventHandler('jobspolice:commandant', function()
-   SetPedComponentVariation(GetPlayerPed(-1), 3, 30, 0, 0)--Gants
- 			SetPedComponentVariation(GetPlayerPed(-1), 4, 35, 0, 0)--Jean
- 			SetPedComponentVariation(GetPlayerPed(-1), 6, 24, 0, 0)--Chaussure
- 			SetPedComponentVariation(GetPlayerPed(-1), 8, 58, 0, 0)--mattraque
- 			SetPedComponentVariation(GetPlayerPed(-1), 11, 55, 0, 0)--Veste
- 			SetPedPropIndex(GetPlayerPed(-1), 2, 2, 0, 1)--Oreillete
- 			SetPedPropIndex(GetPlayerPed(-1), 6, 3, 0, 1)--Montre
- 			SetPedPropIndex(GetPlayerPed(-1), 1, 7, 0, 1)--Lunette
-       SetPedComponentVariation(GetPlayerPed(-1), 10, 8, 2, 0)--Grade
-	   SetPedComponentVariation(GetPlayerPed(-1), 9, 10, 1, 2)--Gilet
- end)
+RegisterNetEvent("jobspolice:brigadier")
+AddEventHandler('jobspolice:brigadier', function()
+  SetPedComponentVariation(GetPlayerPed(-1), 3, 30, 0, 0)--Gants
+  SetPedComponentVariation(GetPlayerPed(-1), 4, 35, 0, 0)--Jean
+  SetPedComponentVariation(GetPlayerPed(-1), 6, 24, 0, 0)--Chaussure
+  SetPedComponentVariation(GetPlayerPed(-1), 8, 58, 0, 0)--mattraque
+  SetPedComponentVariation(GetPlayerPed(-1), 11, 55, 0, 0)--Veste
+  SetPedPropIndex(GetPlayerPed(-1), 2, 2, 0, 1)--Oreillete
+  SetPedPropIndex(GetPlayerPed(-1), 6, 3, 0, 1)--Montre
+  SetPedPropIndex(GetPlayerPed(-1), 1, 7, 0, 1)--Lunette
+end)
+RegisterNetEvent("jobspolice:sergent")
+AddEventHandler('jobspolice:sergent', function()
+  SetPedComponentVariation(GetPlayerPed(-1), 3, 30, 0, 0)--Gants
+  SetPedComponentVariation(GetPlayerPed(-1), 4, 35, 0, 0)--Jean
+  SetPedComponentVariation(GetPlayerPed(-1), 6, 24, 0, 0)--Chaussure
+  SetPedComponentVariation(GetPlayerPed(-1), 8, 58, 0, 0)--mattraque
+  SetPedComponentVariation(GetPlayerPed(-1), 11, 55, 0, 0)--Veste
+  SetPedPropIndex(GetPlayerPed(-1), 2, 2, 0, 1)--Oreillete
+  SetPedPropIndex(GetPlayerPed(-1), 6, 3, 0, 1)--Montre
+  SetPedPropIndex(GetPlayerPed(-1), 1, 7, 0, 1)--Lunette
+  SetPedComponentVariation(GetPlayerPed(-1), 10, 8, 2, 0)--Grade
+end)
+RegisterNetEvent("jobspolice:lieutenant")
+AddEventHandler('jobspolice:lieutenant', function()
+  SetPedComponentVariation(GetPlayerPed(-1), 3, 30, 0, 0)--Gants
+  SetPedComponentVariation(GetPlayerPed(-1), 4, 35, 0, 0)--Jean
+  SetPedComponentVariation(GetPlayerPed(-1), 6, 24, 0, 0)--Chaussure
+  SetPedComponentVariation(GetPlayerPed(-1), 8, 58, 0, 0)--mattraque
+  SetPedComponentVariation(GetPlayerPed(-1), 11, 55, 0, 0)--Veste
+  SetPedPropIndex(GetPlayerPed(-1), 2, 2, 0, 1)--Oreillete
+  SetPedPropIndex(GetPlayerPed(-1), 6, 3, 0, 1)--Montre
+  SetPedPropIndex(GetPlayerPed(-1), 1, 7, 0, 1)--Lunette
+  SetPedComponentVariation(GetPlayerPed(-1), 10, 8, 2, 0)--Grade
+end)
+RegisterNetEvent("jobspolice:capitaine")
+AddEventHandler('jobspolice:capitaine', function()
+  SetPedComponentVariation(GetPlayerPed(-1), 3, 30, 0, 0)--Gants
+  SetPedComponentVariation(GetPlayerPed(-1), 4, 35, 0, 0)--Jean
+  SetPedComponentVariation(GetPlayerPed(-1), 6, 24, 0, 0)--Chaussure
+  SetPedComponentVariation(GetPlayerPed(-1), 8, 58, 0, 0)--mattraque
+  SetPedComponentVariation(GetPlayerPed(-1), 11, 55, 0, 0)--Veste
+  SetPedPropIndex(GetPlayerPed(-1), 2, 2, 0, 1)--Oreillete
+  SetPedPropIndex(GetPlayerPed(-1), 6, 3, 0, 1)--Montre
+  SetPedPropIndex(GetPlayerPed(-1), 1, 7, 0, 1)--Lunette
+  SetPedComponentVariation(GetPlayerPed(-1), 10, 8, 2, 0)--Grade
+end)
+RegisterNetEvent("jobspolice:commandant")
+AddEventHandler('jobspolice:commandant', function()
+  SetPedComponentVariation(GetPlayerPed(-1), 3, 30, 0, 0)--Gants
+  SetPedComponentVariation(GetPlayerPed(-1), 4, 35, 0, 0)--Jean
+  SetPedComponentVariation(GetPlayerPed(-1), 6, 24, 0, 0)--Chaussure
+  SetPedComponentVariation(GetPlayerPed(-1), 8, 58, 0, 0)--mattraque
+  SetPedComponentVariation(GetPlayerPed(-1), 11, 55, 0, 0)--Veste
+  SetPedPropIndex(GetPlayerPed(-1), 2, 2, 0, 1)--Oreillete
+  SetPedPropIndex(GetPlayerPed(-1), 6, 3, 0, 1)--Montre
+  SetPedPropIndex(GetPlayerPed(-1), 1, 7, 0, 1)--Lunette
+  SetPedComponentVariation(GetPlayerPed(-1), 10, 8, 2, 0)--Grade
+  SetPedComponentVariation(GetPlayerPed(-1), 9, 10, 1, 2)--Gilet
+end)

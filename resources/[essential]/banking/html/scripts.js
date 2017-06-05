@@ -79,9 +79,9 @@ $(document).ready(function(){
     var item = event.data;
     // Update HUD Balance
     if(item.updateBalance == true) {
-      $('.balance').html('<p id="balance"><img id="icon" src="bank-icon.png" alt=""/>' +addGaps(event.data.balance)+'</p>');
-      $('.currentBalance').html('$'+addCommas(event.data.balance));
-      $('.username').html(event.data.player);
+      // $('.balance').html('<p id="balance"><img id="icon" src="bank-icon.png" alt=""/>' +addGaps(event.data.balance)+'</p>');
+      // $('.currentBalance').html('$'+addCommas(event.data.balance));
+      // $('.username').html(event.data.player);
     }
 
     // DIRTY MONEY
@@ -111,20 +111,20 @@ $(document).ready(function(){
 
     // Trigger Add Balance Popup
     if(item.addBalance == true) {
-      var element = $('<p id="add-balance"><span class="pre">+</span><span class="green"> $ </span>' +addGaps(event.data.amount)+'</p>');
-      $(".transaction").append(element);
-
-      setTimeout(function(){
-        $(element).fadeOut(600, function() { $(this).remove(); })
-      }, 1000)
+      // var element = $('<p id="add-balance"><span class="pre">+</span><span class="green"> $ </span>' +addGaps(event.data.amount)+'</p>');
+      // $(".transaction").append(element);
+      //
+      // setTimeout(function(){
+      //   $(element).fadeOut(600, function() { $(this).remove(); })
+      // }, 1000)
     }
     //Trigger Remove Balance Popup
     if(item.removeBalance == true) {
-      var element = $('<p id="add-balance"><span class="pre">-</span><span class="red"> $ </span>' +addGaps(event.data.amount)+'</p>');
-      $(".transaction").append(element);
-      setTimeout(function(){
-        $(element).fadeOut(600, function() { $(this).remove(); })
-      }, 1000)
+      // var element = $('<p id="add-balance"><span class="pre">-</span><span class="red"> $ </span>' +addGaps(event.data.amount)+'</p>');
+      // $(".transaction").append(element);
+      // setTimeout(function(){
+      //   $(element).fadeOut(600, function() { $(this).remove(); })
+      // }, 1000)
     }
 
     if(item.setDisplay == true) {

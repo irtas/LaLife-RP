@@ -135,6 +135,8 @@ User = {
 -- 	Citizen.Trace(VMenu[1].top)
 -- end)
 
+
+
 -------- DISTANCE ENTRE JOUEUR ET POINT
 function IsNearPoints(area, dist)
 	local ply = GetPlayerPed(-1)
@@ -446,6 +448,8 @@ function VMenu.valid()
 			TriggerEvent("vmenu:closeMenu")
 		elseif VMenu.curMenu == 17 then
 			TriggerEvent("vmenu:closeMenu")
+		elseif VMenu.curMenu == 18 then
+			TriggerEvent("vmenu:closeMenu")
 		elseif VMenu.curMenu == 98 then
 			--TriggerServerEvent("inventory:getItems_s")
 			getMainMenu()
@@ -481,6 +485,8 @@ function VMenu.back()
 		scrollAdjust()
 	else
 		TriggerEvent("vmenu:closeMenu")
+		TriggerEvent("es:setMoneyDisplay", "hidden")
+		TriggerEvent("banking:setBankDisplay", "hidden")
 	end
 end
 
@@ -599,6 +605,8 @@ function VMenu.test_keys()
 					if VMenu.curMenu == 98 then
 						if VMenu.visible then
 							TriggerEvent("vmenu:toggleMenu")
+							TriggerEvent("es:setMoneyDisplay", "hidden")
+							TriggerEvent("banking:setBankDisplay", "hidden")
 						else
 							TriggerEvent("vmenu:openMenu", 98)
 						end
@@ -1049,7 +1057,15 @@ function Construct()
 		end
 		if User.police >= 6 then
 		end
+	else
+		VMenu.AddSep(menu, "Vous devez être en service")
 	end
+
+	local menu = 18
+	VMenu.AddMenu(menu, "", "default")
+	VMenu.AddFunc(menu, "Ouvrir cellule #1", "menupolice:unjail", {1, User.police}, "Ouvrir")
+	VMenu.AddFunc(menu, "Ouvrir cellule #2", "menupolice:unjail", {2, User.police}, "Ouvrir")
+	VMenu.AddFunc(menu, "Ouvrir cellule #3", "menupolice:unjail", {3, User.police}, "Ouvrir")
 
 
 	------- MAIN MENU F7
@@ -1125,6 +1141,7 @@ function getGaragePolice()
 		if User.police >= 5 then
 			VMenu.AddFunc(7, "Taho banalisée", "vmenu:getGarage", {"fbi2"}, "Obtenir cette voiture")
 			VMenu.AddFunc(7, "Charger banalisée", "vmenu:getGarage", {"fbi"}, "Obtenir cette voiture")
+			VMenu.AddFunc(7, "Moto", "vmenu:getGarage", {"policeb"}, "Obtenir ce véhicule")
 		end
 		if User.police >= 6 then
 			VMenu.AddFunc(7, "Police Explorer Interceptor", "vmenu:getGarage", {"police3"}, "Obtenir cette voiture")
@@ -1142,18 +1159,20 @@ function getGarageHelicoPolice()
 	VMenu.ResetMenu(17, "", "default")
 	if User.enService == 1 then
 		if User.police >= 1 then
-			VMenu.AddFunc(17, "Helico de police", "vmenu:getHelicoGarage", {"polmav"}, "Obtenir cet hélicoptère")
 		end
 		if User.police >= 2 then
 		end
 		if User.police >= 3 then
 		end
 		if User.police >= 4 then
+			VMenu.AddFunc(17, "Helico de police", "vmenu:getHelicoGarage", {"polmav"}, "Obtenir cet hélicoptère")
 		end
 		if User.police >= 5 then
 		end
 		if User.police >= 6 then
 		end
+	else
+		VMenu.AddSep(17, "Vous devez être en service")
 	end
 end
 
@@ -1674,6 +1693,8 @@ Citizen.CreateThread(function()
 
 		elseif (IsNearPoints(informateur, 3) == true) then
 
+		elseif (IsNearPoints(JailPolice, 1) == true) then
+
 		elseif (IsNearPoints(lavage_argent, 3) == true) then
 
 		elseif (IsNearPoints(changeYourJob, 3) == true) then
@@ -1750,12 +1771,16 @@ Citizen.CreateThread(function()
 		-- 	livery = livery + 1
 		-- end
 
+		TriggerEvent("es:setMoneyDisplay", "hidden")
+		TriggerEvent("banking:setBankDisplay", "hidden")
+
 		if IsControlPressed(0, VMenu.mopenKey) then
 			timerTarget = 0
 			VMenu.curItem = 1
 			--TriggerEvent("vmenu:anim", "cellphone@", "text_in")
 			TriggerEvent("vmenu:openMenu", 98)
-
+			TriggerEvent("es:setMoneyDisplay", "visible")
+			TriggerEvent("banking:setBankDisplay", "visible")
 			VMenu.mainMenu = true
 			-- 	TriggerServerEvent("vmenu:updateUser", true)
 			if VMenu.police == false and VMenu.telephone == false and VMenu.animations == false then
@@ -1840,6 +1865,8 @@ Citizen.CreateThread(function()
 				TriggerEvent("vmenu:openMenu", 15)
 			elseif (IsNearPoints(lavage_argent, 3) == true) then
 				TriggerEvent("vmenu:openMenu", 16)
+			elseif (IsNearPoints(JailPolice, 1) == true) then
+				TriggerEvent("vmenu:openMenu", 18)
 			else
 
 			end
@@ -1851,7 +1878,7 @@ Citizen.CreateThread(function()
 			VMenu.lockerpolice = false
 			VMenu.Info('Appuyer sur ~g~F6~s~ pour accéder aux casiers', false)
 		elseif (IsNearPoints(Armory, 2) == true and User.police >= 1) then
-			VMenu.Info("Appuyer sur ~g~F6~s~ pour accéder à l'armurie", false)
+			VMenu.Info("Appuyer sur ~g~F6~s~ pour accéder à l'armurerie", false)
 		elseif (IsNearPoints(Garage_police, 5) == true and User.police >= 1) then
 			VMenu.garagepolice = false
 			VMenu.Info('Appuyer sur ~g~F6~s~ pour accéder au garage', false)
@@ -1888,11 +1915,15 @@ Citizen.CreateThread(function()
 			VMenu.Info('Appuyer sur ~g~F6~s~ pour accéder au magasin', false)
 		elseif (IsNearPoints(lavage_argent, 3) == true) then
 			VMenu.Info('Appuyer sur ~g~F6~s~ pour accéder au menu', false)
+		elseif (IsNearPoints(JailPolice, 1) == true) then
+			VMenu.Info('Appuyer sur ~g~F6~s~ pour accéder au menu', false)
 		else
 			if (VMenu.updatedChar == false) then
-				Wait(1200)
-				TriggerServerEvent("vmenu:lastChar")
-				Wait(200)
+				if not IsEntityDead(PlayerPedId()) then
+					Wait(1200)
+					TriggerServerEvent("vmenu:lastChar")
+					Wait(200)
+				end
 			end
 		end
 	end

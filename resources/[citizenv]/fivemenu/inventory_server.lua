@@ -85,6 +85,35 @@ AddEventHandler("inventory:updateQuantity_sf", function(qty, id)
   end)
 end)
 
+RegisterServerEvent("inventory:checkMoney")
+AddEventHandler("inventory:checkMoney", function(iprice)
+  TriggerEvent('es:getPlayerFromId', source, function(user)
+    local rounded = tonumber(iprice)
+    if(tonumber(rounded) <= tonumber(user:money)) then
+      TriggerClientEvent("inventory:MoneyOk", source, true)
+    else
+      TriggerClientEvent("inventory:MoneyOk", source, false)
+      TriggerClientEvent('chatMessage', source, "", {0, 0, 200}, "^1Pas assez d'argent!^0")
+      CancelEvent()
+    end
+  end)
+end)
+
+RegisterServerEvent("inventory:checkMoneyDistrib")
+AddEventHandler("inventory:checkMoneyDistrib", function(iprice)
+  TriggerEvent('es:getPlayerFromId', source, function(user)
+    local rounded = tonumber(iprice)
+    if(tonumber(rounded) <= tonumber(user:money)) then
+      TriggerClientEvent("inventory:MoneyOk", source, true)
+      user:removeMoney((rounded))
+    else
+      TriggerClientEvent("inventory:MoneyOk", source, false)
+      TriggerClientEvent('chatMessage', source, "", {0, 0, 200}, "^1Pas assez d'argent!^0")
+      CancelEvent()
+    end
+  end)
+end)
+
 RegisterServerEvent("inventory:sell_s")
 AddEventHandler("inventory:sell_s", function(id, qty, iprice, name)
   TriggerEvent('es:getPlayerFromId', source, function(user)

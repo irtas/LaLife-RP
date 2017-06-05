@@ -23,6 +23,18 @@ TriggerEvent('es:addGroupCommand', 'car', "admin", function(source, args, user)
 	TriggerClientEvent('chatMessage', source, "SYSTEM", {255, 0, 0}, "Insufficienct permissions!")
 end)
 
+TriggerEvent('es:addGroupCommand', 'eat', "admin", function(source, args, user)
+	TriggerClientEvent('food:veat', source, 100)
+	end, function(source, args, user)
+	TriggerClientEvent('chatMessage', source, "SYSTEM", {255, 0, 0}, "Insufficienct permissions!")
+end)
+
+TriggerEvent('es:addGroupCommand', 'drink', "admin", function(source, args, user)
+	TriggerClientEvent('food:vdrink', source, 100)
+	end, function(source, args, user)
+	TriggerClientEvent('chatMessage', source, "SYSTEM", {255, 0, 0}, "Insufficienct permissions!")
+end)
+
 
 -- Default commands
 TriggerEvent('es:addCommand', 'report', function(source, args, user)

@@ -113,8 +113,8 @@ Citizen.CreateThread(function()
 				--TriggerServerEvent('SetPlateJob')
 				--local car = 0xC703DB5F
 				Wait(100)
-				--local car = GetHashKey("pony2")
-				local car = 0x58B3979C
+				local car = GetHashKey("utillitruck3")
+				--local car = 0x58B3979C
 				-- VOITURE PAR DÉFAUT
 				local cplate = job.plate
 				Citizen.CreateThread(function()
@@ -299,8 +299,8 @@ Citizen.CreateThread(function()
 		if onJobPool == 0 then
 			if (clientjobID == 45) then -- JOB pool
 				if IsPedSittingInAnyVehicle(GetPlayerPed(-1)) then
-					--if IsVehicleModel(GetVehiclePedIsUsing(GetPlayerPed(-1)), GetHashKey("pony2", _r)) then
-					if IsVehicleModel(GetVehiclePedIsUsing(GetPlayerPed(-1)), 0x58B3979C) then
+					if IsVehicleModel(GetVehiclePedIsUsing(GetPlayerPed(-1)), GetHashKey("utillitruck3", _r)) then
+					--if IsVehicleModel(GetVehiclePedIsUsing(GetPlayerPed(-1)), 0x58B3979C) then
 						TriggerServerEvent("poleemploi:getjobs")
 						Wait(100)
 						if myjob == 2 then

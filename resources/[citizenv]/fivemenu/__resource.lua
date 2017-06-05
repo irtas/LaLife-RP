@@ -24,5 +24,6 @@ client_script {
 	'transporter_client.lua',
 	'drogue_client.lua',
 	'tel_client.lua',
+	'distributeur_client.lua',
 	'animations_client.lua'
 }
