@@ -151,6 +151,15 @@ end)
 -- 	end)
 -- end)
 
+RegisterServerEvent("banking:getBalance")
+AddEventHandler('banking:getBalance', function()
+  TriggerEvent('es:getPlayerFromId', source, function(user)
+    local player = user.identifier
+    local bankbalance = bankBalance(player)
+    TriggerClientEvent("banking:f_getBalance", source, bankbalance)
+  end)
+end)
+
 AddEventHandler('es:playerLoaded', function(source)
   TriggerEvent('es:getPlayerFromId', source, function(user)
     local player = user.identifier

@@ -80,8 +80,8 @@ $(document).ready(function(){
     // Update HUD Balance
     if(item.updateBalance == true) {
       // $('.balance').html('<p id="balance"><img id="icon" src="bank-icon.png" alt=""/>' +addGaps(event.data.balance)+'</p>');
-      // $('.currentBalance').html('$'+addCommas(event.data.balance));
-      // $('.username').html(event.data.player);
+      $('.currentBalance').html('$'+addCommas(event.data.balance));
+      $('.username').html(event.data.player);
     }
 
     // DIRTY MONEY

@@ -126,10 +126,28 @@ local atATM = false
 local bankOpen = false
 local atmOpen = false
 
+local playerName = ""
+RegisterNetEvent("es:f_getName")
+AddEventHandler("es:f_getName", function(name)
+  playerName = name
+end)
+
+local newBalance = 0
+RegisterNetEvent("banking:f_getBalance")
+AddEventHandler("banking:f_getBalance", function(bal)
+  newBalance = bal
+end)
+
 -- Open Gui and Focus NUI
 function openGui()
+  TriggerServerEvent("es:getName")
+  TriggerServerEvent("banking:getBalance")
+  Wait(200)
   SetNuiFocus(true)
-  SendNUIMessage({openBank = true})
+  SendNUIMessage({openBank = true,
+  updateBalance = true,
+  player = playerName,
+  balance = newBalance})
 end
 
 -- Close Gui and disable NUI
@@ -347,8 +365,8 @@ end)
 -- Send NUI message to update bank balance
 RegisterNetEvent('banking:updateBalance')
 AddEventHandler('banking:updateBalance', function(balance)
-  local id = PlayerId()
-  local playerName = GetPlayerName(id)
+  TriggerServerEvent("es:getName")
+  Wait(200)
 	SendNUIMessage({
 		updateBalance = true,
 		balance = balance,
@@ -377,8 +395,8 @@ end)
 
 RegisterNetEvent('banking:updatedBalance')
 AddEventHandler('banking:updatedBalance', function(balance)
-  local id = PlayerId()
-  local playerName = GetPlayerName(id)
+  TriggerServerEvent("es:getName")
+  Wait(200)
   SendNUIMessage({
     updatedBalance = true,
     dbalance = balance,

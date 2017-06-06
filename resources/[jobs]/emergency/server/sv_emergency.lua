@@ -60,14 +60,12 @@ function()
     for i,v in pairs(players) do
       identifier = GetPlayerIdentifiers(i)
       if (identifier ~= nil) then
-        MySQL.Async.fetchAll("SELECT * FROM users LEFT JOIN jobs ON jobs.job_id = users.job WHERE users.identifier = '@identifier' AND jobs.job_id = 13", {['@name'] = tostring(identifier)}, function (result)
-          if (result[1] ~= nil) then
-            isConnected = true
-          end
-        end)
+        local isConnected = MySQL.Sync.fetchScalar("SELECT COUNT(1) FROM users LEFT JOIN jobs ON jobs.job_id = users.job WHERE users.identifier = @identifier AND job_id = 13", {['@identifier'] = identifier[1]})
+		if isConnected ~= 0 then
+			TriggerClientEvent('es_em:cl_getDocConnected', source, true)
+		end
       end
     end
-    TriggerClientEvent('es_em:cl_getDocConnected', source, isConnected)
   end)
 end
 )
@@ -92,8 +90,8 @@ function()
       if user.money > 0 then
         user:setMoney(0)
       end
-      if user.dirty_money > 0 then
-        user:setDirty_money(0)
+      if user.dirtymoney > 0 then
+        user:setDMoney(0)
       end
     end
   end
