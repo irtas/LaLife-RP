@@ -115,6 +115,114 @@ AddEventHandler("vmenu:policeStateCivil", function(target, idPolice) -- target =
 	TriggerServerEvent('jobspolice:jobs', idPolice, true)
 end)
 
+local cashconfirmed = 0
+local sendMoney = 0
+local sendTarget = -1
+
+AddEventHandler("vmenu:giveCash", function(target, money)
+	if target ~= -1 then
+		TriggerEvent("vmenu:closeMenu")
+		DisplayOnscreenKeyboard(true, "FMMC_KEY_TIP8", "", "", "", "", "", 120)
+		cashconfirmed = 1
+		sendMoney = money
+		sendTarget = target
+	else
+		TriggerEvent("es_freeroam:notif", "~r~ Vous n'avez pas de cible")
+	end
+end)
+
+Citizen.CreateThread(function()
+	while true do
+		Wait(0)
+		if cashconfirmed == 1 then
+			if UpdateOnscreenKeyboard() == 3 then
+				cashconfirmed = 0
+			elseif UpdateOnscreenKeyboard() == 1 then
+				local txt = GetOnscreenKeyboardResult()
+				if (string.len(txt) > 0) and (string.match(txt, '%d+')) then -- BEAU REGEX PATTERN EN LUA PARCE QUE C'EST PAUVRE
+					if sendMoney > tonumber(txt) then
+						addCash = txt
+						cashconfirmed = 2
+					else
+						TriggerEvent("es_freeroam:notif", "~r~ Vous n'avez pas assez d'argent")
+						cashconfirmed = 0
+						sendMoney = 0
+						sendTarget = -1
+					end
+				else
+					TriggerEvent("es_freeroam:notif", "~r~ Entrer un montant valide")
+					cashconfirmed = 0
+					sendMoney = 0
+					sendTarget = -1
+				end
+			elseif UpdateOnscreenKeyboard() == 2 then
+				cashconfirmed = 0
+				sendMoney = 0
+				sendTarget = -1
+			end
+		end
+		if cashconfirmed == 2 then
+			TriggerServerEvent('vmenu:giveCash_s', GetPlayerServerId(sendTarget), addCash)
+			cashconfirmed = 0
+			sendMoney = 0
+			sendTarget = -1
+		end
+	end
+end)
+
+local dcashconfirmed = 0
+
+AddEventHandler("vmenu:giveDCash", function(target, money)
+	if target ~= -1 then
+		TriggerEvent("vmenu:closeMenu")
+		DisplayOnscreenKeyboard(true, "FMMC_KEY_TIP8", "", "", "", "", "", 120)
+		dcashconfirmed = 1
+		sendMoney = money
+		sendTarget = target
+	else
+		TriggerEvent("es_freeroam:notif", "~r~ Vous n'avez pas de cible")
+	end
+end)
+
+Citizen.CreateThread(function()
+	while true do
+		Wait(0)
+		if dcashconfirmed == 1 then
+			if UpdateOnscreenKeyboard() == 3 then
+				dcashconfirmed = 0
+			elseif UpdateOnscreenKeyboard() == 1 then
+				local txt = GetOnscreenKeyboardResult()
+				if (string.len(txt) > 0) and (string.match(txt, '%d+')) then -- BEAU REGEX PATTERN EN LUA PARCE QUE C'EST PAUVRE
+					if sendMoney > tonumber(txt) then
+						addCash = txt
+						dcashconfirmed = 2
+					else
+						TriggerEvent("es_freeroam:notif", "~r~ Vous n'avez pas assez d'argent")
+						dcashconfirmed = 0
+						sendMoney = 0
+						sendTarget = -1
+					end
+				else
+					TriggerEvent("es_freeroam:notif", "~r~ Entrer un montant valide")
+					dcashconfirmed = 0
+					sendMoney = 0
+					sendTarget = -1
+				end
+			elseif UpdateOnscreenKeyboard() == 2 then
+				dcashconfirmed = 0
+				sendMoney = 0
+				sendTarget = -1
+			end
+		end
+		if dcashconfirmed == 2 then
+			TriggerServerEvent('vmenu:giveDCash_s', GetPlayerServerId(sendTarget), addCash)
+			dcashconfirmed = 0
+			sendMoney = 0
+			sendTarget = -1
+		end
+	end
+end)
+
 AddEventHandler("vmenu:getArmory", function(target, idGun) -- target = Dernier joueur à avoir parlé, pas besoin ici. Mais obligatoire !
 	TriggerServerEvent('jobspolice:wepArmory', idGun)
 end)

@@ -50,7 +50,8 @@ end)
 
 RegisterServerEvent('menupolice:givecon_s')
 AddEventHandler('menupolice:givecon_s', function(netID, amount)
-  TriggerEvent('bank:remove', amount, netID)
+  TriggerEvent('bank:remove', netID, amount)
+  TriggerClientEvent("es_freeroam:notif", netID, "Vous avez reçu une contravention de ~r~".. amount.."$")
 end)
 
 RegisterServerEvent('menupolice:searchciv_s')
@@ -168,6 +169,29 @@ AddEventHandler('menupolice:unjail_s', function(t, v)
     jail2 = false
   elseif v == 3 then
     TriggerClientEvent("menupolice:wf_unjail", prisoner[3].source, v)
+	prisoner[1].source = 0
+    jail3 = false
+  end
+end)
+
+RegisterServerEvent('menupolice:civunjail_s')
+AddEventHandler('menupolice:civunjail_s', function(t, v)
+	-- print(prisoner[1].source)
+	-- print(prisoner[2].source)
+	-- print(prisoner[3].source)
+  if v == 1 then
+    TriggerClientEvent("menupolice:wf_unjail", prisoner[1].source, v)
+    TriggerEvent("menupolice:uncuff_s", prisoner[1].source)
+	prisoner[1].source = 0
+    jail1 = false
+  elseif v == 2 then
+    TriggerClientEvent("menupolice:wf_unjail", prisoner[2].source, v)
+    TriggerEvent("menupolice:uncuff_s", prisoner[2].source)
+	prisoner[1].source = 0
+    jail2 = false
+  elseif v == 3 then
+    TriggerClientEvent("menupolice:wf_unjail", prisoner[3].source, v)
+    TriggerEvent("menupolice:uncuff_s", prisoner[3].source)
 	prisoner[1].source = 0
     jail3 = false
   end

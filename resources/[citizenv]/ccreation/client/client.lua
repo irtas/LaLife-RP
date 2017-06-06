@@ -115,7 +115,7 @@ RegisterNUICallback('login', function(data, cb)
 			end
 	    TriggerServerEvent("vmenu:getFace", tonumber(data.gender), data.face, 0)
 	    TriggerServerEvent("vmenu:getHair", tonumber(data.hair), tonumber(data.color))
-	    DisplayNotification("Votre nom: " .. data.username .. " - Votre prenom: " .. data.password)
+	    DisplayNotification("Votre nom: " .. data.password .. " - Votre prenom: " .. data.username)
 	    DisplayNotification(data.outfit .. " - " .. data.gender)
 	    EnableGui(false)
 	    Citizen.Wait(2000)
