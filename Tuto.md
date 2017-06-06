@@ -51,6 +51,13 @@ Pour les cacher c'est ultra simple du coup, on va prendre l'exemple de la Coke, 
 
 Pour cela, rien de plus simple : Rendez vous dans resources > [jobs] > tradeIlegal > coke.lua (dans notre cas)
 
-Ouvrez le fichier avec votre éditeur de texte favori et cherchez **if DrawMarkerShow** vous n'aurez plus qu'à commenter chaque ligne pour cacher les markers, si la couleur ne vous plait pas, il semblerait que cela fonctionne en RGB (Red|Green|Blue) et le bleu est de base à 255 et le vert à 75 **(attention je présume, quand j'aurai la preuve de ce que j'avance cette partie sera modifiée)** donc si vous changez cette valeur, la nuance de bleu va évoluer (forcément)
+Ouvrez le fichier avec votre éditeur de texte favori et en haut de votre fichier, vous trouverez :
+
+"local DrawMarkerShow = true"
+
+Passez le a "false" pour désactiver tout les cercles bleu. 
+Pour désactiver un cercle en particulier, vous devrez commenter le code contenu dans "if DrawMarkerShow then" suivant le/les point(s) que ne voulez pas afficher.
+
+Si la couleur ne vous plait pas, il semblerait que cela fonctionne en RGB (Red|Green|Blue) et le bleu est de base à 255 et le vert à 75 **(attention je présume, quand j'aurai la preuve de ce que j'avance cette partie sera modifiée)** donc si vous changez cette valeur, la nuance de bleu va évoluer (forcément)
 
 ## FIN
