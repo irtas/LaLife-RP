@@ -111,41 +111,42 @@ input[type=radio],
   margin: 0px 0 0 2px;
 }
 
-.outfit1{background-image:url(img/14Street3.png);}
-.outfit2{background-image:url(img/14Street4.png);}
-.outfit3{background-image:url(img/14Street5.png);}
-.outfit4{background-image:url(img/15Standard8.png);}
-.outfit5{background-image:url(img/15Standard11.png);}
+.outfit1{background-image:url(img/14Street3.png);} 
+.outfit2{background-image:url(img/14Street4.png);} 
+.outfit3{background-image:url(img/14Street5.png);} 
 
-.outfit6{background-image:url(img/15Standard12.png);}
-.outfit7{background-image:url(img/15Standard17.png);}
-.outfit8{background-image:url(img/15Standard19.png);}
-.outfit9{background-image:url(img/35Lowriders4.png);}
-.outfit10{background-image:url(img/39Hipster1.png);}
-
-.outfit11{background-image:url(img/39Hipster6.png);}
-.outfit12{background-image:url(img/39Hipster10.png);}
-.outfit13{background-image:url(img/Casual1.png);}
-.outfit14{background-image:url(img/Casual3.png);}
-.outfit15{background-image:url(img/party2.png);}
-
-.outfit16{background-image:url(img/2Beach2.png);}
-.outfit17{background-image:url(img/2Beach7.png);}
-.outfit18{background-image:url(img/2Beach8.png);}
-
-.hair1{background-image:url(img/Hair0.png);}
-.hair2{background-image:url(img/Hair2.png);}
-.hair3{background-image:url(img/Hair3.png);}
-.hair4{background-image:url(img/Hair9.png);}
-.hair5{background-image:url(img/Hair13.png);}
-.hair6{background-image:url(img/Hair21.png);}
-
-.color1{background-image:url(img/Color0.png);}
-.color2{background-image:url(img/Color1.png);}
-.color3{background-image:url(img/Color2.png);}
-.color4{background-image:url(img/Color3.png);}
-.color5{background-image:url(img/Color4.png);}
-.color6{background-image:url(img/Color0.png);}
+.outfit4{background-image:url(img/15Standard8.png);} 
+.outfit5{background-image:url(img/15Standard11.png);} 
+ 
+.outfit6{background-image:url(img/15Standard12.png);} 
+.outfit7{background-image:url(img/15Standard17.png);} 
+.outfit8{background-image:url(img/15Standard19.png);} 
+.outfit9{background-image:url(img/35Lowriders4.png);} 
+.outfit10{background-image:url(img/39Hipster1.png);} 
+ 
+.outfit11{background-image:url(img/39Hipster6.png);} 
+.outfit12{background-image:url(img/39Hipster10.png);} 
+.outfit13{background-image:url(img/Casual1.png);} 
+.outfit14{background-image:url(img/Casual3.png);} 
+.outfit15{background-image:url(img/party2.png);} 
+ 
+.outfit16{background-image:url(img/2Beach2.png);} 
+.outfit17{background-image:url(img/2Beach7.png);} 
+.outfit18{background-image:url(img/2Beach8.png);} 
+ 
+.hair1{background-image:url(img/Hair0.png);} 
+.hair2{background-image:url(img/Hair2.png);} 
+.hair3{background-image:url(img/Hair3.png);} 
+.hair4{background-image:url(img/Hair9.png);} 
+.hair5{background-image:url(img/Hair13.png);} 
+.hair6{background-image:url(img/Hair21.png);} 
+ 
+.color1{background-image:url(img/Color0.png);} 
+.color2{background-image:url(img/Color1.png);} 
+.color3{background-image:url(img/Color2.png);} 
+.color4{background-image:url(img/Color3.png);} 
+.color5{background-image:url(img/Color4.png);} 
+.color6{background-image:url(img/Color0.png);} 
 
 .dialog-selector input:active +.out-cc{opacity: .9;}
 .dialog-selector input:checked +.out-cc{

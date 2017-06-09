@@ -285,10 +285,11 @@ AddEventHandler("transporter:mission2", function(missionN, trailerN)
 
   if DoesEntityExist(truckpos) or DoesEntityExist(trailerpos) then
     TriggerEvent("mt:missiontext", "The parking space is occupied, please wait", 5000)
+  else
+    MISSION.start = true
+    MISSION.spawnTrailer(trailerN)
+    MISSION.spawnTruck(trailerN)
   end
-  MISSION.start = true
-  MISSION.spawnTrailer(trailerN)
-  MISSION.spawnTruck(trailerN)
 end)
 
 function MISSION.spawnTruck(spawnID)
