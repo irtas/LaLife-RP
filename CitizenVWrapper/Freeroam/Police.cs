@@ -16,6 +16,9 @@ namespace CitizenVWrapper.Police
 
         private bool handCuffed = false;
         private bool EscorthandCuffed = false;
+        private bool Jailed1 = false;
+        private bool Jailed2 = false;
+        private bool Jailed3 = false;
 
         public Police()
         {
@@ -61,6 +64,12 @@ namespace CitizenVWrapper.Police
 
             EventHandlers[Events.SEIZECASH] += new Action<int>(SeizeCash);
             EventHandlers[Events.SEIZEDRUG] += new Action<int>(SeizeDrug);
+
+            EventHandlers[Events.JAIL] += new Action<int>(Jail);
+            EventHandlers[Events.FJAIL] += new Action<int>(Fjail);
+
+            EventHandlers[Events.UNJAIL] += new Action<int, int, int>(unJail);
+            EventHandlers[Events.FUNJAIL] += new Action<int>(Funjail);
 
             Tick += OnTick;
 
@@ -208,7 +217,8 @@ namespace CitizenVWrapper.Police
 
         private void FCuff()
         {
-                 handCuffed = true;
+                handCuffed = true;
+                TriggerEvent("handsup:toggle", false);
         }
 
         private void Cuff(int target)
@@ -258,6 +268,7 @@ namespace CitizenVWrapper.Police
         private void FUnCuff()
         {
                 handCuffed = false;
+                TriggerEvent("handsup:toggle", true);
         }
 
         private void CivToCar(int target)
@@ -339,16 +350,21 @@ namespace CitizenVWrapper.Police
                 TriggerServerEvent("menupolice:civuncar_s", Function.Call<int>(Hash.GET_PLAYER_SERVER_ID, target));
         }
 
-        private void FCivUnCar()
+        private async void FCivUnCar()
         {
                 if (handCuffed)
                 {
+                    TriggerEvent("menupolice:f_uncuff");
+                    handCuffed = false;
                     int v = Function.Call<int>(Hash.GET_VEHICLE_PED_IS_IN, Game.PlayerPed, true);
                     Function.Call(Hash.TASK_LEAVE_VEHICLE, Game.PlayerPed, v, 0);
+                    await Delay(2000);
+                    handCuffed = true;
+                    TriggerEvent("menupolice:f_cuff");
                 }
         }
 
-        private void Unlock()
+        private async void Unlock()
         {
                 Vector3 Playerpos = Function.Call<Vector3>(Hash.GET_ENTITY_COORDS, Game.PlayerPed);
                 Vector3 entityWorld = Function.Call<Vector3>(Hash.GET_OFFSET_FROM_ENTITY_IN_WORLD_COORDS, Game.PlayerPed, 0.0, 20.0, 0.0);
@@ -357,6 +373,7 @@ namespace CitizenVWrapper.Police
                 Entity veh = vehicleHandle.HitEntity;
                 if (Function.Call<bool>(Hash.DOES_ENTITY_EXIST, veh))
                 {
+                    await Delay(3000);
                     Function.Call(Hash.SET_VEHICLE_DOORS_LOCKED, veh, 1);
                     TriggerEvent("es_freeroam:notif", "~g~Véhicule déverouillé");
                     TriggerEvent("InteractSound_CL:PlayOnOne", "unlock", 1.0);
@@ -365,6 +382,74 @@ namespace CitizenVWrapper.Police
                 {
                     TriggerEvent("es_freeroam:notif", "~r~Aucun véhicle à proximité.");
                 }
+        }
+
+        private void Jail(int target)
+        {
+            TriggerServerEvent("menupolice:jail_s", Function.Call<int>(Hash.GET_PLAYER_SERVER_ID, target));
+        }
+
+        private void Fjail(int jailNumber)
+        {
+            if (handCuffed)
+            {
+                TriggerEvent("menupolice:f_uncuff");
+                handCuffed = false;
+                switch (jailNumber)
+                {
+                    case 1:
+                        Jailed1 = true;
+                        break;
+                    case 2:
+                        Jailed2 = true;
+                        break;
+                    case 3:
+                        Jailed3 = true;
+                        break;
+                    default:
+                        Jailed1 = true;
+                        break;
+                }
+            }
+        }
+
+        private async void unJail(int target, int jailNumber, int police)
+        {
+            TriggerEvent("es_freeroam:notif", "~g~ Ouverture de la cellule...");
+            if (police >= 1)
+            {
+                TriggerServerEvent("menupolice:unjail_s", Function.Call<int>(Hash.GET_PLAYER_SERVER_ID, target), jailNumber);
+                TriggerEvent("es_freeroam:notif", "~g~Cellule ouverte");
+            }
+            else
+            {
+                await Delay(5000);
+                TriggerServerEvent("menupolice:civunjail_s", Function.Call<int>(Hash.GET_PLAYER_SERVER_ID, target), jailNumber);
+                TriggerEvent("es_freeroam:notif", "~g~Cellule ouverte");
+            }
+        }
+
+        private void Funjail(int jailNumber)
+        {
+            TriggerEvent("es_freeroam:notif", "~g~Vous avez été libéré");
+            if (jailNumber == 1)
+            {
+                TriggerEvent("menupolice:cuff");
+                handCuffed = true;
+                Jailed1 = false;
+            }
+            else if (jailNumber == 2)
+            {
+                TriggerEvent("menupolice:cuff");
+                handCuffed = true;
+                Jailed2 = false;
+            }
+            else if (jailNumber == 3)
+            {
+                TriggerEvent("menupolice:cuff");
+                handCuffed = true;
+                Jailed3 = false;
+            }
         }
 
         private async Task OnTick()
@@ -381,6 +466,18 @@ namespace CitizenVWrapper.Police
             //        Function.Call(Hash.SET_BLIP_NAME_TO_PLAYER_NAME, playerBlip.Handle, player.Handle);
             //        Function.Call(Hash._SET_BLIP_SHOW_HEADING_INDICATOR, playerBlip.Handle, true);
             //    }
+            //}
+
+            //if (Game.IsControlJustReleased(1, Control.Aim))
+            //{
+            //    TriggerEvent("es_freeroam:notif", "Allo");
+            //    Jailed1 = true;
+            //}
+
+            //if (Game.IsControlJustReleased(1, Control.Attack))
+            //{
+            //    TriggerEvent("es_freeroam:notif", "Allo");
+            //    Jailed1 = false;
             //}
 
             if (handCuffed)
@@ -428,6 +525,33 @@ namespace CitizenVWrapper.Police
                             }
                         }
                     }
+                }
+            }
+
+            if (Jailed1)
+            {
+                Vector3 Jail = new Vector3(459.39462280273f, -994.36492919922f, 24.714873123169f);
+                if(Function.Call<float>(Hash.GET_DISTANCE_BETWEEN_COORDS, Game.PlayerPed.Position.X, Game.PlayerPed.Position.Y, Game.PlayerPed.Position.Z, Jail.X, Jail.Y, Jail.Z) > 2.01)
+                {
+                    Function.Call(Hash.SET_ENTITY_COORDS, Game.PlayerPed, Jail.X, Jail.Y, Jail.Z, 1, 0, 0, 1);
+                }
+            }
+
+            if (Jailed2)
+            {
+                Vector3 Jail = new Vector3(458.20806884766f, -997.88726806641f, 24.914875030518f);
+                if (Function.Call<float>(Hash.GET_DISTANCE_BETWEEN_COORDS, Game.PlayerPed.Position.X, Game.PlayerPed.Position.Y, Game.PlayerPed.Position.Z, Jail.X, Jail.Y, Jail.Z) > 2.01)
+                {
+                    Function.Call(Hash.SET_ENTITY_COORDS, Game.PlayerPed, Jail.X, Jail.Y, Jail.Z, 1, 0, 0, 1);
+                }
+            }
+
+            if (Jailed3)
+            {
+                Vector3 Jail = new Vector3(458.60348510742f, -1001.6125488281f, 24.914875030518f);
+                if (Function.Call<float>(Hash.GET_DISTANCE_BETWEEN_COORDS, Game.PlayerPed.Position.X, Game.PlayerPed.Position.Y, Game.PlayerPed.Position.Z, Jail.X, Jail.Y, Jail.Z) > 2.01)
+                {
+                    Function.Call(Hash.SET_ENTITY_COORDS, Game.PlayerPed, Jail.X, Jail.Y, Jail.Z, 1, 0, 0, 1);
                 }
             }
 

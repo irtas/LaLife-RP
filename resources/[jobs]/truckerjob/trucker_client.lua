@@ -279,8 +279,13 @@ AddEventHandler("transporter:mission2", function(missionN, trailerN)
   BLIP.destination.i = BLIP.destination.i + 1
   currentMission = MissionData[missionN]
 
-  --GUI.showMenu = false
-  --mission start
+  -- Added by Tim34
+  local truckpos = GetClosestVehicle(TruckingTruck[trailerN]["x"], TruckingTruck[trailerN]["y"], TruckingTruck[trailerN]["z"], 10.000, 0, 70)
+  local trailerpos = GetClosestVehicle(TruckingTrailer[trailerN]["x"], TruckingTrailer[trailerN]["y"], TruckingTrailer[trailerN]["z"], 10.000, 0, 70)
+
+  if DoesEntityExist(truckpos) or DoesEntityExist(trailerpos) then
+    TriggerEvent("mt:missiontext", "The parking space is occupied, please wait", 5000)
+  end
   MISSION.start = true
   MISSION.spawnTrailer(trailerN)
   MISSION.spawnTruck(trailerN)
@@ -305,6 +310,7 @@ end
 
 function MISSION.spawnTrailer(spawnID)
   MISSION.trailer = CreateVehicle(MISSION.hashTrailer, TruckingTrailer[spawnID]["x"], TruckingTrailer[spawnID]["y"], TruckingTrailer[spawnID]["z"], TruckingTrailer[spawnID]["heading"], true, false)
+  SetVehicleLivery(MISSION.trailer, 2)
   SetVehicleOnGroundProperly(MISSION.trailer)
 
   --setMarker on trailer

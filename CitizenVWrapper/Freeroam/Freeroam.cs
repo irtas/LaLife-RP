@@ -16,6 +16,7 @@ namespace FreeCitizenVWrapperroam
             SetPauseMenuTitle();
 
             EventHandlers[Events.PLAYERSPAWNED] += new Action(PlayerSpawned);
+            EventHandlers[Events.VEHPERSIST] += new Action<Vehicle>(vehPersist);
 
             Tick += OnTick;
         }
@@ -23,6 +24,11 @@ namespace FreeCitizenVWrapperroam
         private void PlayerSpawned()
         {
 
+        }
+
+        private void vehPersist(Vehicle veh)
+        {
+            veh.IsPersistent.Equals(true);
         }
 
         private void SetPauseMenuTitle()
