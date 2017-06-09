@@ -1,3 +1,5 @@
+**IF YOU FIND YOUR WORK IN THIS REPO WITHOUT THE CREDITS, PLEASE NOTIFY US, WE WILL KINDLY ADD YOU!**
+
 # La Life RP
 
 [Discord](https://discord.gg/aiekillu)
