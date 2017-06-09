@@ -45,7 +45,6 @@ Including :
 	[13] Magasin d’armes, nous n’avons pas encore touché à celui-ci.
 -	essentialmode, es_freeroam, es_admin
 -	Essential avec une db SQL. Complètement retravaillé. Merci à son créateur. Nous passerons sous une db NoSQL lorsque le temps le permettra.
--	[20] es_freeroam
 - vehshop
 	[12] Encore une fois, super script que nous avons adapté à notre système de véhicule.
 - mysql-async
@@ -93,4 +92,3 @@ Bibliographie :
 [17] https://forum.fivem.net/t/release-truckerjob-v0-3-update-29th-january/5237
 [18] https://forum.fivem.net/t/release-job-save-people-be-a-hero-paramedic-emergency-coma-ko/19773/184
 [19] https://github.com/brouznouf/fivem-mysql-async
-[20] https://github.com/ghermans/Essential_Freeroam
