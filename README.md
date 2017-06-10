@@ -21,6 +21,7 @@ Pour le support sur le scripting de FiveM en général.
 - Nous allons sortir les gros patchs aux 2 semaines environ.
 - Les hotfix sortiront le plus rapidement possible
 - Certaines ressources sont inclus dans le package mais ne sont pas encore activées, car elles ne sont pas finalisées
+- [VirusTotal du Wrapper](https://www.virustotal.com/fr/file/8ee439d195255989bbf372f8e8c9013f02e66ecd381d20cac74b5b6d795a4951/analysis/1497103142/)
 
 ## Requirements
 
