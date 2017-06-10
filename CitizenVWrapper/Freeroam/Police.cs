@@ -22,7 +22,7 @@ namespace CitizenVWrapper.Police
 
         public Police()
         {
-            //Diffï¿½rents type d'event handler possible.
+            //Différents type d'event handler possible.
 
             //1. EventHandlers[Events.XP_ADD] += new Action<int>(AddXP);
 
@@ -143,7 +143,7 @@ namespace CitizenVWrapper.Police
                     await Delay(5000);
                     Function.Call(Hash.CLEAR_PED_TASKS_IMMEDIATELY, Game.PlayerPed);
                     TriggerServerEvent("menupolice:givecon_s", Function.Call<int>(Hash.GET_PLAYER_SERVER_ID, target), amount);
-                    TriggerEvent("citizenv:notif", "~g~Contravention de " + amount.ToString() + "$ envoyï¿½");
+                    TriggerEvent("citizenv:notif", "~g~Contravention de " + amount.ToString() + "$ envoyé");
                 }
                 else
                 {
@@ -173,20 +173,20 @@ namespace CitizenVWrapper.Police
                 }
                 else
                 {
-                    TriggerEvent("citizenv:notif", "Aucun vï¿½hicule a inspecter.");
+                    TriggerEvent("citizenv:notif", "Aucun véhicule a inspecter.");
                 }
         }
 
         private void FSearchVeh(dynamic vehitems)
         {
                 TriggerEvent("citizenv:notif", vehitems.name.ToString());
-                if (vehitems.name == "Vï¿½hicule volï¿½")
+                if (vehitems.name == "Véhicule volé")
                 {
                     TriggerEvent("citizenv:notif", vehitems.name.ToString());
                 }
 		        else
                 {
-                    TriggerEvent("citizenv:notif", "Vï¿½hicule ï¿½: "+vehitems.name.ToString());
+                    TriggerEvent("citizenv:notif", "Véhicule à: "+vehitems.name.ToString());
                 }
         }
 
@@ -238,7 +238,7 @@ namespace CitizenVWrapper.Police
                 }
                 else
                 {
-                    TriggerEvent("citizenv:notif", "Aucun civil ï¿½ proximitï¿½ n'est menottï¿½");
+                    TriggerEvent("citizenv:notif", "Aucun civil à proximité n'est menotté");
                 }
         }
 
@@ -261,7 +261,7 @@ namespace CitizenVWrapper.Police
                 }
                 else
                 {
-                    TriggerEvent("citizenv:notif", "Aucun civil ï¿½ proximitï¿½ n'est menottï¿½");
+                    TriggerEvent("citizenv:notif", "Aucun civil à proximité n'est menotté");
                 }
         }
 
@@ -375,12 +375,12 @@ namespace CitizenVWrapper.Police
                 {
                     await Delay(3000);
                     Function.Call(Hash.SET_VEHICLE_DOORS_LOCKED, veh, 1);
-                    TriggerEvent("citizenv:notif", "~g~Vï¿½hicule dï¿½verouillï¿½");
+                    TriggerEvent("citizenv:notif", "~g~Véhicule déverouillé");
                     TriggerEvent("InteractSound_CL:PlayOnOne", "unlock", 1.0);
                 }
                 else
                 {
-                    TriggerEvent("citizenv:notif", "~r~Aucun vï¿½hicle ï¿½ proximitï¿½.");
+                    TriggerEvent("citizenv:notif", "~r~Aucun véhicle à proximité.");
                 }
         }
 
@@ -431,7 +431,7 @@ namespace CitizenVWrapper.Police
 
         private void Funjail(int jailNumber)
         {
-            TriggerEvent("citizenv:notif", "~g~Vous avez ï¿½tï¿½ libï¿½rï¿½");
+            TriggerEvent("citizenv:notif", "~g~Vous avez été libéré");
             if (jailNumber == 1)
             {
                 TriggerEvent("menupolice:cuff");

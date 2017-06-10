@@ -1,4 +1,0 @@
-D:\GitRepo\freemode-remix\Freeroam\Freeroam\bin\Release\Freeroam.net.dll
-D:\GitRepo\freemode-remix\Freeroam\Freeroam\bin\Release\Freeroam.net.pdb
-D:\GitRepo\freemode-remix\Freeroam\Freeroam\obj\Release\Freeroam.net.dll
-D:\GitRepo\freemode-remix\Freeroam\Freeroam\obj\Release\Freeroam.net.pdb

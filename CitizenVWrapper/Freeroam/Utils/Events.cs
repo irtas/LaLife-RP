@@ -36,6 +36,11 @@
         public const string VEHPERSIST = "wrapper:vehPersist";
 
         public const string PLAYERSPAWNED = "playerSpawned";
+        public const string ONCLIENTMAPSTART = "onClientMapStart";
+        public const string DISPLAYTEXT = "citizenv:text";
+        public const string NOTIFY = "citizenv:notify";
+        public const string NOTIF = "citizenv:notif";
+        public const string HELP = "citizenv:help";
 
     }
 }

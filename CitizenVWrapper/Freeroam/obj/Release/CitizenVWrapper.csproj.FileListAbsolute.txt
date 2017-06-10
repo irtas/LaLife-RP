@@ -1,4 +1,0 @@
-D:\GitRepo\CitizenV_Wrapper\CitizenVWrapper\Freeroam\bin\Release\CitizenVWrapper.net.dll
-D:\GitRepo\CitizenV_Wrapper\CitizenVWrapper\Freeroam\bin\Release\CitizenVWrapper.net.pdb
-D:\GitRepo\CitizenV_Wrapper\CitizenVWrapper\Freeroam\obj\Release\CitizenVWrapper.net.dll
-D:\GitRepo\CitizenV_Wrapper\CitizenVWrapper\Freeroam\obj\Release\CitizenVWrapper.net.pdb

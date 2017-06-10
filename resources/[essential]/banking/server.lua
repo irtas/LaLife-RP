@@ -162,6 +162,8 @@ end)
 
 AddEventHandler('es:playerLoaded', function(source)
   TriggerEvent('es:getPlayerFromId', source, function(user)
+    user:setMoney(user.money)
+    user:setDMoney(user.dirtymoney)
     local player = user.identifier
     local bankbalance = bankBalance(player)
     local bankdbalance = bankdBalance(player)
