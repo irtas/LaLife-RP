@@ -1,0 +1,3 @@
+[submodule "CitizenV-Wrapper-Source"]
+	path = CitizenV-Wrapper-Source
+	url = https://github.com/ldlac/CitizenV-Wrapper-Source
