@@ -1,3 +1,3 @@
-resource_type 'map' { gameTypes = { es_freeroam = true } }
+resource_type 'map' { gameTypes = { itinerance = true } }
 
 map 'map.lua'

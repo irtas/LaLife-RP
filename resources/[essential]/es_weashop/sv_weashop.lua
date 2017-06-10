@@ -23,15 +23,15 @@ AddEventHandler('CheckMoneyForWea', function(weapon,price)
 						{['@username'] = player, ['@weapon'] = weapon, ['@cost'] = (price)/cost_ratio})
 					-- Trigger some client stuff
 					TriggerClientEvent('FinishMoneyCheckForWea',source)
-					TriggerClientEvent("es_freeroam:notify", source, "CHAR_AMMUNATION", 1, "AMMUNATION", false, "Amuse toi bien avec ces joujous!\n")
+					TriggerClientEvent("citizenv:notify", source, "CHAR_AMMUNATION", 1, "AMMUNATION", false, "Amuse toi bien avec ces joujous!\n")
 				else
 					TriggerClientEvent('ToManyWeapons',source)
-					TriggerClientEvent("es_freeroam:notify", source, "CHAR_AMMUNATION", 1, "AMMUNATION", false, "Tu as atteint la limite d armes ! (max: "..max_number_weapons..")\n")
+					TriggerClientEvent("citizenv:notify", source, "CHAR_AMMUNATION", 1, "AMMUNATION", false, "Tu as atteint la limite d armes ! (max: "..max_number_weapons..")\n")
 				end
 			end)
 		else
 			-- Inform the player that he needs more money
-			TriggerClientEvent("es_freeroam:notify", source, "CHAR_AMMUNATION", 1, "AMMUNATION", false, "Reviens quand tu auras plus d'argent !\n")
+			TriggerClientEvent("citizenv:notify", source, "CHAR_AMMUNATION", 1, "AMMUNATION", false, "Reviens quand tu auras plus d'argent !\n")
 		end
 	end)
 end)

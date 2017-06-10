@@ -25,7 +25,7 @@ AddEventHandler('menupolice:seizecash_s', function(netID)
   TriggerEvent('es:getPlayerFromId', netID, function(user)
     local curDCash = user:getDMoney()
     user:removeDMoney(curDCash)
-    TriggerClientEvent("es_freeroam:notif", source, "Vous avez saisi ".. tostring(curDCash))
+    TriggerClientEvent("citizenv:notif", source, "Vous avez saisi ".. tostring(curDCash))
   end)
 end)
 
@@ -39,8 +39,8 @@ AddEventHandler('menupolice:seizedrug_s', function(netID)
         for _, t in pairs(inv_array_illlegal) do
           if result[t.id].quantity > 0 then
             TriggerClientEvent("player:looseItem", netID, t.id, result[t.id].quantity)
-            TriggerClientEvent("es_freeroam:notif", netID, "Vous avez perdu ".. tostring(result[t.id].quantity) .." "..tostring(t.name))
-            TriggerClientEvent("es_freeroam:notif", source, "Vous avez saisi ".. tostring(result[t.id].quantity) .." "..tostring(t.name))
+            TriggerClientEvent("citizenv:notif", netID, "Vous avez perdu ".. tostring(result[t.id].quantity) .." "..tostring(t.name))
+            TriggerClientEvent("citizenv:notif", source, "Vous avez saisi ".. tostring(result[t.id].quantity) .." "..tostring(t.name))
           end
         end
       end
@@ -51,7 +51,7 @@ end)
 RegisterServerEvent('menupolice:givecon_s')
 AddEventHandler('menupolice:givecon_s', function(netID, amount)
   TriggerEvent('bank:remove', netID, amount)
-  TriggerClientEvent("es_freeroam:notif", netID, "Vous avez reçu une contravention de ~r~".. amount.."$")
+  TriggerClientEvent("citizenv:notif", netID, "Vous avez reçu une contravention de ~r~".. amount.."$")
 end)
 
 RegisterServerEvent('menupolice:searchciv_s')
@@ -147,7 +147,7 @@ AddEventHandler('menupolice:jail_s', function(t)
     prisoner[3].source = t
     jail3 = true
   else
-    TriggerClientEvent("es_freeroam:notif", source, "Toutes les cellules sont occupées")
+    TriggerClientEvent("citizenv:notif", source, "Toutes les cellules sont occupées")
   end
 	-- print(prisoner[1].source)
 	-- print(prisoner[2].source)

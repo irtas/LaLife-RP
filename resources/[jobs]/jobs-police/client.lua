@@ -164,6 +164,7 @@ Citizen.CreateThread(function()
           SetVehicleEnginePowerMultiplier( veh, 1.25 )
           SetPedIntoVehicle(GetPlayerPed(-1),  veh,  -1)
           SetEntityAsMissionEntity(veh, true, true)
+          TriggerEvent("wrapper:vehPersist", veh)
           drawNotification("Véhicule sorti, bonne route")
         else
           drawNotification("Tous les zones sont encombrées")
@@ -271,6 +272,44 @@ AddEventHandler('jobspolice:DespawnVehicle', function(plateveh)
     end
   end)
 end)
+
+local Despawnpoint = {
+  { ['x'] = 462.76406860352, ['y'] = -1019.4964599609, ['z'] = 28.104484558105 }
+}
+
+Citizen.CreateThread(function()
+  while true do
+  Citizen.Wait(50)
+    local playerPed = GetPlayerPed(-1)
+    local lastSpawnedVeh = GetVehiclePedIsUsing(playerPed)
+
+    if IsNearPoints(Despawnpoint, 2.01) then
+      --local playerPed = GetPlayerPed(-1)
+      --local lastSpawnedVeh = GetClosestVehicle(Despawnpoint[1].x, Despawnpoint[1].y, Despawnpoint[1].z, 3.000, 0, 70)
+      if (lastSpawnedVeh ~= nil) then
+        deleteCar(lastSpawnedVeh)
+      end
+    end
+  end
+end)
+
+function deleteCar(car)
+  SetEntityAsMissionEntity(car, true, true)
+  Citizen.InvokeNative( 0xEA386986E786A54F, Citizen.PointerValueIntInitialized( car ))
+  Citizen.InvokeNative( 0xB736A491E64A32CF, Citizen.PointerValueIntInitialized( car ))
+  Citizen.InvokeNative( 0xAE3CBE5BF394C9C9, Citizen.PointerValueIntInitialized( car ))
+end
+
+function IsNearPoints(area, dist)
+	local ply = GetPlayerPed(-1)
+	local plyCoords = GetEntityCoords(ply, 0)
+	for _, item in pairs(area) do
+		local distance = GetDistanceBetweenCoords(item.x, item.y, item.z,  plyCoords["x"], plyCoords["y"], plyCoords["z"], true)
+		if(distance <= dist) then
+			return true
+		end
+	end
+end
 
 function drawNotification(text)
   SetNotificationTextEntry("STRING")

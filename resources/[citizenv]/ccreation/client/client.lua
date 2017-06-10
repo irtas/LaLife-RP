@@ -124,7 +124,7 @@ RegisterNUICallback('login', function(data, cb)
 	    TriggerServerEvent("vmenu:lastChar")
 			--TriggerServerEvent("es:loadAfterCreation")
 		else
-			TriggerEvent("es_freeroam:notif", "~r~Remplisser tous les champs")
+			TriggerEvent("citizenv:notif", "~r~Remplisser tous les champs")
 		end
     cb('ok')
 end)

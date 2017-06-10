@@ -11,7 +11,7 @@ AddEventHandler('paycheck:salary', function()
         MySQL.Async.fetchScalar("SELECT salary FROM users INNER JOIN jobs ON users.job = jobs.job_id WHERE identifier = @username",{['@username'] = user_id}, function (salary_job)
             if salary_job > 0 then
                 user:addMoney((salary + salary_job))
-                TriggerClientEvent("es_freeroam:notify", source, "CHAR_BANK_MAZE", 1, "Maze Bank", false, "Aide de L'État :  + "..salary.."~g~$~s~~n~Salaire reçu : + "..salary_job.." ~g~$")
+                TriggerClientEvent("citizenv:notify", source, "CHAR_BANK_MAZE", 1, "Maze Bank", false, "Aide de L'État :  + "..salary.."~g~$~s~~n~Salaire reçu : + "..salary_job.." ~g~$")
             end
         end)
     end)

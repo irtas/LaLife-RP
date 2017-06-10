@@ -22,7 +22,7 @@ namespace CitizenVWrapper.Police
 
         public Police()
         {
-            //Différents type d'event handler possible.
+            //Diffï¿½rents type d'event handler possible.
 
             //1. EventHandlers[Events.XP_ADD] += new Action<int>(AddXP);
 
@@ -88,7 +88,7 @@ namespace CitizenVWrapper.Police
                 }
                 else
                 {
-                    TriggerEvent("es_freeroam:notif", Strings.NO_TARGET);
+                    TriggerEvent("citizenv:notif", Strings.NO_TARGET);
                 }
         }
 
@@ -105,7 +105,7 @@ namespace CitizenVWrapper.Police
                 }
                 else
                 {
-                    TriggerEvent("es_freeroam:notif", Strings.NO_TARGET);
+                    TriggerEvent("citizenv:notif", Strings.NO_TARGET);
                 }
         }
 
@@ -122,16 +122,16 @@ namespace CitizenVWrapper.Police
                 }
                 else
                 {
-                    TriggerEvent("es_freeroam:notif", Strings.NO_TARGET);
+                    TriggerEvent("citizenv:notif", Strings.NO_TARGET);
                 }
         }
 
         private void FVerifP(string a, string b, string c, string d)
         {
-                TriggerEvent("es_freeroam:notif", a);
-                TriggerEvent("es_freeroam:notif", b);
-                TriggerEvent("es_freeroam:notif", c);
-                TriggerEvent("es_freeroam:notif", d);
+                TriggerEvent("citizenv:notif", a);
+                TriggerEvent("citizenv:notif", b);
+                TriggerEvent("citizenv:notif", c);
+                TriggerEvent("citizenv:notif", d);
         }
 
         private async void GiveCon(int target, int amount)
@@ -143,11 +143,11 @@ namespace CitizenVWrapper.Police
                     await Delay(5000);
                     Function.Call(Hash.CLEAR_PED_TASKS_IMMEDIATELY, Game.PlayerPed);
                     TriggerServerEvent("menupolice:givecon_s", Function.Call<int>(Hash.GET_PLAYER_SERVER_ID, target), amount);
-                    TriggerEvent("es_freeroam:notif", "~g~Contravention de " + amount.ToString() + "$ envoyé");
+                    TriggerEvent("citizenv:notif", "~g~Contravention de " + amount.ToString() + "$ envoyï¿½");
                 }
                 else
                 {
-                    TriggerEvent("es_freeroam:notif", Strings.NO_TARGET);
+                    TriggerEvent("citizenv:notif", Strings.NO_TARGET);
                 }
         }
 
@@ -173,20 +173,20 @@ namespace CitizenVWrapper.Police
                 }
                 else
                 {
-                    TriggerEvent("es_freeroam:notif", "Aucun véhicule a inspecter.");
+                    TriggerEvent("citizenv:notif", "Aucun vï¿½hicule a inspecter.");
                 }
         }
 
         private void FSearchVeh(dynamic vehitems)
         {
-                TriggerEvent("es_freeroam:notif", vehitems.name.ToString());
-                if (vehitems.name == "Véhicule volé")
+                TriggerEvent("citizenv:notif", vehitems.name.ToString());
+                if (vehitems.name == "Vï¿½hicule volï¿½")
                 {
-                    TriggerEvent("es_freeroam:notif", vehitems.name.ToString());
+                    TriggerEvent("citizenv:notif", vehitems.name.ToString());
                 }
 		        else
                 {
-                    TriggerEvent("es_freeroam:notif", "Véhicule à: "+vehitems.name.ToString());
+                    TriggerEvent("citizenv:notif", "Vï¿½hicule ï¿½: "+vehitems.name.ToString());
                 }
         }
 
@@ -202,7 +202,7 @@ namespace CitizenVWrapper.Police
                 }
                 else
                 {
-                    TriggerEvent("es_freeroam:notif", Strings.NO_TARGET);
+                    TriggerEvent("citizenv:notif", Strings.NO_TARGET);
                 }
         }
 
@@ -211,7 +211,7 @@ namespace CitizenVWrapper.Police
                 for (int i = 0; i < civlenght; i++)
                 {
                     if (civitems[i].quantity > 0)
-                        TriggerEvent("es_freeroam:notif", civitems[i].libelle +" "+ civitems[i].quantity);
+                        TriggerEvent("citizenv:notif", civitems[i].libelle +" "+ civitems[i].quantity);
                 }
         }
 
@@ -238,7 +238,7 @@ namespace CitizenVWrapper.Police
                 }
                 else
                 {
-                    TriggerEvent("es_freeroam:notif", "Aucun civil à proximité n'est menotté");
+                    TriggerEvent("citizenv:notif", "Aucun civil ï¿½ proximitï¿½ n'est menottï¿½");
                 }
         }
 
@@ -261,7 +261,7 @@ namespace CitizenVWrapper.Police
                 }
                 else
                 {
-                    TriggerEvent("es_freeroam:notif", "Aucun civil à proximité n'est menotté");
+                    TriggerEvent("citizenv:notif", "Aucun civil ï¿½ proximitï¿½ n'est menottï¿½");
                 }
         }
 
@@ -375,12 +375,12 @@ namespace CitizenVWrapper.Police
                 {
                     await Delay(3000);
                     Function.Call(Hash.SET_VEHICLE_DOORS_LOCKED, veh, 1);
-                    TriggerEvent("es_freeroam:notif", "~g~Véhicule déverouillé");
+                    TriggerEvent("citizenv:notif", "~g~Vï¿½hicule dï¿½verouillï¿½");
                     TriggerEvent("InteractSound_CL:PlayOnOne", "unlock", 1.0);
                 }
                 else
                 {
-                    TriggerEvent("es_freeroam:notif", "~r~Aucun véhicle à proximité.");
+                    TriggerEvent("citizenv:notif", "~r~Aucun vï¿½hicle ï¿½ proximitï¿½.");
                 }
         }
 
@@ -415,23 +415,23 @@ namespace CitizenVWrapper.Police
 
         private async void unJail(int target, int jailNumber, int police)
         {
-            TriggerEvent("es_freeroam:notif", "~g~ Ouverture de la cellule...");
+            TriggerEvent("citizenv:notif", "~g~ Ouverture de la cellule...");
             if (police >= 1)
             {
                 TriggerServerEvent("menupolice:unjail_s", Function.Call<int>(Hash.GET_PLAYER_SERVER_ID, target), jailNumber);
-                TriggerEvent("es_freeroam:notif", "~g~Cellule ouverte");
+                TriggerEvent("citizenv:notif", "~g~Cellule ouverte");
             }
             else
             {
                 await Delay(5000);
                 TriggerServerEvent("menupolice:civunjail_s", Function.Call<int>(Hash.GET_PLAYER_SERVER_ID, target), jailNumber);
-                TriggerEvent("es_freeroam:notif", "~g~Cellule ouverte");
+                TriggerEvent("citizenv:notif", "~g~Cellule ouverte");
             }
         }
 
         private void Funjail(int jailNumber)
         {
-            TriggerEvent("es_freeroam:notif", "~g~Vous avez été libéré");
+            TriggerEvent("citizenv:notif", "~g~Vous avez ï¿½tï¿½ libï¿½rï¿½");
             if (jailNumber == 1)
             {
                 TriggerEvent("menupolice:cuff");
@@ -470,13 +470,13 @@ namespace CitizenVWrapper.Police
 
             //if (Game.IsControlJustReleased(1, Control.Aim))
             //{
-            //    TriggerEvent("es_freeroam:notif", "Allo");
+            //    TriggerEvent("citizenv:notif", "Allo");
             //    Jailed1 = true;
             //}
 
             //if (Game.IsControlJustReleased(1, Control.Attack))
             //{
-            //    TriggerEvent("es_freeroam:notif", "Allo");
+            //    TriggerEvent("citizenv:notif", "Allo");
             //    Jailed1 = false;
             //}
 

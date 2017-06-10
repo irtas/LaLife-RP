@@ -34,7 +34,7 @@ AddEventHandler("inventory:setItem_s", function(qty, item, iprice, name)
         ['@item'] = item,
         ['@qty'] = qty
       })
-      TriggerClientEvent("es_freeroam:notify", source, "CHAR_BANK_MAZE", 1, "Maze Bank", false, "Vous avez acheté : ~g~".. name)
+      TriggerClientEvent("citizenv:notify", source, "CHAR_BANK_MAZE", 1, "Maze Bank", false, "Vous avez acheté : ~g~".. name)
       CancelEvent()
     else
       TriggerClientEvent('chatMessage', source, "", {0, 0, 200}, "^1Pas assez d'argent!^0")
@@ -67,7 +67,7 @@ AddEventHandler("inventory:updateQuantity_s", function(qty, id, iprice, name)
         ['@qty'] = tonumber(qty),
         ['@id'] = tonumber(id) }
       )
-      TriggerClientEvent("es_freeroam:notify", source, "CHAR_BANK_MAZE", 1, "Maze Bank", false, "Vous avez acheté : ~g~".. name)
+      TriggerClientEvent("citizenv:notify", source, "CHAR_BANK_MAZE", 1, "Maze Bank", false, "Vous avez acheté : ~g~".. name)
       CancelEvent()
     else
       TriggerClientEvent('chatMessage', source, "", {0, 0, 200}, "^1Pas assez d'argent!^0")

@@ -35,7 +35,7 @@ Pour le trucker job, vers la ligne 216
 
 Prix et armes disponibles à l'achat
 
-**La_LifeRP/resources/[essential]/es_freeroam/stores/vehshop.lua**
+**La_LifeRP/resources/[essential]/itinerance/stores/vehshop.lua**
 
 Prix et véhicules disponibles à l'achat
 

@@ -161,12 +161,8 @@ AddEventHandler('garages:CheckGarageForVeh', function()
           table.insert(vehicles, tonumber(i), t)
         end
       end
-      print(#vehicles)
       TriggerClientEvent('garages:getVehicles', source, vehicles)
-  end)
-    print(#vehicles)
-    --print(vehicles[1].id)
-    --print(vehicles[2].vehicle_model)
+    end)
   end)
 end)
 
@@ -204,7 +200,7 @@ AddEventHandler('garages:SelVeh', function(plate, vehicle)
       end
       MySQL.Async.execute("DELETE from user_vehicle WHERE identifier = @username AND vehicle_plate = @plate AND vehicle_model=@vehicle",
         {['@username'] = player, ['@plate'] = plate, ['@vehicle'] = vehicle})
-      TriggerClientEvent("es_freeroam:notify", source, "CHAR_SIMEON", 1, "Simeon", false, "Véhicule vendu!\n")
+      TriggerClientEvent("citizenv:notify", source, "CHAR_SIMEON", 1, "Simeon", false, "Véhicule vendu!\n")
     end)
   end)
 end)

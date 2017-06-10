@@ -127,7 +127,7 @@ AddEventHandler("vmenu:giveCash", function(target, money)
 		sendMoney = money
 		sendTarget = target
 	else
-		TriggerEvent("es_freeroam:notif", "~r~ Vous n'avez pas de cible")
+		TriggerEvent("citizenv:notif", "~r~ Vous n'avez pas de cible")
 	end
 end)
 
@@ -144,13 +144,13 @@ Citizen.CreateThread(function()
 						addCash = txt
 						cashconfirmed = 2
 					else
-						TriggerEvent("es_freeroam:notif", "~r~ Vous n'avez pas assez d'argent")
+						TriggerEvent("citizenv:notif", "~r~ Vous n'avez pas assez d'argent")
 						cashconfirmed = 0
 						sendMoney = 0
 						sendTarget = -1
 					end
 				else
-					TriggerEvent("es_freeroam:notif", "~r~ Entrer un montant valide")
+					TriggerEvent("citizenv:notif", "~r~ Entrer un montant valide")
 					cashconfirmed = 0
 					sendMoney = 0
 					sendTarget = -1
@@ -180,7 +180,7 @@ AddEventHandler("vmenu:giveDCash", function(target, money)
 		sendMoney = money
 		sendTarget = target
 	else
-		TriggerEvent("es_freeroam:notif", "~r~ Vous n'avez pas de cible")
+		TriggerEvent("citizenv:notif", "~r~ Vous n'avez pas de cible")
 	end
 end)
 
@@ -197,13 +197,13 @@ Citizen.CreateThread(function()
 						addCash = txt
 						dcashconfirmed = 2
 					else
-						TriggerEvent("es_freeroam:notif", "~r~ Vous n'avez pas assez d'argent")
+						TriggerEvent("citizenv:notif", "~r~ Vous n'avez pas assez d'argent")
 						dcashconfirmed = 0
 						sendMoney = 0
 						sendTarget = -1
 					end
 				else
-					TriggerEvent("es_freeroam:notif", "~r~ Entrer un montant valide")
+					TriggerEvent("citizenv:notif", "~r~ Entrer un montant valide")
 					dcashconfirmed = 0
 					sendMoney = 0
 					sendTarget = -1

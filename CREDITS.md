@@ -4,37 +4,39 @@ Including :
 
 - Car pack [15] FBI, LSPD, Sheriff
 - LaLife, The Map.
-- Wrapper [C#]
+- Wrapper [C#] structure inspiré de [20]
 
 **LaLife**
 - CCreation
 	Exclusive : Menu de création complète du personnage avec des tenues prédéfinies. Version 0.3
-	client_base	
-	
+	client_base
+
 	LockSystem, Exclusive, ce script est basé sur [1], totalement repensé pour associer une plaque de véhicule unique au joueur. Permet de verrouiller et déverrouiller que son propre véhicule.
-	
+
 	SirenControls, Déjà super fonctionnel [2], ce script permet de rendre muet les sirènes d’une voiture avec la touche G ainsi que de changer de mode avec la touche Shift
-	
+
 	Pointing, **Exclusive par GeeknessFr, contributeur externe.**
-	
+
 	OnVoiceAction Icon, **Exclusive par GeeknessFr, contributeur externe.**
-	
+
 	Vocalchat, NeverWanted, Handsup, Stamina, Ressources déjà disponibles dans FiveM de base, peu modifié.
 -	fivemenu **Exclusive par Geekness_Fr, contributeur externe.**
  	Le menu le plus complet que vous trouverez distribuer de façon publique. Son utilisation n’est pas la plus simple tellement il est complexe et flexible. Il permet de regrouper toutes les interactions en un seul module. Cette ressource est massive et elle est loin d’être teminée. Comprend : [11][14]
 - foodhud [C#]
 
 	Exclusive : Foodhud est un script développé par nous, inspiré du fameux script frfuel. Foodhud permet d’avoir un HUD proposant deux barres, la faim et la soif. Ainsi que la possibilité de remplir les jauges avec en utilisant des Events.
-	
+
 -	frfuel [C#]
  	Ce script est déjà connu de tous! [3] Sa réputation est indéniable!
-	
+
 -	interiors
  	Cette petit ressource vraiment utile, basée sur [4], a été modifié et est déjà disponible publiquement. Elle permet d’entrer dans les intérieurs inaccessibles à l’aide de point de téléportation.
-	
+
 -	loadingscreen (Simple et efficace [5])
 -	lscustoms
  	[6] Script super intéressant dont nous n’avons pas eu le temps de travailler dessus, pour l’instant. À voir!
+- Itinerance
+	Notre propre gameType créé par nos soins. Une partie se retrouve dans le Wrapper. Itinerance.cs
 
 **Database**
 - Banking
@@ -43,13 +45,13 @@ Including :
 	[10] Script qui permet à un joueur de posséder des véhicules dans son garage. Lui aussi a été adapté pour être implanté avec notre système de véhicule lié au joueur.
 -	es_weashop
 	[13] Magasin d’armes, nous n’avons pas encore touché à celui-ci.
--	essentialmode, es_freeroam, es_admin
+-	essentialmode, es_admin
 -	Essential avec une db SQL. Complètement retravaillé. Merci à son créateur. Nous passerons sous une db NoSQL lorsque le temps le permettra.
 - vehshop
 	[12] Encore une fois, super script que nous avons adapté à notre système de véhicule.
 - mysql-async
 	[19] Un énorme merci **@Brouznouf** pour son implication dans le projet pour l'aspect mysql-async
-	
+
 **Jobs**
 - Organe
  	Exclusive :
@@ -92,3 +94,4 @@ Bibliographie :
 [17] https://forum.fivem.net/t/release-truckerjob-v0-3-update-29th-january/5237
 [18] https://forum.fivem.net/t/release-job-save-people-be-a-hero-paramedic-emergency-coma-ko/19773/184
 [19] https://github.com/brouznouf/fivem-mysql-async
+[20] https://github.com/pongo1231/freemode-remix

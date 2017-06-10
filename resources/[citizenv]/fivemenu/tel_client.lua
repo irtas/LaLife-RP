@@ -22,7 +22,7 @@ AddEventHandler("menutel:PhoneOG", function(target, mytel)
 			VMenu.AddFunc(98, value.nom .. " " .. value.prenom .. " " .. tostring(ind), "tel:call", {ind}, "Appeller: " .. tostring(ind))
 		end
 	else
-		TriggerEvent("es_freeroam:notif", "~r~Utilisation impossible en conduisant")
+		TriggerEvent("citizenv:notif", "~r~Utilisation impossible en conduisant")
 	end
 end)
 
@@ -69,7 +69,7 @@ Citizen.CreateThread(function()
 					msg = txt
 					confirmed = 2
 				else
-					TriggerEvent("es_freeroam:notif", "~r~ Votre message est vide")
+					TriggerEvent("citizenv:notif", "~r~ Votre message est vide")
 					confirmed = 0
 				end
 			elseif UpdateOnscreenKeyboard() == 2 then
@@ -95,7 +95,7 @@ Citizen.CreateThread(function()
 					telAdd = txt
 					addconfirmed = 2
 				else
-					TriggerEvent("es_freeroam:notif", "~r~ Entrer un numéro valide")
+					TriggerEvent("citizenv:notif", "~r~ Entrer un numéro valide")
 					addconfirmed = 0
 				end
 			elseif UpdateOnscreenKeyboard() == 2 then

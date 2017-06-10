@@ -12,9 +12,9 @@ AddEventHandler("tel:addingTel", function(addTel)
 				identifier = user.identifier
 				MySQL.Async.execute("INSERT INTO phonebook (`pidentifier`, `phonenumber`) VALUES (@username, @telnum)", {['@username'] = identifier, ['@telnum'] = addTel})
 				TriggerEvent("es:getPhonebook", source)
-				TriggerClientEvent("es_freeroam:notif", source, "~g~ Contact ajouté" .. " " .. result[1].prenom .. " " .. result[1].nom)
+				TriggerClientEvent("citizenv:notif", source, "~g~ Contact ajouté" .. " " .. result[1].prenom .. " " .. result[1].nom)
 			else
-				TriggerClientEvent("es_freeroam:notif", source, "~r~ Aucun joueur ne possède ce numéro")
+				TriggerClientEvent("citizenv:notif", source, "~r~ Aucun joueur ne possède ce numéro")
 			end
 		end)
 	end)

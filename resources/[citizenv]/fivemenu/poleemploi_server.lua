@@ -18,7 +18,7 @@ AddEventHandler('poleemploi:jobs', function(id)
         updatejob(player, id)
         user:setJob(id)
         TriggerEvent('poleemploi:getjobss', source)
-        TriggerClientEvent("es_freeroam:notify", source, "CHAR_AMANDA", 1, "Mairie", false, "Votre métier est maintenant : ".. nameJob)
+        TriggerClientEvent("citizenv:notify", source, "CHAR_AMANDA", 1, "Mairie", false, "Votre métier est maintenant : ".. nameJob)
   end)
 end)
 

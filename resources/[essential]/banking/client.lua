@@ -311,12 +311,12 @@ RegisterNetEvent('bank:deposit')
 AddEventHandler('bank:deposit', function(amount)
   if(IsNearBank() == true or depositAtATM == true and IsNearATM() == true or depositAnywhere == true ) then
     if (IsInVehicle()) then
-      TriggerEvent("es_freeroam:notif", "~r~ Vous ne pouvez pas utiliser d'atm en véhicule")
+      TriggerEvent("citizenv:notif", "~r~ Vous ne pouvez pas utiliser d'atm en véhicule")
     else
       TriggerServerEvent("bank:deposit", tonumber(amount))
     end
   else
-    TriggerEvent("es_freeroam:notif", "~r~ Vous ne pouvez déposer que dans une banque")
+    TriggerEvent("citizenv:notif", "~r~ Vous ne pouvez déposer que dans une banque")
   end
 end)
 
@@ -325,12 +325,12 @@ RegisterNetEvent('bank:withdraw')
 AddEventHandler('bank:withdraw', function(amount)
   if(IsNearATM() == true or IsNearBank() == true or withdrawAnywhere == true) then
     if (IsInVehicle()) then
-      TriggerEvent("es_freeroam:notif", "~r~ Vous ne pouvez pas utiliser d'atm en véhicule")
+      TriggerEvent("citizenv:notif", "~r~ Vous ne pouvez pas utiliser d'atm en véhicule")
     else
       TriggerServerEvent("bank:withdraw", tonumber(amount))
     end
   else
-    TriggerEvent("es_freeroam:notif", "~r~ Ce n'est pas une banque ni un ATM")
+    TriggerEvent("citizenv:notif", "~r~ Ce n'est pas une banque ni un ATM")
   end
 end)
 
@@ -343,10 +343,10 @@ AddEventHandler('bank:givecash', function(toPlayer, amount)
     if (playing ~= false) then
       TriggerServerEvent("bank:givecash", toPlayer, tonumber(amount))
     else
-      TriggerEvent("es_freeroam:notif", "~r~ Le joueur n'est pas en ligne")
+      TriggerEvent("citizenv:notif", "~r~ Le joueur n'est pas en ligne")
     end
   else
-    TriggerEvent("es_freeroam:notif", "~r~ Le joueur doit être proche de vous")
+    TriggerEvent("citizenv:notif", "~r~ Le joueur doit être proche de vous")
   end
 end)
 
@@ -358,7 +358,7 @@ AddEventHandler('bank:transfer', function(fromPlayer, toPlayer, amount)
   if (playing ~= false) then
     TriggerServerEvent("bank:transfer", fromPlayer, toPlayer, tonumber(amount))
   else
-    TriggerEvent("es_freeroam:notif", "~r~ Le joueur n'est pas en ligne")
+    TriggerEvent("citizenv:notif", "~r~ Le joueur n'est pas en ligne")
   end
 end)
 

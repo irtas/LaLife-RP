@@ -1312,7 +1312,7 @@ Citizen.CreateThread(function()
 					--TriggerServerEvent("menupolice:escortcuff_s", GetPlayerServerId(VMenu.target), pname)
 					TriggerEvent("menupolice:wescortcuff", VMenu.target)
 				else
-					TriggerEvent("es_freeroam:notif", "Aucun civil à proximité n'est menotté")
+					TriggerEvent("citizenv:notif", "Aucun civil à proximité n'est menotté")
 				end
 
 			end
@@ -1806,7 +1806,7 @@ Citizen.CreateThread(function()
 						kpress = not kpress
 					end
 				else
-					TriggerEvent("es_freeroam:notif", "~r~Vous n'avez pas de cible")
+					TriggerEvent("citizenv:notif", "~r~Vous n'avez pas de cible")
 				end
 			end
 		end

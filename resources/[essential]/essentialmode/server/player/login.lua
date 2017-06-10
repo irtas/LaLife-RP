@@ -347,11 +347,11 @@ AddEventHandler("tel:sendingMsg", function(msg, teldest)
 			local player = telist[teldest].IDsource
 			local player2 = telist[origin].IDsource
 			TriggerClientEvent("tel:receivingMsg", player, msg, name, surname)
-			TriggerClientEvent("es_freeroam:notif", player2, "~g~ Message envoyé")
+			TriggerClientEvent("citizenv:notif", player2, "~g~ Message envoyé")
 		else
-			TriggerClientEvent("es_freeroam:notif", player2, "~r~ Le joueur n'est pas connecté")
+			TriggerClientEvent("citizenv:notif", player2, "~r~ Le joueur n'est pas connecté")
 		end
 	else
-		TriggerClientEvent("es_freeroam:notif", player2, "~r~ Le joueur n'est pas connecté")
+		TriggerClientEvent("citizenv:notif", player2, "~r~ Le joueur n'est pas connecté")
 	end
 end)
