@@ -234,7 +234,7 @@ AddEventHandler("es:setPlayerData", function(user, k, v, cb)
 end)
 
 AddEventHandler("es:setPlayerDataId", function(user, k, v, cb)
-	MySQL.Async.execute("UPDATE users SET @key=@value' WHERE identifier = @identifier",
+	MySQL.Async.execute("UPDATE users SET @key=@value WHERE identifier = @identifier",
 	{['@key'] = k, ['@value'] = v, ['@identifier'] = user})
 
 	cb("Player data edited.", true)
