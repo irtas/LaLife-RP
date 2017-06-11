@@ -14,9 +14,37 @@ RegisterServerEvent('garages:SelVeh')
 
 
 
+--[[Function]]--
+
+function getPlayerID(source)
+    local identifiers = GetPlayerIdentifiers(source)
+    local player = getIdentifiant(identifiers)
+    return player
+end
+
+function getIdentifiant(id)
+    for _, v in ipairs(id) do
+        return v
+    end
+end
+
+function vehiclePlate(plate)
+  local plate = plate
+  local user = getPlayerID(source)
+  return MySQL.Sync.fetchScalar("SELECT vehicle_plate FROM user_vehicle WHERE identifier=@identifier AND vehicle_plate=@plate",{['@identifier'] = user, ['@plate'] = plate})
+end
+
+function vehiclePrice(plate)
+  local plate = plate
+  local user = getPlayerID(source)
+  return MySQL.Sync.fetchScalar("SELECT vehicle_price FROM user_vehicle WHERE identifier=@identifier AND vehicle_plate=@plate",{['@identifier'] = user, ['@plate'] = plate})
+end
+
+
+
 --[[Local/Global]]--
 
-local vehicles = {}
+vehicles = {}
 
 
 
@@ -28,50 +56,25 @@ end)
 
 
 AddEventHandler('garages:CheckForSpawnVeh', function(veh_id)
-  TriggerEvent('es:getPlayerFromId', source, function(user)
-    local veh_id = veh_id
-    local player = user.identifier
-    MySQL.Async.fetchAll("SELECT * FROM user_vehicle WHERE identifier = @username AND ID = @ID",{['@username'] = player, ['@ID'] = veh_id}, function (result)
-      if(result)then
-        for k,v in ipairs(result)do
-          vehicle = v.vehicle_model
-          plate = v.vehicle_plate
-          state = v.vehicle_state
-          primarycolor = v.vehicle_colorprimary
-          secondarycolor = v.vehicle_colorsecondary
-          pearlescentcolor = v.vehicle_pearlescentcolor
-          wheelcolor = v.vehicle_wheelcolor
-
-          local vehicle = vehicle
-          local plate = plate
-          local state = state
-          local primarycolor = primarycolor
-          local secondarycolor = secondarycolor
-          local pearlescentcolor = pearlescentcolor
-          local wheelcolor = wheelcolor
-        end
-      end
-      TriggerClientEvent('garages:SpawnVehicle', source, vehicle, plate, state, primarycolor, secondarycolor, pearlescentcolor, wheelcolor)
-    end)
+  local veh_id = veh_id
+  local user = getPlayerID(source)
+  MySQL.Async.fetchAll("SELECT * FROM user_vehicle WHERE identifier = @identifier AND id = @id",{['@identifier'] = user, ['@id'] = veh_id}, function(data)
+      TriggerClientEvent('garages:SpawnVehicle', source, data[1].vehicle_model, data[1].vehicle_plate, data[1].vehicle_state, data[1].vehicle_colorprimary, data[1].vehicle_colorsecondary, data[1].vehicle_pearlescentcolor, data[1].vehicle_wheelcolor)
   end)
 end)
 
-AddEventHandler('garages:CheckForVeh', function()
-  TriggerEvent('es:getPlayerFromId', source, function(user)
-    local state = "Sorti"
-    local player = user.identifier
-    MySQL.Async.fetchAll("SELECT * FROM user_vehicle WHERE identifier = @username AND vehicle_state =@state",{['@username'] = player, ['@vehicle'] = vehicle, ['@state'] = state}, function(result)
-      if(result)then
-        for k,v in ipairs(result)do
-          vehicle = v.vehicle_model
-          plate = v.vehicle_plate
-          local vehicle = vehicle
-          local plate = plate
-        end
-      end
-      TriggerClientEvent('garages:StoreVehicle', source, vehicle, plate)
-    end)
-  end)
+AddEventHandler('garages:CheckForVeh', function(plate)
+  local plate = plate
+  local state = "Sorti"
+  local user = getPlayerID(source)
+  local vehicle_plate = tostring(vehiclePlate(plate))
+  if vehicle_plate == plate then
+    local state = "Rentré"
+    MySQL.Sync.execute("UPDATE user_vehicle SET vehicle_state=@state WHERE identifier=@identifier AND vehicle_plate=@plate",{['@identifier'] = user, ['@state'] = state, ['@plate'] = plate})
+    TriggerClientEvent('garages:StoreVehicleTrue', source)
+  else
+    TriggerClientEvent('garages:StoreVehicleFalse', source)
+  end
 end)
 
 AddEventHandler('garages:SetVehOut', function(vehicle, plate, car)
@@ -135,34 +138,22 @@ AddEventHandler('garages:CheckGarageForVehFirst', function(user)
           table.insert(vehicles, tonumber(i), t)
         end
       end
-      print(#vehicles)
+      print("allo")
       TriggerClientEvent('garages:getVehicles', source, vehicles)
   end)
-    print(#vehicles)
     --print(vehicles[1].id)
     --print(vehicles[2].vehicle_model)
 end)
 
 AddEventHandler('garages:CheckGarageForVeh', function()
-  TriggerEvent('es:getPlayerFromId', source, function(user)
   vehicles = {}
-    local player = user.identifier
-    print(player)
-    MySQL.Async.fetchAll("SELECT * FROM user_vehicle WHERE identifier = @username",{['@username'] = player}, function (result)
-      if (result) then
-        local i = 0
-        for _, v in ipairs(result) do
-          i = i + 1
-          -- print(v.vehicle_model)
-          -- print(v.vehicle_plate)
-          -- print(v.vehicle_state)
-          -- print(v.ID)
-          t = { ["id"] = v.ID, ["vehicle_model"] = v.vehicle_model, ["vehicle_name"] = v.vehicle_name, ["vehicle_state"] = v.vehicle_state}
-          table.insert(vehicles, tonumber(i), t)
-        end
-      end
-      TriggerClientEvent('garages:getVehicles', source, vehicles)
-    end)
+  local user = getPlayerID(source)
+  MySQL.Async.fetchAll("SELECT * FROM user_vehicle WHERE identifier = @username",{['@username'] = user}, function(data)
+    for _, v in ipairs(data) do
+        t = { ["id"] = v.ID, ["vehicle_model"] = v.vehicle_model, ["vehicle_name"] = v.vehicle_name, ["vehicle_state"] = v.vehicle_state}
+        table.insert(vehicles, tonumber(v.ID), t)
+    end
+    TriggerClientEvent("garages:getVehicles", source, vehicles)
   end)
 end)
 
