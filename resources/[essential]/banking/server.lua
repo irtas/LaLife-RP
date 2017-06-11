@@ -78,13 +78,13 @@ AddEventHandler('bank:withdraw', function(amount)
 end)
 
 RegisterServerEvent('bank:remove')
-AddEventHandler('bank:remove', function(amount, source)
+AddEventHandler('bank:remove', function(source, amount)
   TriggerEvent('es:getPlayerFromId', source, function(user)
     local rounded = round(tonumber(amount), 0)
     local player = user.identifier
     local bankbalance = bankBalance(player)
     withdraw(player, rounded)
-    local new_balance = bankbalance - rounded
+    local new_balance = bankBalance(player)
     TriggerClientEvent("banking:updateBalance", source, new_balance)
     TriggerClientEvent("banking:removeBalance", source, rounded)
     CancelEvent()

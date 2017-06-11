@@ -124,7 +124,6 @@ end)
 AddEventHandler('garages:CheckGarageForVehFirst', function(user)
   vehicles = {}
     local player = user.identifier
-    print(player)
     MySQL.Async.fetchAll("SELECT * FROM user_vehicle WHERE identifier = @username",{['@username'] = player}, function (result)
       if (result) then
         local i = 0
@@ -138,7 +137,6 @@ AddEventHandler('garages:CheckGarageForVehFirst', function(user)
           table.insert(vehicles, tonumber(i), t)
         end
       end
-      print("allo")
       TriggerClientEvent('garages:getVehicles', source, vehicles)
   end)
     --print(vehicles[1].id)
