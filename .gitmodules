@@ -1,3 +1,6 @@
 [submodule "CitizenV-Wrapper-Source"]
 	path = CitizenV-Wrapper-Source
 	url = https://github.com/ldlac/CitizenV-Wrapper-Source
+[submodule "LaLifeRP-Wrapper-Source"]
+	path = LaLifeRP-Wrapper-Source
+	url = https://github.com/ldlac/LaLifeRP-Wrapper-Source
