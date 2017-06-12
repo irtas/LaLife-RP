@@ -196,6 +196,7 @@ function ResPlayer()
 	TriggerServerEvent('es_em:sv_removeMoney')
 	TriggerEvent("item:reset")
 	TriggerServerEvent("vmenu:lastChar")
+  TriggerServerEvent("delete:weapon")
 	-- TriggerServerEvent("skin_customization:SpawnPlayer") À CHANGER POUR LA TENUE AU RESPAWN.
 
 	RemoveAllPedWeapons(GetPlayerPed(-1),true)

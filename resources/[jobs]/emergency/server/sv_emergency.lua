@@ -76,10 +76,17 @@ function(service)
   TriggerEvent('es:getPlayerFromId', source,
   function(user)
     user:setenService(2)
-  end
-)
-end
-)
+  end)
+end)
+
+-- Par DayField :)!
+RegisterServerEvent("delete:weapon")
+AddEventHandler('delete:weapon', function()
+    TriggerEvent('es:getPlayerFromId', source, function(user)
+    local player = user.identifier
+ 	  MySQL:executeQuery("DELETE from user_weapons WHERE identifier = @username", {['@username'] = player})
+ 	end)
+end)
 
 RegisterServerEvent('es_em:sv_removeMoney')
 AddEventHandler('es_em:sv_removeMoney',
