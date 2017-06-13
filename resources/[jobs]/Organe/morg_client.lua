@@ -206,10 +206,9 @@ Citizen.CreateThread(function()
 					vehicleSorti = false
 					Citizen.InvokeNative(0xEA386986E786A54F, Citizen.PointerValueIntInitialized(vehicle))
 					RemoveBlip(Blip)
-					RemoveBlip(Bli)
 					ShowMsgtime.msg = '~r~ Vous avez terminer votre journée de travail !'
 					ShowMsgtime.time = 150
-		  
+
 					TriggerServerEvent("vmenu:lastChar")
 					vehicleSorti = false
 				end
