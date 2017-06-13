@@ -88,6 +88,13 @@ AddEventHandler("mine:getJobs", function(job)
   myjob = job
 end)
 
+local plate = ""
+
+RegisterNetEvent("org:f_plate")
+AddEventHandler('org:f_plate', function(plaque)
+  plate = plaque
+end)
+
 Citizen.CreateThread(function()
   while true do
     Citizen.Wait(0)
@@ -149,32 +156,36 @@ Citizen.CreateThread(function()
             Wait(100)
             if myjob == 4 then
               if ArgentJoueur >= 3000 then
-              local car = GetHashKey("Tiptruck2")
-              RequestModel(car)
-              while not HasModelLoaded(car) do
-                Wait(1)
+                local car = GetHashKey("Tiptruck2")
+                RequestModel(car)
+                while not HasModelLoaded(car) do
+                  Wait(1)
+                end
+                TriggerEvent("vmenu:JobOutfit", 11, 124)
+                vehicle =  CreateVehicle(car, Position.SpawnCamion.x,  Position.SpawnCamion.y,  Position.SpawnCamion.z, 0.0, true, false)
+                SetVehicleOnGroundProperly(vehicle)
+				        TriggerServerEvent("org:plate")
+				        Wait(100)
+				        SetVehicleNumberPlateText(vehicle, plate)
+				        Wait(100)
+				        SetVehicleHasBeenOwnedByPlayer(vehicle,true)
+                SetVehRadioStation(vehicle, "OFF")
+                SetVehicleColours(vehicle, 25, 25)
+                SetVehicleLivery(vehicle, 4)
+                SetPedIntoVehicle(GetPlayerPed(-1), vehicle, -1)
+                SetVehicleEngineOn(vehicle, true, false, false)
+                SetEntityAsMissionEntity(vehicle, true, true)
+                Wait(100)
+                Citizen.Wait(1)
+                camionSortie = true
+                AfficherBlip()
+                TriggerServerEvent("mine:addmoney",(-3000))
+                ShowMsgtime.msg = "Allez à la mine et n'oubliez pas de ramener le camion pour être rembourser"
+                ShowMsgtime.time = 300
+              else
+                ShowMsgtime.msg = "Vous devez fournir 3000$ de caution pour prendre le véhicule"
+                ShowMsgtime.time = 300
               end
-              TriggerEvent("vmenu:JobOutfit", 11, 124)
-              vehicle =  CreateVehicle(car, Position.SpawnCamion.x,  Position.SpawnCamion.y,  Position.SpawnCamion.z, 0.0, true, false)
-              SetVehicleOnGroundProperly(vehicle)
-              SetVehicleNumberPlateText(vehicle, "M15510")
-              SetVehRadioStation(vehicle, "OFF")
-              SetVehicleColours(vehicle, 25, 25)
-              SetVehicleLivery(vehicle, 4)
-              SetPedIntoVehicle(GetPlayerPed(-1), vehicle, -1)
-              SetVehicleEngineOn(vehicle, true, false, false)
-              SetEntityAsMissionEntity(vehicle, true, true)
-              Wait(100)
-              Citizen.Wait(1)
-              camionSortie = true
-              AfficherBlip()
-			  TriggerServerEvent("mine:addmoney",(-3000))
-			        ShowMsgtime.msg = "Allez à la mine et n'oubliez pas de ramener le camion pour être rembourser"
-              ShowMsgtime.time = 300
-            else
-              ShowMsgtime.msg = "Vous n'avez pas assez d'argent, il vous faut 3000$ pour récupérer le camion"
-              ShowMsgtime.time = 300
-			  end
             else
               ShowMsgtime.msg = '~r~ Vous devez être mineur !'
               ShowMsgtime.time = 150
@@ -190,11 +201,11 @@ Citizen.CreateThread(function()
               Citizen.InvokeNative(0xEA386986E786A54F, Citizen.PointerValueIntInitialized(vehicle))
               camionSortie = false
               removeBlip()
-			  Wait(100)
-			  TriggerServerEvent("mine:addmoney",3000)
-			  ShowMsgtime.msg = "~r~ Vous avez été remboursé"
+              Wait(100)
+              TriggerServerEvent("mine:addmoney",3000)
+              ShowMsgtime.msg = "~r~ Vous avez été remboursé"
               ShowMsgtime.time = 300
-			  money = 0
+              money = 0
 
               TriggerServerEvent("vmenu:lastChar")
             end
@@ -300,12 +311,12 @@ Citizen.CreateThread(function()
               TriggerEvent("player:getQuantity", 19)
               diams = qte
 
-			  local roche_trait = 0
-			  local cuivre_trait =0
-			  local fer_trait =0
-			  local diams_trait =0
+              local roche_trait = 0
+              local cuivre_trait =0
+              local fer_trait =0
+              local diams_trait =0
 
-			  TriggerEvent("player:getQuantity", 24)
+              TriggerEvent("player:getQuantity", 24)
               roche_trait = qte
               TriggerEvent("player:getQuantity", 20)
               cuivre_trait = qte
@@ -399,21 +410,21 @@ Citizen.CreateThread(function()
                 ShowMsgtime.time = 250
                 Wait(2500)
                 ShowMsgtime.msg = '~g~ 1 roche taillé vendu +' .. ' ' .. PrixRoche .. '$'
-				        TriggerEvent("inventory:sell",0, 1, 24, PrixRoche, "")
+                TriggerEvent("inventory:sell",0, 1, 24, PrixRoche, "")
                 ShowMsgtime.time = 150
               elseif cuivre ~= 0 then
                 ShowMsgtime.msg = '~g~ Vendre ~b~minerai'
                 ShowMsgtime.time = 250
                 Wait(2500)
                 ShowMsgtime.msg = '~g~ 1 lingot de cuivre vendu +' .. ' ' .. PrixCuivre .. '$'
-				        TriggerEvent("inventory:sell",0, 1, 20, PrixCuivre, "")
+                TriggerEvent("inventory:sell",0, 1, 20, PrixCuivre, "")
                 ShowMsgtime.time = 150
               elseif fer ~= 0 then
                 ShowMsgtime.msg = '~g~ Vendre ~b~minerai'
                 ShowMsgtime.time = 250
                 Wait(2500)
                 ShowMsgtime.msg = '~g~ 1 lingot de fer vendu +' .. ' ' .. PrixFer .. '$'
-				        TriggerEvent("inventory:sell",0, 1, 21, PrixFer, "")
+                TriggerEvent("inventory:sell",0, 1, 21, PrixFer, "")
                 ShowMsgtime.time = 150
               else
                 ShowMsgtime.msg = "~r~ Vous n'avez plus aucun minerai, allez rendre votre camion pour recevoir votre argent !"
@@ -453,7 +464,7 @@ Citizen.CreateThread(function()
                 Wait(2500)
                 ShowMsgtime.msg = '~g~ 1 diamant vendu + ' .. ' ' .. PrixDiams .. '$'
                 ShowMsgtime.time = 150
-								        TriggerEvent("inventory:sell",0, 1, 22, PrixDiams, "")
+                TriggerEvent("inventory:sell",0, 1, 22, PrixDiams, "")
                 money = money + PrixDiams
               else
                 ShowMsgtime.msg = "~r~ Vous n'avez plus aucun minerai !"

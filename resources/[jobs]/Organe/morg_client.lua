@@ -12,6 +12,8 @@ local DrawBlipTradeShow = true
 local Price = 1500
 local random = 1
 local Blip
+local vehicle
+local vehicleSorti = false
 local morgue = {
   [1] = {["name"] = "Disposition",["x"] = 289.727600097656, ["y"] = -1344.177734375, ["z"] = 24.5377960205078},
   [2] = {["name"] = "Véhicule Morgue",["x"] = 245.443954467773, ["y"] = -1410.55725097656, ["z"] = 30.587495803833},
@@ -105,6 +107,13 @@ AddEventHandler("mine:getJobs", function(job)
   myjob = job
 end)
 
+local plate = ""
+
+RegisterNetEvent("org:f_plate")
+AddEventHandler('org:f_plate', function(plaque)
+  plate = plaque
+end)
+
 Citizen.CreateThread(function()
   while true do
     Citizen.Wait(0)
@@ -141,6 +150,7 @@ Citizen.CreateThread(function()
     local distance = GetDistanceBetweenCoords(playerPos.x, playerPos.y, playerPos.z, morgue[3].x, morgue[3].y, morgue[3].z, true)
     if not IsInVehicle() then
       if distance < 5 then
+		if vehicleSorti == false then
         ShowInfo('~b~Appuyer sur ~g~E~b~ pour obtenir la destination', 0)
         if IsControlJustPressed(1,38) then
           TriggerServerEvent("poleemploi:getjobs")
@@ -152,11 +162,15 @@ Citizen.CreateThread(function()
             while not HasModelLoaded(car) do
               Wait(1)
             end
-            local vehicle =  CreateVehicle(car, morgue[2].x,  morgue[2].y,  morgue[2].z, 0.0, true, false)
+            vehicle =  CreateVehicle(car, morgue[2].x,  morgue[2].y,  morgue[2].z, 0.0, true, false)
             SetVehicleOnGroundProperly(vehicle)
-            SetVehicleNumberPlateText(vehicle, "M15510")
+           	TriggerServerEvent("org:plate")
+			Wait(100)
+			SetVehicleNumberPlateText(vehicle, plate)
+			Wait(100)
+			SetVehicleHasBeenOwnedByPlayer(vehicle,true)
             SetVehRadioStation(vehicle, "OFF")
-  					SetVehicleColours(vehicle, 25, 25)
+  		    SetVehicleColours(vehicle, 25, 25)
             SetVehicleLivery(vehicle, 4)
             SetPedIntoVehicle(GetPlayerPed(-1), vehicle, -1)
             SetVehicleEngineOn(vehicle, true, false, false)
@@ -174,12 +188,33 @@ Citizen.CreateThread(function()
             --     weedcount = data.count
             -- end)
             Wait(100)
+			vehicleSorti = true
             Citizen.Wait(1)
           else
             ShowMsgtime.msg = '~r~ Vous devez être préposé à la morgue !'
             ShowMsgtime.time = 150
           end
         end
+		else
+		ShowInfo('~b~Appuyer sur ~g~E~b~ pour terminer votre journée de travail', 0)
+        if IsControlJustPressed(1,38) then
+          TriggerServerEvent("poleemploi:getjobs")
+          Wait(100)
+          if myjob == 12 then
+		            TriggerServerEvent("poleemploi:getjobs")
+					Wait(100)
+					vehicleSorti = false
+					Citizen.InvokeNative(0xEA386986E786A54F, Citizen.PointerValueIntInitialized(vehicle))
+					RemoveBlip(Blip)
+					RemoveBlip(Bli)
+					ShowMsgtime.msg = '~r~ Vous avez terminer votre journée de travail !'
+					ShowMsgtime.time = 150
+		  
+					TriggerServerEvent("vmenu:lastChar")
+					vehicleSorti = false
+				end
+            end
+		end
       end
     end
 

@@ -5,6 +5,8 @@
 
 local DrawMarkerShow = true
 local DrawBlipTradeShow = true
+local vehicle
+local vehicleSorti = false
 local Blip_tombe
 local tombe = 1
 local Price = 1500
@@ -190,9 +192,9 @@ end)
 
 local plate = ""
 
-RegisterNetEvent("es:f_getVehPlate")
-AddEventHandler('es:f_getVehPlate', function(param)
-  plate = param
+RegisterNetEvent("org:f_plate")
+AddEventHandler('org:f_plate', function(plaque)
+  plate = plaque
 end)
 
 local Blip_morgue
@@ -205,48 +207,68 @@ Citizen.CreateThread(function()
 
     local distance = GetDistanceBetweenCoords(playerPos.x, playerPos.y, playerPos.z, morgue[1].x, morgue[1].y, morgue[1].z, true)
     if not IsInVehicle() then
-      if distance < 5 then
-        ShowInfo('~b~Appuyer sur ~g~E~b~ pour obtenir la destination', 0)
-        if IsControlJustPressed(1,38) then
-          TriggerServerEvent("poleemploi:getjobs")
-          Wait(100)
-          if myjob == 11 then
-            TriggerEvent("vmenu:JobOutfit", 19, 108)
-            Wait(100)
-            local car = GetHashKey("Romero")
-            RequestModel(car)
-            while not HasModelLoaded(car) do
-              Wait(1)
-            end
-            local vehicle =  CreateVehicle(car, morgue[4].x,  morgue[4].y,  morgue[4].z, 0.0, true, false)
-            SetVehicleOnGroundProperly(vehicle)
-            TriggerServerEvent("es:getVehPlate_s")
-            Wait(100)
-            SetVehicleNumberPlateText(vehicle, plate)
-            SetVehRadioStation(vehicle, "OFF")
-            SetPedIntoVehicle(GetPlayerPed(-1), vehicle, -1)
-            SetVehicleEngineOn(vehicle, true, false, false)
-            SetEntityAsMissionEntity(vehicle, true, true)
-            -- TriggerEvent("player:getQuantity", 4, function(data)
-            --     weedcount = data.count
-            -- end)
-            Wait(100)
-            Blip_morgue = AddBlipForCoord(morgue[3].x, morgue[3].y, morgue[3].z)
+		if distance < 5 then
+			if vehicleSorti==false then
+				ShowInfo('~b~Appuyer sur ~g~E~b~ pour obtenir la destination', 0)
+				if IsControlJustPressed(1,38) then
+					TriggerServerEvent("poleemploi:getjobs")
+					Wait(100)
+					if myjob == 11 then
+						TriggerEvent("vmenu:JobOutfit", 19, 108)
+						Wait(100)
+						local car = GetHashKey("Romero")
+						RequestModel(car)
+						while not HasModelLoaded(car) do
+							Wait(1)
+						end
+						vehicle =  CreateVehicle(car, morgue[4].x,  morgue[4].y,  morgue[4].z, 0.0, true, false)
+						SetVehicleOnGroundProperly(vehicle)
+						Wait(100)
+						TriggerServerEvent("org:plate")
+						Wait(100)
+						SetVehicleNumberPlateText(vehicle, plate)
+						Wait(100)
+						SetVehicleHasBeenOwnedByPlayer(vehicle,true)
+						SetVehRadioStation(vehicle, "OFF")
+						SetPedIntoVehicle(GetPlayerPed(-1), vehicle, -1)
+						SetVehicleEngineOn(vehicle, true, false, false)
+						SetEntityAsMissionEntity(vehicle, true, true)
+						-- TriggerEvent("player:getQuantity", 4, function(data)
+						--     weedcount = data.count
+						-- end)
+						Wait(100)
+						Blip_morgue = AddBlipForCoord(morgue[3].x, morgue[3].y, morgue[3].z)
 
-            SetBlipSprite(Blip_morgue, 273)
-            SetBlipColour(Blip_morgue, 2)
-            SetBlipRoute(Blip_morgue, true)
-            BeginTextCommandSetBlipName("STRING")
-            AddTextComponentString("Allez chercher un corps")
-            EndTextCommandSetBlipName(Blip)
-            ShowMsgtime.msg = '~r~ Allez chercher le corp dans la morgue !'
-            ShowMsgtime.time = 150
-            Citizen.Wait(1)
-          else
-            ShowMsgtime.msg = '~r~ Vous devez être fossoyeur !'
-            ShowMsgtime.time = 150
-          end
-        end
+						SetBlipSprite(Blip_morgue, 273)
+						SetBlipColour(Blip_morgue, 2)
+						SetBlipRoute(Blip_morgue, true)
+						BeginTextCommandSetBlipName("STRING")
+						AddTextComponentString("Allez chercher un corps")
+						EndTextCommandSetBlipName(Blip)
+						ShowMsgtime.msg = '~r~ Allez chercher le corp dans la morgue !'
+						ShowMsgtime.time = 150
+						vehicleSorti = true
+						Citizen.Wait(1)
+					else
+						ShowMsgtime.msg = '~r~ Vous devez être fossoyeur !'
+						ShowMsgtime.time = 150
+					end
+				end
+			else
+				ShowInfo('~b~Appuyer sur ~g~E~b~ pour terminer votre journée de travail', 0)
+				if IsControlJustPressed(1,38) then
+					TriggerServerEvent("poleemploi:getjobs")
+					Wait(100)
+					vehicleSorti = false
+					Citizen.InvokeNative(0xEA386986E786A54F, Citizen.PointerValueIntInitialized(vehicle))
+					RemoveBlip(Blip_morgue)
+					RemoveBlip(Blip_tombe)
+					ShowMsgtime.msg = '~r~ Vous avez terminer votre journée de travail !'
+					ShowMsgtime.time = 150
+		  
+					TriggerServerEvent("vmenu:lastChar")
+				end
+			end
       end
     end
 
