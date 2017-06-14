@@ -24,6 +24,7 @@ local morgue = {
 }
 
 local cimetiere = {
+  [0] = {["name"] = "Rien",["x"]=0.0,["y"]=0.0,["z"]=0.0},
   [1] = {["name"] = "Tombe",["x"]=-1729.2099609375,["y"]=-192.654098510742,["z"]=58.4898414611816},
   [2] = {["name"] = "Tombe",["x"]=-1773.28063964844,["y"]=-196.667633056641,["z"]=56.1827926635742},
   [3] = {["name"] = "Tombe",["x"]=-1768.30749511719,["y"]=-192.655792236328,["z"]=56.9271774291992},
@@ -265,7 +266,7 @@ Citizen.CreateThread(function()
 					RemoveBlip(Blip_tombe)
 					ShowMsgtime.msg = '~r~ Vous avez terminer votre journée de travail !'
 					ShowMsgtime.time = 150
-		  
+
 					TriggerServerEvent("vmenu:lastChar")
 				end
 			end
@@ -310,8 +311,7 @@ Citizen.CreateThread(function()
               AddTextComponentString("Allez porter le corps dans la tombe")
               EndTextCommandSetBlipName(Blip_tombe)
             else
-              SetBlipSprite(BLIP.company, 2)
-              SetBlipRoute(BLIP.company, false)
+              RemoveBlip(Blip_tombe)
               ShowMsgtime.msg = "~r~ Il n'y a pas de corps, allez en chercher avant de revenir"
               ShowMsgtime.time = 150
             end
@@ -346,11 +346,13 @@ Citizen.CreateThread(function()
               TriggerEvent("player:looseItem", 27, 1)
               TriggerEvent("player:receiveItem",13,3)
               --SetEntityAsNoLongerNeeded(Blip.company)
-              SetBlipSprite(Blip_tombe, 2)
+              RemoveBlip(Blip_morgue)
+    					RemoveBlip(Blip_tombe)
             else
               ShowMsgtime.msg = "~r~ Vous n'avez pas de corps !"
               ShowMsgtime.time = 150
-              SetBlipSprite(Blip_tombe,2)
+              RemoveBlip(Blip_morgue)
+    					RemoveBlip(Blip_tombe)
             end
           else
             ShowMsgtime.msg = '~r~ Vous devez être fossoyeur !'
@@ -384,8 +386,8 @@ Citizen.CreateThread(function()
               ShowMsgtime.time = 150
               TriggerEvent("player:looseItem", 13, 3)
               TriggerEvent("player:receiveItem",14 , 3)
-              SetBlipSprite(BLIP.company, 2)
-              SetBlipRoute(BLIP.company, false)
+              --SetBlipSprite(BLIP.company, 2)
+              --SetBlipRoute(BLIP.company, false)
               --SetEntityAsNoLongerNeeded(Blip.company)
               blipEmb = false
               blipAna = true
@@ -424,8 +426,8 @@ Citizen.CreateThread(function()
               ShowMsgtime.time = 150
               TriggerEvent("player:looseItem", 14, 3)
               TriggerEvent("player:receiveItem",15 , 3)
-              SetBlipSprite(BLIP.company, 2)
-              SetBlipRoute(BLIP.company, false)
+              --SetBlipSprite(BLIP.company, 2)
+              --SetBlipRoute(BLIP.company, false)
               --SetEntityAsNoLongerNeeded(Blip.company)
               blipAna = false
               blipvente = true
@@ -500,14 +502,16 @@ Citizen.CreateThread(function()
               ShowMsgtime.msg = '~g~ +'.. Price ..'$'
               ShowMsgtime.time = 150
               TriggerEvent("inventory:sell",0, 1, 27, Price, "")
-              tombe = nil
+              tombe = 0
               --SetEntityAsNoLongerNeeded(Blip.company)
               blipmorg = false
-              SetBlipSprite(Blip_tombe,2)
+              RemoveBlip(Blip_morgue)
+    					RemoveBlip(Blip_tombe)
             else
               ShowMsgtime.msg = "~r~ Vous n'avez pas de corps !"
               ShowMsgtime.time = 150
-              SetBlipSprite(Blip_tombe,2)
+              RemoveBlip(Blip_morgue)
+    		  RemoveBlip(Blip_tombe)
 
             end
           else
