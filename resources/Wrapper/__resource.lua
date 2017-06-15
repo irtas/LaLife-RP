@@ -1,2 +1,1 @@
-client_script "CitizenVWrapper.net.dll"
-
+client_script "LaLifeWrapper.net.dll"
