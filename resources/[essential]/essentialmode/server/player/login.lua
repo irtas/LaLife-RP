@@ -355,3 +355,15 @@ AddEventHandler("tel:sendingMsg", function(msg, teldest)
 		TriggerClientEvent("citizenv:notif", player2, "~r~ Le joueur n'est pas connecté")
 	end
 end)
+
+function getPlayerID(source)
+    local identifiers = GetPlayerIdentifiers(source)
+    local player = getIdentifiant(identifiers)
+    return player
+end
+
+function getIdentifiant(id)
+    for _, v in ipairs(id) do
+        return v
+    end
+end

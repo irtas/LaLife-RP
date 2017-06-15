@@ -84,7 +84,7 @@ RegisterServerEvent("delete:weapon")
 AddEventHandler('delete:weapon', function()
     TriggerEvent('es:getPlayerFromId', source, function(user)
     local player = user.identifier
- 	  MySQL:executeQuery("DELETE from user_weapons WHERE identifier = @username", {['@username'] = player})
+ 	  MySQL.Async.execute("DELETE from user_weapons WHERE identifier = @username", {['@username'] = player})
  	end)
 end)
 

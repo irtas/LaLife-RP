@@ -84,7 +84,7 @@ AddEventHandler('bank:remove', function(source, amount)
     local player = user.identifier
     local bankbalance = bankBalance(player)
     withdraw(player, rounded)
-    local new_balance = bankBalance(player)
+    local new_balance = bankbalance - rounded
     TriggerClientEvent("banking:updateBalance", source, new_balance)
     TriggerClientEvent("banking:removeBalance", source, rounded)
     CancelEvent()
