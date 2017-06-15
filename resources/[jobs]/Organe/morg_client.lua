@@ -165,12 +165,13 @@ Citizen.CreateThread(function()
             vehicle =  CreateVehicle(car, morgue[2].x,  morgue[2].y,  morgue[2].z, 0.0, true, false)
             SetVehicleOnGroundProperly(vehicle)
            	TriggerServerEvent("org:plate")
-			Wait(100)
-			SetVehicleNumberPlateText(vehicle, plate)
-			Wait(100)
-			SetVehicleHasBeenOwnedByPlayer(vehicle,true)
+			      Wait(200)
+			      SetVehicleNumberPlateText(vehicle, plate)
+			      Wait(200)
+			      SetVehicleHasBeenOwnedByPlayer(vehicle,true)
+            Wait(200)
             SetVehRadioStation(vehicle, "OFF")
-  		    SetVehicleColours(vehicle, 25, 25)
+  		      SetVehicleColours(vehicle, 25, 25)
             SetVehicleLivery(vehicle, 4)
             SetPedIntoVehicle(GetPlayerPed(-1), vehicle, -1)
             SetVehicleEngineOn(vehicle, true, false, false)
@@ -180,6 +181,7 @@ Citizen.CreateThread(function()
 
             SetBlipSprite(Blip, 273)
             SetBlipColour(Blip, 2)
+            SetBlipRoute(Blip,true)
 
             BeginTextCommandSetBlipName("STRING")
             AddTextComponentString("Allez chercher le corps")
@@ -240,15 +242,34 @@ Citizen.CreateThread(function()
               TriggerEvent("player:receiveItem", 26, 1)
               ShowMsgtime.msg = '~r~ Allez porter le corp dans la morgue !'
               ShowMsgtime.time = 150
-              SetBlipSprite(Blip, 2)
+              RemoveBlip(Blip)
+              Blip = AddBlipForCoord(morgue[3].x, morgue[3].y, morgue[3].z)
+
+              SetBlipSprite(Blip, 273)
+              SetBlipColour(Blip, 2)
+              SetBlipRoute(Blip,true)
+
+              BeginTextCommandSetBlipName("STRING")
+              AddTextComponentString("Morgue")
+              EndTextCommandSetBlipName(Blip)
             else
-              ShowMsgtime.msg = '~g~ Vous avez déjà un ~b~corps '
+              ShowMsgtime.msg = '~g~ Vous avez déjà un ~b~corps, allez le porter à la morgue '
               ShowMsgtime.time = 150
-              SetBlipSprite(Blip, 2)
+              RemoveBlip(Blip)
+              Blip = AddBlipForCoord(morgue[3].x, morgue[3].y, morgue[3].z)
+
+              SetBlipSprite(Blip, 273)
+              SetBlipColour(Blip, 2)
+              SetBlipRoute(Blip,true)
+
+              BeginTextCommandSetBlipName("STRING")
+              AddTextComponentString("Morgue")
+              EndTextCommandSetBlipName(Blip)
             end
           else
             ShowMsgtime.msg = '~r~ Vous devez être préposé à la morgue !'
             ShowMsgtime.time = 150
+            RemoveBlip(Blip)
           end
         end
       end
@@ -282,6 +303,7 @@ Citizen.CreateThread(function()
 
               SetBlipSprite(Blip, 273)
               SetBlipColour(Blip, 2)
+              SetBlipRoute(Blip,true)
 
               BeginTextCommandSetBlipName("STRING")
               AddTextComponentString("Allez chercher le corps")
@@ -290,10 +312,12 @@ Citizen.CreateThread(function()
             else
               ShowMsgtime.msg = "~r~ Vous n'avez pas de corps !"
               ShowMsgtime.time = 150
+              RemoveBlip(Blip)
             end
           else
             ShowMsgtime.msg = '~r~ Vous devez être préposé à la morgue !'
             ShowMsgtime.time = 150
+            RemoveBlip(Blip)
           end
         end
       end
