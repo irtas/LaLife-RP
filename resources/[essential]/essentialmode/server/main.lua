@@ -27,7 +27,6 @@ AddEventHandler('playerConnecting', function(name, setCallback)
 	for i = 1, #identifiers do
 		local identifier = identifiers[i]
 		debugMsg('Checking user ban: ' .. identifier .. " (" .. name .. ")")
-
 		local banned = isIdentifierBanned(identifier)
 		if(banned)then
 			if(type(settings.defaultSettings.banreason) == "string")then

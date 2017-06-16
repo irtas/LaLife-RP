@@ -509,6 +509,7 @@ AddEventHandler('rconCommand', function(commandName, args)
 	elseif commandName == 'ban' then
 		if #args ~= 1 then
 			RconPrint("Usage: ban [user-id]\n")
+			RconPrint("Use status in the server console to get the user-id]\n")
 			CancelEvent()
 			return
 		end
@@ -519,9 +520,39 @@ AddEventHandler('rconCommand', function(commandName, args)
 			return
 		end
 
-		TriggerEvent("es:setPlayerData", tonumber(args[1]), "banned", 1, function(response, success)
-			TriggerClientEvent('chatMessage', -1, "SYSTEM", {255, 0, 0}, "Player ^2" .. GetPlayerName(player) .. "^0 has been banned(^2Banned: You have been banned by console.^0)")
-		end)
+		if(GetPlayerName(tonumber(args[1])) ~= nil)then
+			-- User permission check
+			local player = tonumber(args[1])
+			TriggerEvent("es:getPlayerFromId", player, function(target)
+				if target ~= nil then
+
+					local message = ""
+
+					local reason = args
+					table.remove(reason, 1)
+					table.remove(reason, 1)
+					table.remove(reason, 1)
+
+					reason = "Banned: From the rcon"
+
+					if(reason == "Banned: ")then
+						reason = reason .. "You have been banned for: ^1^*" .. message .. "^r^0."
+						DropPlayer(player, "You have been banned for: " .. message)
+					else
+						DropPlayer(player, "Banned: " .. reason)
+					end
+
+					TriggerClientEvent('chatMessage', -1, "SYSTEM", {255, 0, 0}, "Player ^2" .. GetPlayerName(player) .. "^0 has been banned(^2" .. reason .. "^0)")
+
+					MySQL.Async.execute("INSERT INTO bans (`banned`, `reason`, `expires`, `banner`, `timestamp`) VALUES (@username, @reason, @expires, @banner, @now)",
+					{['@username'] = target.identifier, ['@reason'] = "rcon", ['@expires'] = "2017-06-16 19:35:31", ['@banner'] = "rcon", ['@now'] = "2017-06-16 19:35:31"})
+				else
+					TriggerEvent("es:desyncMsg")
+				end
+			end)
+		else
+			TriggerClientEvent('chatMessage', source, "SYSTEM", {255, 0, 0}, "Incorrect player ID!")
+		end
 
 		CancelEvent()
 	end

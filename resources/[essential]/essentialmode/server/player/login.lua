@@ -135,13 +135,8 @@ end
 -- PLEASE I HOPE WE CODED THIS FOR NOTHING.
 function isIdentifierBanned(id)
 	local result = MySQL.Sync.fetchAll("SELECT * FROM bans WHERE banned = @name", {['@name'] = id})
-
-	if(result)then
-		for k,v in ipairs(result)do
-			if v.expires > v.timestamp then
-				return true
-			end
-		end
+	if(#result > 0)then
+		return true
 	end
 
 	return false
