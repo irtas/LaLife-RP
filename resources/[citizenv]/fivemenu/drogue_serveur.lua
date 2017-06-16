@@ -29,22 +29,28 @@ local weed = {
 --asd
 RegisterServerEvent("menudrogue:sendData_s")
 AddEventHandler("menudrogue:sendData_s", function()
-  TriggerEvent('es:getPlayerFromId', source, function(user)
     TriggerClientEvent("menudrogue:f_sendData", source, coke, meth, organe, weed)
-  end)
 end)
 
 RegisterServerEvent("menudrogue:getCash_s")
 AddEventHandler("menudrogue:getCash_s", function()
   TriggerEvent('es:getPlayerFromId', source, function(user)
-    local lecashy = user:getMoney()
-    TriggerClientEvent("menudrogue:f_getCash", source, lecashy)
+    if (user) then
+      local lecashy = user:getMoney()
+      TriggerClientEvent("menudrogue:f_getCash", source, lecashy)
+    else
+      TriggerEvent("es:desyncMsg")
+    end
   end)
 end)
 
 RegisterServerEvent("menudrogue:setCash")
 AddEventHandler("menudrogue:setCash", function(amount)
   TriggerEvent('es:getPlayerFromId', source, function(user)
-    user:removeMoney(amount)
+    if (user) then
+      user:removeMoney(amount)
+    else
+      TriggerEvent("es:desyncMsg")
+    end
   end)
 end)

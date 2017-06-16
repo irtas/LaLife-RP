@@ -19,19 +19,19 @@ end)
 
 TriggerEvent('es:addGroupCommand', 'car', "admin", function(source, args, user)
 	TriggerClientEvent('es_admin:spawnVehicle', source, args[2])
-	end, function(source, args, user)
+end, function(source, args, user)
 	TriggerClientEvent('chatMessage', source, "SYSTEM", {255, 0, 0}, "Insufficienct permissions!")
 end)
 
 TriggerEvent('es:addGroupCommand', 'eat', "admin", function(source, args, user)
 	TriggerClientEvent('food:veat', source, 100)
-	end, function(source, args, user)
+end, function(source, args, user)
 	TriggerClientEvent('chatMessage', source, "SYSTEM", {255, 0, 0}, "Insufficienct permissions!")
 end)
 
 TriggerEvent('es:addGroupCommand', 'drink', "admin", function(source, args, user)
 	TriggerClientEvent('food:vdrink', source, 100)
-	end, function(source, args, user)
+end, function(source, args, user)
 	TriggerClientEvent('chatMessage', source, "SYSTEM", {255, 0, 0}, "Insufficienct permissions!")
 end)
 
@@ -44,8 +44,12 @@ TriggerEvent('es:addCommand', 'report', function(source, args, user)
 	TriggerEvent("es:getPlayers", function(pl)
 		for k,v in pairs(pl) do
 			TriggerEvent("es:getPlayerFromId", k, function(user)
-				if(user.permission_level > 0 and k ~= source)then
-					TriggerClientEvent('chatMessage', k, "REPORT", {255, 0, 0}, " (^2" .. GetPlayerName(source) .." | "..source.."^0) " .. table.concat(args, " "))
+				if (user) then
+					if(user.permission_level > 0 and k ~= source)then
+						TriggerClientEvent('chatMessage', k, "REPORT", {255, 0, 0}, " (^2" .. GetPlayerName(source) .." | "..source.."^0) " .. table.concat(args, " "))
+					end
+				else
+					TriggerEvent("es:desyncMsg")
 				end
 			end)
 		end
@@ -85,7 +89,11 @@ end)
 TriggerEvent('es:addGroupCommand', 'tpme', "admin", function(source, args, user)
 	local pos = {}
 	TriggerEvent("es:getPlayerFromId", source, function(user)
-		pos = user:getCoords()
+		if (user) then
+			pos = user:getCoords()
+		else
+			TriggerEvent("es:desyncMsg")
+		end
 	end)
 	TriggerEvent("citizenv:notif", GetPlayerName(tonumber(args[2])))
 	TriggerClientEvent("vmenu:teleport_marker_player", tonumber(args[2]), pos)
@@ -95,11 +103,12 @@ end)
 
 -- Kicking
 TriggerEvent('es:addGroupCommand', 'kick', "mod", function(source, args, user)
-		if(GetPlayerName(tonumber(args[2])))then
-			local player = tonumber(args[2])
+	if(GetPlayerName(tonumber(args[2])))then
+		local player = tonumber(args[2])
 
-			-- User permission check
-			TriggerEvent("es:getPlayerFromId", player, function(target)
+		-- User permission check
+		TriggerEvent("es:getPlayerFromId", player, function(target)
+			if target ~= nil then
 				if(tonumber(target.permission_level) > tonumber(user.permission_level))then
 					TriggerClientEvent("chatMessage", source, "SYSTEM", {255, 0, 0}, "You're not allowed to target this person!")
 					return
@@ -116,24 +125,28 @@ TriggerEvent('es:addGroupCommand', 'kick', "mod", function(source, args, user)
 
 				TriggerClientEvent('chatMessage', -1, "SYSTEM", {255, 0, 0}, "Player ^2" .. GetPlayerName(player) .. "^0 has been kicked(^2" .. reason .. "^0)")
 				DropPlayer(player, reason)
-			end)
-		else
-			TriggerClientEvent('chatMessage', source, "SYSTEM", {255, 0, 0}, "Incorrect player ID!")
-		end
+			else
+				TriggerEvent("es:desyncMsg")
+			end
+		end)
+	else
+		TriggerClientEvent('chatMessage', source, "SYSTEM", {255, 0, 0}, "Incorrect player ID!")
+	end
 end, function(source, args, user)
 	TriggerClientEvent('chatMessage', source, "SYSTEM", {255, 0, 0}, "Insufficienct permissions!")
 end)
 
 -- Banning
 TriggerEvent('es:addGroupCommand', 'ban', "admin", function(source, args, user)
-		if(GetPlayerName(tonumber(args[2])) ~= nil)then
-			-- User permission check
-			local player = tonumber(args[2])
-			TriggerEvent("es:getPlayerFromId", player, function(target)
-					if(tonumber(target.permission_level) > tonumber(user.permission_level))then
-						TriggerClientEvent("chatMessage", source, "SYSTEM", {255, 0, 0}, "You're not allowed to target this person!")
-						return
-					end
+	if(GetPlayerName(tonumber(args[2])) ~= nil)then
+		-- User permission check
+		local player = tonumber(args[2])
+		TriggerEvent("es:getPlayerFromId", player, function(target)
+			if target ~= nil then
+				if(tonumber(target.permission_level) > tonumber(user.permission_level))then
+					TriggerClientEvent("chatMessage", source, "SYSTEM", {255, 0, 0}, "You're not allowed to target this person!")
+					return
+				end
 				local time = args[3]
 
 				local message = ""
@@ -177,23 +190,26 @@ TriggerEvent('es:addGroupCommand', 'ban', "admin", function(source, args, user)
 
 				MySQL.Async.execute("INSERT INTO bans (`banned`, `reason`, `expires`, `banner`, `timestamp`) VALUES (@username, @reason, @expires, @banner, @now)",
 				{['@username'] = target.identifier, ['@reason'] = reason, ['@expires'] = os.date(tstamp.year .. "-" .. tstamp.month .. "-" .. tstamp.day .. " " .. tstamp.hour .. ":" .. tstamp.min .. ":" .. tstamp.sec), ['@banner'] = user.identifier, ['@now'] = os.date(tstamp2.year .. "-" .. tstamp2.month .. "-" .. tstamp2.day .. " " .. tstamp2.hour .. ":" .. tstamp2.min .. ":" .. tstamp2.sec)})
-			end)
-		else
-			TriggerClientEvent('chatMessage', source, "SYSTEM", {255, 0, 0}, "Incorrect player ID!")
-		end
+			else
+				TriggerEvent("es:desyncMsg")
+			end
+		end)
+	else
+		TriggerClientEvent('chatMessage', source, "SYSTEM", {255, 0, 0}, "Incorrect player ID!")
+	end
 end, function(source, args, user)
 	TriggerClientEvent('chatMessage', source, "SYSTEM", {255, 0, 0}, "Insufficienct permissions!")
 end)
 
 function stringsplit(self, delimiter)
-  local a = self:Split(delimiter)
-  local t = {}
+	local a = self:Split(delimiter)
+	local t = {}
 
-  for i = 0, #a - 1 do
-     table.insert(t, a[i])
-  end
+	for i = 0, #a - 1 do
+		table.insert(t, a[i])
+	end
 
-  return t
+	return t
 end
 
 -- Announcing
@@ -207,11 +223,12 @@ end)
 -- Freezing
 local frozen = {}
 TriggerEvent('es:addGroupCommand', 'freeze', "mod", function(source, args, user)
-		if(GetPlayerName(tonumber(args[2])))then
-			local player = tonumber(args[2])
+	if(GetPlayerName(tonumber(args[2])))then
+		local player = tonumber(args[2])
 
-			-- User permission check
-			TriggerEvent("es:getPlayerFromId", player, function(target)
+		-- User permission check
+		TriggerEvent("es:getPlayerFromId", player, function(target)
+			if target ~= nil then
 				if(tonumber(target.permission_level) > tonumber(user.permission_level))then
 					TriggerClientEvent("chatMessage", source, "SYSTEM", {255, 0, 0}, "You're not allowed to target this person!")
 					return
@@ -232,10 +249,13 @@ TriggerEvent('es:addGroupCommand', 'freeze', "mod", function(source, args, user)
 
 				TriggerClientEvent('chatMessage', player, "SYSTEM", {255, 0, 0}, "You have been " .. state .. " by ^2" .. GetPlayerName(source))
 				TriggerClientEvent('chatMessage', source, "SYSTEM", {255, 0, 0}, "Player ^2" .. GetPlayerName(player) .. "^0 has been " .. state)
-			end)
-		else
-			TriggerClientEvent('chatMessage', source, "SYSTEM", {255, 0, 0}, "Incorrect player ID!")
-		end
+			else
+				TriggerEvent("es:desyncMsg")
+			end
+		end)
+	else
+		TriggerClientEvent('chatMessage', source, "SYSTEM", {255, 0, 0}, "Incorrect player ID!")
+	end
 end, function(source, args, user)
 	TriggerClientEvent('chatMessage', source, "SYSTEM", {255, 0, 0}, "Insufficienct permissions!")
 end)
@@ -243,11 +263,12 @@ end)
 -- Bring
 local frozen = {}
 TriggerEvent('es:addGroupCommand', 'bring', "mod", function(source, args, user)
-		if(GetPlayerName(tonumber(args[2])))then
-			local player = tonumber(args[2])
+	if(GetPlayerName(tonumber(args[2])))then
+		local player = tonumber(args[2])
 
-			-- User permission check
-			TriggerEvent("es:getPlayerFromId", player, function(target)
+		-- User permission check
+		TriggerEvent("es:getPlayerFromId", player, function(target)
+			if target ~= nil then
 				if(tonumber(target.permission_level) > tonumber(user.permission_level))then
 					TriggerClientEvent("chatMessage", source, "SYSTEM", {255, 0, 0}, "You're not allowed to target this person!")
 					return
@@ -257,10 +278,13 @@ TriggerEvent('es:addGroupCommand', 'bring', "mod", function(source, args, user)
 
 				TriggerClientEvent('chatMessage', player, "SYSTEM", {255, 0, 0}, "You have brought by ^2" .. GetPlayerName(source))
 				TriggerClientEvent('chatMessage', source, "SYSTEM", {255, 0, 0}, "Player ^2" .. GetPlayerName(player) .. "^0 has been brought")
-			end)
-		else
-			TriggerClientEvent('chatMessage', source, "SYSTEM", {255, 0, 0}, "Incorrect player ID!")
-		end
+			else
+				TriggerEvent("es:desyncMsg")
+			end
+		end)
+	else
+		TriggerClientEvent('chatMessage', source, "SYSTEM", {255, 0, 0}, "Incorrect player ID!")
+	end
 end, function(source, args, user)
 	TriggerClientEvent('chatMessage', source, "SYSTEM", {255, 0, 0}, "Insufficienct permissions!")
 end)
@@ -268,11 +292,12 @@ end)
 -- Bring
 local frozen = {}
 TriggerEvent('es:addGroupCommand', 'slap', "admin", function(source, args, user)
-		if(GetPlayerName(tonumber(args[2])))then
-			local player = tonumber(args[2])
+	if(GetPlayerName(tonumber(args[2])))then
+		local player = tonumber(args[2])
 
-			-- User permission check
-			TriggerEvent("es:getPlayerFromId", player, function(target)
+		-- User permission check
+		TriggerEvent("es:getPlayerFromId", player, function(target)
+			if target ~= nil then
 				if(tonumber(target.permission_level) > tonumber(user.permission_level))then
 					TriggerClientEvent("chatMessage", source, "SYSTEM", {255, 0, 0}, "You're not allowed to target this person!")
 					return
@@ -282,10 +307,13 @@ TriggerEvent('es:addGroupCommand', 'slap', "admin", function(source, args, user)
 
 				TriggerClientEvent('chatMessage', player, "SYSTEM", {255, 0, 0}, "You have slapped by ^2" .. GetPlayerName(source))
 				TriggerClientEvent('chatMessage', source, "SYSTEM", {255, 0, 0}, "Player ^2" .. GetPlayerName(player) .. "^0 has been slapped")
-			end)
-		else
-			TriggerClientEvent('chatMessage', source, "SYSTEM", {255, 0, 0}, "Incorrect player ID!")
-		end
+			else
+				TriggerEvent("es:desyncMsg")
+			end
+		end)
+	else
+		TriggerClientEvent('chatMessage', source, "SYSTEM", {255, 0, 0}, "Incorrect player ID!")
+	end
 end, function(source, args, user)
 	TriggerClientEvent('chatMessage', source, "SYSTEM", {255, 0, 0}, "Insufficienct permissions!")
 end)
@@ -293,11 +321,12 @@ end)
 -- Freezing
 local frozen = {}
 TriggerEvent('es:addGroupCommand', 'goto', "mod", function(source, args, user)
-		if(GetPlayerName(tonumber(args[2])))then
-			local player = tonumber(args[2])
+	if(GetPlayerName(tonumber(args[2])))then
+		local player = tonumber(args[2])
 
-			-- User permission check
-			TriggerEvent("es:getPlayerFromId", player, function(target)
+		-- User permission check
+		TriggerEvent("es:getPlayerFromId", player, function(target)
+			if target ~= nil then
 				if(target)then
 					if(tonumber(target.permission_level) > tonumber(user.permission_level))then
 						TriggerClientEvent("chatMessage", source, "SYSTEM", {255, 0, 0}, "You're not allowed to target this person!")
@@ -309,10 +338,13 @@ TriggerEvent('es:addGroupCommand', 'goto', "mod", function(source, args, user)
 					TriggerClientEvent('chatMessage', player, "SYSTEM", {255, 0, 0}, "You have been teleported to by ^2" .. GetPlayerName(source))
 					TriggerClientEvent('chatMessage', source, "SYSTEM", {255, 0, 0}, "Teleported to player ^2" .. GetPlayerName(player) .. "")
 				end
-			end)
-		else
-			TriggerClientEvent('chatMessage', source, "SYSTEM", {255, 0, 0}, "Incorrect player ID!")
-		end
+			else
+				TriggerEvent("es:desyncMsg")
+			end
+		end)
+	else
+		TriggerClientEvent('chatMessage', source, "SYSTEM", {255, 0, 0}, "Incorrect player ID!")
+	end
 end, function(source, args, user)
 	TriggerClientEvent('chatMessage', source, "SYSTEM", {255, 0, 0}, "Insufficienct permissions!")
 end)
@@ -325,11 +357,12 @@ end)
 
 -- Killing
 TriggerEvent('es:addGroupCommand', 'slay', "admin", function(source, args, user)
-		if(GetPlayerName(tonumber(args[2])))then
-			local player = tonumber(args[2])
+	if(GetPlayerName(tonumber(args[2])))then
+		local player = tonumber(args[2])
 
-			-- User permission check
-			TriggerEvent("es:getPlayerFromId", player, function(target)
+		-- User permission check
+		TriggerEvent("es:getPlayerFromId", player, function(target)
+			if target ~= nil then
 				if(tonumber(target.permission_level) > tonumber(user.permission_level))then
 					TriggerClientEvent("chatMessage", source, "SYSTEM", {255, 0, 0}, "You're not allowed to target this person!")
 					return
@@ -339,21 +372,25 @@ TriggerEvent('es:addGroupCommand', 'slay', "admin", function(source, args, user)
 
 				TriggerClientEvent('chatMessage', player, "SYSTEM", {255, 0, 0}, "You have been killed by ^2" .. GetPlayerName(source))
 				TriggerClientEvent('chatMessage', source, "SYSTEM", {255, 0, 0}, "Player ^2" .. GetPlayerName(player) .. "^0 has been killed.")
-			end)
-		else
-			TriggerClientEvent('chatMessage', source, "SYSTEM", {255, 0, 0}, "Incorrect player ID!")
-		end
+			else
+				TriggerEvent("es:desyncMsg")
+			end
+		end)
+	else
+		TriggerClientEvent('chatMessage', source, "SYSTEM", {255, 0, 0}, "Incorrect player ID!")
+	end
 end, function(source, args, user)
 	TriggerClientEvent('chatMessage', source, "SYSTEM", {255, 0, 0}, "Insufficienct permissions!")
 end)
 
 -- Crashing
 TriggerEvent('es:addGroupCommand', 'crash', "superadmin", function(source, args, user)
-		if(GetPlayerName(tonumber(args[2])))then
-			local player = tonumber(args[2])
+	if(GetPlayerName(tonumber(args[2])))then
+		local player = tonumber(args[2])
 
-			-- User permission check
-			TriggerEvent("es:getPlayerFromId", player, function(target)
+		-- User permission check
+		TriggerEvent("es:getPlayerFromId", player, function(target)
+			if target ~= nil then
 				if(tonumber(target.permission_level) > tonumber(user.permission_level))then
 					TriggerClientEvent("chatMessage", source, "SYSTEM", {255, 0, 0}, "You're not allowed to target this person!")
 					return
@@ -362,10 +399,13 @@ TriggerEvent('es:addGroupCommand', 'crash', "superadmin", function(source, args,
 				TriggerClientEvent('es_admin:crash', player)
 
 				TriggerClientEvent('chatMessage', source, "SYSTEM", {255, 0, 0}, "Player ^2" .. GetPlayerName(player) .. "^0 has been crashed.")
-			end)
-		else
-			TriggerClientEvent('chatMessage', source, "SYSTEM", {255, 0, 0}, "Incorrect player ID!")
-		end
+			else
+				TriggerEvent("es:desyncMsg")
+			end
+		end)
+	else
+		TriggerClientEvent('chatMessage', source, "SYSTEM", {255, 0, 0}, "Incorrect player ID!")
+	end
 end, function(source, args, user)
 	TriggerClientEvent('chatMessage', source, "SYSTEM", {255, 0, 0}, "Insufficienct permissions!")
 end)
@@ -382,9 +422,9 @@ end)
 AddEventHandler('rconCommand', function(commandName, args)
 	if commandName == 'setadmin' then
 		if #args ~= 2 then
-				RconPrint("Usage: setadmin [user-id] [permission-level]\n")
-				CancelEvent()
-				return
+			RconPrint("Usage: setadmin [user-id] [permission-level]\n")
+			CancelEvent()
+			return
 		end
 
 		if(GetPlayerName(tonumber(args[1])) == nil)then
@@ -406,9 +446,9 @@ AddEventHandler('rconCommand', function(commandName, args)
 		CancelEvent()
 	elseif commandName == 'setgroup' then
 		if #args ~= 2 then
-				RconPrint("Usage: setgroup [user-id] [group]\n")
-				CancelEvent()
-				return
+			RconPrint("Usage: setgroup [user-id] [group]\n")
+			CancelEvent()
+			return
 		end
 
 		if(GetPlayerName(tonumber(args[1])) == nil)then
@@ -436,55 +476,55 @@ AddEventHandler('rconCommand', function(commandName, args)
 
 		CancelEvent()
 	elseif commandName == 'setmoney' then
-			if #args ~= 2 then
-					RconPrint("Usage: setmoney [user-id] [money]\n")
-					CancelEvent()
-					return
-			end
-
-			if(GetPlayerName(tonumber(args[1])) == nil)then
-				RconPrint("Player not ingame\n")
-				CancelEvent()
-				return
-			end
-
-			TriggerEvent("es:getPlayerFromId", tonumber(args[1]), function(user)
-				if(user)then
-					user:setMoney((args[2] + 0.0))
-
-					RconPrint("Money set")
-					TriggerClientEvent('chatMessage', tonumber(args[1]), "CONSOLE", {0, 0, 0}, "Your money has been set to: $" .. tonumber(args[2]))
-				end
-			end)
-
+		if #args ~= 2 then
+			RconPrint("Usage: setmoney [user-id] [money]\n")
 			CancelEvent()
-		elseif commandName == 'unban' then
-			if #args ~= 1 then
-					RconPrint("Usage: unban [identifier]\n")
-					CancelEvent()
-					return
-			end
-
-			CancelEvent()
-		elseif commandName == 'ban' then
-			if #args ~= 1 then
-					RconPrint("Usage: ban [user-id]\n")
-					CancelEvent()
-					return
-			end
-
-			if(GetPlayerName(tonumber(args[1])) == nil)then
-				RconPrint("Player not ingame\n")
-				CancelEvent()
-				return
-			end
-
-			TriggerEvent("es:setPlayerData", tonumber(args[1]), "banned", 1, function(response, success)
-				TriggerClientEvent('chatMessage', -1, "SYSTEM", {255, 0, 0}, "Player ^2" .. GetPlayerName(player) .. "^0 has been banned(^2Banned: You have been banned by console.^0)")
-			end)
-
-			CancelEvent()
+			return
 		end
+
+		if(GetPlayerName(tonumber(args[1])) == nil)then
+			RconPrint("Player not ingame\n")
+			CancelEvent()
+			return
+		end
+
+		TriggerEvent("es:getPlayerFromId", tonumber(args[1]), function(user)
+			if(user)then
+				user:setMoney((args[2] + 0.0))
+
+				RconPrint("Money set")
+				TriggerClientEvent('chatMessage', tonumber(args[1]), "CONSOLE", {0, 0, 0}, "Your money has been set to: $" .. tonumber(args[2]))
+			end
+		end)
+
+		CancelEvent()
+	elseif commandName == 'unban' then
+		if #args ~= 1 then
+			RconPrint("Usage: unban [identifier]\n")
+			CancelEvent()
+			return
+		end
+
+		CancelEvent()
+	elseif commandName == 'ban' then
+		if #args ~= 1 then
+			RconPrint("Usage: ban [user-id]\n")
+			CancelEvent()
+			return
+		end
+
+		if(GetPlayerName(tonumber(args[1])) == nil)then
+			RconPrint("Player not ingame\n")
+			CancelEvent()
+			return
+		end
+
+		TriggerEvent("es:setPlayerData", tonumber(args[1]), "banned", 1, function(response, success)
+			TriggerClientEvent('chatMessage', -1, "SYSTEM", {255, 0, 0}, "Player ^2" .. GetPlayerName(player) .. "^0 has been banned(^2Banned: You have been banned by console.^0)")
+		end)
+
+		CancelEvent()
+	end
 end)
 
 -- Logging

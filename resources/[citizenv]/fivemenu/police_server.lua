@@ -4,9 +4,13 @@ RegisterServerEvent('menupolice:getTargetN_s')
 
 AddEventHandler('menupolice:getTargetN_s', function(netID)
   TriggerEvent('es:getPlayerFromId', netID, function(user)
-    local name = user:getNom()
-    local surname = user:getPrenom()
-    TriggerClientEvent("f_getTargetN", source, {surname, name})
+    if (user) then
+      local name = user:getNom()
+      local surname = user:getPrenom()
+      TriggerClientEvent("f_getTargetN", source, {surname, name})
+    else
+      TriggerEvent("es:desyncMsg")
+    end
   end)
 end)
 
@@ -23,28 +27,36 @@ end)
 RegisterServerEvent('menupolice:seizecash_s')
 AddEventHandler('menupolice:seizecash_s', function(netID)
   TriggerEvent('es:getPlayerFromId', netID, function(user)
-    local curDCash = user:getDMoney()
-    user:removeDMoney(curDCash)
-    TriggerClientEvent("citizenv:notif", source, "Vous avez saisi ".. tostring(curDCash))
+    if (user) then
+      local curDCash = user:getDMoney()
+      user:removeDMoney(curDCash)
+      TriggerClientEvent("citizenv:notif", source, "Vous avez saisi ".. tostring(curDCash))
+    else
+      TriggerEvent("es:desyncMsg")
+    end
   end)
 end)
 
 RegisterServerEvent('menupolice:seizedrug_s')
 AddEventHandler('menupolice:seizedrug_s', function(netID)
   TriggerEvent('es:getPlayerFromId', netID, function(user)
-    local tIdentifier = GetPlayerIdentifiers(netID)
-    local identifier = tIdentifier[1]
-    MySQL.Async.fetchAll("SELECT * FROM user_inventory JOIN items ON `user_inventory`.`item_id` = `items`.`id` WHERE user_id = @username", { ['@username'] = identifier }, function (result)
-      if (result) then
-        for _, t in pairs(inv_array_illlegal) do
-          if result[t.id].quantity > 0 then
-            TriggerClientEvent("player:looseItem", netID, t.id, result[t.id].quantity)
-            TriggerClientEvent("citizenv:notif", netID, "Vous avez perdu ".. tostring(result[t.id].quantity) .." "..tostring(t.name))
-            TriggerClientEvent("citizenv:notif", source, "Vous avez saisi ".. tostring(result[t.id].quantity) .." "..tostring(t.name))
+    if (user) then
+      local tIdentifier = GetPlayerIdentifiers(netID)
+      local identifier = tIdentifier[1]
+      MySQL.Async.fetchAll("SELECT * FROM user_inventory JOIN items ON `user_inventory`.`item_id` = `items`.`id` WHERE user_id = @username", { ['@username'] = identifier }, function (result)
+        if (result) then
+          for _, t in pairs(inv_array_illlegal) do
+            if result[t.id].quantity > 0 then
+              TriggerClientEvent("player:looseItem", netID, t.id, result[t.id].quantity)
+              TriggerClientEvent("citizenv:notif", netID, "Vous avez perdu ".. tostring(result[t.id].quantity) .." "..tostring(t.name))
+              TriggerClientEvent("citizenv:notif", source, "Vous avez saisi ".. tostring(result[t.id].quantity) .." "..tostring(t.name))
+            end
           end
         end
-      end
-    end)
+      end)
+    else
+      TriggerEvent("es:desyncMsg")
+    end
   end)
 end)
 
@@ -57,19 +69,23 @@ end)
 RegisterServerEvent('menupolice:searchciv_s')
 AddEventHandler('menupolice:searchciv_s', function(netID)
   TriggerEvent('es:getPlayerFromId', netID, function(user)
-    local tIdentifier = GetPlayerIdentifiers(netID)
-    local identifier = tIdentifier[1]
-    MySQL.Async.fetchAll("SELECT * FROM user_inventory JOIN items ON `user_inventory`.`item_id` = `items`.`id` WHERE user_id = @username", { ['@username'] = identifier }, function (result)
-      local civitems = {}
-      if (result) then
-        for _, v in ipairs(result) do
-          t = { ["quantity"] = v.quantity, ["libelle"] = v.libelle }
-          table.insert(civitems, tonumber(v.item_id), t)
-        end
+    if (user) then
+      local tIdentifier = GetPlayerIdentifiers(netID)
+      local identifier = tIdentifier[1]
+      MySQL.Async.fetchAll("SELECT * FROM user_inventory JOIN items ON `user_inventory`.`item_id` = `items`.`id` WHERE user_id = @username", { ['@username'] = identifier }, function (result)
+        local civitems = {}
+        if (result) then
+          for _, v in ipairs(result) do
+            t = { ["quantity"] = v.quantity, ["libelle"] = v.libelle }
+            table.insert(civitems, tonumber(v.item_id), t)
+          end
 
-        TriggerClientEvent("menupolice:f_searchciv", source, civitems, #civitems)
-      end
-    end)
+          TriggerClientEvent("menupolice:f_searchciv", source, civitems, #civitems)
+        end
+      end)
+    else
+      TriggerEvent("es:desyncMsg")
+    end
   end)
 end)
 
@@ -131,9 +147,9 @@ local prisoner = {
 
 RegisterServerEvent('menupolice:jail_s')
 AddEventHandler('menupolice:jail_s', function(t)
-	-- print(jail1)
-	-- print(jail2)
-	-- print(jail3)
+  -- print(jail1)
+  -- print(jail2)
+  -- print(jail3)
   if jail1 == false then
     TriggerClientEvent('menupolice:wf_jail', t, 1)
     prisoner[1].source = t
@@ -149,50 +165,50 @@ AddEventHandler('menupolice:jail_s', function(t)
   else
     TriggerClientEvent("citizenv:notif", source, "Toutes les cellules sont occupées")
   end
-	-- print(prisoner[1].source)
-	-- print(prisoner[2].source)
-	-- print(prisoner[3].source)
+  -- print(prisoner[1].source)
+  -- print(prisoner[2].source)
+  -- print(prisoner[3].source)
 end)
 
 RegisterServerEvent('menupolice:unjail_s')
 AddEventHandler('menupolice:unjail_s', function(t, v)
-	-- print(prisoner[1].source)
-	-- print(prisoner[2].source)
-	-- print(prisoner[3].source)
+  -- print(prisoner[1].source)
+  -- print(prisoner[2].source)
+  -- print(prisoner[3].source)
   if v == 1 then
     TriggerClientEvent("menupolice:wf_unjail", prisoner[1].source, v)
-	prisoner[1].source = 0
+    prisoner[1].source = 0
     jail1 = false
   elseif v == 2 then
     TriggerClientEvent("menupolice:wf_unjail", prisoner[2].source, v)
-	prisoner[1].source = 0
+    prisoner[1].source = 0
     jail2 = false
   elseif v == 3 then
     TriggerClientEvent("menupolice:wf_unjail", prisoner[3].source, v)
-	prisoner[1].source = 0
+    prisoner[1].source = 0
     jail3 = false
   end
 end)
 
 RegisterServerEvent('menupolice:civunjail_s')
 AddEventHandler('menupolice:civunjail_s', function(t, v)
-	-- print(prisoner[1].source)
-	-- print(prisoner[2].source)
-	-- print(prisoner[3].source)
+  -- print(prisoner[1].source)
+  -- print(prisoner[2].source)
+  -- print(prisoner[3].source)
   if v == 1 then
     TriggerClientEvent("menupolice:wf_unjail", prisoner[1].source, v)
     TriggerEvent("menupolice:uncuff_s", prisoner[1].source)
-	prisoner[1].source = 0
+    prisoner[1].source = 0
     jail1 = false
   elseif v == 2 then
     TriggerClientEvent("menupolice:wf_unjail", prisoner[2].source, v)
     TriggerEvent("menupolice:uncuff_s", prisoner[2].source)
-	prisoner[1].source = 0
+    prisoner[1].source = 0
     jail2 = false
   elseif v == 3 then
     TriggerClientEvent("menupolice:wf_unjail", prisoner[3].source, v)
     TriggerEvent("menupolice:uncuff_s", prisoner[3].source)
-	prisoner[1].source = 0
+    prisoner[1].source = 0
     jail3 = false
   end
 end)

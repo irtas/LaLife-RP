@@ -9,16 +9,20 @@ price = 50 -- you may edit this to your liking. if "enableprice = false" ignore 
 RegisterServerEvent('carwash:checkmoney')
 AddEventHandler('carwash:checkmoney', function()
 	TriggerEvent('es:getPlayerFromId', source, function(player)
-		if(enableprice == true) then
-			if(player:money >= price) then
-				player:removeMoney((price))
-				TriggerClientEvent('carwash:success', source, price)
+		if (user) then
+			if(enableprice == true) then
+				if(player:money >= price) then
+					player:removeMoney((price))
+					TriggerClientEvent('carwash:success', source, price)
+				else
+					moneyleft = price - player:money
+					TriggerClientEvent('carwash:notenoughmoney', source, moneyleft)
+				end
 			else
-				moneyleft = price - player:money
-				TriggerClientEvent('carwash:notenoughmoney', source, moneyleft)
+				TriggerClientEvent('carwash:free', source)
 			end
 		else
-			TriggerClientEvent('carwash:free', source)
+			TriggerEvent("es:desyncMsg")
 		end
 	end)
 end)

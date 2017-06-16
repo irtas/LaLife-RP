@@ -234,6 +234,7 @@ function spawnPlayer(spawnIdx, cb)
     -- freeze the local player
     freezePlayer(PlayerId(), true)
 
+
     DoScreenFadeOut(500)
 
     while IsScreenFadingOut() do
@@ -306,20 +307,22 @@ function spawnPlayer(spawnIdx, cb)
     --SetEntityHealth(ped, 300) -- TODO: allow configuration of this?
     RemoveAllPedWeapons(ped) -- TODO: make configurable (V behavior?)
     ClearPlayerWantedLevel(PlayerId())
-    Wait(15000)
+
     freezePlayer(PlayerId(), false)
+
+    -- ShutdownLoadingScreen()
+    -- DoScreenFadeIn(500)
+    --
+    -- while IsScreenFadingIn() do
+    --   Citizen.Wait(0)
+    -- end
 
     TriggerEvent('playerSpawned', spawn)
     if cb then
       cb(spawn)
     end
     Citizen.Trace("There")
-    ShutdownLoadingScreen()
-    DoScreenFadeIn(500)
 
-    while IsScreenFadingIn() do
-      Citizen.Wait(0)
-    end
     spawnLock = false
   end)
 end

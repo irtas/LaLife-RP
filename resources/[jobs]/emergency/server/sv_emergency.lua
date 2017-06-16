@@ -24,7 +24,11 @@ RegisterServerEvent('es_em:getTheCall')
 AddEventHandler('es_em:getTheCall', function(playerName, playerID, x, y, z, sourcePlayerInComa)
   local fullname = playerName
   TriggerEvent('es:getPlayerFromId', source, function(user)
-    fullname = user:getPrenom() .. " " .. user:getNom()
+    if (user) then
+      fullname = user:getPrenom() .. " " .. user:getNom()
+    else
+      TriggerEvent("es:desyncMsg")
+    end
   end)
   TriggerEvent("es:getPlayers", function(players)
     for i,v in pairs(players) do
@@ -43,10 +47,14 @@ end
 
 RegisterServerEvent('es_em:sv_getJobId')
 AddEventHandler('es_em:sv_getJobId', function()
-TriggerEvent('es:getPlayerFromId', source, function(user)
-  local jobid = user:getJob()
-  TriggerClientEvent('es_em:cl_setJobId', source, jobid)
-end)
+  TriggerEvent('es:getPlayerFromId', source, function(user)
+    if (user) then
+      local jobid = user:getJob()
+      TriggerClientEvent('es_em:cl_setJobId', source, jobid)
+    else
+      TriggerEvent("es:desyncMsg")
+    end
+  end)
 end)
 
 RegisterServerEvent('es_em:sv_getDocConnected')
@@ -61,9 +69,9 @@ function()
       identifier = GetPlayerIdentifiers(i)
       if (identifier ~= nil) then
         local isConnected = MySQL.Sync.fetchScalar("SELECT COUNT(1) FROM users LEFT JOIN jobs ON jobs.job_id = users.job WHERE users.identifier = @identifier AND job_id = 13", {['@identifier'] = identifier[1]})
-		if isConnected ~= 0 then
-			TriggerClientEvent('es_em:cl_getDocConnected', source, true)
-		end
+        if isConnected ~= 0 then
+          TriggerClientEvent('es_em:cl_getDocConnected', source, true)
+        end
       end
     end
   end)
@@ -73,27 +81,32 @@ end
 RegisterServerEvent('es_em:sv_setService')
 AddEventHandler('es_em:sv_setService',
 function(service)
-  TriggerEvent('es:getPlayerFromId', source,
-  function(user)
-    user:setenService(2)
+  TriggerEvent('es:getPlayerFromId', source, function(user)
+    if (user) then
+      user:setenService(2)
+    else
+      TriggerEvent("es:desyncMsg")
+    end
   end)
 end)
 
 -- Par DayField :)!
 RegisterServerEvent("delete:weapon")
 AddEventHandler('delete:weapon', function()
-    TriggerEvent('es:getPlayerFromId', source, function(user)
-    local player = user.identifier
- 	  MySQL.Async.execute("DELETE from user_weapons WHERE identifier = @username", {['@username'] = player})
- 	end)
+  TriggerEvent('es:getPlayerFromId', source, function(user)
+    if (user) then
+      local player = user.identifier
+      MySQL.Async.execute("DELETE from user_weapons WHERE identifier = @username", {['@username'] = player})
+    else
+      TriggerEvent("es:desyncMsg")
+    end
+  end)
 end)
 
 RegisterServerEvent('es_em:sv_removeMoney')
-AddEventHandler('es_em:sv_removeMoney',
-function()
-  TriggerEvent("es:getPlayerFromId", source,
-  function(user)
-    if(user)then
+AddEventHandler('es_em:sv_removeMoney', function()
+  TriggerEvent("es:getPlayerFromId", source, function(user)
+    if (user) then
       if user.money > 0 then
         user:setMoney(0)
       end
@@ -101,10 +114,8 @@ function()
         user:setDMoney(0)
       end
     end
-  end
-)
-end
-)
+  end)
+end)
 
 RegisterServerEvent('es_em:sv_sendMessageToPlayerInComa')
 AddEventHandler('es_em:sv_sendMessageToPlayerInComa',

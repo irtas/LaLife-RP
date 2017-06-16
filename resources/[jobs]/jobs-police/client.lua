@@ -283,9 +283,12 @@ Citizen.CreateThread(function()
     local playerPed = GetPlayerPed(-1)
     local lastSpawnedVeh = GetVehiclePedIsUsing(playerPed)
 
+    if IsNearPoints(Despawnpoint, 5.01) then
+			DrawMarker(1, Despawnpoint.x, Despawnpoint.y, Despawnpoint.z, 0, 0, 0, 0, 0, 0, 3.001, 3.0001, 0.5001, 0, 155, 255, 200, 0, 0, 0, 0)
+    end
+
     if IsNearPoints(Despawnpoint, 2.01) then
-      --local playerPed = GetPlayerPed(-1)
-      --local lastSpawnedVeh = GetClosestVehicle(Despawnpoint[1].x, Despawnpoint[1].y, Despawnpoint[1].z, 3.000, 0, 70)
+
       if (lastSpawnedVeh ~= nil) then
         deleteCar(lastSpawnedVeh)
       end

@@ -29,32 +29,44 @@ local countItems = MySQL.Sync.fetchScalar("SELECT COUNT(1) FROM items")
 RegisterServerEvent("es:deleteTelist")
 AddEventHandler("es:deleteTelist", function(source)
 	TriggerEvent('es:getPlayerFromId', source, function(user)
-		tel = user:getTel()
-		telist[tel].IDsource = nil
-  end)
+		if (user) then
+			tel = user:getTel()
+			telist[tel].IDsource = nil
+		else
+			TriggerEvent("es:desyncMsg")
+		end
+	end)
 end)
 
 AddEventHandler('playerDropped', function()
 	TriggerEvent('es:getPlayerFromId', source, function(user)
-		tel = user:getTel()
-		telist[tel].IDsource = nil
+		if (user) then
+			tel = user:getTel()
+			telist[tel].IDsource = nil
 
-		MySQL.Async.execute("UPDATE users SET `money`=@value WHERE identifier = @identifier",
-		{['@value'] = user.money, ['@identifier'] = user.identifier})
+			MySQL.Async.execute("UPDATE users SET `money`=@value WHERE identifier = @identifier",
+			{['@value'] = user.money, ['@identifier'] = user.identifier})
 
-		MySQL.Async.execute("UPDATE users SET `dirtymoney`=@value WHERE identifier = @identifier",
+			MySQL.Async.execute("UPDATE users SET `dirtymoney`=@value WHERE identifier = @identifier",
 			{['@value'] = user.dirtymoney, ['@identifier'] = user.identifier})
 
-		MySQL.Async.execute("UPDATE coordinates SET `x`=@valx,`y`=@valy,`z`=@valz WHERE identifier = @identifier",
-		{['@valx'] = user.coords.x, ['@valy'] = user.coords.y, ['@valz'] = user.coords.z, ['@identifier'] = user.identifier})
-  end)
+			MySQL.Async.execute("UPDATE coordinates SET `x`=@valx,`y`=@valy,`z`=@valz WHERE identifier = @identifier",
+			{['@valx'] = user.coords.x, ['@valy'] = user.coords.y, ['@valz'] = user.coords.z, ['@identifier'] = user.identifier})
+		else
+			TriggerEvent("es:desyncMsg")
+		end
+	end)
 end)
 
 RegisterServerEvent("es:getPhonebook")
 AddEventHandler("es:getPhonebook", function(source)
 	TriggerEvent('es:getPlayerFromId', source, function(user)
-		LoadPhonebook(user.identifier, source)
-  end)
+		if (user) then
+			LoadPhonebook(user.identifier, source)
+		else
+			TriggerEvent("es:desyncMsg")
+		end
+	end)
 end)
 
 function LoadPhonebook(identifier, source)
@@ -110,14 +122,14 @@ function LoadUser(identifier, source, new)
 end
 
 function stringsplit(self, delimiter)
-  local a = self:Split(delimiter)
-  local t = {}
+	local a = self:Split(delimiter)
+	local t = {}
 
-  for i = 0, #a - 1 do
-     table.insert(t, a[i])
-  end
+	for i = 0, #a - 1 do
+		table.insert(t, a[i])
+	end
 
-  return t
+	return t
 end
 
 -- PLEASE I HOPE WE CODED THIS FOR NOTHING.
@@ -153,11 +165,11 @@ end
 -- YOU MUST
 function isLoggedIn(source)
 	if(Users[GetPlayerName(source)] ~= nil)then
-	if(Users[GetPlayerName(source)]['isLoggedIn'] == 1) then
-		return true
-	else
-		return false
-	end
+		if(Users[GetPlayerName(source)]['isLoggedIn'] == 1) then
+			return true
+		else
+			return false
+		end
 	else
 		return false
 	end
@@ -217,7 +229,7 @@ AddEventHandler("es:setPlayerData", function(user, k, v, cb)
 				Users[user][k] = v
 
 				MySQL.Async.execute("UPDATE users SET @key=@value WHERE identifier = @identifier",
-			    {['@key'] = k, ['@value'] = v, ['@identifier'] = Users[user]['identifier']})
+				{['@key'] = k, ['@value'] = v, ['@identifier'] = Users[user]['identifier']})
 			end
 
 			if(k == "group")then
@@ -276,18 +288,18 @@ end)
 function generateTel(identifier)
 	local tel = ""
 	for i = #identifier, 1, -1 do
-	    local c = string.sub(identifier, i, i)
-	    -- do something with c
-	    if (#tel) < 8 then
-	        c = tonumber(c)
-	        if c ~= nil then
-	            if string.len(tel) == 3 then
-	                tel = tel .. "-"
-	            end
-	            c = tostring(c)
-	            tel = tel .. c
-	        end
-	    end
+		local c = string.sub(identifier, i, i)
+		-- do something with c
+		if (#tel) < 8 then
+			c = tonumber(c)
+			if c ~= nil then
+				if string.len(tel) == 3 then
+					tel = tel .. "-"
+				end
+				c = tostring(c)
+				tel = tel .. c
+			end
+		end
 	end
 	return tel
 end
@@ -296,7 +308,11 @@ end
 RegisterServerEvent("es:getVehPlate")
 AddEventHandler("es:getVehPlate", function()
 	TriggerEvent('es:getPlayerFromId', source, function(user)
-		TriggerClientEvent("es:f_getVehPlate", source, user:getVehicle())
+		if (user) then
+			TriggerClientEvent("es:f_getVehPlate", source, user:getVehicle())
+		else
+			TriggerEvent("es:desyncMsg")
+		end
 	end)
 end)
 
@@ -305,7 +321,11 @@ end)
 RegisterServerEvent("es:requestingSpawnData")
 AddEventHandler("es:requestingSpawnData", function()
 	TriggerEvent('es:getPlayerFromId', source, function(user)
-		TriggerClientEvent("es:sendingSpawnData", source, user:getCoords())
+		if (user) then
+			TriggerClientEvent("es:sendingSpawnData", source, user:getCoords())
+		else
+			TriggerEvent("es:desyncMsg")
+		end
 	end)
 end)
 
@@ -316,9 +336,9 @@ local function savePlayerMoney()
 		TriggerEvent("es:getPlayers", function(users)
 			for k,v in pairs(users)do
 				MySQL.Async.execute("UPDATE users SET `money`=@value WHERE identifier = @identifier",
-			    {['@value'] = v.money, ['@identifier'] = v.identifier})
+				{['@value'] = v.money, ['@identifier'] = v.identifier})
 				MySQL.Async.execute("UPDATE users SET `dirtymoney`=@value WHERE identifier = @identifier",
-					{['@value'] = v.dirtymoney, ['@identifier'] = v.identifier})
+				{['@value'] = v.dirtymoney, ['@identifier'] = v.identifier})
 			end
 		end)
 
@@ -333,37 +353,44 @@ savePlayerMoney()
 -- TELEPHONE -> TELIST
 RegisterServerEvent("tel:sendingMsg")
 AddEventHandler("tel:sendingMsg", function(msg, teldest)
-	local name = ""
-	local surname = ""
-	local origin = ""
-	  TriggerEvent('es:getPlayerFromId', source, function(user)
+	local name = nil
+	local surname = nil
+	local origin = nil
+	TriggerEvent('es:getPlayerFromId', source, function(user)
+		if (user) then
 			name = user:getNom()
 			surname = user:getPrenom()
 			origin = user:getTel()
-		end)
-
-	if telist[teldest] ~= nil then
-		if telist[teldest].IDsource ~= nil then
-			local player = telist[teldest].IDsource
-			local player2 = telist[origin].IDsource
-			TriggerClientEvent("tel:receivingMsg", player, msg, name, surname)
-			TriggerClientEvent("citizenv:notif", player2, "~g~ Message envoyé")
+		else
+			TriggerEvent("es:desyncMsg")
+		end
+	end)
+	if name ~= nil then
+		if telist[teldest] ~= nil then
+			if telist[teldest].IDsource ~= nil then
+				local player = telist[teldest].IDsource
+				local player2 = telist[origin].IDsource
+				TriggerClientEvent("tel:receivingMsg", player, msg, name, surname)
+				TriggerClientEvent("citizenv:notif", player2, "~g~ Message envoyé")
+			else
+				TriggerClientEvent("citizenv:notif", player2, "~r~ Le joueur n'est pas connecté")
+			end
 		else
 			TriggerClientEvent("citizenv:notif", player2, "~r~ Le joueur n'est pas connecté")
 		end
 	else
-		TriggerClientEvent("citizenv:notif", player2, "~r~ Le joueur n'est pas connecté")
+		TriggerEvent("es:desyncMsg")
 	end
 end)
 
 function getPlayerID(source)
-    local identifiers = GetPlayerIdentifiers(source)
-    local player = getIdentifiant(identifiers)
-    return player
+	local identifiers = GetPlayerIdentifiers(source)
+	local player = getIdentifiant(identifiers)
+	return player
 end
 
 function getIdentifiant(id)
-    for _, v in ipairs(id) do
-        return v
-    end
+	for _, v in ipairs(id) do
+		return v
+	end
 end

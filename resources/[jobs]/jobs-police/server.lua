@@ -17,34 +17,42 @@ end
 RegisterServerEvent('jobspolice:updateService')
 AddEventHandler('jobspolice:updateService', function(id)
 	TriggerEvent('es:getPlayerFromId', source, function(user)
-		local player = user.identifier
-		user:setenService(id)
-		TriggerServerEvent('vmenu:updateUser', 5)
+		if (user) then
+			local player = user.identifier
+			user:setenService(id)
+			TriggerServerEvent('vmenu:updateUser', 5)
+		else
+			TriggerEvent("es:desyncMsg")
+		end
 	end)
 end)
 
 RegisterServerEvent('jobspolice:jobs')
 AddEventHandler('jobspolice:jobs', function(id, civil)
 	TriggerEvent('es:getPlayerFromId', source, function(user)
-		local player = user.identifier
-		local namePolice = namePolice(player, user) --SELECT
-		local id_police = idPolice(user) --Donne le ID de la police du joueur pour lui donne les armes et le skin aproprier
-		if namePolice == "Rien" then
-			TriggerClientEvent("citizenv:notify", source, "CHAR_ANDREAS", 1, "Commissariat", false, "Vous devez être policier")
-		else
-			--updatejob(player, id) --UPDATE
-			user:setenService(id)
-			local isService = isService(user)
-			if isService == 1 then
-				TriggerClientEvent("citizenv:notify", source, "CHAR_ANDREAS", 1, "Commissariat", false, "Vous êtes en service en tant que : ".. namePolice)
-				if not civil then
-					ArmeSelonGrade(id_police)
-				end
+		if (user) then
+			local player = user.identifier
+			local namePolice = namePolice(player, user) --SELECT
+			local id_police = idPolice(user) --Donne le ID de la police du joueur pour lui donne les armes et le skin aproprier
+			if namePolice == "Rien" then
+				TriggerClientEvent("citizenv:notify", source, "CHAR_ANDREAS", 1, "Commissariat", false, "Vous devez être policier")
 			else
-				TriggerClientEvent("citizenv:notify", source, "CHAR_ANDREAS", 1, "Commissariat", false, "Vous êtes maintenant hors service")
-				TriggerEvent("vmenu:fromSlastChar", source)
+				--updatejob(player, id) --UPDATE
+				user:setenService(id)
+				local isService = isService(user)
+				if isService == 1 then
+					TriggerClientEvent("citizenv:notify", source, "CHAR_ANDREAS", 1, "Commissariat", false, "Vous êtes en service en tant que : ".. namePolice)
+					if not civil then
+						ArmeSelonGrade(id_police)
+					end
+				else
+					TriggerClientEvent("citizenv:notify", source, "CHAR_ANDREAS", 1, "Commissariat", false, "Vous êtes maintenant hors service")
+					TriggerEvent("vmenu:fromSlastChar", source)
+				end
+				TriggerEvent('vmenu:updateUser', 5)
 			end
-			TriggerEvent('vmenu:updateUser', 5)
+		else
+			TriggerEvent("es:desyncMsg")
 		end
 	end)
 end)
@@ -79,18 +87,22 @@ end
 RegisterServerEvent('jobspolice:wepArmory')
 AddEventHandler('jobspolice:wepArmory', function(id)
 	TriggerEvent('es:getPlayerFromId', source, function(user)
-		local player = user.identifier
-		local namePolice = namePolice(player, user) --SELECT
-		if namePolice == "Rien" then
-			TriggerClientEvent("citizenv:notify", source, "CHAR_ANDREAS", 1, "Commissariat", false, "Vous devez être policier")
-		else
-			local isService = isService(user)
-			if isService == 1 then
-				TriggerClientEvent("jobspolice:notif", source, "~g~Voici votre arme")
-				TriggerClientEvent("jobspolice:giveArmory", source, id, nil)
+		if (user) then
+			local player = user.identifier
+			local namePolice = namePolice(player, user) --SELECT
+			if namePolice == "Rien" then
+				TriggerClientEvent("citizenv:notify", source, "CHAR_ANDREAS", 1, "Commissariat", false, "Vous devez être policier")
 			else
-				TriggerClientEvent("jobspolice:notif", source, "~r~Vous n'êtes pas en service")
+				local isService = isService(user)
+				if isService == 1 then
+					TriggerClientEvent("jobspolice:notif", source, "~g~Voici votre arme")
+					TriggerClientEvent("jobspolice:giveArmory", source, id, nil)
+				else
+					TriggerClientEvent("jobspolice:notif", source, "~r~Vous n'êtes pas en service")
+				end
 			end
+		else
+			TriggerEvent("es:desyncMsg")
 		end
 	end)
 end)
@@ -98,63 +110,75 @@ end)
 RegisterServerEvent('jobspolice:vehtoGarage')
 AddEventHandler('jobspolice:vehtoGarage', function()
 	TriggerEvent('es:getPlayerFromId', source, function(user)
-		local player = user.identifier
-		local L = #player - 4
-		local L1 = #player - 3
-		local L2 = #player - 2
-		local L3 = #player - 1
-		local plateveh = "LSPD" .. player[L] .. player[L1] .. player[L2] .. player[L3]
-		plateveh = string.upper(plateveh)
-		user:setVehicle(0)
-		TriggerClientEvent("jobspolice:DespawnVehicle", source, plateveh)
-		TriggerEvent('vmenu:updateUser', 98)
+		if (user) then
+			local player = user.identifier
+			local L = #player - 4
+			local L1 = #player - 3
+			local L2 = #player - 2
+			local L3 = #player - 1
+			local plateveh = "LSPD" .. player[L] .. player[L1] .. player[L2] .. player[L3]
+			plateveh = string.upper(plateveh)
+			user:setVehicle(0)
+			TriggerClientEvent("jobspolice:DespawnVehicle", source, plateveh)
+			TriggerEvent('vmenu:updateUser', 98)
+		else
+			TriggerEvent("es:desyncMsg")
+		end
 	end)
 end)
 
 RegisterServerEvent('jobspolice:vehGarage')
 AddEventHandler('jobspolice:vehGarage', function(vehicule)
 	TriggerEvent('es:getPlayerFromId', source, function(user)
-		local player = user.identifier
-		local L = #player - 4
-		local L1 = #player - 3
-		local L2 = #player - 2
-		local L3 = #player - 1
-		local plateveh = "LSPD" .. player[L] .. player[L1] .. player[L2] .. player[L3]
-		plateveh = string.upper(plateveh)
-		user:setVehicle(plateveh)
-		local name_police = namePolice(player, user)
-		if name_police ~= "Rien" then
-			local isService = isService(user)
-			if isService == 1 then
-				TriggerClientEvent("jobspolice:SpawnVehicle", source, vehicule, plateveh, true)
+		if (user) then
+			local player = user.identifier
+			local L = #player - 4
+			local L1 = #player - 3
+			local L2 = #player - 2
+			local L3 = #player - 1
+			local plateveh = "LSPD" .. player[L] .. player[L1] .. player[L2] .. player[L3]
+			plateveh = string.upper(plateveh)
+			user:setVehicle(plateveh)
+			local name_police = namePolice(player, user)
+			if name_police ~= "Rien" then
+				local isService = isService(user)
+				if isService == 1 then
+					TriggerClientEvent("jobspolice:SpawnVehicle", source, vehicule, plateveh, true)
+				else
+					TriggerClientEvent("jobspolice:notif", source, "~r~Vous n'êtes pas en service")
+				end
 			else
-				TriggerClientEvent("jobspolice:notif", source, "~r~Vous n'êtes pas en service")
+				TriggerClientEvent("citizenv:notify", source, "CHAR_ANDREAS", 1, "Commissariat", false, "Vous devez être policier")
 			end
+			TriggerEvent('vmenu:updateUser', 98)
 		else
-			TriggerClientEvent("citizenv:notify", source, "CHAR_ANDREAS", 1, "Commissariat", false, "Vous devez être policier")
+			TriggerEvent("es:desyncMsg")
 		end
-		TriggerEvent('vmenu:updateUser', 98)
 	end)
 end)
 
 RegisterServerEvent('jobspolice:vehHelicoGarage')
 AddEventHandler('jobspolice:vehHelicoGarage', function(vehicule)
 	TriggerEvent('es:getPlayerFromId', source, function(user)
-		local player = user.identifier
-		local L = #player - 4
-		local L1 = #player - 3
-		local L2 = #player - 2
-		local L3 = #player - 1
-		local plateveh = "LSPD" .. player[L] .. player[L1] .. player[L2] .. player[L3]
-		plateveh = string.upper(plateveh)
-		user:setVehicle(plateveh)
-		local isService = isService(user)
-		if isService == 1 then
-			TriggerClientEvent("jobspolice:SpawnVehicle", source, vehicule, plateveh, false)
+		if (user) then
+			local player = user.identifier
+			local L = #player - 4
+			local L1 = #player - 3
+			local L2 = #player - 2
+			local L3 = #player - 1
+			local plateveh = "LSPD" .. player[L] .. player[L1] .. player[L2] .. player[L3]
+			plateveh = string.upper(plateveh)
+			user:setVehicle(plateveh)
+			local isService = isService(user)
+			if isService == 1 then
+				TriggerClientEvent("jobspolice:SpawnVehicle", source, vehicule, plateveh, false)
+			else
+				TriggerClientEvent("jobspolice:notif", source, "~r~Vous n'êtes pas en service")
+			end
+			TriggerEvent('vmenu:updateUser', 98)
 		else
-			TriggerClientEvent("jobspolice:notif", source, "~r~Vous n'êtes pas en service")
+			TriggerEvent("es:desyncMsg")
 		end
-		TriggerEvent('vmenu:updateUser', 98)
 	end)
 end)
 

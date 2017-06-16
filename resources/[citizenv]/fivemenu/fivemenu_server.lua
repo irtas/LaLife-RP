@@ -9,7 +9,7 @@ AddEventHandler('vmenu:getUpdates', function(openMenu)
 		MenuOpts.openMenu = true
 	else
 		TriggerEvent('es:getPlayerFromId', source, function(user)
-			if user ~= nil then
+			if (user) then
 				-- TriggerEvent('es:getPlayerFromIdentifier', user.identifier, function(user)
 				-- 	MenuOpts.user = user
 				-- end)
@@ -45,7 +45,7 @@ AddEventHandler('vmenu:updateUser', function(openMenu)
 	-- identifier = nil,
 	-- telephone = ""
 	TriggerEvent('es:getPlayerFromId', source, function(user)
-		if user ~= nil then
+		if (user) then
 			userInfos["group"] = user.group.group
 			userInfos["permission_level"] = user.permission_level
 			userInfos["money"] = user:getMoney()
@@ -68,9 +68,12 @@ end)
 RegisterServerEvent('es:getVehPlate_s')
 AddEventHandler('es:getVehPlate_s', function()
 	TriggerEvent('es:getPlayerFromId', source, function(user)
-		local plate = user:getVehicle()
-		print(plate)
-		TriggerClientEvent("es:f_getVehPlate", source, plate)
+		if (user) then
+			local plate = user:getVehicle()
+			TriggerClientEvent("es:f_getVehPlate", source, plate)
+		else
+			TriggerEvent("es:desyncMsg")
+		end
 	end)
 end)
 
@@ -82,12 +85,16 @@ end
 RegisterServerEvent("vmenu:cleanCash_s")
 AddEventHandler("vmenu:cleanCash_s", function()
 	TriggerEvent('es:getPlayerFromId', source, function(user)
-		local dcash = tonumber(user:getDMoney())
-		local cash = tonumber(user:getMoney())
-		local washedcash = dcash * 0.3
-		user:setDMoney(0)
-		local total = cash + round(washedcash)
-		user:setMoney(total)
+		if (user) then
+			local dcash = tonumber(user:getDMoney())
+			local cash = tonumber(user:getMoney())
+			local washedcash = dcash * 0.3
+			user:setDMoney(0)
+			local total = cash + round(washedcash)
+			user:setMoney(total)
+		else
+			TriggerEvent("es:desyncMsg")
+		end
 	end)
 end)
 
@@ -97,14 +104,22 @@ AddEventHandler("vmenu:giveCash_s", function(netID, cash)
 	local name = ""
 	local surname = ""
 	TriggerEvent('es:getPlayerFromId', source, function(user)
-		name =  user:getNom()
-		surname = user:getPrenom()
-		user:removeMoney(total)
-		TriggerClientEvent("citizenv:notif", source, "Vous avez donné ~g~" .. total .. "$")
+		if (user) then
+			name =  user:getNom()
+			surname = user:getPrenom()
+			user:removeMoney(total)
+			TriggerClientEvent("citizenv:notif", source, "Vous avez donné ~g~" .. total .. "$")
+		else
+			TriggerEvent("es:desyncMsg")
+		end
 	end)
 	TriggerEvent('es:getPlayerFromId', netID, function(user)
-		user:addMoney(total)
-		TriggerClientEvent("citizenv:notif", netID, surname .. " " .. name .. " vous a donné ~g~" .. total .. "$")
+		if (user) then
+			user:addMoney(total)
+			TriggerClientEvent("citizenv:notif", netID, surname .. " " .. name .. " vous a donné ~g~" .. total .. "$")
+		else
+			TriggerEvent("es:desyncMsg")
+		end
 	end)
 end)
 
@@ -114,13 +129,21 @@ AddEventHandler("vmenu:giveDCash_s", function(netID, cash)
 	local name = ""
 	local surname = ""
 	TriggerEvent('es:getPlayerFromId', source, function(user)
-		name =  user:getNom()
-		surname = user:getPrenom()
-		user:removeDMoney(total)
-		TriggerClientEvent("citizenv:notif", source, "Vous avez donné ~r~" .. total .. "$")
+		if (user) then
+			name =  user:getNom()
+			surname = user:getPrenom()
+			user:removeDMoney(total)
+			TriggerClientEvent("citizenv:notif", source, "Vous avez donné ~r~" .. total .. "$")
+		else
+			TriggerEvent("es:desyncMsg")
+		end
 	end)
 	TriggerEvent('es:getPlayerFromId', netID, function(user)
-		user:addDMoney(total)
-		TriggerClientEvent("citizenv:notif", netID, surname .. " " .. name .. " vous a donné ~r~" .. total .. "$")
+		if (user) then
+			user:addDMoney(total)
+			TriggerClientEvent("citizenv:notif", netID, surname .. " " .. name .. " vous a donné ~r~" .. total .. "$")
+		else
+			TriggerEvent("es:desyncMsg")
+		end
 	end)
 end)

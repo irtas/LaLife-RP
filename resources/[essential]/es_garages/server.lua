@@ -17,15 +17,15 @@ RegisterServerEvent('garages:SelVeh')
 --[[Function]]--
 
 function getPlayerID(source)
-    local identifiers = GetPlayerIdentifiers(source)
-    local player = getIdentifiant(identifiers)
-    return player
+  local identifiers = GetPlayerIdentifiers(source)
+  local player = getIdentifiant(identifiers)
+  return player
 end
 
 function getIdentifiant(id)
-    for _, v in ipairs(id) do
-        return v
-    end
+  for _, v in ipairs(id) do
+    return v
+  end
 end
 
 function vehiclePlate(plate)
@@ -59,7 +59,7 @@ AddEventHandler('garages:CheckForSpawnVeh', function(veh_id)
   local veh_id = veh_id
   local user = getPlayerID(source)
   MySQL.Async.fetchAll("SELECT * FROM user_vehicle WHERE identifier = @identifier AND id = @id",{['@identifier'] = user, ['@id'] = veh_id}, function(data)
-      TriggerClientEvent('garages:SpawnVehicle', source, data[1].vehicle_model, data[1].vehicle_plate, data[1].vehicle_state, data[1].vehicle_colorprimary, data[1].vehicle_colorsecondary, data[1].vehicle_pearlescentcolor, data[1].vehicle_wheelcolor)
+    TriggerClientEvent('garages:SpawnVehicle', source, data[1].vehicle_model, data[1].vehicle_plate, data[1].vehicle_state, data[1].vehicle_colorprimary, data[1].vehicle_colorsecondary, data[1].vehicle_pearlescentcolor, data[1].vehicle_wheelcolor)
   end)
 end)
 
@@ -79,68 +79,73 @@ end)
 
 AddEventHandler('garages:SetVehOut', function(vehicle, plate, car)
   TriggerEvent('es:getPlayerFromId', source, function(user)
-    local player = user.identifier
-    local vehicle = vehicle
-    local state = "Sorti"
-    local plate = plate
-    user:setVehicle(plate)
-    MySQL.Async.execute("UPDATE user_vehicle SET vehicle_state=@state WHERE identifier = @username AND vehicle_plate = @plate AND vehicle_model = @vehicle",
+    if (user) then
+      local player = user.identifier
+      local vehicle = vehicle
+      local state = "Sorti"
+      local plate = plate
+      user:setVehicle(plate)
+      MySQL.Async.execute("UPDATE user_vehicle SET vehicle_state=@state WHERE identifier = @username AND vehicle_plate = @plate AND vehicle_model = @vehicle",
       {['@username'] = player, ['@vehicle'] = vehicle, ['@state'] = state, ['@plate'] = plate})
+    else
+      TriggerEvent("es:desyncMsg")
+    end
   end)
 end)
 
 AddEventHandler('garages:SetVehIn', function(plate)
   TriggerEvent('es:getPlayerFromId', source, function(user)
-    local player = user.identifier
-    local plate = plate
-    local state = "Rentré"
-    MySQL.Async.execute("UPDATE user_vehicle SET vehicle_state=@state WHERE identifier = @username AND vehicle_plate = @plate",
+    if (user) then
+      local player = user.identifier
+      local plate = plate
+      local state = "Rentré"
+      MySQL.Async.execute("UPDATE user_vehicle SET vehicle_state=@state WHERE identifier = @username AND vehicle_plate = @plate",
       {['@username'] = player, ['@plate'] = plate, ['@state'] = state})
+    else
+      TriggerEvent("es:desyncMsg")
+    end
   end)
 end)
 
 AddEventHandler('garages:PutVehInGarages', function(vehicle)
   TriggerEvent('es:getPlayerFromId', source, function(user)
+    if (user) then
+      local player = user.identifier
+      local state ="Rentré"
 
-    local player = user.identifier
-    local state ="Rentré"
-
-    MySQL.Async.fetchAll("SELECT * FROM user_vehicle WHERE identifier = @username",{['@username'] = player}, function (result)
-      if(result)then
-        for k,v in ipairs(result)do
-          joueur = v.identifier
-          local joueur = joueur
+      MySQL.Async.fetchAll("SELECT * FROM user_vehicle WHERE identifier = @username",{['@username'] = player}, function (result)
+        if(result)then
+          for k,v in ipairs(result)do
+            joueur = v.identifier
+            local joueur = joueur
+          end
         end
-      end
 
-      if joueur ~= nil then
-        MySQL.Async.execute("UPDATE user_vehicle SET `vehicle_state`=@state WHERE identifier = @username",
+        if joueur ~= nil then
+          MySQL.Async.execute("UPDATE user_vehicle SET `vehicle_state`=@state WHERE identifier = @username",
           {['@username'] = player, ['@state'] = state})
-      end
-    end)
+        end
+      end)
+    else
+      TriggerEvent("es:desyncMsg")
+    end
   end)
 end)
 
 AddEventHandler('garages:CheckGarageForVehFirst', function(user)
   vehicles = {}
-    local player = user.identifier
-    MySQL.Async.fetchAll("SELECT * FROM user_vehicle WHERE identifier = @username",{['@username'] = player}, function (result)
-      if (result) then
-        local i = 0
-        for _, v in ipairs(result) do
-          i = i + 1
-          -- print(v.vehicle_model)
-          -- print(v.vehicle_plate)
-          -- print(v.vehicle_state)
-          -- print(v.ID)
-          t = { ["id"] = v.ID, ["vehicle_model"] = v.vehicle_model, ["vehicle_name"] = v.vehicle_name, ["vehicle_state"] = v.vehicle_state}
-          table.insert(vehicles, tonumber(i), t)
-        end
+  local player = user.identifier
+  MySQL.Async.fetchAll("SELECT * FROM user_vehicle WHERE identifier = @username",{['@username'] = player}, function (result)
+    if (result) then
+      local i = 0
+      for _, v in ipairs(result) do
+        i = i + 1
+        t = { ["id"] = v.ID, ["vehicle_model"] = v.vehicle_model, ["vehicle_name"] = v.vehicle_name, ["vehicle_state"] = v.vehicle_state}
+        table.insert(vehicles, tonumber(i), t)
       end
-      TriggerClientEvent('garages:getVehicles', source, vehicles)
+    end
+    TriggerClientEvent('garages:getVehicles', source, vehicles)
   end)
-    --print(vehicles[1].id)
-    --print(vehicles[2].vehicle_model)
 end)
 
 AddEventHandler('garages:CheckGarageForVeh', function()
@@ -148,8 +153,8 @@ AddEventHandler('garages:CheckGarageForVeh', function()
   local user = getPlayerID(source)
   MySQL.Async.fetchAll("SELECT * FROM user_vehicle WHERE identifier = @username",{['@username'] = user}, function(data)
     for _, v in ipairs(data) do
-        t = { ["id"] = v.ID, ["vehicle_model"] = v.vehicle_model, ["vehicle_name"] = v.vehicle_name, ["vehicle_state"] = v.vehicle_state}
-        table.insert(vehicles, tonumber(v.ID), t)
+      t = { ["id"] = v.ID, ["vehicle_model"] = v.vehicle_model, ["vehicle_name"] = v.vehicle_name, ["vehicle_state"] = v.vehicle_state}
+      table.insert(vehicles, tonumber(v.ID), t)
     end
     TriggerClientEvent("garages:getVehicles", source, vehicles)
   end)
@@ -157,39 +162,47 @@ end)
 
 AddEventHandler('garages:CheckForSelVeh', function()
   TriggerEvent('es:getPlayerFromId', source, function(user)
-    local state = "Sorti"
-    local player = user.identifier
-    MySQL.Async.fetchAll("SELECT * FROM user_vehicle WHERE identifier = @username AND vehicle_state =@state",{['@username'] = player, ['@vehicle'] = vehicle, ['@state'] = state}, function (result)
-      if(result)then
-        for k,v in ipairs(result)do
-          vehicle = v.vehicle_model
-          plate = v.vehicle_plate
-          local vehicle = vehicle
-          local plate = plate
+    if (user) then
+      local state = "Sorti"
+      local player = user.identifier
+      MySQL.Async.fetchAll("SELECT * FROM user_vehicle WHERE identifier = @username AND vehicle_state =@state",{['@username'] = player, ['@vehicle'] = vehicle, ['@state'] = state}, function (result)
+        if(result)then
+          for k,v in ipairs(result)do
+            vehicle = v.vehicle_model
+            plate = v.vehicle_plate
+            local vehicle = vehicle
+            local plate = plate
+          end
         end
-      end
-      TriggerClientEvent('garages:SelVehicle', source, vehicle, plate)
-    end)
+        TriggerClientEvent('garages:SelVehicle', source, vehicle, plate)
+      end)
+    else
+      TriggerEvent("es:desyncMsg")
+    end
   end)
 end)
 
 
 AddEventHandler('garages:SelVeh', function(plate, vehicle)
   TriggerEvent('es:getPlayerFromId', source, function(user)
-    local player = user.identifier
-    local plate = plate
-    local vehicle = vehicle
-    MySQL.Async.fetchAll("SELECT * FROM user_vehicle WHERE identifier = @username AND vehicle_plate =@plate AND vehicle_model=@vehicle",{['@username'] = player, ['@vehicle'] = vehicle, ['@plate'] = plate}, function (result)
-      if(result)then
-        for k,v in ipairs(result)do
-          price = v.vehicle_price
-          local price = price / 2
-          user:addMoney((price))
+    if (user) then
+      local player = user.identifier
+      local plate = plate
+      local vehicle = vehicle
+      MySQL.Async.fetchAll("SELECT * FROM user_vehicle WHERE identifier = @username AND vehicle_plate =@plate AND vehicle_model=@vehicle",{['@username'] = player, ['@vehicle'] = vehicle, ['@plate'] = plate}, function (result)
+        if(result)then
+          for k,v in ipairs(result)do
+            price = v.vehicle_price
+            local price = price / 2
+            user:addMoney((price))
+          end
         end
-      end
-      MySQL.Async.execute("DELETE from user_vehicle WHERE identifier = @username AND vehicle_plate = @plate AND vehicle_model=@vehicle",
+        MySQL.Async.execute("DELETE from user_vehicle WHERE identifier = @username AND vehicle_plate = @plate AND vehicle_model=@vehicle",
         {['@username'] = player, ['@plate'] = plate, ['@vehicle'] = vehicle})
-      TriggerClientEvent("citizenv:notify", source, "CHAR_SIMEON", 1, "Simeon", false, "Véhicule vendu!\n")
-    end)
+        TriggerClientEvent("citizenv:notify", source, "CHAR_SIMEON", 1, "Simeon", false, "Véhicule vendu!\n")
+      end)
+    else
+      TriggerEvent("es:desyncMsg")
+    end
   end)
 end)
