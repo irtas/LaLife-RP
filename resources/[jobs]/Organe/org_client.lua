@@ -354,6 +354,7 @@ Citizen.CreateThread(function()
               ShowMsgtime.time = 150
               RemoveBlip(Blip_morgue)
     					RemoveBlip(Blip_tombe)
+              tombe=0
             end
           else
             ShowMsgtime.msg = '~r~ Vous devez être fossoyeur !'
@@ -512,7 +513,8 @@ Citizen.CreateThread(function()
               ShowMsgtime.msg = "~r~ Vous n'avez pas de corps !"
               ShowMsgtime.time = 150
               RemoveBlip(Blip_morgue)
-    		  RemoveBlip(Blip_tombe)
+    		      RemoveBlip(Blip_tombe)
+              tombe = 0
 
             end
           else

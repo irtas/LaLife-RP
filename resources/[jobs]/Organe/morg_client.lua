@@ -310,9 +310,8 @@ Citizen.CreateThread(function()
               EndTextCommandSetBlipName(Blip)
               --SetEntityAsNoLongerNeeded(Blip.company)
             else
-              ShowMsgtime.msg = "~r~ Vous n'avez pas de corps !"
+              ShowMsgtime.msg = "~r~ Vous n'avez pas de corps, allez en chercher un !"
               ShowMsgtime.time = 150
-              RemoveBlip(Blip)
             end
           else
             ShowMsgtime.msg = '~r~ Vous devez être préposé à la morgue !'
