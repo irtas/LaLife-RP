@@ -140,7 +140,8 @@ Citizen.CreateThread(function()
 			elseif UpdateOnscreenKeyboard() == 1 then
 				local txt = GetOnscreenKeyboardResult()
 				if (string.len(txt) > 0) and (string.match(txt, '%d+')) then -- BEAU REGEX PATTERN EN LUA PARCE QUE C'EST PAUVRE
-					if sendMoney > tonumber(txt) then
+					txt = tonumber(txt)
+					if sendMoney > txt then
 						if txt > 0 then
 							addCash = txt
 							cashconfirmed = 2
@@ -200,7 +201,8 @@ Citizen.CreateThread(function()
 			elseif UpdateOnscreenKeyboard() == 1 then
 				local txt = GetOnscreenKeyboardResult()
 				if (string.len(txt) > 0) and (string.match(txt, '%d+')) then -- BEAU REGEX PATTERN EN LUA PARCE QUE C'EST PAUVRE
-					if sendMoney > tonumber(txt) then
+					txt = tonumber(txt)
+					if sendMoney > txt then
 						if txt > 0 then
 							addCash = txt
 							dcashconfirmed = 2
