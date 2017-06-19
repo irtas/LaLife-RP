@@ -95,7 +95,7 @@ TriggerEvent('es:addGroupCommand', 'tpme', "admin", function(source, args, user)
 			TriggerEvent("es:desyncMsg")
 		end
 	end)
-	TriggerEvent("citizenv:notif", GetPlayerName(tonumber(args[2])))
+	TriggerEvent("itinerance:notif", GetPlayerName(tonumber(args[2])))
 	TriggerClientEvent("vmenu:teleport_marker_player", tonumber(args[2]), pos)
 end, function(source, args, user)
 	TriggerClientEvent('chatMessage', source, "SYSTEM", {255, 0, 0}, "Insufficienct permissions!")

@@ -114,6 +114,10 @@ Garage_helico_police = {
   {name="Pole Emploi", colour=15, id=351, ['x'] = 449.87265014648, ['y'] = -981.50982666016, ['z'] = 43.69164276123},
 }
 
+Garage_helico_ambulance = {
+  { ['x'] = 313.22354125977, ['y'] = -1464.9350585938, ['z'] = 46.509483337402 }
+}
+
 Tanker_company = {
   {name="Trucker Company", num=0 ,colour=15, id=351, x=1515.51, y=-2138.76, z=76.7922},
 }

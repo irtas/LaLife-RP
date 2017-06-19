@@ -225,6 +225,37 @@ function SpawnAmbulance()
 	Citizen.InvokeNative(0xB736A491E64A32CF, Citizen.PointerValueIntInitialized(spawned_car))
 end
 
+
+RegisterNetEvent('es_em:SpawnHelicoAmbulance')
+AddEventHandler('es_em:SpawnHelicoAmbulance', function(model, plateveh)
+	Citizen.Wait(0)
+	local myPed = GetPlayerPed(-1)
+	local player = PlayerId()
+	local vehicle = GetHashKey(model)
+
+	RequestModel(vehicle)
+
+	while not HasModelLoaded(vehicle) do
+		Wait(1)
+	end
+
+	local spawned_helico = CreateVehicle(vehicle, 313.223, -1464.935, 46.509, 223.580, true, false)
+	SetVehicleLivery(spawned_helico, 1)
+	SetVehicleOnGroundProperly(spawned_helico)
+	SetVehicleHasBeenOwnedByPlayer(spawned_helico,true)
+	local id = NetworkGetNetworkIdFromEntity(spawned_helico)
+	SetNetworkIdCanMigrate(id, true)
+	SetVehRadioStation(spawned_helico, "OFF")
+	SetEntityInvincible(spawned_helico, false)
+	SetVehicleOnGroundProperly(spawned_helico)
+	SetVehicleNumberPlateText(spawned_helico, plateveh)
+	SetModelAsNoLongerNeeded(vehicle)
+	SetPedIntoVehicle(myPed, spawned_helico, - 1)
+	SetEntityAsMissionEntity(spawned_helico, true, true)
+	drawNotification("Hélico sorti, bonne route")
+	Citizen.InvokeNative(0xB736A491E64A32CF, Citizen.PointerValueIntInitialized(spawned_helico))
+end)
+
 function StartEmergency(x, y, z, sourcePlayerInComa)
 	BLIP_EMERGENCY = AddBlipForCoord(x, y, z)
 

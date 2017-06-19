@@ -108,7 +108,7 @@ AddEventHandler("vmenu:giveCash_s", function(netID, cash)
 			name =  user:getNom()
 			surname = user:getPrenom()
 			user:removeMoney(total)
-			TriggerClientEvent("citizenv:notif", source, "Vous avez donné ~g~" .. total .. "$")
+			TriggerClientEvent("itinerance:notif", source, "Vous avez donné ~g~" .. total .. "$")
 		else
 			TriggerEvent("es:desyncMsg")
 		end
@@ -116,7 +116,7 @@ AddEventHandler("vmenu:giveCash_s", function(netID, cash)
 	TriggerEvent('es:getPlayerFromId', netID, function(user)
 		if (user) then
 			user:addMoney(total)
-			TriggerClientEvent("citizenv:notif", netID, surname .. " " .. name .. " vous a donné ~g~" .. total .. "$")
+			TriggerClientEvent("itinerance:notif", netID, surname .. " " .. name .. " vous a donné ~g~" .. total .. "$")
 		else
 			TriggerEvent("es:desyncMsg")
 		end
@@ -133,7 +133,7 @@ AddEventHandler("vmenu:giveDCash_s", function(netID, cash)
 			name =  user:getNom()
 			surname = user:getPrenom()
 			user:removeDMoney(total)
-			TriggerClientEvent("citizenv:notif", source, "Vous avez donné ~r~" .. total .. "$")
+			TriggerClientEvent("itinerance:notif", source, "Vous avez donné ~r~" .. total .. "$")
 		else
 			TriggerEvent("es:desyncMsg")
 		end
@@ -141,7 +141,7 @@ AddEventHandler("vmenu:giveDCash_s", function(netID, cash)
 	TriggerEvent('es:getPlayerFromId', netID, function(user)
 		if (user) then
 			user:addDMoney(total)
-			TriggerClientEvent("citizenv:notif", netID, surname .. " " .. name .. " vous a donné ~r~" .. total .. "$")
+			TriggerClientEvent("itinerance:notif", netID, surname .. " " .. name .. " vous a donné ~r~" .. total .. "$")
 		else
 			TriggerEvent("es:desyncMsg")
 		end

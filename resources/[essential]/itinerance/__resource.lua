@@ -7,6 +7,7 @@ dependency "essentialmode"
 
 client_scripts {
   "map.lua",
+  "main.lua",
   "stores/vehshop.lua"
 }
 

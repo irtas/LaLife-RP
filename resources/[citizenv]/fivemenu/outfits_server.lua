@@ -1,18 +1,22 @@
 require "resources/mysql-async/lib/MySQL"
 
-function updateHair(player, e, v)
+function updateHair(player, e, v, t, y)
   local hair = e
-  local haircolor = v
+  local hairsec = v
+  local haircolor = t
+  local haircolorsec = y
   MySQL.Async.execute("UPDATE outfits SET `hair`=@hair WHERE identifier=@user",{['@hair'] = hair, ['@user'] = player})
-  MySQL.Async.execute("UPDATE outfits SET `hair_text`=@hairc WHERE identifier=@user",{['@hairc'] = haircolor, ['@user'] = player})
+  MySQL.Async.execute("UPDATE outfits SET `hair_text`=@hairsec WHERE identifier=@user",{['@hairsec'] = hairsec, ['@user'] = player})
+  MySQL.Async.execute("UPDATE outfits SET `haircolor`=@haircolor WHERE identifier=@user",{['@haircolor'] = haircolor, ['@user'] = player})
+  MySQL.Async.execute("UPDATE outfits SET `haircolor_text`=@haircolorsec WHERE identifier=@user",{['@haircolorsec'] = haircolorsec, ['@user'] = player})
 end
 
 RegisterServerEvent('vmenu:getHair')
-AddEventHandler('vmenu:getHair', function(hair, haircolor)
+AddEventHandler('vmenu:getHair', function(hair, hairsec, haircolor, haircolorsec)
   TriggerEvent('es:getPlayerFromId', source, function(user)
     if (user) then
       local player = user.identifier
-      updateHair(player, hair, haircolor)
+      updateHair(player, hair, hairsec, haircolor, haircolorsec)
     else
       TriggerEvent("es:desyncMsg")
     end
@@ -86,10 +90,10 @@ AddEventHandler('vmenu:lastChar', function()
     if (user) then
       local player = user.identifier
 
-      MySQL.Async.fetchAll("SELECT skin,face,face_text,hair,hair_text,pants,pants_text,shoes,shoes_text,torso,torso_text,shirt,shirt_text,three,three_text,seven,seven_text FROM outfits WHERE identifier=@user",{
+      MySQL.Async.fetchAll("SELECT skin,face,face_text,hair,hair_text,pants,pants_text,shoes,shoes_text,torso,torso_text,shirt,shirt_text,three,three_text,seven,seven_text,haircolor,haircolor_text FROM outfits WHERE identifier=@user",{
         ['@user']=player
       }, function (result)
-        TriggerClientEvent("vmenu:updateChar",source,{result[1].face,result[1].face_text,result[1].hair,result[1].hair_text,result[1].pants,result[1].pants_text,result[1].shoes,result[1].shoes_text,result[1].torso,result[1].torso_text,result[1].shirt,result[1].shirt_text,result[1].three,result[1].three_text,result[1].seven,result[1].seven_text,result[1].skin})
+        TriggerClientEvent("vmenu:updateChar",source,{result[1].face,result[1].face_text,result[1].hair,result[1].hair_text,result[1].pants,result[1].pants_text,result[1].shoes,result[1].shoes_text,result[1].torso,result[1].torso_text,result[1].shirt,result[1].shirt_text,result[1].three,result[1].three_text,result[1].seven,result[1].seven_text,result[1].haircolor,result[1].haircolor_text,result[1].skin})
       end)
     else
       TriggerEvent("es:desyncMsg")
@@ -103,8 +107,8 @@ AddEventHandler('vmenu:lastCharInShop', function(model)
     if (user) then
       local player = user.identifier
 
-      MySQL.Async.fetchAll("SELECT skin,face,face_text,hair,hair_text,pants,pants_text,shoes,shoes_text,torso,torso_text,shirt,shirt_text,three,three_text,seven,seven_text FROM outfits WHERE identifier=@user",{['@user']=player}, function (result)
-        TriggerClientEvent("vmenu:updateCharInShop",source,{result[1].face,result[1].face_text,result[1].hair,result[1].hair_text,result[1].pants,result[1].pants_text,result[1].shoes,result[1].shoes_text,result[1].torso,result[1].torso_text,result[1].shirt,result[1].shirt_text,result[1].three,result[1].three_text,result[1].seven,result[1].seven_text,model})
+      MySQL.Async.fetchAll("SELECT skin,face,face_text,hair,hair_text,pants,pants_text,shoes,shoes_text,torso,torso_text,shirt,shirt_text,three,three_text,seven,seven_text,haircolor,haircolor_text FROM outfits WHERE identifier=@user",{['@user']=player}, function (result)
+        TriggerClientEvent("vmenu:updateCharInShop",source,{result[1].face,result[1].face_text,result[1].hair,result[1].hair_text,result[1].pants,result[1].pants_text,result[1].shoes,result[1].shoes_text,result[1].torso,result[1].torso_text,result[1].shirt,result[1].shirt_text,result[1].three,result[1].three_text,result[1].seven,result[1].seven_text,result[1].haircolor,result[1].haircolor_text,model})
       end)
     else
       TriggerEvent("es:desyncMsg")
@@ -119,8 +123,8 @@ AddEventHandler('vmenu:fromSlastChar', function(source)
     if (user) then
       local player = user.identifier
 
-      MySQL.Async.fetchAll("SELECT skin,face,face_text,hair,hair_text,pants,pants_text,shoes,shoes_text,torso,torso_text,shirt,shirt_text,three,three_text,seven,seven_text FROM outfits WHERE identifier=@user",{['@user']=player}, function(result)
-        TriggerClientEvent("vmenu:updateChar",source,{result[1].face,result[1].face_text,result[1].hair,result[1].hair_text,result[1].pants,result[1].pants_text,result[1].shoes,result[1].shoes_text,result[1].torso,result[1].torso_text,result[1].shirt,result[1].shirt_text,result[1].three,result[1].three_text,result[1].seven,result[1].seven_text,result[1].skin})
+      MySQL.Async.fetchAll("SELECT skin,face,face_text,hair,hair_text,pants,pants_text,shoes,shoes_text,torso,torso_text,shirt,shirt_text,three,three_text,seven,seven_text,haircolor,haircolor_text FROM outfits WHERE identifier=@user",{['@user']=player}, function(result)
+        TriggerClientEvent("vmenu:updateChar",source,{result[1].face,result[1].face_text,result[1].hair,result[1].hair_text,result[1].pants,result[1].pants_text,result[1].shoes,result[1].shoes_text,result[1].torso,result[1].torso_text,result[1].shirt,result[1].shirt_text,result[1].three,result[1].three_text,result[1].seven,result[1].seven_text,result[1].haircolor,result[1].haircolor_text,result[1].skin})
       end)
     else
       TriggerEvent("es:desyncMsg")

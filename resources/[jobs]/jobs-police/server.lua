@@ -175,7 +175,6 @@ AddEventHandler('jobspolice:vehHelicoGarage', function(vehicule)
 			else
 				TriggerClientEvent("jobspolice:notif", source, "~r~Vous n'êtes pas en service")
 			end
-			TriggerEvent('vmenu:updateUser', 98)
 		else
 			TriggerEvent("es:desyncMsg")
 		end

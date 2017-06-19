@@ -17,12 +17,12 @@ AddEventHandler("menutel:PhoneOG", function(target, mytel)
 		VMenu.AddSep(98, tostring(mytel))
 		VMenu.AddFunc(98, "Retour", "vmenu:MainMenuOG", {}, "Retour")
 		VMenu.AddFunc(98, "Ajouter un contact", "tel:add", {}, "Valider")
-		VMenu.AddFunc(98, "Conctacter la police", "tel:call", {"911"}, "Appeller")
+		VMenu.AddFunc(98, "Appeler la police", "tel:call", {"911"}, "Appeller")
 		for ind, value in pairs(PHONEBOOK) do
-			VMenu.AddFunc(98, value.nom .. " " .. value.prenom .. " " .. tostring(ind), "tel:call", {ind}, "Appeller: " .. tostring(ind))
+			VMenu.AddFunc(98, value.nom .. " " .. value.prenom .. " " .. tostring(ind), "tel:call", {ind}, "Appeler: " .. tostring(ind))
 		end
 	else
-		TriggerEvent("citizenv:notif", "~r~Utilisation impossible en conduisant")
+		TriggerEvent("itinerance:notif", "~r~Utilisation impossible en conduisant")
 	end
 end)
 
@@ -69,7 +69,7 @@ Citizen.CreateThread(function()
 					msg = txt
 					confirmed = 2
 				else
-					TriggerEvent("citizenv:notif", "~r~ Votre message est vide")
+					TriggerEvent("itinerance:notif", "~r~ Votre message est vide")
 					confirmed = 0
 				end
 			elseif UpdateOnscreenKeyboard() == 2 then
@@ -95,7 +95,7 @@ Citizen.CreateThread(function()
 					telAdd = txt
 					addconfirmed = 2
 				else
-					TriggerEvent("citizenv:notif", "~r~ Entrer un numéro valide")
+					TriggerEvent("itinerance:notif", "~r~ Entrer un numéro valide")
 					addconfirmed = 0
 				end
 			elseif UpdateOnscreenKeyboard() == 2 then
@@ -180,5 +180,5 @@ function DrawAdvancedText(x,y ,w,h,sc, text, r,g,b,a,font,jus)
     SetTextOutline()
     SetTextEntry("STRING")
     AddTextComponentString(text)
-	DrawText(x - 0.1+w, y - 0.02+h)
+		DrawText(x - 0.1+w, y - 0.02+h)
 end

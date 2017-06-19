@@ -127,7 +127,9 @@ CREATE TABLE `outfits` (
   `three` int(11) NOT NULL DEFAULT '0',
   `three_text` int(11) NOT NULL DEFAULT '0',
   `seven` int(11) NOT NULL DEFAULT '0',
-  `seven_text` int(11) NOT NULL DEFAULT '0'
+  `seven_text` int(11) NOT NULL DEFAULT '0',
+  `haircolor` int(11) NOT NULL DEFAULT '0',
+  `haircolor_text` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------

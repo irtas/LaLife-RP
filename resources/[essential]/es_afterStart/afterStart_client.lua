@@ -37,4 +37,7 @@ AddEventHandler("playerSpawned", function()
     Citizen.Wait(0)
   end
   -- FreezeEntityPosition(GetPlayerPed(-1), false)
+
+  TriggerEvent("es:setMoneyDisplay", "visible")
+  TriggerEvent("banking:setBankDisplay", "visible")
 end)

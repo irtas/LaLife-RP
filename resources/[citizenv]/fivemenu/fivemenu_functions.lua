@@ -127,7 +127,7 @@ AddEventHandler("vmenu:giveCash", function(target, money)
 		sendMoney = money
 		sendTarget = target
 	else
-		TriggerEvent("citizenv:notif", "~r~ Vous n'avez pas de cible")
+		TriggerEvent("itinerance:notif", "~r~ Vous n'avez pas de cible")
 	end
 end)
 
@@ -141,16 +141,23 @@ Citizen.CreateThread(function()
 				local txt = GetOnscreenKeyboardResult()
 				if (string.len(txt) > 0) and (string.match(txt, '%d+')) then -- BEAU REGEX PATTERN EN LUA PARCE QUE C'EST PAUVRE
 					if sendMoney > tonumber(txt) then
-						addCash = txt
-						cashconfirmed = 2
+						if txt > 0 then
+							addCash = txt
+							cashconfirmed = 2
+						else
+							TriggerEvent("itinerance:notif", "~r~ Vous devez entrer un nombre positif")
+							dcashconfirmed = 0
+							sendMoney = 0
+							sendTarget = -1
+						end
 					else
-						TriggerEvent("citizenv:notif", "~r~ Vous n'avez pas assez d'argent")
+						TriggerEvent("itinerance:notif", "~r~ Vous n'avez pas assez d'argent")
 						cashconfirmed = 0
 						sendMoney = 0
 						sendTarget = -1
 					end
 				else
-					TriggerEvent("citizenv:notif", "~r~ Entrer un montant valide")
+					TriggerEvent("itinerance:notif", "~r~ Entrer un montant valide")
 					cashconfirmed = 0
 					sendMoney = 0
 					sendTarget = -1
@@ -180,7 +187,7 @@ AddEventHandler("vmenu:giveDCash", function(target, money)
 		sendMoney = money
 		sendTarget = target
 	else
-		TriggerEvent("citizenv:notif", "~r~ Vous n'avez pas de cible")
+		TriggerEvent("itinerance:notif", "~r~ Vous n'avez pas de cible")
 	end
 end)
 
@@ -194,16 +201,23 @@ Citizen.CreateThread(function()
 				local txt = GetOnscreenKeyboardResult()
 				if (string.len(txt) > 0) and (string.match(txt, '%d+')) then -- BEAU REGEX PATTERN EN LUA PARCE QUE C'EST PAUVRE
 					if sendMoney > tonumber(txt) then
-						addCash = txt
-						dcashconfirmed = 2
+						if txt > 0 then
+							addCash = txt
+							dcashconfirmed = 2
+						else
+							TriggerEvent("itinerance:notif", "~r~ Vous devez entrer un nombre positif")
+							dcashconfirmed = 0
+							sendMoney = 0
+							sendTarget = -1
+						end
 					else
-						TriggerEvent("citizenv:notif", "~r~ Vous n'avez pas assez d'argent")
+						TriggerEvent("itinerance:notif", "~r~ Vous n'avez pas assez d'argent")
 						dcashconfirmed = 0
 						sendMoney = 0
 						sendTarget = -1
 					end
 				else
-					TriggerEvent("citizenv:notif", "~r~ Entrer un montant valide")
+					TriggerEvent("itinerance:notif", "~r~ Entrer un montant valide")
 					dcashconfirmed = 0
 					sendMoney = 0
 					sendTarget = -1
@@ -233,6 +247,10 @@ end)
 
 AddEventHandler("vmenu:getHelicoGarage", function(target, vehicule) -- target = Dernier joueur à avoir parlé, pas besoin ici. Mais obligatoire !
 	TriggerServerEvent('jobspolice:vehHelicoGarage', vehicule)
+end)
+
+AddEventHandler("vmenu:getAmbulanceHelicoGarage", function(target, vehicule) -- target = Dernier joueur à avoir parlé, pas besoin ici. Mais obligatoire !
+	TriggerServerEvent('es_em:getAmbulanceHelicoGarage', vehicule)
 end)
 
 AddEventHandler("vmenu:toGarage", function(target) -- target = Dernier joueur à avoir parlé, pas besoin ici. Mais obligatoire !
@@ -292,8 +310,8 @@ AddEventHandler("vmenu:getclientOutfits", function(target, item) -- target = Der
 	end)
 end)
 
-AddEventHandler("vmenu:getclientHair", function(target, hair, hairc) -- target = Dernier joueur à avoir parlé, pas besoin ici. Mais obligatoire !
-	TriggerServerEvent("vmenu:getHair", hair, hairc)
+AddEventHandler("vmenu:getclientHair", function(target, hair, hairsec, hairc, haircsec) -- target = Dernier joueur à avoir parlé, pas besoin ici. Mais obligatoire !
+	TriggerServerEvent("vmenu:getHair", hair, hairsec, hairc, haircsec)
 end)
 
 AddEventHandler("vmenu:getclientFace", function(target, sex, face, face_text) -- target = Dernier joueur à avoir parlé, pas besoin ici. Mais obligatoire !

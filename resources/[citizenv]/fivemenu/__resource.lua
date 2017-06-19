@@ -25,5 +25,6 @@ client_script {
 	'drogue_client.lua',
 	'tel_client.lua',
 	'distributeur_client.lua',
-	'animations_client.lua'
+	'animations_client.lua',
+	'localization.lua'
 }

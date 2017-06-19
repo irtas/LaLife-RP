@@ -118,11 +118,28 @@ AddEventHandler('es_em:sv_removeMoney', function()
 end)
 
 RegisterServerEvent('es_em:sv_sendMessageToPlayerInComa')
-AddEventHandler('es_em:sv_sendMessageToPlayerInComa',
-function(sourcePlayerInComa)
+AddEventHandler('es_em:sv_sendMessageToPlayerInComa', function(sourcePlayerInComa)
   TriggerClientEvent('es_em:cl_sendMessageToPlayerInComa', sourcePlayerInComa)
-end
-)
+end)
+
+RegisterServerEvent('es_em:getAmbulanceHelicoGarage')
+AddEventHandler('es_em:getAmbulanceHelicoGarage', function(vehicule)
+	TriggerEvent('es:getPlayerFromId', source, function(user)
+		if (user) then
+			local player = user.identifier
+			local L = #player - 4
+			local L1 = #player - 3
+			local L2 = #player - 2
+			local L3 = #player - 1
+			local plateveh = "JOBS" .. player[L] .. player[L1] .. player[L2] .. player[L3]
+			plateveh = string.upper(plateveh)
+			user:setVehicle(plateveh)
+			TriggerClientEvent("es_em:SpawnHelicoAmbulance", source, vehicule, plateveh, false)
+		else
+			TriggerEvent("es:desyncMsg")
+		end
+	end)
+end)
 
 AddEventHandler('playerDropped', function()
 

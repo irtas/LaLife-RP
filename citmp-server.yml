@@ -6,6 +6,7 @@ PreParseResources:
 AutoStartResources:
     - Citizen-V # MAP -> Définit le ou les points de Spawn de base.
     - client_base # NeverWanted, HandsUP, VoiceChat, etc...
+    - localization
     - chat
     - spawnmanager
     - baseevents
@@ -62,7 +63,6 @@ Announce: false
 DisableAuth: false
 
 # set to true to disable local script hook plugins
-DisableScriptHook: true
 
 # set to the path of an icon to use in the server browser. it should be square.
 ServerIcon: hello.png

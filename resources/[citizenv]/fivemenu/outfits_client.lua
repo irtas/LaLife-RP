@@ -5,7 +5,7 @@ end
 
 RegisterNetEvent("vmenu:updateChar")
 AddEventHandler("vmenu:updateChar", function(args)
-  model = GetHashKey(args[17])
+  model = GetHashKey(args[19])
   RequestModel(model)
   while not HasModelLoaded(model) do -- Wait for model to load
     RequestModel(model)
@@ -17,6 +17,7 @@ AddEventHandler("vmenu:updateChar", function(args)
 	SetPedHeadBlendData(GetPlayerPed(-1), args[1], args[1], args[1], args[1], args[1], args[1], 1.0, 1.0, 1.0, true)
   ChangeComponent({0,0,args[1],args[2]})-- 1:componentID; 2: page; 3: drawbleID; 4: textureID
   ChangeComponent({2,0,args[3],args[4]})
+  SetPedHairColor(GetPlayerPed(-1), args[17], args[18])
   ChangeComponent({3,0,args[13],args[14]})
   ChangeComponent({4,0,args[5],args[6]})
   ChangeComponent({6,0,args[7],args[8]})
@@ -46,7 +47,7 @@ AddEventHandler("vmenu:changeGender", function(gender)
 end)
 
 RegisterNetEvent("vmenu:supdateChar")
-AddEventHandler("vmenu:supdateChar", function(o, t, th, f, fi, s, se, e, n, te, el, tw, thi, fo, fif, si, sev)
+AddEventHandler("vmenu:supdateChar", function(o, t, th, f, fi, s, se, e, n, te, el, tw, thi, fo, fif, si, y, u, sev)
   model = GetHashKey(sev)
   RequestModel(model)
   while not HasModelLoaded(model) do -- Wait for model to load
@@ -59,6 +60,7 @@ AddEventHandler("vmenu:supdateChar", function(o, t, th, f, fi, s, se, e, n, te, 
   SetPedHeadBlendData(GetPlayerPed(-1), o, o, o, o, o, o, 1.0, 1.0, 1.0, true)
   ChangeComponent({0,0,o,t})-- 1:componentID; 2: page; 3: drawbleID; 4: textureID
   ChangeComponent({2,0,th,f})
+  SetPedHairColor(GetPlayerPed(-1), y, u)
   ChangeComponent({3,0,thi,fo})
   ChangeComponent({4,0,fi,s})
   ChangeComponent({6,0,se,e})
