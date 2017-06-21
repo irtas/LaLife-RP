@@ -89,7 +89,7 @@ RegisterServerEvent('bank:remove')
 AddEventHandler('bank:remove', function(source, amount)
   TriggerEvent('es:getPlayerFromId', source, function(user)
     if (user) then
-      local rounded = round(tonumber(amount), 0)
+      local rounded = - round(math.abs(tonumber(amount)), 0)
       local player = user.identifier
       local bankbalance = bankBalance(player)
       withdraw(player, rounded)
