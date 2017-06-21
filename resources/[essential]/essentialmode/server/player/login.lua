@@ -9,20 +9,7 @@ require "resources/mysql-async/lib/MySQL"
 
 telist = {}
 
--- tel = { name, surname, identifier, IDsource }
-
--- -- THIS IS CALLED AFTER THE CHARACTER CREATION.
--- -- WE NEED TO UPDATE HIS NAME BECAUSE CITIZEN CITIZEN IS NOT A DECENT NAME FOR SOMEONE!
--- -- I AM WRITING SINGLE COMMENT LINE
--- RegisterServerEvent("es:loadAfterCreation")
--- AddEventHandler("es:loadAfterCreation", function()
--- 	TriggerEvent('es:getPlayerFromId', source, function(user)
--- 		local player = user.identifier
--- 		MySQL.Async.fetchScalar("SELECT telephone FROM users WHERE identifier = @name", {['@name'] = player}, function (telephone)
--- 			telist[telephone] = { IDsource = source }
--- 		end)
---   end)
--- end)
+local hopital = { x = 306.72396850586, y = -1434.4223632813, z = 29.804103851318  }
 
 local countItems = MySQL.Sync.fetchScalar("SELECT COUNT(1) FROM items")
 
@@ -38,26 +25,55 @@ AddEventHandler("es:deleteTelist", function(source)
 	end)
 end)
 
+-- Get the status of the player, Dead or Alive
+RegisterServerEvent("es:updateAlivePlayer")
+AddEventHandler("es:updateAlivePlayer", function(alive_status)
+	TriggerEvent('es:getPlayerFromId', source, function(user)
+		user.status = alive_status
+	end)
+end)
+
+-- When the client dropped. It's here
 AddEventHandler('playerDropped', function()
 	TriggerEvent('es:getPlayerFromId', source, function(user)
 		if (user) then
-			tel = user:getTel()
-			telist[tel].IDsource = nil
+			-- Try to alt F4 now ...
+			if user.status == "alive" then
+				user.status  = nil
 
-			MySQL.Async.execute("UPDATE users SET `money`=@value WHERE identifier = @identifier",
-			{['@value'] = user.money, ['@identifier'] = user.identifier})
+				tel = user:getTel()
+				telist[tel].IDsource = nil
 
-			MySQL.Async.execute("UPDATE users SET `dirtymoney`=@value WHERE identifier = @identifier",
-			{['@value'] = user.dirtymoney, ['@identifier'] = user.identifier})
+				MySQL.Async.execute("UPDATE users SET `money`=@value WHERE identifier = @identifier",
+				{['@value'] = user.money, ['@identifier'] = user.identifier})
 
-			MySQL.Async.execute("UPDATE coordinates SET `x`=@valx,`y`=@valy,`z`=@valz WHERE identifier = @identifier",
-			{['@valx'] = user.coords.x, ['@valy'] = user.coords.y, ['@valz'] = user.coords.z, ['@identifier'] = user.identifier})
+				MySQL.Async.execute("UPDATE users SET `dirtymoney`=@value WHERE identifier = @identifier",
+				{['@value'] = user.dirtymoney, ['@identifier'] = user.identifier})
+
+				MySQL.Async.execute("UPDATE coordinates SET `x`=@valx,`y`=@valy,`z`=@valz WHERE identifier = @identifier",
+				{['@valx'] = user.coords.x, ['@valy'] = user.coords.y, ['@valz'] = user.coords.z, ['@identifier'] = user.identifier})
+			else
+				user.status  = nil
+
+				tel = user:getTel()
+				telist[tel].IDsource = nil
+
+				MySQL.Async.execute("UPDATE users SET `money`=@value WHERE identifier = @identifier",
+				{['@value'] = 0, ['@identifier'] = user.identifier})
+
+				MySQL.Async.execute("UPDATE users SET `dirtymoney`=@value WHERE identifier = @identifier",
+				{['@value'] = 0, ['@identifier'] = user.identifier})
+
+				MySQL.Async.execute("UPDATE coordinates SET `x`=@valx,`y`=@valy,`z`=@valz WHERE identifier = @identifier",
+				{['@valx'] = hopital.x, ['@valy'] = hopital.y, ['@valz'] = hopital.z, ['@identifier'] = user.identifier})
+			end
 		else
 			TriggerEvent("es:desyncMsg")
 		end
 	end)
 end)
 
+-- GET THE PHONEBOOK
 RegisterServerEvent("es:getPhonebook")
 AddEventHandler("es:getPhonebook", function(source)
 	TriggerEvent('es:getPlayerFromId', source, function(user)
@@ -69,6 +85,7 @@ AddEventHandler("es:getPhonebook", function(source)
 	end)
 end)
 
+-- AND SEND IT TO THE CLIENT! BOIS IN THE PHONEBOOK!
 function LoadPhonebook(identifier, source)
 	local phonebook = {}
 	MySQL.Async.fetchAll("SELECT * FROM phonebook JOIN users ON `phonebook`.`phonenumber` = `users`.`telephone` WHERE pidentifier = @username", { ['@username'] = identifier }, function (result)
@@ -83,7 +100,7 @@ function LoadPhonebook(identifier, source)
 	end)
 end
 
--- THIS IS THE WHERE WE LOAD THE INFO FROM THE DATABASE. IF YOU NEED IT IN THE MENU -> fivemenu
+-- THIS IS WHERE WE LOAD THE INFO FROM THE DATABASE. IF YOU NEED IT IN THE MENU -> fivemenu
 -- DON'T FORGET THE PLAYER CLASS! CREATE YOUR GETTER AND SETTER BOI!
 function LoadUser(identifier, source, new)
 	MySQL.Async.fetchAll("SELECT * FROM users WHERE identifier = @name", {['@name'] = identifier}, function (result)
@@ -259,6 +276,7 @@ AddEventHandler("es:getPlayerFromId", function(user, cb)
 	end
 end)
 
+-- USELESS DOPE STUFF
 AddEventHandler("es:getPlayerFromIdentifier", function(identifier, cb)
 	MySQL.Async.fetchAll("SELECT * FROM users WHERE identifier = @name", {['@name'] = identifier}, function (result)
 		if(result[1])then
@@ -269,6 +287,7 @@ AddEventHandler("es:getPlayerFromIdentifier", function(identifier, cb)
 	end)
 end)
 
+-- IF YOU NEED ALL THE PLAYERS
 AddEventHandler("es:getAllPlayers", function(cb)
 	MySQL.Async.fetchAll("SELECT * FROM users", {}, function (result)
 		if(result)then
@@ -378,6 +397,7 @@ AddEventHandler("tel:sendingMsg", function(msg, teldest)
 	end
 end)
 
+-- GET THE ID WITH THIS COOL FUNC
 function getPlayerID(source)
 	local identifiers = GetPlayerIdentifiers(source)
 	local player = getIdentifiant(identifiers)

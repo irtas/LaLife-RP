@@ -28,6 +28,7 @@ setmetatable(Player, {
 		pl.telephone = telephone
 		pl.vehicle = 0
 		pl.jobVehicle = 0
+		pl.status = "alive"
 
 		return setmetatable(pl, Player)
 	end

@@ -88,6 +88,9 @@ Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(0)
   	if IsEntityDead(PlayerPedId()) then
+			TriggerServerEvent("es:updateAlivePlayer", "dead")
+			Wait(200)
+
 			StartScreenEffect("DeathFailOut", 0, 0)
 			ShakeGameplayCam("DEATH_FAIL_IN_EFFECT_SHAKE", 1.0)
 
