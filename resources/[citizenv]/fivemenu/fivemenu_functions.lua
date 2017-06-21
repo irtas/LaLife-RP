@@ -147,7 +147,7 @@ Citizen.CreateThread(function()
 							cashconfirmed = 2
 						else
 							TriggerEvent("itinerance:notif", "~r~ Vous devez entrer un nombre positif")
-							dcashconfirmed = 0
+							cashconfirmed = 0
 							sendMoney = 0
 							sendTarget = -1
 						end
