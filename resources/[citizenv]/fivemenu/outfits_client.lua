@@ -24,7 +24,7 @@ AddEventHandler("vmenu:updateChar", function(args)
   ChangeComponent({7,0,args[15],args[16]})
   ChangeComponent({11,0,args[9],args[10]})
   ChangeComponent({8,0,args[11],args[12]})
-
+  
   TriggerServerEvent("weaponshop:GiveWeapons")
   VMenu.updatedChar = true
 end)

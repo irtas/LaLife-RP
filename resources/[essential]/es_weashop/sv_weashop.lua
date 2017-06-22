@@ -78,7 +78,7 @@ AddEventHandler("weaponshop:GiveWeapons", function()
 				delay = 2000
 				if(result)then
 					for k,v in ipairs(result) do
-						TriggerClientEvent("giveWeapon", player, v.weapon_model, delay)
+						TriggerClientEvent("giveWeapon", source, v.weapon_model, delay)
 					end
 				end
 			end)
