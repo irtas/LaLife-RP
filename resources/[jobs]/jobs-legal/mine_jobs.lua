@@ -164,6 +164,7 @@ Citizen.CreateThread(function()
             TriggerServerEvent("poleemploi:getjobs")
             Wait(100)
             if myjob == 4 then
+	      TriggerServerEvent("job:addMoney",3000)
               mineEnding()
             end
           end
@@ -487,7 +488,6 @@ end
 function mineEnding()
   removeBlip()
   Wait(100)
-  TriggerServerEvent("job:addMoney",3000)
   ShowMsgtime.msg = "~r~ Vous avez été remboursé"
   ShowMsgtime.time = 300
   money = 0
