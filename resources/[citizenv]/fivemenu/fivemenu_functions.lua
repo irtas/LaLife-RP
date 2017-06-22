@@ -18,10 +18,21 @@ function DrawNotif(text)
 	DrawNotification(false, false)
 end
 
+----- Job info for the menu ------
+onJobLegal = 0
+
+AddEventHandler("fivemenu:f_getJobInfos", function(onJobLegaly)
+	onJobLegal = onJobLegaly
+end)
+----------------------------------
+
+--------------- Clean cash  ------
 AddEventHandler("vmenu:cleanCash", function(target)
 	TriggerServerEvent("vmenu:cleanCash_s")
 end)
+----------------------------------
 
+------ Animation Controller ------
 AddEventHandler("vmenu:anim", function(dict, anim)
 	Citizen.CreateThread(function()
 		Wait(1000)
@@ -92,29 +103,24 @@ AddEventHandler("vmenu:animChain", function(dict, anim, dict2, anim2, dict3, ani
 		end
 	end)
 end)
+----------------------------------
 
+----------------------------------
 AddEventHandler("vmenu:poleemploi", function(target, idJob) -- target = Dernier joueur à avoir parlé, pas besoin ici. Mais obligatoire !
 	User.job = idJob
 	TriggerServerEvent('poleemploi:jobs', idJob)
 end)
+----------------------------------
 
+----------------------------------
 AddEventHandler("vmenu:MainMenuOG", function(target)
 	VMenu.police = false
 	VMenu.telephone = false
 	VMenu.animations = false
 end)
+----------------------------------
 
-AddEventHandler("vmenu:policeState", function(target, idPolice) -- target = Dernier joueur à avoir parlé, pas besoin ici. Mais obligatoire !
-	TriggerServerEvent("player:serviceOn", "police")
-	TriggerServerEvent('jobspolice:jobs', idPolice, false)
-end)
-
-AddEventHandler("vmenu:policeStateCivil", function(target, idPolice) -- target = Dernier joueur à avoir parlé, pas besoin ici. Mais obligatoire !
-	TriggerServerEvent("vmenu:lastChar")
-	TriggerServerEvent("player:serviceOn", "police")
-	TriggerServerEvent('jobspolice:jobs', idPolice, true)
-end)
-
+----------------------------------
 local cashconfirmed = 0
 local sendMoney = 0
 local sendTarget = -1
@@ -238,6 +244,19 @@ Citizen.CreateThread(function()
 		end
 	end
 end)
+----------------------------------
+
+----------------------------------
+AddEventHandler("vmenu:policeState", function(target, idPolice) -- target = Dernier joueur à avoir parlé, pas besoin ici. Mais obligatoire !
+	TriggerServerEvent("player:serviceOn", "police")
+	TriggerServerEvent('jobspolice:jobs', idPolice, false)
+end)
+
+AddEventHandler("vmenu:policeStateCivil", function(target, idPolice) -- target = Dernier joueur à avoir parlé, pas besoin ici. Mais obligatoire !
+	TriggerServerEvent("vmenu:lastChar")
+	TriggerServerEvent("player:serviceOn", "police")
+	TriggerServerEvent('jobspolice:jobs', idPolice, true)
+end)
 
 AddEventHandler("vmenu:getArmory", function(target, idGun) -- target = Dernier joueur à avoir parlé, pas besoin ici. Mais obligatoire !
 	TriggerServerEvent('jobspolice:wepArmory', idGun)
@@ -262,6 +281,7 @@ AddEventHandler("vmenu:toGarage", function(target) -- target = Dernier joueur à
 		TriggerServerEvent('jobspolice:vehtoGarage')
 	end
 end)
+----------------------------------
 
 AddEventHandler("vmenu:getSkin", function(target, sex) -- target = Dernier joueur à avoir parlé, pas besoin ici. Mais obligatoire !
 	CreateThread(function()

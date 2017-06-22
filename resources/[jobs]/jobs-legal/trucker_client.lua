@@ -42,9 +42,8 @@ local Truck = {"HAULER", "PACKER", "PHANTOM"}
 local Trailer = {"TANKER", "TRAILERS", "TRAILERS2", "TRAILERLOGS"}
 
 local MissionData = {}
-local MISSION = {}
+MISSION = {}
 
-MISSION.start = false
 MISSION.toDest = false
 MISSION.tailer = false
 MISSION.truck = false
@@ -80,40 +79,25 @@ local b = 192
 local alpha = 200
 
 function clear()
-  MISSION.start = false
+  onJobLegal = 2
   SetBlipRoute(BLIP.company, false)
   SetBlipRoute(BLIP.destination[BLIP.destination.i], false)
   SetEntityAsNoLongerNeeded(BLIP.destination[BLIP.destination.i])
 
-  if ( DoesEntityExist(MISSION.truck) ) then
-    SetEntityAsNoLongerNeeded(MISSION.truck)
-    SetVehicleDoorsLocked(MISSION.truck, 2)
-    SetVehicleUndriveable(MISSION.truck, true)
-  end
-
-  local temptruck = MISSION.truck
-  local temphashTruck = MISSION.hashTruck
-
-  MISSION.truck = 0
   MISSION.hashTruck = 0
   currentMission = -1
   MissionData = {}
-
-  Wait(2000)
-  SetEntityAsMissionEntity(temptruck, true, true)
-  Citizen.InvokeNative(0xEA386986E786A54F, Citizen.PointerValueIntInitialized(temptruck))
-
-
-
 end
 
-function trailerclear()
+function trailerclear(timer)
   SetBlipRoute(BLIP.company, true)
   SetBlipRoute(BLIP.destination[BLIP.destination.i], false)
   SetBlipSprite(BLIP.destination[BLIP.destination.i], 2) --invisible
-  Wait(10000)
-  SetEntityAsMissionEntity(MISSION.trailer, true, true)
-  Citizen.InvokeNative(0xEA386986E786A54F, Citizen.PointerValueIntInitialized(MISSION.trailer))
+  Wait(timer)
+  if ( DoesEntityExist(MISSION.trailer) ) then
+    SetEntityAsMissionEntity(MISSION.trailer, true, true)
+    Citizen.InvokeNative(0xEA386986E786A54F, Citizen.PointerValueIntInitialized(MISSION.trailer))
+  end
   MISSION.trailer = 0
   MISSION.hashTrailer = 0
 end
@@ -131,7 +115,6 @@ Citizen.CreateThread(function()
     end
     tick()
   end
-
 end)
 
 function init()
@@ -159,7 +142,7 @@ function tick()
     BLIP.destination[BLIP.destination.i] = BLIP.destination[BLIP.destination.i]
   end
 
-  if( MISSION.start == true ) then
+  if( onJobLegal == 1 and ( myjob == 6 or myjob == 7 or myjob == 8 or myjob == 9 ) ) then
 
     MISSION.markerUpdate(IsEntityAttached(MISSION.trailer))
     if( IsEntityAttached(MISSION.trailer) and text1 == false) then
@@ -174,9 +157,9 @@ function tick()
     local trailerCoords = GetEntityCoords(MISSION.trailer, 0)
     local truckCoords = GetEntityCoords(MISSION.truck, 0)
     if ( GetDistanceBetweenCoords(currentMission[1], currentMission[2], currentMission[3], trailerCoords ) < 25 and not IsEntityAttached(MISSION.trailer) and MISSION.toDest == false) then
-      --TriggerServerEvent("truckerJob:addMoney", tonumber(currentMission[4]))
+      --TriggerServerEvent("job:success", tonumber(currentMission[4]))
       TriggerEvent("mt:missiontext", "Retourner votre camion à la ~y~compagnie de transport", 15000)
-      trailerclear()
+      trailerclear(10000)
       MISSION.toDest = true
     elseif ( GetDistanceBetweenCoords(currentMission[1], currentMission[2], currentMission[3], trailerCoords ) < 25 and IsEntityAttached(MISSION.trailer) and MISSION.toDest == false ) then
       TriggerEvent("mt:missiontext", "Vous êtes arrivé. Détacher votre ~o~remorque~w~ avec la touche ~r~H~w~", 15000)
@@ -188,7 +171,7 @@ function tick()
     if ( GetDistanceBetweenCoords(BLIP.truckReturn[1], BLIP.truckReturn[2], BLIP.truckReturn[3], truckCoords ) < 25 and not IsEntityAttached(MISSION.trailer) and MISSION.toDest) then
       distance = GetDistanceBetweenCoords(BLIP.truckReturn[1], BLIP.truckReturn[2], BLIP.truckReturn[3], currentMission[1], currentMission[2], currentMission[3], true)
       distance = tonumber(math.floor(distance))
-      TriggerServerEvent("truckerJob:addMoney", distance)
+      TriggerServerEvent("job:success", distance)
       TriggerEvent("mt:missiontext", "Vous êtes arrivé. Vous avez obtenu ~g~$"..distance, 10000)
       SetBlipRoute(BLIP.company, false)
       MISSION.toDest = false
@@ -196,11 +179,12 @@ function tick()
       clear()
     end
 
-    if ( IsEntityDead(MISSION.trailer) and MISSION.toDest == false ) or ( IsEntityDead(MISSION.truck) ) then
+    if ( IsEntityDead(MISSION.trailer) and MISSION.toDest == false ) or ( IsEntityDead(MISSION.truck) ) or ( onJobLegal == 0 and ( myjob == 6 or myjob == 7 or myjob == 8 or myjob == 9 ) ) then
       MISSION.removeMarker()
+      trailerclear(3000)
       clear()
     end
-  end --if MISSION.start == false
+  end --if onJobLegal == 0
 end
 
 
@@ -219,36 +203,36 @@ AddEventHandler("transporter:optionMisson2", function(trailerN)
   MissionData = {}
   if trailerN == 0 then
     MissionData = {                     -- TANKER
-    [0] = {529.998, -2285.18, 5.98135, 10000},
-    [1] = {263.392, -2851.05, 5.99999, 5000}, --x,y,z,money
-    [2] = {2935.05, 4308.76, 51.0919, 15000},
-    [3] = {-275.528, 6044.54, 31.6137, 20000},
+    [1] = {529.998, -2285.18, 5.98135, 10000},
+    [2] = {263.392, -2851.05, 5.99999, 5000}, --x,y,z,money
+    [3] = {2935.05, 4308.76, 51.0919, 15000},
+    [4] = {-275.528, 6044.54, 31.6137, 20000},
   }
 elseif trailerN == 1 then
   MissionData = {                 -- CONTAINER
-  [0] = {1730.39, -1569.42, 112.628, 10000},
-  [1] = {1253.4, 1865.69, 79.6297, 15000},
-  [2] = {-1658.26, 3070.84, 31.1018, 5000}, --x,y,z,money
-  [3] = {10.9037, 6274.51, 31.2464, 15000},
+  [1] = {1730.39, -1569.42, 112.628, 10000},
+  [2] = {1253.4, 1865.69, 79.6297, 15000},
+  [3] = {-1658.26, 3070.84, 31.1018, 5000}, --x,y,z,money
+  [4] = {10.9037, 6274.51, 31.2464, 15000},
 }
 elseif trailerN == 2 then
   MissionData = {                      -- FRIGORIGIQUE
-  [0] = {1815.92749023438,3698.14306640625,33.9835662841797, 15000},
-  [1] = {-238.370208740234,6332.79248046875,32.4256858825684, 15000},
-  [2] = {-654.866943359375,308.018859863281,82.8393630981445, 15000},
-  [3] = {380.510467529297,-581.022399902344,28.670919418335, 15000},
-  [4] = {-931.446960449219,-318.014434814453,39.1533203125, 15000},
-  [5] = {-654.866943359375,308.018859863281,82.8393630981445, 15000},
-  [6] = {98.501, -1607.326, 29.559, 5000}, --x,y,z,money
-  [7] = {294.517,-1438.098,29.804, 10000},
-  [8] = {1144.44201660156,-1484.60327148438,34.6925354003906, 15000},
+  [1] = {1815.92749023438,3698.14306640625,33.9835662841797, 15000},
+  [2] = {-238.370208740234,6332.79248046875,32.4256858825684, 15000},
+  [3] = {-654.866943359375,308.018859863281,82.8393630981445, 15000},
+  [4] = {380.510467529297,-581.022399902344,28.670919418335, 15000},
+  [5] = {-931.446960449219,-318.014434814453,39.1533203125, 15000},
+  [6] = {-654.866943359375,308.018859863281,82.8393630981445, 15000},
+  [7] = {98.501, -1607.326, 29.559, 5000}, --x,y,z,money
+  [8] = {294.517,-1438.098,29.804, 10000},
+  [9] = {1144.44201660156,-1484.60327148438,34.6925354003906, 15000},
 }
 elseif trailerN == 3 then
   MissionData = {                      -- LOG
-  [0] = {257.960, 2901.558, 43.101, 20000},
-  [1] = {1373.795, -739.679, 67.232, 5000}, --x,y,z,money
-  [2] = {-198.747, -1090.453, 21.687, 15000},
-  [3] = {-493.225, -961.148, 23.681, 10000},
+  [1] = {257.960, 2901.558, 43.101, 20000},
+  [2] = {1373.795, -739.679, 67.232, 5000}, --x,y,z,money
+  [3] = {-198.747, -1090.453, 21.687, 15000},
+  [4] = {-493.225, -961.148, 23.681, 10000},
 }
 end
 
@@ -286,10 +270,17 @@ AddEventHandler("transporter:mission2", function(missionN, trailerN)
   if DoesEntityExist(truckpos) or DoesEntityExist(trailerpos) then
     TriggerEvent("mt:missiontext", "The parking space is occupied, please wait", 5000)
   else
-    MISSION.start = true
+    onJobLegal = 1
     MISSION.spawnTrailer(trailerN)
     MISSION.spawnTruck(trailerN)
   end
+end)
+
+RegisterNetEvent("transporter:endingDay")
+AddEventHandler("transporter:endingDay", function()
+  trailerclear(1000)
+  MISSION.removeMarker()
+  clear()
 end)
 
 function MISSION.spawnTruck(spawnID)
@@ -350,4 +341,7 @@ function MISSION.removeMarker()
   SetBlipSprite(BLIP.company, 2) --invisible
   SetBlipSprite(BLIP.destination[BLIP.destination.i], 2)--invisible
   SetBlipSprite(BLIP.trailer[BLIP.trailer.i], 2) --invisible
+  RemoveBlip(BLIP.company)
+  RemoveBlip(BLIP.destination[BLIP.destination.i])
+  RemoveBlip(BLIP.trailer[BLIP.trailer.i], 2)
 end

@@ -163,20 +163,12 @@ end)
 
 AddEventHandler("playerSpawned", function()
 	Citizen.CreateThread(function()
-		DoScreenFadeOut(500)
-
-		while IsScreenFadingOut() do
-			Citizen.Wait(0)
-		end
 		Wait(500)
 		TriggerServerEvent('vmenu:lastChar')
 		TriggerServerEvent("inventory:getItems_s")
 		TriggerServerEvent('vmenu:updateUser', 98)
+		TriggerServerEvent("poleemploi:getjobs")
 		Wait(2500)
-		DoScreenFadeIn(500)
-		while IsScreenFadingIn() do
-			Citizen.Wait(0)
-		end
 	end)
 end)
 

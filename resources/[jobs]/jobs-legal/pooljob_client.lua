@@ -1,9 +1,3 @@
-local clientjobID = 0
-
-job = {
-	plate = 0,
-}
-
 local pool_locations = {
 	{enteringpool = {722.0145,-909.5587,24.43356}, innutile2 = {722.0145,-909.5587,24.43356}, outsidepool= {717.3234,-894.7209,24.0391}},
 }
@@ -68,7 +62,11 @@ function ShowpoolBlips(bool)
 						DrawMarker(0,711.4304,-893.3711,23.05157,0,0,0,0,0,0,2.001,2.0001,0.5001,0,155,255,200,0,0,0,0)
 						currentlocation = b
 						if GetDistanceBetweenCoords(711.4304,-893.3711,23.05157,GetEntityCoords(LocalPed()),true) < 3 then
-							ShowInfoJobPool("Appuyez sur ~INPUT_CONTEXT~ pour sortir votre ~b~Camion~w~.", 0)
+							if onJobLegal == 0 then
+								ShowInfoJobPool("Appuyez sur ~INPUT_CONTEXT~ pour sortir votre ~b~Camion~w~.", 0)
+							elseif onJobLegal == 1 then
+								ShowInfoJobPool("Appuyez sur ~INPUT_CONTEXT~ pour retourner votre ~b~Camion~w~.", 0)
+							end
 							inrange3 = true
 						end
 					end
@@ -88,59 +86,62 @@ function ShowpoolBlips(bool)
 	end
 end
 
-RegisterNetEvent("job:f_GetIdentifier")
-AddEventHandler("job:f_GetIdentifier", function(plate)
-	job.plate = plate
-end)
-
-AddEventHandler("playerSpawned", function()
-	TriggerServerEvent("job:GetIdentifier")
-end)
-
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(0)
 		if IsControlJustPressed(1,38) and inrangeofpool3 then
 			TriggerServerEvent("poleemploi:getjobs")
-			Wait(100)
+			TriggerServerEvent("job:getCash_s")
+			Wait(200)
 			if myjob == 2 then
-				SetPedComponentVariation(GetPlayerPed(-1), 11, 123, 1, 0)
-				SetPedComponentVariation(GetPlayerPed(-1), 8, 15, 0, 0)
-				SetPedComponentVariation(GetPlayerPed(-1), 4, 17, 6, 0)
-				SetPedComponentVariation(GetPlayerPed(-1), 6, 8, 0, 0)
-				SetPedComponentVariation(GetPlayerPed(-1), 3, 0, 0, 0)
-				--TriggerServerEvent('CheckPoolVehi')
-				--TriggerServerEvent('SetPlateJob')
-				--local car = 0xC703DB5F
-				Wait(100)
-				local car = GetHashKey("utillitruck3")
-				--local car = 0x58B3979C
-				-- VOITURE PAR DÉFAUT
-				local cplate = job.plate
-				Citizen.CreateThread(function()
-					Citizen.Wait(10)
-
-
-					RequestModel(car)
-					while not HasModelLoaded(car) do
-						Citizen.Wait(0)
+				if ArgentJoueur >= 3000 then
+					if onJobLegal == 0 then
+						TriggerServerEvent("job:removeMoney",3000)
+						ShowMsgtime.msg = "N'oubliez pas de ramener le camion pour être remboursé"
+						ShowMsgtime.time = 300
+						SetPedComponentVariation(GetPlayerPed(-1), 11, 123, 1, 0)
+						SetPedComponentVariation(GetPlayerPed(-1), 8, 15, 0, 0)
+						SetPedComponentVariation(GetPlayerPed(-1), 4, 17, 6, 0)
+						SetPedComponentVariation(GetPlayerPed(-1), 6, 8, 0, 0)
+						SetPedComponentVariation(GetPlayerPed(-1), 3, 0, 0, 0)
+						--TriggerServerEvent('CheckPoolVehi')
+						--TriggerServerEvent('SetPlateJob')
+						--local car = 0xC703DB5F
+						Wait(100)
+						local car = GetHashKey("utillitruck3")
+						--local car = 0x58B3979C
+						-- VOITURE PAR DÉFAUT
+						local cplate = job.plate
+						Citizen.CreateThread(function()
+							Citizen.Wait(10)
+							RequestModel(car)
+							while not HasModelLoaded(car) do
+								Citizen.Wait(0)
+							end
+							veh = CreateVehicle(car, 729.268, -878.351, 24.95, 0.0, true, false)
+							MISSION.truck = veh
+							Wait(100)
+							SetEntityVelocity(veh, 2000)
+							SetVehicleNumberPlateText(veh, cplate)
+							SetVehicleOnGroundProperly(veh)
+							SetVehicleHasBeenOwnedByPlayer(veh,true)
+							local id = NetworkGetNetworkIdFromEntity(veh)
+							SetNetworkIdCanMigrate(id, true)
+							SetVehRadioStation(veh, "OFF")
+							SetVehicleColours(veh, 64,64)
+							SetVehicleLivery(veh, 3)
+							SetPedIntoVehicle(GetPlayerPed(-1),  veh,  -1)
+							DrawNotif("Véhicule sorti, bonne route")
+						end)
+						inrangeofpool3 = false
+						inrange3 = false
+					elseif onJobLegal == 1 then
+						poolEnding()
 					end
-					veh = CreateVehicle(car, 729.268, -878.351, 24.95, 0.0, true, false)
-					SetEntityVelocity(veh, 2000)
-					SetVehicleNumberPlateText(veh, cplate)
-					SetVehicleOnGroundProperly(veh)
-					SetVehicleHasBeenOwnedByPlayer(veh,true)
-					local id = NetworkGetNetworkIdFromEntity(veh)
-					SetNetworkIdCanMigrate(id, true)
-					SetVehRadioStation(veh, "OFF")
-					SetVehicleColours(veh, 64,64)
-					SetVehicleLivery(veh, 3)
-					SetPedIntoVehicle(GetPlayerPed(-1),  veh,  -1)
-					DrawNotif("Véhicule sorti, bonne route")
-				end)
-				clientjobID = 45 -- Piscine
-				inrangeofpool3 = false
-				inrange3 = false
+				else
+					ShowMsgtime.msg = "Vous devez fournir 3000$ de caution pour prendre le véhicule"
+					ShowMsgtime.time = 300
+				end
 			else
 				ShowMsgtime.msg = '~r~ Vous devez être nettoyeur de piscine !'
 				ShowMsgtime.time = 150
@@ -148,8 +149,6 @@ Citizen.CreateThread(function()
 		end
 	end
 end)
-
-onJobPool = 0
 
 daily = {flag = {}, blip = {}, veh = {}, coords = {cx={}, cy={}, cz={}}}
 
@@ -243,12 +242,12 @@ function StartJobPool()
 	daily.coords.cx[86], daily.coords.cy[86], daily.coords.cz[86] = -792.6884765625,415.536346435547,91.6127853393555
 	daily.coords.cx[87], daily.coords.cy[87], daily.coords.cz[87] = -1714.65356445313,-197.835693359375,57.6977310180664
 	daily.coords.cx[88], daily.coords.cy[88], daily.coords.cz[88] = -819.223937988281,458.750823974609,90.1694793701172
-	daily.veh[1] = GetVehiclePedIsUsing(GetPlayerPed(-1))
 	daily.flag[1] = 1
 	daily.flag[2] = GetRandomIntInRange(1, 88)
+	onJobLegal = 1
+	TriggerServerEvent("poleemploi:getjobs")
 	Wait(2000)
 	DrawMissionTextpool("Conduisez et allez nettoyer les ~h~~y~Piscines~w~.", 10000)
-	onJobPool = 1
 end
 
 function DrawMissionTextpool(m_text, showtime)
@@ -286,9 +285,8 @@ function StopJobPool()
 		Citizen.InvokeNative(0x86A652570E5F25DD,Citizen.PointerValueIntInitialized(daily.blip[1]))
 		daily.blip[1] = nil
 	end
-	onJobPool = 0
-	clientjobID = 0
-	daily.veh[1] = nil
+	onJobLegal = 0
+	MISSION.truck = nil
 	daily.flag[1] = nil
 	daily.flag[2] = nil
 end
@@ -296,15 +294,15 @@ end
 Citizen.CreateThread(function()
 	while true do
 		Wait(0)
-		if onJobPool == 0 then
-			if (clientjobID == 45) then -- JOB pool
+		if onJobLegal == 0 then
+			if (myjob == 2) then
 				if IsPedSittingInAnyVehicle(GetPlayerPed(-1)) then
 					if IsVehicleModel(GetVehiclePedIsUsing(GetPlayerPed(-1)), GetHashKey("utillitruck3", _r)) then
 					--if IsVehicleModel(GetVehiclePedIsUsing(GetPlayerPed(-1)), 0x58B3979C) then
 						TriggerServerEvent("poleemploi:getjobs")
 						Wait(100)
 						if myjob == 2 then
-							StartJobPool(1)
+							StartJobPool()
 						else
 							ShowMsgtime.msg = '~r~ Vous devez être nettoyeur de piscine !'
 							ShowMsgtime.time = 150
@@ -312,70 +310,74 @@ Citizen.CreateThread(function()
 					end
 				end
 			end
-		elseif onJobPool == 1 then
-			if DoesEntityExist(daily.veh[1]) and IsVehicleDriveable(daily.veh[1], 0) then
+		elseif onJobLegal == 1 then
+			if myjob == 2 then
+				if not IsEntityDead(MISSION.truck) then
+					if daily.flag[1] == 1 then
+						daily.flag[2] = GetRandomIntInRange(1, 88)
+						daily.blip[1] = AddBlipForCoord(daily.coords.cx[daily.flag[2]],daily.coords.cy[daily.flag[2]],daily.coords.cz[daily.flag[2]])
+						N_0x80ead8e2e1d5d52e(daily.blip[1])
+						SetBlipRoute(daily.blip[1], 1)
+						distance = GetDistanceBetweenCoords(GetEntityCoords(GetPlayerPed(-1)), daily.coords.cx[daily.flag[2]],daily.coords.cy[daily.flag[2]],daily.coords.cz[daily.flag[2]], true)
+						daily.flag[1] = 2
+					end
+					if daily.flag[1] == 2 then
+						if GetDistanceBetweenCoords(GetEntityCoords(GetPlayerPed(-1)), daily.coords.cx[daily.flag[2]],daily.coords.cy[daily.flag[2]],daily.coords.cz[daily.flag[2]], true) > 5.0001 then
+							--DrawMarker(1, daily.coords.cx[daily.flag[2]],daily.coords.cy[daily.flag[2]],daily.coords.cz[daily.flag[2]]-1.0001, 0, 0, 0, 0, 0, 0, 2.0, 2.0, 2.0, 178, 236, 93, 155, 0, 0, 2, 0, 0, 0, 0)
+						else
+							local plyCoords = GetEntityCoords(GetPlayerPed(-1))
+							if math.abs(plyCoords['z'] - daily.coords.cz[daily.flag[2]]) < 1 then
+								if daily.blip[1] ~= nil and DoesBlipExist(daily.blip[1]) then
+									Citizen.InvokeNative(0x86A652570E5F25DD,Citizen.PointerValueIntInitialized(daily.blip[1]))
+									daily.blip[1] = nil
+								end
+								if IsPedInAnyVehicle(LocalPed(), true) == false then
+									ShowInfoJobPool("Appuyez sur ~INPUT_CONTEXT~ pour ~b~nettoyer~w~ la piscine.", 0)
+									if IsControlJustPressed(1,38) then
+										local dict = "pickup_object"
+										local anim = "pickup_low"
+										RequestAnimDict(dict)
 
-				if daily.flag[1] == 1 then
-					daily.flag[2] = GetRandomIntInRange(1, 88)
-					daily.blip[1] = AddBlipForCoord(daily.coords.cx[daily.flag[2]],daily.coords.cy[daily.flag[2]],daily.coords.cz[daily.flag[2]])
-					N_0x80ead8e2e1d5d52e(daily.blip[1])
-					SetBlipRoute(daily.blip[1], 1)
-					distance = GetDistanceBetweenCoords(GetEntityCoords(GetPlayerPed(-1)), daily.coords.cx[daily.flag[2]],daily.coords.cy[daily.flag[2]],daily.coords.cz[daily.flag[2]], true)
-					daily.flag[1] = 2
-				end
-				if daily.flag[1] == 2 then
-					if GetDistanceBetweenCoords(GetEntityCoords(GetPlayerPed(-1)), daily.coords.cx[daily.flag[2]],daily.coords.cy[daily.flag[2]],daily.coords.cz[daily.flag[2]], true) > 5.0001 then
-						--DrawMarker(1, daily.coords.cx[daily.flag[2]],daily.coords.cy[daily.flag[2]],daily.coords.cz[daily.flag[2]]-1.0001, 0, 0, 0, 0, 0, 0, 2.0, 2.0, 2.0, 178, 236, 93, 155, 0, 0, 2, 0, 0, 0, 0)
-					else
-						local plyCoords = GetEntityCoords(GetPlayerPed(-1))
-						if math.abs(plyCoords['z'] - daily.coords.cz[daily.flag[2]]) < 1 then
-							if daily.blip[1] ~= nil and DoesBlipExist(daily.blip[1]) then
-								Citizen.InvokeNative(0x86A652570E5F25DD,Citizen.PointerValueIntInitialized(daily.blip[1]))
-								daily.blip[1] = nil
-							end
-							if IsPedInAnyVehicle(LocalPed(), true) == false then
-								ShowInfoJobPool("Appuyez sur ~INPUT_CONTEXT~ pour ~b~nettoyer~w~ la piscine.", 0)
-								if IsControlJustPressed(1,38) then
-									local dict = "pickup_object"
-									local anim = "pickup_low"
-									RequestAnimDict(dict)
+										while not HasAnimDictLoaded(dict) do
+											Citizen.Wait(0)
+										end
 
-									while not HasAnimDictLoaded(dict) do
-										Citizen.Wait(0)
+										local myPed = PlayerPedId()
+										local animation = anim
+										local flags = 16 -- only play the animation on the upper body
+
+										TaskPlayAnim(myPed, dict, animation, 8.0, -8, -1, flags, 0, 0, 0, 0)
+										Wait(2000)
+										DrawMissionTextpool("~h~Vous avez ~g~nettoyé~w~ une piscine !", 5000)
+										TriggerServerEvent('job:success', distance)
+										--TriggerServerEvent('CheckPool')
+										Wait(1000)
+										daily.flag[1] = 1
+										daily.flag[2] = GetRandomIntInRange(1, 88)
 									end
-
-									local myPed = PlayerPedId()
-									local animation = anim
-									local flags = 16 -- only play the animation on the upper body
-
-									TaskPlayAnim(myPed, dict, animation, 8.0, -8, -1, flags, 0, 0, 0, 0)
-									Wait(2000)
-									DrawMissionTextpool("~h~Vous avez ~g~nettoyé~w~ une piscine !", 5000)
-									TriggerServerEvent('job:success', distance)
-									--TriggerServerEvent('CheckPool')
-									Wait(1000)
-									daily.flag[1] = 1
-									daily.flag[2] = GetRandomIntInRange(1, 88)
 								end
 							end
 						end
 					end
-				end
-
-				if GetDistanceBetweenCoords(GetEntityCoords(GetPlayerPed(-1)), GetEntityCoords(daily.veh[1]), true) > 350.0001 then
-					StopJobPool(1)
-					DrawNotif("~r~Retournez dans votre véhicule pour reprendre votre travail")
 				else
-
+					StopJobPool()
+					DrawMissionTextpool("Votre camion est ~h~~r~hors-service~w~.", 5000)
 				end
-
-			else
-				StopJobPool(1)
-				DrawMissionTextpool("Votre camion est ~h~~r~hors-service~w~.", 5000)
 			end
 		end
 	end
+end)
 
+function poolEnding()
+	TriggerServerEvent("job:addMoney",3000)
+	onJobLegal = 2
+	Wait(500)
+	StopJobPool()
+end
+
+RegisterNetEvent("jobslegal:poolEnding")
+AddEventHandler("jobslegal:poolEnding", function()
+  poolEnding()
 end)
 
 AddEventHandler('playerSpawned', function(spawn)

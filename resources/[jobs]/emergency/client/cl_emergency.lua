@@ -296,9 +296,7 @@ function GetService()
 
 	if isInService then
 		SendNotification(txt[lang]['stopService'])
-		TriggerServerEvent("vmenu:lastChar") --EN TEST REDONNE LES VETEMENT
-		TriggerServerEvent('es_em:sv_setService', 0)
-		--TriggerServerEvent("jobssystem:jobs", 1) --REPASSER EN CHOMEUR A TEST
+		emergencyEnding()
 	else
 		SendNotification(txt[lang]['startService'])
 		TriggerServerEvent('es_em:sv_setService', 1)
@@ -326,6 +324,13 @@ end
         USEFUL METHODS
 ################################
 --]]
+
+
+
+function emergencyEnding()
+	TriggerServerEvent("vmenu:lastChar")
+	TriggerServerEvent('es_em:sv_setService', 0)
+end
 
 function DisplayHelpText(str)
 	SetTextComponentFormat("STRING")

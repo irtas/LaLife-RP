@@ -1227,25 +1227,41 @@ end
 function getTankerCompany()
 	VMenu.ResetMenu(13, "", "default")
 	VMenu.AddMenu(13, "", "default")
-	VMenu.AddFunc(13, "Citerne", "transporter:optionMission", {0}, "Choisir")
+	if onJobLegal == 0 then
+		VMenu.AddFunc(13, "Citerne", "transporter:optionMission", {0}, "Choisir")
+	else
+		VMenu.AddFunc(13, "Terminer votre journée de travail", "transporter:optionEnding", {}, "Choisir")
+	end
 end
 
 function getContainerCompany()
 	VMenu.ResetMenu(13, "", "default")
 	VMenu.AddMenu(13, "", "default")
-	VMenu.AddFunc(13, "Conteneur", "transporter:optionMission", {1}, "Choisir")
+	if onJobLegal == 0 then
+		VMenu.AddFunc(13, "Conteneur", "transporter:optionMission", {1}, "Choisir")
+	else
+		VMenu.AddFunc(13, "Terminer votre journée de travail", "transporter:optionEnding", {}, "Choisir")
+	end
 end
 
 function getFrigorifiqueCompany()
 	VMenu.ResetMenu(13, "", "default")
 	VMenu.AddMenu(13, "", "default")
-	VMenu.AddFunc(13, "Réfrigéré", "transporter:optionMission", {2}, "Choisir")
+	if onJobLegal == 0 then
+		VMenu.AddFunc(13, "Réfrigéré", "transporter:optionMission", {2}, "Choisir")
+	else
+		VMenu.AddFunc(13, "Terminer votre journée de travail", "transporter:optionEnding", {}, "Choisir")
+	end
 end
 
 function getLogCompany()
 	VMenu.ResetMenu(13, "", "default")
 	VMenu.AddMenu(13, "", "default")
-	VMenu.AddFunc(13, "Bois", "transporter:optionMission", {3}, "Choisir")
+	if onJobLegal == 0 then
+		VMenu.AddFunc(13, "Bois", "transporter:optionMission", {3}, "Choisir")
+	else
+		VMenu.AddFunc(13, "Terminer votre journée de travail", "transporter:optionEnding", {}, "Choisir")
+	end
 end
 
 -------------------------------------------------------------
@@ -1351,12 +1367,12 @@ Citizen.CreateThread(function()
 			end
 
 			if VOpts.toUpdate == "itemBuy" then
-					-- local curUpdate = getOpt("itemBuy")
-					-- VMenu.ResetMenu(11, "", "default")
-					-- VMenu.AddNum(11, "Quantité", "itemBuy", curUpdate, 30, "Sélection")
-					for _, item in pairs(inv_array_legal) do
-						VMenu.EditFunc(11, item.name, "inventory:buy", {getOpt("itemBuy"), item.id, item.price, item.name}, "Acheter")
-					end
+				-- local curUpdate = getOpt("itemBuy")
+				-- VMenu.ResetMenu(11, "", "default")
+				-- VMenu.AddNum(11, "Quantité", "itemBuy", curUpdate, 30, "Sélection")
+				for _, item in pairs(inv_array_legal) do
+					VMenu.EditFunc(11, item.name, "inventory:buy", {getOpt("itemBuy"), item.id, item.price, item.name}, "Acheter")
+				end
 			end
 
 			if VMenu.police then
@@ -1871,6 +1887,8 @@ Citizen.CreateThread(function()
 				end
 			elseif (IsNearPoints(Tanker_company, 3) == true) then
 				if User.job == 7 then
+					TriggerEvent("job:getJobInfos")
+					Wait(200)
 					TriggerEvent("vmenu:openMenu", 13)
 					if VMenu.TankerCompany == false then
 						getTankerCompany()
@@ -1881,6 +1899,8 @@ Citizen.CreateThread(function()
 				end
 			elseif (IsNearPoints(Container_company, 3) == true) then
 				if User.job == 8 then
+					TriggerEvent("job:getJobInfos")
+					Wait(200)
 					TriggerEvent("vmenu:openMenu", 13)
 					if VMenu.ContainerCompany == false then
 						getContainerCompany()
@@ -1891,6 +1911,8 @@ Citizen.CreateThread(function()
 				end
 			elseif (IsNearPoints(Frigorifique_company, 3) == true) then
 				if User.job == 9 then
+					TriggerEvent("job:getJobInfos")
+					Wait(200)
 					TriggerEvent("vmenu:openMenu", 13)
 					if VMenu.FrigorifiqueCompany == false then
 						getFrigorifiqueCompany()
@@ -1901,6 +1923,8 @@ Citizen.CreateThread(function()
 				end
 			elseif (IsNearPoints(Log_company, 3) == true) then
 				if User.job == 6 then
+					TriggerEvent("job:getJobInfos")
+					Wait(200)
 					TriggerEvent("vmenu:openMenu", 13)
 					if VMenu.LogCompany == false then
 						getLogCompany()
