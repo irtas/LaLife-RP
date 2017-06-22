@@ -96,7 +96,7 @@ Citizen.CreateThread(function()
 			if myjob == 3 then
 				if ArgentJoueur >= 3000 then
 					if onJobLegal == 0 then
-						--TriggerServerEvent("job:removeMoney",3000)
+						TriggerServerEvent("job:removeMoney",3000)
 						ShowMsgtime.msg = "N'oubliez pas de ramener le camion pour être remboursé"
 						ShowMsgtime.time = 300
 						SetPedComponentVariation(GetPlayerPed(-1), 11, 56, 0, 0)
@@ -133,6 +133,7 @@ Citizen.CreateThread(function()
 						inrangeofbin3 = false
 						inrange3 = false
 					elseif onJobLegal == 1 then
+						TriggerServerEvent("job:addMoney", 3000)
 						binEnding()
 					end
 				else
@@ -337,7 +338,6 @@ Citizen.CreateThread(function()
 end)
 
 function binEnding()
-	--TriggerServerEvent("job:addMoney", 3000)
 	onJobLegal = 2
 	Wait(500)
 	StopJobBin()
