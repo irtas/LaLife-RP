@@ -25,7 +25,7 @@ AddEventHandler("vmenu:updateChar", function(args)
   ChangeComponent({11,0,args[9],args[10]})
   ChangeComponent({8,0,args[11],args[12]})
 
-  TriggerServerEvent("weaponshop:GiveWeaponsToPlayer")
+  TriggerServerEvent("weaponshop:GiveWeapons")
   VMenu.updatedChar = true
 end)
 
@@ -45,7 +45,7 @@ AddEventHandler("vmenu:changeGender", function(gender)
   SetPlayerModel(PlayerId(), model)
   SetModelAsNoLongerNeeded(model)
   SetPedComponentVariation(GetPlayerPed(-1), 2, 0, 0, 2)
-  TriggerServerEvent("weaponshop:GiveWeaponsToPlayer")
+  TriggerServerEvent("weaponshop:GiveWeapons")
 end)
 
 RegisterNetEvent("vmenu:supdateChar")
@@ -69,7 +69,7 @@ AddEventHandler("vmenu:supdateChar", function(o, t, th, f, fi, s, se, e, n, te, 
   ChangeComponent({7,0,fif,si})
   ChangeComponent({11,0,n,te})
   ChangeComponent({8,0,el,tw})
-  TriggerServerEvent("weaponshop:GiveWeaponsToPlayer")
+  TriggerServerEvent("weaponshop:GiveWeapons")
   VMenu.updatedChar = true
 end)
 

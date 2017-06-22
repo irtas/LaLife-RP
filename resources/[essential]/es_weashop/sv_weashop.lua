@@ -66,3 +66,24 @@ AddEventHandler("weaponshop:GiveWeaponsToPlayer", function(player)
 		end
 	end)
 end)
+
+RegisterServerEvent("weaponshop:GiveWeapons")
+AddEventHandler("weaponshop:GiveWeapons", function()
+	TriggerEvent('es:getPlayerFromId', source, function(user)
+		if (user) then
+			local playerID = user.identifier
+			local delay = nil
+
+			MySQL.Async.fetchAll("SELECT * FROM user_weapons WHERE identifier = @username",{['@username'] = playerID}, function (result)
+				delay = 2000
+				if(result)then
+					for k,v in ipairs(result) do
+						TriggerClientEvent("giveWeapon", player, v.weapon_model, delay)
+					end
+				end
+			end)
+		else
+			TriggerEvent("es:desyncMsg")
+		end
+	end)
+end)
