@@ -96,7 +96,7 @@ Citizen.CreateThread(function()
 			if myjob == 2 then
 				if ArgentJoueur >= 3000 then
 					if onJobLegal == 0 then
-						TriggerServerEvent("job:removeMoney",3000)
+						--TriggerServerEvent("job:removeMoney",3000)
 						ShowMsgtime.msg = "N'oubliez pas de ramener le camion pour être remboursé"
 						ShowMsgtime.time = 300
 						SetPedComponentVariation(GetPlayerPed(-1), 11, 123, 1, 0)
@@ -369,7 +369,7 @@ Citizen.CreateThread(function()
 end)
 
 function poolEnding()
-	TriggerServerEvent("job:addMoney",3000)
+	--TriggerServerEvent("job:addMoney",3000)
 	onJobLegal = 2
 	Wait(500)
 	StopJobPool()
