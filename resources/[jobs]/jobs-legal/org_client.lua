@@ -209,9 +209,12 @@ Citizen.CreateThread(function()
           end
         else
           ShowInfo('~b~Appuyer sur ~g~E~b~ pour terminer votre journée de travail', 0)
-          if IsControlJustPressed(1,38) then
+          if IsControlJustPressed(1,38) and EndingDay == false then
+            EndingDay = true
             TriggerServerEvent("poleemploi:getjobs")
             Wait(100)
+            ShowMsgtime.msg = '~r~ Vous avez terminé votre journée de travail !'
+            ShowMsgtime.time = 150
             orgEnding()
           end
         end
@@ -478,8 +481,6 @@ end)
 function orgEnding()
   RemoveBlip(Blip_morgue)
   RemoveBlip(Blip_tombe)
-  ShowMsgtime.msg = '~r~ Vous avez terminé votre journée de travail !'
-  ShowMsgtime.time = 150
   onJobLegal = 2
 end
 

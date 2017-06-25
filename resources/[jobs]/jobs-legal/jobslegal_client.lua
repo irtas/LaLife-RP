@@ -1,5 +1,6 @@
 -- Initialize global jobs legal vars
 onJobLegal = 0
+EndingDay = false
 myjob = 0
 ShowMsgtime = { msg = "", time = 0 }
 
@@ -90,4 +91,5 @@ function clearJob()
   onJobLegal = 0
   Citizen.Trace("Cleared")
   TriggerServerEvent("vmenu:lastChar")
+  EndingDay = false
 end

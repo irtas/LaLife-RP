@@ -135,7 +135,8 @@ Citizen.CreateThread(function()
 						end)
 						inrangeofpool3 = false
 						inrange3 = false
-					elseif onJobLegal == 1 then
+					elseif onJobLegal == 1 and EndingDay == false then
+						EndingDay = true
 						TriggerServerEvent("job:addMoney",3000)
 						poolEnding()
 					end

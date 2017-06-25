@@ -34,9 +34,8 @@ end
 
 AddEventHandler("es:debugMsg", debugMsg)
 
-AddEventHandler("es:desyncMsg", desyncMsg)
- function desyncMsg()
+AddEventHandler("es:desyncMsg", function()
   print("Warning, this should not happen!")
   print("Warning, this should not happen!")
   print("Warning, this should not happen!")
-end
+end)

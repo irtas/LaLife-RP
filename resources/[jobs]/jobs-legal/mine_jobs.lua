@@ -115,7 +115,7 @@ Citizen.CreateThread(function()
     local distance = GetDistanceBetweenCoords(playerPos.x, playerPos.y, playerPos.z, Position.Compagnie.x, Position.Compagnie.y, Position.Compagnie.z, true)
     if not IsInVehicle() then
       if distance < Position.Compagnie.distance then
-        if camionSortie == false then
+        if onJobLegal == 0 then
           ShowInfo('~b~Appuyer sur ~g~E~b~ pour obtenir votre camion', 0)
           if IsControlJustPressed(1,38) then
             TriggerServerEvent("poleemploi:getjobs")
@@ -144,7 +144,6 @@ Citizen.CreateThread(function()
                 SetEntityAsMissionEntity(vehicle, true, true)
                 Wait(100)
                 Citizen.Wait(1)
-                camionSortie = true
                 AfficherBlip()
                 TriggerServerEvent("job:removeMoney",3000)
                 ShowMsgtime.msg = "Allez à la mine et n'oubliez pas de ramener le camion pour être remboursé"
@@ -159,13 +158,18 @@ Citizen.CreateThread(function()
             end
           end
         else
-          ShowInfo('~b~Appuyer sur ~g~E~b~ pour ranger votre camion', 0)
-          if IsControlJustPressed(1,38) then
-            TriggerServerEvent("poleemploi:getjobs")
-            Wait(100)
-            if myjob == 4 then
-	      TriggerServerEvent("job:addMoney",3000)
+          if myjob == 4 then
+            ShowInfo('~b~Appuyer sur ~g~E~b~ pour ranger votre camion', 0)
+            if IsControlJustPressed(1,38) and EndingDay == false then
+              EndingDay = true
+              TriggerServerEvent("poleemploi:getjobs")
+              Wait(100)
+
+              TriggerServerEvent("job:addMoney",3000)
               mineEnding()
+              ShowMsgtime.msg = "~r~ Vous avez été remboursé"
+              ShowMsgtime.time = 300
+              money = 0
             end
           end
         end
@@ -488,9 +492,6 @@ end
 function mineEnding()
   removeBlip()
   Wait(100)
-  ShowMsgtime.msg = "~r~ Vous avez été remboursé"
-  ShowMsgtime.time = 300
-  money = 0
   onJobLegal = 2
   TriggerServerEvent("vmenu:lastChar")
 end

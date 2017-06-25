@@ -19,7 +19,7 @@ function quitLastJob(source, job)
   elseif job == 4 then
     TriggerClientEvent("jobslegal:mineEnding", source)
   elseif job == 5 then
-    
+
   elseif job == 6 then
     TriggerClientEvent("transporter:endingDay", source)
   elseif job == 7 then
@@ -35,8 +35,7 @@ function quitLastJob(source, job)
   elseif job == 12 then
     TriggerClientEvent("jobslegal:morgEnding", source)
   elseif job == 13 then
-    TriggerServerEvent('es_em:sv_setService', 0)
-    TriggerServerEvent("vmenu:lastChar")
+    TriggerEvent('es_em:endingService', source, 0)
   end
 end
 
@@ -48,8 +47,8 @@ AddEventHandler('poleemploi:jobs', function(id)
       local player = user.identifier
 
       ------ Quit Last job
-      quitLastJob(source, user.job)
-
+      local job = user:getJob()
+      quitLastJob(source, job)
       ------ Get New Job
       local nameJob = nameJob(id)
       updatejob(player, id)
