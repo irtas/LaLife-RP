@@ -45,7 +45,9 @@ $(function() {
     $("input[name=gender][value='0']").prop("checked", true);
     $("input[name=outfit][value='1']").prop("checked", true);
     $("input[name=hair]").val(0);
-    $("input[name=color]").val(0);
+    $("input[name=hairsec]").val(0);
+    $("input[name=haircolor]").val(0);
+    $("input[name=haircolorsec]").val(0);
     $("input[name=face]").val(0);
 
 
