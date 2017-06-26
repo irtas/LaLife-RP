@@ -92,6 +92,7 @@ Citizen.CreateThread(function()
 		Citizen.Wait(0)
 		if IsControlJustPressed(1,38) and inrangeofbin3 then
 			TriggerServerEvent("poleemploi:getjobs")
+			TriggerServerEvent("job:getCash_s")
 			Wait(100)
 			if myjob == 3 then
 				if ArgentJoueur >= 3000 then
