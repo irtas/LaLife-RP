@@ -94,56 +94,56 @@ Citizen.CreateThread(function()
 			TriggerServerEvent("job:getCash_s")
 			Wait(200)
 			if myjob == 2 then
-				if ArgentJoueur >= 3000 then
 					if onJobLegal == 0 then
-						TriggerServerEvent("job:removeMoney",3000)
-						ShowMsgtime.msg = "N'oubliez pas de ramener le camion pour être remboursé"
-						ShowMsgtime.time = 300
-						SetPedComponentVariation(GetPlayerPed(-1), 11, 123, 1, 0)
-						SetPedComponentVariation(GetPlayerPed(-1), 8, 15, 0, 0)
-						SetPedComponentVariation(GetPlayerPed(-1), 4, 17, 6, 0)
-						SetPedComponentVariation(GetPlayerPed(-1), 6, 8, 0, 0)
-						SetPedComponentVariation(GetPlayerPed(-1), 3, 0, 0, 0)
-						--TriggerServerEvent('CheckPoolVehi')
-						--TriggerServerEvent('SetPlateJob')
-						--local car = 0xC703DB5F
-						Wait(100)
-						local car = GetHashKey("utillitruck3")
-						--local car = 0x58B3979C
-						-- VOITURE PAR DÉFAUT
-						local cplate = job.plate
-						Citizen.CreateThread(function()
-							Citizen.Wait(10)
-							RequestModel(car)
-							while not HasModelLoaded(car) do
-								Citizen.Wait(0)
-							end
-							veh = CreateVehicle(car, 729.268, -878.351, 24.95, 0.0, true, false)
-							MISSION.truck = veh
+						if ArgentJoueur >= 3000 then
+							TriggerServerEvent("job:removeMoney",3000)
+							ShowMsgtime.msg = "N'oubliez pas de ramener le camion pour être remboursé"
+							ShowMsgtime.time = 300
+							SetPedComponentVariation(GetPlayerPed(-1), 11, 123, 1, 0)
+							SetPedComponentVariation(GetPlayerPed(-1), 8, 15, 0, 0)
+							SetPedComponentVariation(GetPlayerPed(-1), 4, 17, 6, 0)
+							SetPedComponentVariation(GetPlayerPed(-1), 6, 8, 0, 0)
+							SetPedComponentVariation(GetPlayerPed(-1), 3, 0, 0, 0)
+							--TriggerServerEvent('CheckPoolVehi')
+							--TriggerServerEvent('SetPlateJob')
+							--local car = 0xC703DB5F
 							Wait(100)
-							SetEntityVelocity(veh, 2000)
-							SetVehicleNumberPlateText(veh, cplate)
-							SetVehicleOnGroundProperly(veh)
-							SetVehicleHasBeenOwnedByPlayer(veh,true)
-							local id = NetworkGetNetworkIdFromEntity(veh)
-							SetNetworkIdCanMigrate(id, true)
-							SetVehRadioStation(veh, "OFF")
-							SetVehicleColours(veh, 64,64)
-							SetVehicleLivery(veh, 3)
-							SetPedIntoVehicle(GetPlayerPed(-1),  veh,  -1)
-							DrawNotif("Véhicule sorti, bonne route")
-						end)
-						inrangeofpool3 = false
-						inrange3 = false
+							local car = GetHashKey("utillitruck3")
+							--local car = 0x58B3979C
+							-- VOITURE PAR DÉFAUT
+							local cplate = job.plate
+							Citizen.CreateThread(function()
+								Citizen.Wait(10)
+								RequestModel(car)
+								while not HasModelLoaded(car) do
+									Citizen.Wait(0)
+								end
+								veh = CreateVehicle(car, 729.268, -878.351, 24.95, 0.0, true, false)
+								MISSION.truck = veh
+								Wait(100)
+								SetEntityVelocity(veh, 2000)
+								SetVehicleNumberPlateText(veh, cplate)
+								SetVehicleOnGroundProperly(veh)
+								SetVehicleHasBeenOwnedByPlayer(veh,true)
+								local id = NetworkGetNetworkIdFromEntity(veh)
+								SetNetworkIdCanMigrate(id, true)
+								SetVehRadioStation(veh, "OFF")
+								SetVehicleColours(veh, 64,64)
+								SetVehicleLivery(veh, 3)
+								SetPedIntoVehicle(GetPlayerPed(-1),  veh,  -1)
+								DrawNotif("Véhicule sorti, bonne route")
+							end)
+							inrangeofpool3 = false
+							inrange3 = false
+						else
+							ShowMsgtime.msg = "Vous devez fournir 3000$ de caution pour prendre le véhicule"
+							ShowMsgtime.time = 300
+						end
 					elseif onJobLegal == 1 and EndingDay == false then
 						EndingDay = true
 						TriggerServerEvent("job:addMoney",3000)
 						poolEnding()
 					end
-				else
-					ShowMsgtime.msg = "Vous devez fournir 3000$ de caution pour prendre le véhicule"
-					ShowMsgtime.time = 300
-				end
 			else
 				ShowMsgtime.msg = '~r~ Vous devez être nettoyeur de piscine !'
 				ShowMsgtime.time = 150
