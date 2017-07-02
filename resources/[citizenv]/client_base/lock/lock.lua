@@ -52,10 +52,11 @@ Citizen.CreateThread(function()
     while true do
         Wait(10)
 
+        local player = GetPlayerPed(-1)
+
         if IsControlJustPressed(1, key) then
             TriggerServerEvent("lock:getCar")
             Wait(300)
-            local player = GetPlayerPed(-1)
 
             local playerPos = GetEntityCoords( GetPlayerPed(-1), 1 )
             local inFrontOfPlayer = GetOffsetFromEntityInWorldCoords( GetPlayerPed(-1), 0.0, 10.000, 0.0 )
@@ -113,7 +114,9 @@ Citizen.CreateThread(function()
 
                         if not engineValue then
                             SetVehicleEngineOn(v, false, false, true)
-                        end
+                        else
+														SetVehicleEngineOn(v, true, true, true)
+												end
 
                     else
 
@@ -126,7 +129,6 @@ Citizen.CreateThread(function()
                         if playSound then
                             TriggerEvent('InteractSound_CL:PlayOnOne', 'unlock', 1.0)
                         end
-
                     end
 
                 else
@@ -137,6 +139,13 @@ Citizen.CreateThread(function()
 
                 end
             end
+        end
+
+        if (IsControlJustPressed(1, 32) or IsControlJustPressed(1, 8)) and IsPedInAnyVehicle(player) then
+          v = GetVehiclePedIsIn(GetPlayerPed(-1), true)
+          if DoesEntityExist(v) then
+            SetVehicleEngineOn(v, true, true, true)
+          end
         end
     end
 end)
