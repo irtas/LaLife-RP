@@ -51,7 +51,9 @@ Including :
 	[12] Encore une fois, super script que nous avons adapté à notre système de véhicule.
 - mysql-async
 	[19] Un énorme merci **@Brouznouf** pour son implication dans le projet pour l'aspect mysql-async
-
+- pQueue
+	[21] Une ressource de file d'attente super intéressante! On y a ajouté la bannedlist et la whitelist afin de gérer tout à la même place
+	
 **Jobs**
 - Organe
  	Exclusive :
@@ -95,3 +97,4 @@ Bibliographie :
 [18] https://forum.fivem.net/t/release-job-save-people-be-a-hero-paramedic-emergency-coma-ko/19773/184
 [19] https://github.com/brouznouf/fivem-mysql-async
 [20] https://github.com/pongo1231/freemode-remix
+[21] https://forum.fivem.net/t/alpha-pqueue-a-server-queue-system/22228
