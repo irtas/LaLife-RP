@@ -138,10 +138,10 @@ end)
 
 Citizen.CreateThread(function()
     while true do
-		if IsControlJustReleased(0, 303) then
-            EnableGui(true)
-			Wait(100)
-		end
+		-- if IsControlJustReleased(0, 303) then
+    --         EnableGui(true)
+		-- 	Wait(100)
+		-- end
         if guiEnabled then
             DisableControls()
             --DisableControlAction(0, 1, guiEnabled) -- LookLeftRight
