@@ -42,6 +42,13 @@ AddEventHandler('vmenu:getFace', function(e, v, t)
   TriggerEvent('es:getPlayerFromId', source, function(user)
     if (user) then
       local player = user.identifier
+      local sexe = "mp_m_freemode_01"
+      if e == 0 then
+        sexe = "mp_m_freemode_01"
+      else
+        sexe = "mp_f_freemode_01"
+      end
+      user:setGender(sexe)
       updateFace(player, e, v, t)
     else
       TriggerEvent("es:desyncMsg")

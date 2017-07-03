@@ -105,35 +105,37 @@ end
 function LoadUser(identifier, source, new)
 	MySQL.Async.fetchAll("SELECT * FROM users WHERE identifier = @name", {['@name'] = identifier}, function (result)
 		MySQL.Async.fetchAll("SELECT * FROM coordinates WHERE identifier = @name", {['@name'] = identifier}, function (result1)
-			local group = groups[result[1].group]
-			Users[source] = Player(source, result[1].permission_level, result[1].money, result[1].identifier, group, result[1].dirtymoney, result[1].job, result[1].police, result[1].nom, result[1].prenom, result[1].telephone, { x = result1[1].x, y = result1[1].y, z = result1[1].z})
+			MySQL.Async.fetchAll("SELECT * FROM outfits WHERE identifier = @name", {['@name'] = identifier}, function (result2)
+				local group = groups[result[1].group]
+				Users[source] = Player(source, result[1].permission_level, result[1].money, result[1].identifier, group, result[1].dirtymoney, result[1].job, result[1].police, result[1].nom, result[1].prenom, result[1].telephone, { x = result1[1].x, y = result1[1].y, z = result1[1].z}, result2[1].skin)
 
-			local playerCountItems = MySQL.Sync.fetchScalar("SELECT COUNT(1) FROM user_inventory WHERE user_id = @username", { ['@username'] = identifier })
-			if playerCountItems ~= countItems then
-				for i=playerCountItems+1,countItems do
-					MySQL.Async.execute("INSERT INTO user_inventory (`user_id`, `item_id`, `quantity`) VALUES (@username, @item_id, '0')",
-					{['@username'] = identifier, ['@item_id'] = i})
+				local playerCountItems = MySQL.Sync.fetchScalar("SELECT COUNT(1) FROM user_inventory WHERE user_id = @username", { ['@username'] = identifier })
+				if playerCountItems ~= countItems then
+					for i=playerCountItems+1,countItems do
+						MySQL.Async.execute("INSERT INTO user_inventory (`user_id`, `item_id`, `quantity`) VALUES (@username, @item_id, '0')",
+						{['@username'] = identifier, ['@item_id'] = i})
+					end
 				end
-			end
 
-			-- THE ARRAY THAT WE WILL USE TO COMMUNICATE WITH CELLPHONE, OMAGGAD TECHNOLOGY
-			telist[result[1].telephone] = { IDsource = source }
+				-- THE ARRAY THAT WE WILL USE TO COMMUNICATE WITH CELLPHONE, OMAGGAD TECHNOLOGY
+				telist[result[1].telephone] = { IDsource = source }
 
-			-- LOADING THE PHONEBOOK OF THE PLAYER
-			LoadPhonebook(identifier, source)
+				-- LOADING THE PHONEBOOK OF THE PLAYER
+				LoadPhonebook(identifier, source)
 
-			-- LOADING STUFF AFTER LOADING PLAYER
+				-- LOADING STUFF AFTER LOADING PLAYER
 
-			TriggerEvent('es:playerLoaded', source, Users[source])
-			TriggerClientEvent("es:finishedLoading", source)
+				TriggerEvent('es:playerLoaded', source, Users[source])
+				TriggerClientEvent("es:finishedLoading", source)
 
-			if(true)then
-				TriggerClientEvent('es:setPlayerDecorator', source, 'rank', Users[source]:getPermissions())
-			end
+				if(true)then
+					TriggerClientEvent('es:setPlayerDecorator', source, 'rank', Users[source]:getPermissions())
+				end
 
-			if(true)then
-				TriggerEvent('es:newPlayerLoaded', source, Users[source])
-			end
+				if(true)then
+					TriggerEvent('es:newPlayerLoaded', source, Users[source])
+				end
+			end)
 		end)
 	end)
 end

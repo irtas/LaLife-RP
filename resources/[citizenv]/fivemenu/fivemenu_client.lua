@@ -138,7 +138,8 @@ User = {
 	prenom = "",
 	vehicle = "",
 	identifier = nil,
-	telephone = ""
+	telephone = "",
+	gender = ""
 }
 
 -- AddEventHandler("playerSpawned", function()
@@ -1000,7 +1001,11 @@ function Construct()
 
 	local menu = 8
 	VMenu.AddMenu(menu, "Tenues", "cloth") -- default = Header "Texte" sur fond bleu
-	VMenu.AddNum(menu, "Catégorie", "Tenues", 0, 65, "Changer de catégorie")
+	if User.gender == "mp_m_freemode_01" then
+		VMenu.AddNum(8, "Catégorie", "Tenues", 0, 65, "Changer de catégorie")
+	else
+		VMenu.AddNum(8, "Catégorie", "Tenues", 66, 66, "Changer de catégorie")
+	end
 	VMenu.AddSep(menu, OutfitsCat[1])
 	VMenu.AddFunc(menu, "Validez catégories tenues", "vmenu:OutfitsValidate", {getOpt("Tenues")}, "Valider")
 
@@ -1108,6 +1113,7 @@ function getOutfitsMenu(id, OutfitsNo)
 		if item.id == id then
 			i = i + 1
 			if i == OutfitsNo then
+				Citizen.Trace(item.name)
 				args = { item.zero[1],item.zero[2],item.two[1],item.two[2],item.four[1],item.four[2],item.six[1],item.six[2],item.eleven[1],item.eleven[2],item.eight[1],item.eight[2],item.three[1],item.three[2],item.seven[1],item.seven[2],GetHashKey("mp_m_freemode_01") }
 				TriggerEvent("vmenu:updateCharInShop", args)
 				break
@@ -1654,6 +1660,10 @@ Citizen.CreateThread(function()
 				if VOpts.toUpdate == "OutfitsNo67" then
 					getOutfitsMenu(174, getOpt("OutfitsNo67"))
 					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo67"), 174}, "Valider")
+				end
+				if VOpts.toUpdate == "OutfitsNo68" then
+					getOutfitsMenu(175, getOpt("OutfitsNo68"))
+					VMenu.EditFunc(8, "Validez votre tenue", "vmenu:OutfitsVal", {getOpt("OutfitsNo68"), 175}, "Valider")
 				end
 			end
 

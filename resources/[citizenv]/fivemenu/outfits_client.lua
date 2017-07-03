@@ -24,7 +24,7 @@ AddEventHandler("vmenu:updateChar", function(args)
   ChangeComponent({7,0,args[15],args[16]})
   ChangeComponent({11,0,args[9],args[10]})
   ChangeComponent({8,0,args[11],args[12]})
-  
+
   TriggerServerEvent("weaponshop:GiveWeapons")
   VMenu.updatedChar = true
 end)
@@ -99,7 +99,11 @@ end)
 AddEventHandler("vmenu:OutfitsOG", function(target)
   VMenu.ResetMenu(8, "Tenues", "cloth")
   VMenu.AddMenu(8, "Tenues", "cloth") -- default = Header "Texte" sur fond bleu
-  VMenu.AddNum(8, "Catégorie", "Tenues", 0, 65, "Change de catégorie")
+  if User.gender == "mp_m_freemode_01" then
+    VMenu.AddNum(8, "Catégorie", "Tenues", 0, 65, "Changer de catégorie")
+  else
+    VMenu.AddNum(8, "Catégorie", "Tenues", 66, 66, "Changer de catégorie")
+  end
   VMenu.AddSep(8, OutfitsCat[1])
   VMenu.AddFunc(8, "Validez catégories tenues", "vmenu:OutfitsValidate", {getOpt("Tenues")}, "Valider")
 end)
@@ -254,6 +258,8 @@ AddEventHandler("vmenu:OutfitsValidate", function(target, e)
     menuOutfits(172, "OutfitsNo65", OutfitsCat[65])
   elseif (e == 65) then
     menuOutfits(173, "OutfitsNo66", OutfitsCat[66])
+  elseif (e == 66) then
+    menuOutfits(175, "OutfitsNo68", OutfitsCat[67])
   end
 end)
 

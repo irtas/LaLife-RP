@@ -4,7 +4,7 @@ OutfitsCat = {"Haute Gamme", "Associates", "Beach", "Biker", "Biker Suit", "VIP"
  "MC Patched Member", "MC Outlaw", "MC One Percenter", "MC Mod", "Luxuary", "Lowrider", "Lowrider Classics", "Juggernaut", "Import", "Hipster",
  "High Life Open", "High Life Closed", "Heist Tuxedos", "Heist Tactical Stealth", "Heist Street", "Heist Street Combat", "Heist Sloppy", "Heist Sharp",
  "Heist Shady", "Heist Rider", "Heist Rebel", "Heist Minimalist", "Heist Light Combat", "Heist Heavy Combat", "Heist Coveralls", "Heist Casual",
- "Heist Buisness Security", "Flight Suit", "Flashy", "Festive", "Drop Zone", "Deadline", "CEO", "Casual", "Bodysuits", "Bodyguard"}
+ "Heist Buisness Security", "Flight Suit", "Flashy", "Festive", "Drop Zone", "Deadline", "CEO", "Casual", "Bodysuits", "Bodyguard", "Tenue de femmes"}
 
 changeYourJob = {
   {name="Pole Emploi", colour=15, id=351, x=-601.59295654297, y=-116.45598602295, z=41.734840393066},

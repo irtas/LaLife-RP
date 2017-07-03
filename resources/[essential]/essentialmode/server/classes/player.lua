@@ -9,7 +9,7 @@ Player.__index = Player
 
 -- Meta table for users
 setmetatable(Player, {
-	__call = function(self, source, permission_level, money, identifier, group, dirtymoney, job, police, nom, prenom, telephone, pos)
+	__call = function(self, source, permission_level, money, identifier, group, dirtymoney, job, police, nom, prenom, telephone, pos, gender)
 		local pl = {}
 
 		pl.source = source
@@ -29,6 +29,7 @@ setmetatable(Player, {
 		pl.vehicle = 0
 		pl.jobVehicle = 0
 		pl.status = "alive"
+		pl.gender = gender
 
 		return setmetatable(pl, Player)
 	end
@@ -212,4 +213,12 @@ end
 
 function Player:setJob(param)
 	self.job = param
+end
+
+function Player:getGender()
+	return self.gender
+end
+
+function Player:setGender(param)
+	self.gender = param
 end

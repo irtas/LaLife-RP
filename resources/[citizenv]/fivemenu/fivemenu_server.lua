@@ -58,6 +58,7 @@ AddEventHandler('vmenu:updateUser', function(openMenu)
 			userInfos["vehicle"] = user:getVehicle()
 			userInfos["telephone"] = user:getTel()
 			userInfos["identifier"] = user.identifier
+			userInfos["gender"] = user:getGender()
 		end
 	end)
 	userInfos.Loaded = true

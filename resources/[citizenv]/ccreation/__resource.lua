@@ -3,10 +3,10 @@ client_script('client/client.lua')
 ui_page('client/html/index.html')
 
 files({
-    'client/html/index.html',
-    'client/html/script.js',
-    'client/html/style.css',
-    'client/html/cursor.png',
+  'client/html/index.html',
+  'client/html/script.js',
+  'client/html/style.css',
+  'client/html/cursor.png',
 	'client/html/img/14Street3.png',
 	'client/html/img/14Street4.png',
 	'client/html/img/14Street5.png',
@@ -25,15 +25,7 @@ files({
 	'client/html/img/2Beach2.png',
 	'client/html/img/2Beach7.png',
 	'client/html/img/2Beach8.png',
-  'client/html/img/Hair0.png',
-  'client/html/img/Hair2.png',
-  'client/html/img/Hair3.png',
-  'client/html/img/Hair9.png',
-  'client/html/img/Hair13.png',
-  'client/html/img/Hair21.png',
-  'client/html/img/Color0.png',
-  'client/html/img/Color1.png',
-  'client/html/img/Color2.png',
-  'client/html/img/Color3.png',
-  'client/html/img/Color4.png'
+  'client/html/img/Femme1.png',
+  'client/html/img/Femme2.png',
+  'client/html/img/Femme3.png'
 })

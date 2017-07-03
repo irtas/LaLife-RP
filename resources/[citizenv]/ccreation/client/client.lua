@@ -113,6 +113,12 @@ RegisterNUICallback('login', function(data, cb)
 			    TriggerEvent("vmenu:OutfitsVal", target, 7, 110)
 			elseif choice == "18" then
 			    TriggerEvent("vmenu:OutfitsVal", target, 8, 110)
+			elseif choice == "19" then
+					TriggerEvent("vmenu:OutfitsVal", target, 108, 175)
+			elseif choice == "20" then
+					TriggerEvent("vmenu:OutfitsVal", target, 99, 175)
+			elseif choice == "21" then
+					TriggerEvent("vmenu:OutfitsVal", target, 84, 175)
 			end
 	    TriggerServerEvent("vmenu:getFace", tonumber(data.gender), data.face, 0)
 	    TriggerServerEvent("vmenu:getHair", tonumber(data.hair), tonumber(data.hairsec), tonumber(data.haircolor), tonumber(data.haircolorsec))
@@ -125,17 +131,17 @@ RegisterNUICallback('login', function(data, cb)
 	    TriggerServerEvent("vmenu:lastChar")
 			--TriggerServerEvent("es:loadAfterCreation")
 		else
-			TriggerEvent("itinerance:notif", "~r~Remplisser tous les champs")
+			TriggerEvent("itinerance:notif", "~r~Remplissez tous les champs")
 		end
     cb('ok')
 end)
 
 Citizen.CreateThread(function()
     while true do
-		-- if IsControlJustReleased(0, 303) then
-    --         EnableGui(true)
-		-- 	Wait(100)
-		-- end
+		if IsControlJustReleased(0, 303) then
+            EnableGui(true)
+			Wait(100)
+		end
         if guiEnabled then
             DisableControls()
             --DisableControlAction(0, 1, guiEnabled) -- LookLeftRight
