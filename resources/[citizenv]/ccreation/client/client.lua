@@ -129,6 +129,7 @@ RegisterNUICallback('login', function(data, cb)
 			SetEntityCoordsNoOffset(GetPlayerPed(-1), -1037.927, -2738.061, 20.169, 0,  0,  1)
 	    FreezeEntityPosition(GetPlayerPed(-1),  false)
 	    TriggerServerEvent("vmenu:lastChar")
+			TriggerEvent("disclaimer:called")
 			--TriggerServerEvent("es:loadAfterCreation")
 		else
 			TriggerEvent("itinerance:notif", "~r~Remplissez tous les champs")

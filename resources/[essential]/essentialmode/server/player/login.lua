@@ -231,6 +231,7 @@ function registerUser(identifier, source)
 			LoadUser(identifier, source, true)
 		else
 			LoadUser(identifier, source)
+			TriggerClientEvent("disclaimer:called", source)
 		end
 	end)
 end
