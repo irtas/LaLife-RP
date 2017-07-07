@@ -1807,12 +1807,13 @@ Citizen.CreateThread(function()
 		--           end
 		--       end
 	else
-
+		local X = GetEntityForwardX(GetPlayerPed(-1))
+		local Y = GetEntityForwardY(GetPlayerPed(-1))
 		for i = 0,31 do
 			if NetworkIsPlayerConnected(i) then
 				if NetworkIsPlayerActive(i) and GetPlayerPed(i) ~= nil then
 					if GetPlayerServerId(i) ~= GetPlayerServerId(PlayerId()) then
-						if (GetDistanceBetweenCoords(GetEntityCoords(GetPlayerPed(-1)), GetEntityCoords(GetPlayerPed(i))) < 2.5001) then
+						if (GetDistanceBetweenCoords(GetEntityCoords(GetPlayerPed(-1)).x+X,GetEntityCoords(GetPlayerPed(-1)).y+Y,GetEntityCoords(GetPlayerPed(-1)).z, GetEntityCoords(GetPlayerPed(i)).x,GetEntityCoords(GetPlayerPed(i)).y,GetEntityCoords(GetPlayerPed(i)).z) < 0.6001) then
 							talkingTarget = i
 
 							break
