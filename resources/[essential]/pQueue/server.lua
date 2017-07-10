@@ -13,7 +13,7 @@ local Config = {}
 
 Config.PlayerLimit = 24                -- How many playerslots your server has
 
-Config.PlaceInQueueAt = 15             --[[ This determines when it will start placing players in the queue. For example, if the server has 5 people ingame, and this is set to 5, it will start placing players in queue.
+Config.PlaceInQueueAt = 23             --[[ This determines when it will start placing players in the queue. For example, if the server has 5 people ingame, and this is set to 5, it will start placing players in queue.
                                             If there were 3 people in the server and it was set to 5, it would allow 2 more people to join without going through the queue.
                                             Setting this to false will disable it and will only place players in queue when the server is full. This is useful for server restarts which will assure priority users get in.]]
 
@@ -28,7 +28,7 @@ Config.DisconnectPriorityTime = 300    -- How long a player has priority queue a
 Config.ConnectPriority = true          -- Enabled/Disables giving players timed priority when they join, incase they crash or something goes wrong while they are loading. Currently shares disconnect priorities time.
 
 Config.MaxWarnings = 6                 -- How many warnings they get before being punished
-Config.SpamTime = 60                   -- How many seconds until they can refresh again, You will also need to edit Config.Language.refreshwarning accordingly if you change this
+Config.SpamTime = 10                   -- How many seconds until they can refresh again, You will also need to edit Config.Language.refreshwarning accordingly if you change this
 
 Config.TimeToRefresh = 180             -- How many seconds they have after SpamTime to refresh their position before removed
 
