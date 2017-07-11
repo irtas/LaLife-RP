@@ -38,35 +38,48 @@ AddEventHandler('playerDropped', function()
 	TriggerEvent('es:getPlayerFromId', source, function(user)
 		if (user) then
 			-- Try to alt F4 now ...
-			if user.status == "alive" then
-				user.status  = nil
+			-- if user.status == "alive" then
+			-- 	user.status  = nil
+			--
+			-- 	tel = user:getTel()
+			-- 	telist[tel].IDsource = nil
+			--
+			-- 	MySQL.Async.execute("UPDATE users SET `money`=@value WHERE identifier = @identifier",
+			-- 	{['@value'] = user.money, ['@identifier'] = user.identifier})
+			--
+			-- 	MySQL.Async.execute("UPDATE users SET `dirtymoney`=@value WHERE identifier = @identifier",
+			-- 	{['@value'] = user.dirtymoney, ['@identifier'] = user.identifier})
+			--
+			-- 	MySQL.Async.execute("UPDATE coordinates SET `x`=@valx,`y`=@valy,`z`=@valz WHERE identifier = @identifier",
+			-- 	{['@valx'] = user.coords.x, ['@valy'] = user.coords.y, ['@valz'] = user.coords.z, ['@identifier'] = user.identifier})
+			-- else
+			-- 	user.status  = nil
+			--
+			-- 	tel = user:getTel()
+			-- 	telist[tel].IDsource = nil
+			--
+			-- 	MySQL.Async.execute("UPDATE users SET `money`=@value WHERE identifier = @identifier",
+			-- 	{['@value'] = 0, ['@identifier'] = user.identifier})
+			--
+			-- 	MySQL.Async.execute("UPDATE users SET `dirtymoney`=@value WHERE identifier = @identifier",
+			-- 	{['@value'] = 0, ['@identifier'] = user.identifier})
+			--
+			-- 	MySQL.Async.execute("UPDATE coordinates SET `x`=@valx,`y`=@valy,`z`=@valz WHERE identifier = @identifier",
+			-- 	{['@valx'] = hopital.x, ['@valy'] = hopital.y, ['@valz'] = hopital.z, ['@identifier'] = user.identifier})
+			-- end
+			user.status  = nil
 
-				tel = user:getTel()
-				telist[tel].IDsource = nil
+			tel = user:getTel()
+			telist[tel].IDsource = nil
 
-				MySQL.Async.execute("UPDATE users SET `money`=@value WHERE identifier = @identifier",
-				{['@value'] = user.money, ['@identifier'] = user.identifier})
+			MySQL.Async.execute("UPDATE users SET `money`=@value WHERE identifier = @identifier",
+			{['@value'] = user.money, ['@identifier'] = user.identifier})
 
-				MySQL.Async.execute("UPDATE users SET `dirtymoney`=@value WHERE identifier = @identifier",
-				{['@value'] = user.dirtymoney, ['@identifier'] = user.identifier})
+			MySQL.Async.execute("UPDATE users SET `dirtymoney`=@value WHERE identifier = @identifier",
+			{['@value'] = user.dirtymoney, ['@identifier'] = user.identifier})
 
-				MySQL.Async.execute("UPDATE coordinates SET `x`=@valx,`y`=@valy,`z`=@valz WHERE identifier = @identifier",
-				{['@valx'] = user.coords.x, ['@valy'] = user.coords.y, ['@valz'] = user.coords.z, ['@identifier'] = user.identifier})
-			else
-				user.status  = nil
-
-				tel = user:getTel()
-				telist[tel].IDsource = nil
-
-				MySQL.Async.execute("UPDATE users SET `money`=@value WHERE identifier = @identifier",
-				{['@value'] = 0, ['@identifier'] = user.identifier})
-
-				MySQL.Async.execute("UPDATE users SET `dirtymoney`=@value WHERE identifier = @identifier",
-				{['@value'] = 0, ['@identifier'] = user.identifier})
-
-				MySQL.Async.execute("UPDATE coordinates SET `x`=@valx,`y`=@valy,`z`=@valz WHERE identifier = @identifier",
-				{['@valx'] = hopital.x, ['@valy'] = hopital.y, ['@valz'] = hopital.z, ['@identifier'] = user.identifier})
-			end
+			MySQL.Async.execute("UPDATE coordinates SET `x`=@valx,`y`=@valy,`z`=@valz WHERE identifier = @identifier",
+			{['@valx'] = user.coords.x, ['@valy'] = user.coords.y, ['@valz'] = user.coords.z, ['@identifier'] = user.identifier})
 		else
 			TriggerEvent("es:desyncMsg")
 		end
